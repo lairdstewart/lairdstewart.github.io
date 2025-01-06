@@ -1,19 +1,18 @@
 ## On Software Design
-
-This is a living document. I expect to add more ideas and for my philosophy to change over time.
-
-"You know you are working on clean code when each routine you read turns out to be pretty much what you expected" - Ward Cunningham  
 "Dealing with complexity is the most important challenge in software design" - John Ousterhout
 
-- Favor composition over inheritance
-- Minimize complexity don't maximize readability [1]
-- Make modules deep (Chapter 4 of *A Philosophy of Software Design*)
-- Strive to use immutable data and [pure methods](https://en.wikipedia.org/wiki/Pure_function)
-- Methods with side effects should have no return value
+### Beware pithy rules
+The root cause of a lot of bad code is the overuse of common rules (e.g., DRY, YAGNI, "keep methods under X lines"). These are well intentioned and distill years of programming expertise. However, even in a world where they're right 90% of the time, the 10% times they are wrong translates to technical debt which compounds quickly. This isn't to say their creators are at fault; These rules are often introduced with disclaimers about overuse. The problem is that pithy sayings don't have room for disclaimers. After learning a new rule, new developers may only remember the acronym and not any of its nuances. Senior developers aren't innocent either; During code review, it's easier to cite a rule than explain the underlying issue with the code. Teachers don't want to overwhelm students, so they may give a blanket statement like "don't use static methods". There is a direct relationship between the length of a piece of advice and its value. Longer answers can provide context, edge cases, and describe more sophisticated concepts. It shouldn't be a surprise that short, general statements can lead us astray.
 
-I reccomended
-- [Amir Hakim: A Minimalist Approach to Software](https://ammar-hakim.org/sj/pn/pn0/pn0-minimalism.html#pn0-a-minimalist-approach-to-software)  
-- [John Ousterhout: A Philosophy of Software Design](https://ammar-hakim.org/sj/pn/pn0/pn0-minimalism.html#pn0-a-minimalist-approach-to-software)
---- 
-[1] Over-indexing on readability can turn code to fool's gold. By this I mean code that has many methods with simple names. It looks clean, but only at first glance. For example, methods with fewer arguments are more readable. At the extreme, Bob Martin claims "the ideal number of arguments for a function is zero". In my opinion, the "ideal" method is pure, but methods without arguments must be impure! Simmilarly, splitting a method in two makes their declarations more readable when read one after the other, but it could add complexity via a new field variable and/or an implicit assumption about the order they must be called in. Listing 2-2 of *Clean Code* is an example of fool's gold and [Don't Refactor Like Uncle Bob. Please](https://theaxolot.wordpress.com/2024/05/08/dont-refactor-like-uncle-bob-please/) has a nice way to refactor it.
+You've likely heard some version of the rule *"methods should be shorter than X lines"*. The professor of my software design course at Georgia Tech suggested methods should be under five lines, and *Clean Code* claims *"The first rule of functions is that they should be small. The second rule of functions is that they should be smaller than that."* In my mind, this rule is just a heuristic to remind us that methods should generally only have a single "concept". I argue that because the former is easier to remember it gets used (and abused) more frequently. See [It's probably time to stop recommending Clean Code](https://qntm.org/clean) for an example of how this can go too far. 
+
+Another example is DRY. In my first internship, I inherited a hundred-line R script with code literally copy and pasted half a dozen times with different hard-coded parameters. DRY is a powerful concept when you first learn it and I've met a number of data scientists who should have learned it sooner. However, entry level software engineers understand copy and pasting code is a red flag. Therefore it may cause more harm than good in the form of premature optimization and over-abstraction. 
+
+### Don't optimize for readability
+Code and prose share many similarities, but they are not the same. Therefore we shouldn't expect our perferences for clearly written english to translate to good code. For example, some claim methods with fewer arguments are more readable. At the extreme, Bob Martin claims "the ideal number of arguments for a function is zero". In my opinion, the "ideal" method is pure, but methods without arguments must be impure! Similarly, splitting a method in two makes their declarations more readable when read one after the other, but it could add complexity via a new field variable and/or an implicit assumption about the order they must be called in. See [Don't Refactor Like Uncle Bob. Please](https://theaxolot.wordpress.com/2024/05/08/dont-refactor-like-uncle-bob-please/) as an example. Instead of readability, optimize for simplicity.
+
+### I reccomend
+- [A Minimalist Approach to Software (Ammar Hakim)](https://ammar-hakim.org/sj/pn/pn0/pn0-minimalism.html#pn0-a-minimalist-approach-to-software)  
+- [A Philosophy of Software Design (John Ousterhout)](https://ammar-hakim.org/sj/pn/pn0/pn0-minimalism.html#pn0-a-minimalist-approach-to-software)
+
 
