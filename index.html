@@ -4,23 +4,59 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Laird Stewart</title>
+	<style>
+		.content {
+		    margin-left: 25%;
+		    margin-right: 25%;
+		    font-family: Arial, sans-sarif;
+		}
+		.content a { 
+		    color: #180ea4;
+		}
+		.content a:hover {
+		    color: #92b4d1;
+		}
+
+		.sidebar {
+		    position: fixed; /* Keeps it in place as you scroll */
+		    left: 0;
+		    top: 0;
+		    width: 15%;
+		    height: 100%;
+		    background-color: #7C2827;
+		    color: white; /* color of text elements */
+		    padding: 0px 20px; /* vertical, horizontal */
+		    box-sizing: border-box; /* padding "inside" the width of the sidebar*/
+		    font-family: Arial, sans-sarif;
+		}
+		.sidebar a { 
+		    color: #FFFFFF;
+		    text-decoration: none;
+		}
+		.sidebar a:hover {
+		    color: #92b4d1;
+		}
+	</style>
 </head>
 <body>
-	<p>"If today were the last day of my life, would I want to do what I'm about to do today?" - Steve Jobs</p>
+	<div class="content">
+		<br>
+		"If today were the last day of my life, would I want to do what I'm about to do today?" - Steve Jobs<br>
+		<br>
+		<b>Posts</b><br>
+		<a href="on-software-design.html">On Software Design</a><br>
+		<br>
+		<b>Publications</b><br>
+		<a href="https://www.siam.org/media/brxpwggc/s136984pdf-copy.pdf">SIR Model of Time Dependent Drug and Vaccine Distribution on COVID-19</a><br>
+	</div>
 
-	<b>Blog</b><br>
-	<a href="on-software-design.html">On Software Design</a><br>
-	
-	<br><b>Publicatio(n)</b><br>
-	<a href="https://www.siam.org/media/brxpwggc/s136984pdf-copy.pdf">SIR Model of Time Dependent Drug and Vaccine Distribution on COVID-19</a><br>
-
-	<br><b>Social</b><br>
-	<a href="https://linkedin.com/in/lairdstewart">Linkedin</a><br>
-	<a href="https://github.com/lairdstewart">Github</a><br>
-	<a href="https://substack.com/@laird">Substack</a><br>
-	<a href="https://www.goodreads.com/user/show/184711854-laird-stewart">Goodreads</a><br>
-
-	<br><b>Contact</b><br>
-	<a href="mailto:me@lairdstewart.com">Email</a><br>
+	<div id="sidebar-container"></div>
+	<script>
+		fetch('sidebar.html')
+		    .then(response => response.text())
+		    .then(data => {
+			document.getElementById('sidebar-container').innerHTML = data;
+		    });
+	</script>
 </body>
 </html>

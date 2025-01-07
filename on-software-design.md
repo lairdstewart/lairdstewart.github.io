@@ -14,5 +14,7 @@ Code and prose share many similarities, but they are not the same. Therefore we 
 ### I reccomend
 - [A Minimalist Approach to Software (Ammar Hakim)](https://ammar-hakim.org/sj/pn/pn0/pn0-minimalism.html#pn0-a-minimalist-approach-to-software)  
 - [A Philosophy of Software Design (John Ousterhout)](https://ammar-hakim.org/sj/pn/pn0/pn0-minimalism.html#pn0-a-minimalist-approach-to-software)
+---
+https://htmx.org/essays/locality-of-behaviour/
 
 

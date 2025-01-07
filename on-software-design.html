@@ -1,12 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laird Stewart</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Laird Stewart</title>
+	<style>
+		.content {
+		    margin-left: 25%;
+		    margin-right: 25%;
+		    font-family: Arial, sans-sarif;
+		}
+		.content a { 
+		    color: #180ea4;
+		}
+		.content a:hover {
+		    color: #92b4d1;
+		}
+
+		.sidebar {
+		    position: fixed; /* Keeps it in place as you scroll */
+		    left: 0;
+		    top: 0;
+		    width: 15%;
+		    height: 100%;
+		    background-color: #7C2827;
+		    color: white; /* color of text elements */
+		    padding: 0px 20px; /* vertical, horizontal */
+		    box-sizing: border-box; /* padding "inside" the width of the sidebar*/
+		    font-family: Arial, sans-sarif;
+		}
+		.sidebar a { 
+		    color: #FFFFFF;
+		    text-decoration: none;
+		}
+		.sidebar a:hover {
+		    color: #92b4d1;
+		}
+
+	</style>
+
 </head>
 <body>
-	<a href="index.html">Home</a>
+	<div class="content">
 	  <div id="content"></div>
 	  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 	  <script>
@@ -18,5 +53,15 @@
 		document.getElementById('content').innerHTML = marked.parse(markdown);
 	      });
 	  </script>
+	</div>
+
+	<div id="sidebar-container"></div>
+	<script>
+		fetch('sidebar.html')
+		    .then(response => response.text())
+		    .then(data => {
+			document.getElementById('sidebar-container').innerHTML = data;
+		    });
+	</script>
 </body>
 </html>
