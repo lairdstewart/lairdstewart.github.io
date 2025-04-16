@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Laird Stewart</title>
+        <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="content">
+	  <div id="content"></div>
+	  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+	  <script>
+	    fetch('beware-pithy-rules.md') 
+	      .then(response => {
+		return response.text();
+	      })
+	      .then(markdown => {
+		document.getElementById('content').innerHTML = marked.parse(markdown);
+	      });
+	  </script>
+	</div>
+
+	<div id="sidebar-container"></div>
+	<script>
+		fetch('sidebar.html')
+		    .then(response => response.text())
+		    .then(data => {
+			document.getElementById('sidebar-container').innerHTML = data;
+		    });
+	</script>
+</body>
+</html>
