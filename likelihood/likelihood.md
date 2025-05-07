@@ -1,3 +1,5 @@
+# Notes on Likelihood
+
 Take a gaussian probability distribution
 $$
 f(x; \mu, \sigma)=\frac{1}{\sigma\sqrt{2\pi}}\exp(-\frac{1}{2}(\frac{x-\mu}{\sigma})^2)
