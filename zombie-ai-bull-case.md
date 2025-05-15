@@ -1,5 +1,4 @@
 # Bull Case For Zombie AI
-5/6/2024
 
 I won't use the terms AGI or super-human-AI because I don't know what "general" or "super-human" mean and others disagree anyway. It may be more useful to categorize AI based on its capabilities rather than intelligence. Consider Dangerous AI (DAI): one capable of killing all humans, and Self-Sustaining AI (SSAI): one capable of building an interstellar civilization. SSAI is DAI, and humans are SSAI. I'll focus on SSAI for now.
 
