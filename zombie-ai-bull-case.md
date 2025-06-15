@@ -1,3 +1,4 @@
+*[Laird Stewart](index.html)*\
 *5/25/25*
 
 ### Bull Case For Zombie AI

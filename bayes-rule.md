@@ -3,7 +3,7 @@
 
 ### Notes on Bayes' rule
 
-<img src="resources/venn-diagram.svg" width="30%">
+<img src="venn-diagram.svg" width="30%">
 
 Consider a rectangular dartboard with two circles $A$ and $B$ drawn on it. A monkey is throwing darts at the board, and they fall randomly within it. The probability that the dart falls within the circle labeled $A$ is its area divided by the area of the rectangle, $20/100=0.2$. Now imagine you're facing the other way and the money throws the dart. The bartender tells you it landed in $B$. What is the probability it also landed in $A$ (i.e., in the purple intersection)? It's hopefully intuitive this is the area of the purple section divided by the red section, $4/12=0.33$.
 

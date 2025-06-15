@@ -1,3 +1,4 @@
+*[Laird Stewart](../index.html)*\
 *4/25/25*
 
 ### Notes on Likelihood

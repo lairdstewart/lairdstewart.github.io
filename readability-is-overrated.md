@@ -1,3 +1,4 @@
+*[Laird Stewart](index.html)*\
 *1/25/25*
 
 ### Readability is Overrated
