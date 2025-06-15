@@ -2,8 +2,7 @@
 *1/25/25*
 
 ### Readability is Overrated
-"Dealing with complexity is the most important challenge in software design" -
-John Ousterhout
+> Dealing with complexity is the most important challenge in software design—John Ousterhout
 
 When I say a piece of code is readable I typically mean understandable or
 grokable. And I typically take others to mean that as well. However, it seems
