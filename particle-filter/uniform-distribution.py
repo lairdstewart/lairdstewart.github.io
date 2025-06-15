@@ -16,4 +16,3 @@ plt.ylabel('Probability Density')
 plt.ylim(0, 1.05)
 plt.title('Uniform Prior on $x_t$')
 plt.savefig('uniform-prior.png')
-

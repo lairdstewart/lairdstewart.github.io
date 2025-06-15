@@ -25,7 +25,7 @@ Let's take a step back, and think more about (1). $P(A|B)$ is a probability and 
 In (1), $P(A)$ is called the prior and $P(A|B)$ the posterior since $P(A)$ was our belief about the probability of event $A$ occuring before observing the event $B$, and $P(A|B)$ is our belief about its probability afer (prior to) observing $B$.
 
 Resources
-- [An Introduction to Bayesian Thinking](https://statswithr.github.io/book/)
+- [An Introduction to Bayesian Thinking](https://statswithr.github.io/book/): Free online textbook from a Coursera course. Good for someone who has taken an undergaduate stats course 
 
 
 

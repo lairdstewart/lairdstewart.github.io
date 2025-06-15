@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Laird Stewart</title>
-        <link rel="stylesheet" href="style.css"> 
+	<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 	<div class="content">
 		<br>
@@ -18,16 +20,18 @@
 		<a href="readability-is-overrated.html">Readability is Overrated</a> (1/25)<br>
 		<a href="beware-pithy-rules.html">Beware of Pithy Rules About Software</a> (1/25)<br><br>
 		<b>Publications</b><br>
-		<a href="https://www.siam.org/media/brxpwggc/s136984pdf-copy.pdf">SIR Model of Time Dependent Drug and Vaccine Distribution on COVID-19</a><br>
+		<a href="https://www.siam.org/media/brxpwggc/s136984pdf-copy.pdf">SIR Model of Time Dependent Drug and Vaccine
+			Distribution on COVID-19</a><br>
 	</div>
 
 	<div id="sidebar-container"></div>
 	<script>
 		fetch('sidebar.html')
-		    .then(response => response.text())
-		    .then(data => {
-			document.getElementById('sidebar-container').innerHTML = data;
-		    });
+			.then(response => response.text())
+			.then(data => {
+				document.getElementById('sidebar-container').innerHTML = data;
+			});
 	</script>
 </body>
+
 </html>
