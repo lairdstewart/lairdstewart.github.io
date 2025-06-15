@@ -1,40 +1,132 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Laird Stewart</title>
-        <link rel="stylesheet" href="style.css">
-    <script>
-    window.MathJax = {
-      tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
-    };
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</head>
-<body>
-	<div class="content">
-	  <div id="content"></div>
-	  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-	  <script>
-	    fetch('bayes-rule.md') 
-	      .then(response => {
-		return response.text();
-	      })
-	      .then(markdown => {
-              document.getElementById('content').innerHTML = marked.parse(markdown);
-              MathJax.typeset();
-	      });
-	  </script>
-	</div>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 
-	<div id="sidebar-container"></div>
-	<script>
-		fetch('sidebar.html')
-		    .then(response => response.text())
-		    .then(data => {
-			document.getElementById('sidebar-container').innerHTML = data;
-		    });
-	</script>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>bayes-rule</title>
+  <style>
+    code {
+      white-space: pre-wrap;
+    }
+
+    span.smallcaps {
+      font-variant: small-caps;
+    }
+
+    div.columns {
+      display: flex;
+      gap: min(4vw, 1.5em);
+    }
+
+    div.column {
+      flex: auto;
+      overflow-x: auto;
+    }
+
+    div.hanging-indent {
+      margin-left: 1.5em;
+      text-indent: -1.5em;
+    }
+
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class] {
+      list-style: none;
+    }
+
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="https://lairdstewart.com/style.css" />
+  <script defer="" src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+      var mathElements = document.getElementsByClassName("math");
+      var macros = [];
+      for (var i = 0; i < mathElements.length; i++) {
+        var texText = mathElements[i].firstChild;
+        if (mathElements[i].tagName == "SPAN") {
+          katex.render(texText.data, mathElements[i], {
+            displayMode: mathElements[i].classList.contains('display'),
+            throwOnError: false,
+            macros: macros,
+            fleqn: false
+          });
+        }
+      }
+    });
+  </script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+</head>
+
+<body>
+  <p><em><a href="index.html">Laird Stewart</a></em><br />
+    <em>5/25/25</em>
+  </p>
+  <h3 id="notes-on-bayes-rule">Notes on Bayes’ rule</h3>
+  <p><img src="venn-diagram.svg" width="30%"></p>
+  <p>Consider a rectangular dartboard with two circles <span class="math inline">A</span> and <span
+      class="math inline">B</span>
+    drawn on it. A monkey is throwing darts at the board, and they fall
+    randomly within it. The probability that the dart falls within the
+    circle labeled <span class="math inline">A</span> is its area divided by
+    the area of the rectangle, <span class="math inline">20/100=0.2</span>.
+    Now imagine you’re facing the other way and the money throws the dart.
+    The bartender tells you it landed in <span class="math inline">B</span>.
+    What is the probability it also landed in <span class="math inline">A</span> (i.e., in the purple intersection)?
+    It’s
+    hopefully intuitive this is the area of the purple section divided by
+    the red section, <span class="math inline">4/12=0.33</span>.</p>
+  <p>Bayes’ rule formalizes this: <span class="math display">
+      P(A|B)=\frac{P(B|A)P(A)}{P(B)}\tag{1}
+    </span></p>
+  <p>Where <span class="math inline">P(A)</span> is the probability of
+    event <span class="math inline">A</span> occurring and <span class="math inline">P(A|B)</span> is the probability of
+    <span class="math inline">A</span> occurring given that <span class="math inline">B</span> occurred. Plugging in the
+    probabilities
+    from the dartboard example, we get the result we expect: <span class="math display">
+      P(A|B)=\frac{(4/20)\times (20/100)}{(12/100)}=4/12=0.33\tag{2}
+    </span>
+  </p>
+  <p>One way to derive Bayes rule is by starting with the definition of
+    joint probability: <span class="math display">
+      P(A\cap B)=P(A|B)P(B)=P(B|A)P(A)\tag{3}
+    </span></p>
+  <p>If you aren’t convinced of this fact, consider the dartboard again.
+    You can think of <span class="math inline">P(A|B)</span> as what % of
+    the red circle is covered by the purple section. Or, in other words, the
+    ratio of the area of the purple section to that of the red section. If
+    we then multiply that by the area of the red section, we’re left with
+    the area of the purple section. You can use the same logic to convince
+    yourself of the third term in (3). Finding Bayes’ rule is as simple as
+    dividing (3) by <span class="math inline">P(B)</span>.</p>
+  <p>Let’s take a step back, and think more about (1). <span class="math inline">P(A|B)</span> is a probability and
+    therefore bounded
+    between 0 and 1. How does this fraction ensure this is the case? It’s
+    clear that it won’t be negative as the three components are all
+    positive. But if <span class="math inline">P(B)\to 0</span>, why
+    wouldn’t this fraction grow to infinity? The reason is that <span class="math inline">P(B|A)P(A)=P(A\cap B)</span>
+    which is strictly less
+    than or equal to <span class="math inline">P(B)</span>.</p>
+  <p>In (1), <span class="math inline">P(A)</span> is called the prior and
+    <span class="math inline">P(A|B)</span> the posterior since <span class="math inline">P(A)</span> was our belief
+    about the probability of
+    event <span class="math inline">A</span> occurring before observing the
+    event <span class="math inline">B</span>, and <span class="math inline">P(A|B)</span> is our belief about its
+    probability
+    after (prior to) observing <span class="math inline">B</span>.
+  </p>
+  <h4 id="resources">Resources</h4>
+  <ul>
+    <li><a href="https://statswithr.github.io/book/">An Introduction to
+        Bayesian Thinking</a>: Free online textbook from a Coursera course. Good
+      for someone who has taken an undergraduate stats course</li>
+  </ul>
 </body>
+
 </html>
