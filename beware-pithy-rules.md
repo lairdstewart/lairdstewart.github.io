@@ -32,7 +32,7 @@ Code](https://qntm.org/clean) for an example of how this can go too far.
 
 > "Don't repeat yourself"
 
-In my first internship, I inherited a hundred-line R script with code literally
+In my first internship, I inherited a thousand-line R script with code literally
 copy and pasted half a dozen times with different hard-coded parameters. DRY is
 a powerful concept when you first learn it, and I've met a number of data
 scientists who could have learned it sooner. However, entry level software
