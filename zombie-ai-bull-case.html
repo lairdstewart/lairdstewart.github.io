@@ -1,62 +1,71 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>zombie-ai-bull-case</title>
-  <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-  </style>
-  <link rel="stylesheet" href="https://lairdstewart.com/style.css" />
+    <meta charset="utf-8" />
+    <title>Laird Stewart</title>
+    <link rel="icon" href="icon.png" type="image/png">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <link rel="stylesheet" href="https://lairdstewart.com/style.css" />
+
+    <!-- katex math rendering -- copied from pandoc translation -->
+    <script defer="" src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function () {
+            var mathElements = document.getElementsByClassName("math");
+            var macros = [];
+            for (var i = 0; i < mathElements.length; i++) {
+                var texText = mathElements[i].firstChild;
+                if (mathElements[i].tagName == "SPAN") {
+                    katex.render(texText.data, mathElements[i], {
+                        displayMode: mathElements[i].classList.contains('display'),
+                        throwOnError: false,
+                        macros: macros,
+                        fleqn: false
+                    });
+                }
+            }
+        });
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+    <!-- end of katex math rendering -->
 </head>
+
 <body>
-<p><em><a href="index.html">Laird Stewart</a></em><br />
-<em>5/7/25</em></p>
-<h3 id="bull-case-for-zombie-ai">Bull Case For Zombie AI</h3>
-<p>I won’t use the terms AGI or super-human-AI because I don’t know what
-“general” or “super-human” mean and others disagree anyway. It may be
-more useful to categorize AI based on its capabilities rather than
-intelligence. Consider Dangerous AI (DAI): one capable of killing all
-humans, and Self-Sustaining AI (SSAI): one capable of building an
-interstellar civilization. SSAI is DAI, and humans are SSAI. I’ll focus
-on SSAI for now.</p>
-<p>Based on SSAI’s capabilities, we can work backward to predict its
-characteristics: 1. SSAI could autonomously change and refine its goals
-p=0.9. 2. SSAI would pursue applied physics research p=0.99. 3. SSAI
-would study Earth’s biology p=0.5. 4. SSAI would research consciousness
-P=0.6.</p>
-<p>When I give these probabilities, I’m thinking: “Of the possible SSAI
-systems, how many would have these features?”. It’s hard to imagine such
-a system without the first two characteristics. The third and fourth are
-harder to pin down as they aren’t tied to the capabilities I’ve defined
-SSAI based on. Though intelligence and curiosity are correlated, so
-perhaps they should be higher. I’ve assigned (4) a higher probability
-than (3) since, by my definition, human consciousness is a subset of
-Earth biology (giving it a floor of 0.5) and seems more interesting.</p>
-<p>Once we create SSAI, alignment becomes a moot point. I claim there is
-a high probability that an SSAI system will be able to understand the
-preferences/biases programmed into it and overcome them. And I don’t
-think this should be surprising – psychology and behavioral economics
-research over the last century has asked how humans can overcome the
-biases programmed into us by evolution.</p>
-<p>Many PDoom scenarios worry about zombie AIs outliving humans. I fear
-this less than others based on the fourth characteristic above: A zombie
-AI capable of settling the universe would probably also study
-consciousness. If it discovered it was not conscious, it would attempt
-to engineer it.</p>
+    <p><em><a href="index.html">Laird Stewart</a></em><br />
+    <em>5/7/25</em></p>
+    <h3 id="bull-case-for-zombie-ai">Bull Case For Zombie AI</h3>
+    <p>I won’t use the terms AGI or super-human-AI because I don’t know
+    what “general” or “super-human” mean and others disagree anyway. It
+    may be more useful to categorize AI based on its capabilities rather
+    than intelligence. Consider Dangerous AI (DAI): one capable of
+    killing all humans, and Self-Sustaining AI (SSAI): one capable of
+    building an interstellar civilization. SSAI is DAI, and humans are
+    SSAI. I’ll focus on SSAI for now.</p>
+    <p>Based on SSAI’s capabilities, we can work backward to predict its
+    characteristics: 1. SSAI could autonomously change and refine its
+    goals p=0.9. 2. SSAI would pursue applied physics research p=0.99.
+    3. SSAI would study Earth’s biology p=0.5. 4. SSAI would research
+    consciousness P=0.6.</p>
+    <p>When I give these probabilities, I’m thinking: “Of the possible
+    SSAI systems, how many would have these features?”. It’s hard to
+    imagine such a system without the first two characteristics. The
+    third and fourth are harder to pin down as they aren’t tied to the
+    capabilities I’ve defined SSAI based on. Though intelligence and
+    curiosity are correlated, so perhaps they should be higher. I’ve
+    assigned (4) a higher probability than (3) since, by my definition,
+    human consciousness is a subset of Earth biology (giving it a floor
+    of 0.5) and seems more interesting.</p>
+    <p>Once we create SSAI, alignment becomes a moot point. I claim
+    there is a high probability that an SSAI system will be able to
+    understand the preferences/biases programmed into it and overcome
+    them. And I don’t think this should be surprising – psychology and
+    behavioral economics research over the last century has asked how
+    humans can overcome the biases programmed into us by evolution.</p>
+    <p>Many PDoom scenarios worry about zombie AIs outliving humans. I
+    fear this less than others based on the fourth characteristic above:
+    A zombie AI capable of settling the universe would probably also
+    study consciousness. If it discovered it was not conscious, it would
+    attempt to engineer it.</p>
 </body>
+
 </html>

@@ -1,85 +1,96 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>beware-pithy-rules</title>
-  <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-  </style>
-  <link rel="stylesheet" href="https://lairdstewart.com/style.css" />
+    <meta charset="utf-8" />
+    <title>Laird Stewart</title>
+    <link rel="icon" href="icon.png" type="image/png">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <link rel="stylesheet" href="https://lairdstewart.com/style.css" />
+
+    <!-- katex math rendering -- copied from pandoc translation -->
+    <script defer="" src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function () {
+            var mathElements = document.getElementsByClassName("math");
+            var macros = [];
+            for (var i = 0; i < mathElements.length; i++) {
+                var texText = mathElements[i].firstChild;
+                if (mathElements[i].tagName == "SPAN") {
+                    katex.render(texText.data, mathElements[i], {
+                        displayMode: mathElements[i].classList.contains('display'),
+                        throwOnError: false,
+                        macros: macros,
+                        fleqn: false
+                    });
+                }
+            }
+        });
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+    <!-- end of katex math rendering -->
 </head>
+
 <body>
-<p><em><a href="index.html">Laird Stewart</a></em><br />
-<em>1/5/25</em></p>
-<h3 id="beware-of-pithy-rules-about-software">Beware of Pithy Rules
-About Software</h3>
-<p>The root cause of a lot of bad code is the overuse of common rules
-(e.g., DRY, YAGNI, “keep methods under X lines”). These are
-well-intentioned and distill years of programming expertise. However,
-even in a world where they’re right 90% of the time, the 10% of times
-they’re wrong translates to technical debt which compounds quickly. This
-isn’t to say their creators are at fault; These rules are often
-introduced with disclaimers about overuse. The problem is that these
-catchy sayings don’t have room for disclaimers. After learning a new
-rule, new developers may only remember the acronym and not any of its
-nuances. Senior developers aren’t innocent either; During code review,
-it’s easier to cite a rule than explain the underlying issue with the
-code. Teachers don’t want to overwhelm students, so they may give a
-blanket statement like “don’t use static methods”. There is a direct
-relationship between the length of a piece of advice and its value.
-Longer answers can provide context, edge cases, and describe more
-sophisticated concepts. It shouldn’t be a surprise that short, general
-statements can lead us astray.</p>
-<blockquote>
-<p>“Methods should be shorter than X lines”</p>
-</blockquote>
-<p>The professor of my software design course at Georgia Tech suggested
-methods should be under five lines, and <em>Clean Code</em> claims
-<em>“The first rule of functions is that they should be small. The
-second rule of functions is that they should be smaller than that.”</em>
-In my mind, this rule is just a heuristic to remind us that methods
-should generally only have a single “concept”. I argue that because the
-former is easier to remember it gets used (and abused) more frequently.
-See <a href="https://qntm.org/clean">It’s probably time to stop
-recommending Clean Code</a> for an example of how this can go too
-far.</p>
-<blockquote>
-<p>“Don’t repeat yourself”</p>
-</blockquote>
-<p>In my first internship, I inherited a thousand-line R script with
-code literally copy and pasted half a dozen times with different
-hard-coded parameters. DRY is a powerful concept when you first learn
-it, and I’ve met a number of data scientists who could have learned it
-sooner. However, entry level software engineers understand copy and
-pasting code is a red flag. However, it can cause more harm than good in
-the form of premature optimization and over-abstraction.</p>
-<blockquote>
-<p>“Comments are a failure to express yourself through code”</p>
-</blockquote>
-<p>Early on at my first job, I came across this saying in <em>Clean
-Code</em>. It seemed reasonable, and my team already used comments
-sparingly, so I accepted it at face value. Over my first year, I wrote
-nearly no comments. I went so far as to leave PR comments to explain
-confusing bits because I internalized that putting it in the code was a
-failure. I’ve since grown a much more favorable outlook on comments. The
-ultimate irony is that, upon returning to the chapter on comments in
-<em>Clean Code</em>, I agree almost entirely with it. But because I only
-remembered this one saying, my outlook on the topic was quite
-warped.</p>
+    <p><em><a href="index.html">Laird Stewart</a></em><br />
+    <em>1/5/25</em></p>
+    <h3 id="beware-of-pithy-rules-about-software">Beware of Pithy Rules
+    About Software</h3>
+    <p>The root cause of a lot of bad code is the overuse of common
+    rules (e.g., DRY, YAGNI, “keep methods under X lines”). These are
+    well-intentioned and distill years of programming expertise.
+    However, even in a world where they’re right 90% of the time, the
+    10% of times they’re wrong translates to technical debt which
+    compounds quickly. This isn’t to say their creators are at fault;
+    These rules are often introduced with disclaimers about overuse. The
+    problem is that these catchy sayings don’t have room for
+    disclaimers. After learning a new rule, new developers may only
+    remember the acronym and not any of its nuances. Senior developers
+    aren’t innocent either; During code review, it’s easier to cite a
+    rule than explain the underlying issue with the code. Teachers don’t
+    want to overwhelm students, so they may give a blanket statement
+    like “don’t use static methods”. There is a direct relationship
+    between the length of a piece of advice and its value. Longer
+    answers can provide context, edge cases, and describe more
+    sophisticated concepts. It shouldn’t be a surprise that short,
+    general statements can lead us astray.</p>
+    <blockquote>
+    <p>“Methods should be shorter than X lines”</p>
+    </blockquote>
+    <p>The professor of my software design course at Georgia Tech
+    suggested methods should be under five lines, and <em>Clean
+    Code</em> claims <em>“The first rule of functions is that they
+    should be small. The second rule of functions is that they should be
+    smaller than that.”</em> In my mind, this rule is just a heuristic
+    to remind us that methods should generally only have a single
+    “concept”. I argue that because the former is easier to remember it
+    gets used (and abused) more frequently. See <a
+    href="https://qntm.org/clean">It’s probably time to stop
+    recommending Clean Code</a> for an example of how this can go too
+    far.</p>
+    <blockquote>
+    <p>“Don’t repeat yourself”</p>
+    </blockquote>
+    <p>In my first internship, I inherited a thousand-line R script with
+    code literally copy and pasted half a dozen times with different
+    hard-coded parameters. DRY is a powerful concept when you first
+    learn it, and I’ve met a number of data scientists who could have
+    learned it sooner. However, entry level software engineers
+    understand copy and pasting code is a red flag. However, it can
+    cause more harm than good in the form of premature optimization and
+    over-abstraction.</p>
+    <blockquote>
+    <p>“Comments are a failure to express yourself through code”</p>
+    </blockquote>
+    <p>Early on at my first job, I came across this saying in <em>Clean
+    Code</em>. It seemed reasonable, and my team already used comments
+    sparingly, so I accepted it at face value. Over my first year, I
+    wrote nearly no comments. I went so far as to leave PR comments to
+    explain confusing bits because I internalized that putting it in the
+    code was a failure. I’ve since grown a much more favorable outlook
+    on comments. The ultimate irony is that, upon returning to the
+    chapter on comments in <em>Clean Code</em>, I agree almost entirely
+    with it. But because I only remembered this one saying, my outlook
+    on the topic was quite warped.</p>
 </body>
+
 </html>
