@@ -1,42 +1,19 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-
 <head>
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Laird Stewart</title>
-  <link rel="icon" href="../icon.png" type="image/png">
+  <title>likelihood</title>
   <style>
-    code {
-      white-space: pre-wrap;
-    }
-
-    span.smallcaps {
-      font-variant: small-caps;
-    }
-
-    div.columns {
-      display: flex;
-      gap: min(4vw, 1.5em);
-    }
-
-    div.column {
-      flex: auto;
-      overflow-x: auto;
-    }
-
-    div.hanging-indent {
-      margin-left: 1.5em;
-      text-indent: -1.5em;
-    }
-
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     /* The extra [class] is a hack that increases specificity enough to
        override a similar rule in reveal.js */
-    ul.task-list[class] {
-      list-style: none;
-    }
-
+    ul.task-list[class]{list-style: none;}
     ul.task-list li input[type="checkbox"] {
       font-size: inherit;
       width: 0.8em;
@@ -45,117 +22,121 @@
     }
   </style>
   <link rel="stylesheet" href="https://lairdstewart.com/style.css" />
-  <script defer="" src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
-      var mathElements = document.getElementsByClassName("math");
-      var macros = [];
-      for (var i = 0; i < mathElements.length; i++) {
-        var texText = mathElements[i].firstChild;
-        if (mathElements[i].tagName == "SPAN") {
-          katex.render(texText.data, mathElements[i], {
-            displayMode: mathElements[i].classList.contains('display'),
-            throwOnError: false,
-            macros: macros,
-            fleqn: false
-          });
-        }
-      }
-    });
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
   </script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
 </head>
-
 <body>
-  <p><em><a href="../index.html">Laird Stewart</a></em><br />
-    <em>4/25/25</em>
-  </p>
-  <h3 id="notes-on-likelihood">Notes on Likelihood</h3>
-  Take a Gaussian probability distribution <span class="math display">
-    f(x; \mu,
-    \sigma)=\frac{1}{\sigma\sqrt{2\pi}}\exp(-\frac{1}{2}(\frac{x-\mu}{\sigma})^2)
-  </span>
-  <div style="text-align: center;">
-    <p><img src="pdf.png" width="60%" /></p>
-  </div>
-  This is a function of <span class="math inline">x</span> and is
-  parameterized by <span class="math inline">\mu</span> and <span class="math inline">\sigma</span>. If we instead
-  consider the expression
-  on the right as a function of <span class="math inline">\mu</span> and
-  <span class="math inline">\sigma</span>, parameterized by <span class="math inline">x</span>, we have the likelihood
-  function <span class="math display">
-    L(\mu, \sigma;
-    x)=\frac{1}{\sigma\sqrt{2\pi}}\exp(-\frac{1}{2}(\frac{x-\mu}{\sigma})^2)
-  </span>
-  <div style="text-align: center;">
-    <p><img src="likelihood.png" width="60%" /></p>
-  </div>
-  <p>This is the definition of the likelihood function.</p>
-  <p>I’ll emphasize that the expression on the right hasn’t changed. A few
-    things fall out of this 1) Previously the integral of <span class="math inline">f</span> (holding <span
-      class="math inline">\mu</span>, <span class="math inline">\sigma</span>
-    constant) over <span class="math inline">x</span> was 1. Now if we
-    integrate <span class="math inline">L</span> over <span class="math inline">\mu</span> and <span
-      class="math inline">\sigma</span> (holding x constant) there is no
-    reason to expect the integral is still 1. 2) <span class="math inline">L</span> evaluated at <span
-      class="math inline">(\mu=a,\sigma=b;x=5)</span> is a likelihood. If
-    <span class="math inline">f</span> happened to be parameterized by <span class="math inline">\mu=a,\sigma=b</span>
-    and evaluated at <span class="math inline">x=5</span> the result would be the same (since the
-    expression is the same). Therefore, the value of <span class="math inline">f</span> evaluated at <span
-      class="math inline">x=5</span> is the likelihood of its parameters
-    parameterized by <span class="math inline">x=5</span>. That’s a
-    long-winded way to say <span class="math inline">f(x)</span> is a
-    likelihood. (Remember it is the integral of <span class="math inline">f</span> which is a probability: <span
-      class="math inline">\int_a^bfdx</span>).
-  </p>
-  <p>So what does it mean? Look at the line on this surface for <span class="math inline">\mu=5.5</span>. Notice that
-    near <span class="math inline">\sigma=0</span> it has a low likelihood. As <span class="math inline">\sigma</span>
-    increases, its likelihood increases
-    for a bit and then declines again. Consider three points along that line
-    (<span class="math inline">\mu</span>, <span class="math inline">\sigma</span>) = (5.5, 0.2), (5.5, 1), (5.5, 2).
-    How
-    did we calculate the value of <span class="math inline">L</span> at each
-    of these points? We just plugged in these <span class="math inline">(\mu, \sigma)</span> pairs along with <span
-      class="math inline">x=5</span> into the expression above. Let’s
-    visualize our doing that, but letting x vary again (notice these curves
-    are PDFs now).</p>
-  <div style="text-align: center;">
-    <p><img src="cross.png" width="60%" /></p>
-  </div>
-  <p>The value of our likelihood surface for each combination <span class="math inline">(\mu, \sigma)</span> is the
-    intersection of the red
-    line with each of these PDFs. Orange performs the best. Even if we
-    centered the green PDF on <span class="math inline">x=5</span> it would
-    still not have as high a value as the orange curve. So we can think
-    about the values of the likelihood function like this: “how well does
-    this pair of parameters <span class="math inline">(\mu,\sigma)</span>
-    fit the data point <span class="math inline">x=5</span>?”</p>
-  <p>That brings us to Wikipedia’s definition: “A likelihood function
-    (often simply called the likelihood) measures how well a statistical
-    model explains observed data by calculating the probability of seeing
-    that data under different parameter values of the model.” Hopefully this
-    is clear now.</p>
-  <p>One last thing. Wikipedia’s article continues “It is constructed from
-    the joint probability distribution of the random variable that
-    (presumably) generated the observations”. When I said earlier that the
-    definition of the Likelihood was simply the PDF with its parameters
-    considered as variables that was only partially true. It is actually the
-    <em>joint</em> PDF. In this case we just considered a “joint” PDF with
-    only one part. <span class="math display">
-      L(\mu, \sigma; x_1,x_2,...x_n)\triangleq
-      \prod_{i=1}^nf(x_i;\mu,\sigma)=\prod_{i=1}^n\frac{1}{\sigma\sqrt{2\pi}}\exp(-\frac{1}{2}(\frac{x_i-\mu}{\sigma})^2)
-    </span> The likelihood function is useful because it helps us guess the
-    parameters of a distribution given some samples from it. Say we have IID
-    samples <span class="math inline">x_1,x_2,\cdots,x_n</span>, from a
-    known distribution with unknown parameters, and we want to find the
-    parameters which maximize the probability of having drawn this sample.
-    The parameters which maximize the likelihood function are those
-    parameters! If this isn’t clear, think back to the one dimensional case
-    and the previous figure.
-  </p>
-  <p>Here is a simple example of this process (called a maximum likelihood
-    estimate) for three data points assumed to be drawn from a Gaussian
-    distribution</p>
-  <p><img src="figure-4.png" width="50%" /><img src="figure-5.png" width="50%" /></p>
+<p><em><a href="../index.html">Laird Stewart</a></em><br />
+<em>4/16/25</em></p>
+<h3 id="notes-on-likelihood">Notes on Likelihood</h3>
+Take a Gaussian probability distribution <span class="math display">
+f(x; \mu,
+\sigma)=\frac{1}{\sigma\sqrt{2\pi}}\exp(-\frac{1}{2}(\frac{x-\mu}{\sigma})^2)
+</span>
+<div style="text-align: center;">
+<p><img src="pdf.png" width="60%"/></p>
+</div>
+This is a function of <span class="math inline">x</span> and is
+parameterized by <span class="math inline">\mu</span> and <span
+class="math inline">\sigma</span>. If we instead consider the expression
+on the right as a function of <span class="math inline">\mu</span> and
+<span class="math inline">\sigma</span>, parameterized by <span
+class="math inline">x</span>, we have the likelihood function <span
+class="math display">
+L(\mu, \sigma;
+x)=\frac{1}{\sigma\sqrt{2\pi}}\exp(-\frac{1}{2}(\frac{x-\mu}{\sigma})^2)
+</span>
+<div style="text-align: center;">
+<p><img src="likelihood.png" width="60%"/></p>
+</div>
+<p>This is the definition of the likelihood function.</p>
+<p>I’ll emphasize that the expression on the right hasn’t changed. A few
+things fall out of this 1) Previously the integral of <span
+class="math inline">f</span> (holding <span
+class="math inline">\mu</span>, <span class="math inline">\sigma</span>
+constant) over <span class="math inline">x</span> was 1. Now if we
+integrate <span class="math inline">L</span> over <span
+class="math inline">\mu</span> and <span
+class="math inline">\sigma</span> (holding x constant) there is no
+reason to expect the integral is still 1. 2) <span
+class="math inline">L</span> evaluated at <span
+class="math inline">(\mu=a,\sigma=b;x=5)</span> is a likelihood. If
+<span class="math inline">f</span> happened to be parameterized by <span
+class="math inline">\mu=a,\sigma=b</span> and evaluated at <span
+class="math inline">x=5</span> the result would be the same (since the
+expression is the same). Therefore, the value of <span
+class="math inline">f</span> evaluated at <span
+class="math inline">x=5</span> is the likelihood of its parameters
+parameterized by <span class="math inline">x=5</span>. That’s a
+long-winded way to say <span class="math inline">f(x)</span> is a
+likelihood. (Remember it is the integral of <span
+class="math inline">f</span> which is a probability: <span
+class="math inline">\int_a^bfdx</span>).</p>
+<p>So what does it mean? Look at the line on this surface for <span
+class="math inline">\mu=5.5</span>. Notice that near <span
+class="math inline">\sigma=0</span> it has a low likelihood. As <span
+class="math inline">\sigma</span> increases, its likelihood increases
+for a bit and then declines again. Consider three points along that line
+(<span class="math inline">\mu</span>, <span
+class="math inline">\sigma</span>) = (5.5, 0.2), (5.5, 1), (5.5, 2). How
+did we calculate the value of <span class="math inline">L</span> at each
+of these points? We just plugged in these <span
+class="math inline">(\mu, \sigma)</span> pairs along with <span
+class="math inline">x=5</span> into the expression above. Let’s
+visualize our doing that, but letting x vary again (notice these curves
+are PDFs now).</p>
+<div style="text-align: center;">
+<p><img src="cross.png" width="60%"/></p>
+</div>
+<p>The value of our likelihood surface for each combination <span
+class="math inline">(\mu, \sigma)</span> is the intersection of the red
+line with each of these PDFs. Orange performs the best. Even if we
+centered the green PDF on <span class="math inline">x=5</span> it would
+still not have as high a value as the orange curve. So we can think
+about the values of the likelihood function like this: “how well does
+this pair of parameters <span class="math inline">(\mu,\sigma)</span>
+fit the data point <span class="math inline">x=5</span>?”</p>
+<p>That brings us to Wikipedia’s definition: “A likelihood function
+(often simply called the likelihood) measures how well a statistical
+model explains observed data by calculating the probability of seeing
+that data under different parameter values of the model.” Hopefully this
+is clear now.</p>
+<p>One last thing. Wikipedia’s article continues “It is constructed from
+the joint probability distribution of the random variable that
+(presumably) generated the observations”. When I said earlier that the
+definition of the Likelihood was simply the PDF with its parameters
+considered as variables that was only partially true. It is actually the
+<em>joint</em> PDF. In this case we just considered a “joint” PDF with
+only one part. <span class="math display">
+L(\mu, \sigma; x_1,x_2,...x_n)\triangleq
+\prod_{i=1}^nf(x_i;\mu,\sigma)=\prod_{i=1}^n\frac{1}{\sigma\sqrt{2\pi}}\exp(-\frac{1}{2}(\frac{x_i-\mu}{\sigma})^2)
+</span> The likelihood function is useful because it helps us guess the
+parameters of a distribution given some samples from it. Say we have IID
+samples <span class="math inline">x_1,x_2,\cdots,x_n</span>, from a
+known distribution with unknown parameters, and we want to find the
+parameters which maximize the probability of having drawn this sample.
+The parameters which maximize the likelihood function are those
+parameters! If this isn’t clear, think back to the one dimensional case
+and the previous figure.</p>
+<p>Here is a simple example of this process (called a maximum likelihood
+estimate) for three data points assumed to be drawn from a Gaussian
+distribution</p>
+<p><img src="figure-4.png" width="50%"/><img src="figure-5.png" width="50%"/></p>
 </body>
-
 </html>

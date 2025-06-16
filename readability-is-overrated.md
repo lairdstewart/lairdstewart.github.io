@@ -1,5 +1,5 @@
 *[Laird Stewart](index.html)*\
-*1/25/25*
+*1/5/25*
 
 ### Readability is Overrated
 > Dealing with complexity is the most important challenge in software design—John Ousterhout

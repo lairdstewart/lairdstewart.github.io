@@ -1,5 +1,5 @@
 *[Laird Stewart](index.html)*\
-*1/25/25*
+*1/5/25*
 
 ### Beware of Pithy Rules About Software
 
