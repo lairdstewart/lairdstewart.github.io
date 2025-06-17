@@ -19,5 +19,7 @@ I'm a software engineer at [Metron Inc.](https://metsci.com) where I develop tra
 ### Publications
 - [SIR Model of Time Dependent Drug and Vaccine Distribution on COVID-19](covid-sir-model.pdf) (5/11/21)
 
-<!-- ### Quote Collection
-> If today were the last day of my life, would I want to do what I'm about to do today? -->
+<br />
+<div style="text-align: center;">
+<img src="resources/loading.gif" width="30%"/>
+</div>
