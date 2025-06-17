@@ -21,5 +21,5 @@ I'm a software engineer at [Metron Inc.](https://metsci.com) where I develop tra
 
 <br />
 <div style="text-align: center;">
-<img src="resources/loading.gif" width="30%"/>
+<img src="resources/ovals.gif" width="30%" style="margin-right: 10%"/><img src="resources/rain.gif" width="30%"/>
 </div>
