@@ -29,32 +29,8 @@ a:hover {
     color: #06e;
 }
 
-a:active {
-    color: #faa700;
-}
-
 a:focus {
     outline: thin dotted;
-}
-
-*::-moz-selection {
-    background: rgba(255, 255, 0, 0.3);
-    color: #000;
-}
-
-*::selection {
-    background: rgba(255, 255, 0, 0.3);
-    color: #000;
-}
-
-a::-moz-selection {
-    background: rgba(255, 255, 0, 0.3);
-    color: #0645ad;
-}
-
-a::selection {
-    background: rgba(255, 255, 0, 0.3);
-    color: #0645ad;
 }
 
 p {
@@ -147,19 +123,6 @@ strong {
 
 dfn {
     font-style: italic;
-}
-
-ins {
-    background: #ff9;
-    color: #000;
-    text-decoration: none;
-}
-
-mark {
-    background: #ff0;
-    color: #000;
-    font-style: italic;
-    font-weight: bold;
 }
 
 sub,
@@ -364,10 +327,6 @@ body.dark a:visited {
 
 body.dark a:hover {
     color: #bfe1ff;
-}
-
-body.dark a:active {
-    color: #ffdd55;
 }
 
 body.dark h1,
