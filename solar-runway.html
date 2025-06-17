@@ -35,7 +35,7 @@
 
 <body>
     <p><em><a href="index.html">Laird Stewart</a></em><button id="theme-toggle" aria-label="Toggle dark mode"
-            style="background:none;border:none;font-size:1em;margin-left:0.5em;vertical-align:middle;cursor:pointer;">◐</button><br />
+            style="background:none;border:none;font-size:1em;margin-left:0.5em;vertical-align:middle;cursor:pointer;">☀️</button><br />
         
 
         <script>
@@ -45,18 +45,18 @@
                 const stored = localStorage.getItem('theme');
                 if (stored === 'dark' || (!stored && prefersDark)) {
                     document.body.classList.add('dark');
-                    toggle.textContent = '◐';
+                    toggle.textContent = '🌙';
                     toggle.style.color = '#fff';
                 }
                 toggle.addEventListener('click', () => {
                     if (document.body.classList.contains('dark')) {
                         document.body.classList.remove('dark');
-                        toggle.textContent = '◐';
+                        toggle.textContent = '☀️';
                         toggle.style.color = '#000';
                         localStorage.setItem('theme', 'light');
                     } else {
                         document.body.classList.add('dark');
-                        toggle.textContent = '◐';
+                        toggle.textContent = '🌙';
                         toggle.style.color = '#fff';
                         localStorage.setItem('theme', 'dark');
                     }
