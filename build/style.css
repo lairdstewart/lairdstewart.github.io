@@ -346,3 +346,52 @@ table td {
         page-break-after: avoid;
     }
 }
+
+
+/* Dark mode */
+body.dark {
+    background: #222;
+    color: #eee;
+}
+
+body.dark a {
+    color: #9ecbff;
+}
+
+body.dark a:visited {
+    color: #bfafff;
+}
+
+body.dark a:hover {
+    color: #bfe1ff;
+}
+
+body.dark a:active {
+    color: #ffdd55;
+}
+
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark h4,
+body.dark h5,
+body.dark h6 {
+    color: #fff;
+}
+
+body.dark blockquote {
+    color: #aaa;
+    border-left: 0.5em #444 solid;
+}
+
+body.dark hr {
+    border-top: 1px solid #555;
+    border-bottom: 1px solid #333;
+}
+
+body.dark pre,
+body.dark code,
+body.dark kbd,
+body.dark samp {
+    color: #fff;
+}

@@ -1,7 +1,7 @@
-*[Laird Stewart](index.html)*\
-*1/5/25*
+<!-- trick pandoc to not wrapping date in a paragraph tag -->
+<em>1/5/25</em>
+<h3>Readability is Overrated</h3>
 
-### Readability is Overrated
 > Dealing with complexity is the most important challenge in software design—John Ousterhout
 
 When I say a piece of code is readable I typically mean understandable or

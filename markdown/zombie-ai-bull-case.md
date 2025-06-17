@@ -1,7 +1,6 @@
-*[Laird Stewart](index.html)*\
-*5/7/25*
-
-### Bull Case For Zombie AI
+<!-- trick pandoc to not wrapping date in a paragraph tag -->
+<em>5/7/25</em>
+<h3>Bull Case For Zombie AI</h3>
 
 I won't use the terms AGI or super-human-AI because I don't know what "general" or "super-human" mean and others disagree anyway. It may be more useful to categorize AI based on its capabilities rather than intelligence. Consider Dangerous AI (DAI): one capable of killing all humans, and Self-Sustaining AI (SSAI): one capable of building an interstellar civilization. SSAI is DAI, and humans are SSAI. I'll focus on SSAI for now.
 

@@ -30,45 +30,80 @@
     <!-- end of katex math rendering -->
 </head>
 
+<!-- ◐◑ -->
+
 <body>
-    <p><em><a href="index.html">Laird Stewart</a></em><br />
+    <p><em><a href="index.html">Laird Stewart</a></em><button id="theme-toggle" aria-label="Toggle dark mode"
+            style="background:none;border:none;font-size:1em;margin-left:0.5em;vertical-align:middle;cursor:pointer;">◐</button><br />
+        <!-- trick pandoc to not wrapping date in a paragraph tag -->
         <em>6/15/25</em>
-    </p>
-    <h3 id="about">About</h3>
-    <p>I’m a software engineer at <a href="https://metsci.com">Metron
-            Inc.</a> where I develop tracking and sensor-fusion algorithms for
-        maritime systems. I studied applied math at Emory and computer
-        engineering at Georgia Tech. I take part-time coursework at Johns
-        Hopkins—most recently plasma physics. I plan to pursue a PhD focused
-        on some combination of simulation, numerical analysis, and machine
-        learning. Most of what <a href="https://www.goodreads.com/user/show/184711854-laird-stewart">I
-            read</a> centers on energy, technology, history, and progress. I’d
-        like to write more.</p>
-    <ul>
-        <li><a href="https://linkedin.com/in/lairdstewart">LinkedIn</a></li>
+        <h3 id="about">
+        About
+        </h3>
+        <p>I’m a software engineer at <a
+        href="https://metsci.com">Metron Inc.</a> where I develop
+        tracking and sensor-fusion algorithms for maritime systems. I
+        studied applied math at Emory and computer engineering at
+        Georgia Tech. I take part-time coursework at Johns Hopkins—most
+        recently plasma physics. I plan to pursue a PhD focused on some
+        combination of simulation, numerical analysis, and machine
+        learning. Most of what <a
+        href="https://www.goodreads.com/user/show/184711854-laird-stewart">I
+        read</a> centers on energy, technology, history, and progress.
+        I’d like to write more.</p>
+        <ul>
+        <li><a
+        href="https://linkedin.com/in/lairdstewart">LinkedIn</a></li>
         <li><a href="https://github.com/lairdstewart">GitHub</a></li>
         <li><a href="resume.pdf">Resume</a> (6/15/25)</li>
         <li><a href="mailto:me@lairdstewart.com">Email</a></li>
-    </ul>
-    <h3 id="posts">Posts</h3>
-    <ul>
+        </ul>
+        <h3 id="posts">Posts</h3>
+        <ul>
         <li><a href="bayes-rule.html">Notes on Bayes’ Rule</a>
-            (5/14/25)</li>
-        <li><a href="zombie-ai-bull-case.html">Bull Case for Zombie AI</a>
-            (5/7/25)</li>
-        <li><a href="likelihood.html">Notes on Likelihood</a> (4/16/25)</li>
+        (5/14/25)</li>
+        <li><a href="zombie-ai-bull-case.html">Bull Case for Zombie
+        AI</a> (5/7/25)</li>
+        <li><a href="likelihood.html">Notes on Likelihood</a>
+        (4/16/25)</li>
         <li><a href="readability-is-overrated.html">Readability is
-                Overrated</a> (1/5/25)</li>
-        <li><a href="beware-pithy-rules.html">Beware of Pithy Rules About
-                Software</a> (1/5/25)</li>
-    </ul>
-    <h3 id="publications">Publications</h3>
-    <ul>
-        <li><a href="covid-sir-model.pdf">SIR Model of Time Dependent Drug
-                and Vaccine Distribution on COVID-19</a> (5/11/21)</li>
-    </ul>
-    <!-- ### Quote Collection
-    > If today were the last day of my life, would I want to do what I'm about to do today? -->
+        Overrated</a> (1/5/25)</li>
+        <li><a href="beware-pithy-rules.html">Beware of Pithy Rules
+        About Software</a> (1/5/25)</li>
+        </ul>
+        <h3 id="publications">Publications</h3>
+        <ul>
+        <li><a href="covid-sir-model.pdf">SIR Model of Time Dependent
+        Drug and Vaccine Distribution on COVID-19</a> (5/11/21)</li>
+        </ul>
+        <!-- ### Quote Collection
+        > If today were the last day of my life, would I want to do what I'm about to do today? -->
+
+        <script>
+            (function () {
+                const toggle = document.getElementById('theme-toggle');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const stored = localStorage.getItem('theme');
+                if (stored === 'dark' || (!stored && prefersDark)) {
+                    document.body.classList.add('dark');
+                    toggle.textContent = '◐';
+                    toggle.style.color = '#fff';
+                }
+                toggle.addEventListener('click', () => {
+                    if (document.body.classList.contains('dark')) {
+                        document.body.classList.remove('dark');
+                        toggle.textContent = '◐';
+                        toggle.style.color = '#000';
+                        localStorage.setItem('theme', 'light');
+                    } else {
+                        document.body.classList.add('dark');
+                        toggle.textContent = '◐';
+                        toggle.style.color = '#fff';
+                        localStorage.setItem('theme', 'dark');
+                    }
+                });
+            })();
+        </script>
 </body>
 
 </html>

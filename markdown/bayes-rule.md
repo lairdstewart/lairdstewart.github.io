@@ -1,7 +1,6 @@
-*[Laird Stewart](index.html)*\
-*5/14/25*
-
-### Notes on Bayes' rule
+<!-- trick pandoc to not wrapping date in a paragraph tag -->
+<em>5/14/25</em>
+<h3>Notes on Bayes' rule</h3>
 
 <img src="resources/venn-diagram.svg" width="30%">
 

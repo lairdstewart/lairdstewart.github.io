@@ -1,7 +1,6 @@
-*[Laird Stewart](index.html)*\
-*4/16/25*
-
-### Notes on Likelihood
+<!-- trick pandoc to not wrapping date in a paragraph tag -->
+<em>4/16/25</em>
+<h3>Notes on Likelihood</h3>
 
 Take a Gaussian probability distribution
 $$

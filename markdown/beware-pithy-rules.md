@@ -1,7 +1,6 @@
-*[Laird Stewart](index.html)*\
-*1/5/25*
-
-### Beware of Pithy Rules About Software
+<!-- trick pandoc to not wrapping date in a paragraph tag -->
+<em>1/5/25</em>
+<h3>Beware of Pithy Rules About Software</h3>
 
 The root cause of a lot of bad code is the overuse of common rules (e.g., DRY,
 YAGNI, "keep methods under X lines"). These are well-intentioned and distill
