@@ -8,7 +8,7 @@ f(x; \mu, \sigma)=\frac{1}{\sigma\sqrt{2\pi}}\exp(-\frac{1}{2}(\frac{x-\mu}{\sig
 $$
 
 <div style="text-align: center;">
-<img src="resources/pdf.png" width="60%"/>
+<img src="resources/likelihood/pdf.png" width="60%"/>
 </div>
 
 This is a function of $x$ and is parameterized by $\mu$ and $\sigma$. If we instead consider the expression on the right as a function of $\mu$ and $\sigma$, parameterized by $x$, we have the likelihood function
@@ -16,7 +16,7 @@ $$
 L(\mu, \sigma; x)=\frac{1}{\sigma\sqrt{2\pi}}\exp(-\frac{1}{2}(\frac{x-\mu}{\sigma})^2)
 $$
 <div style="text-align: center;">
-<img src="resources/likelihood.png" width="60%"/>
+<img src="resources/likelihood/likelihood.png" width="60%"/>
 </div>
 
 This is the definition of the likelihood function.
@@ -28,7 +28,7 @@ I'll emphasize that the expression on the right hasn't changed. A few things fal
 So what does it mean? Look at the line on this surface for $\mu=5.5$. Notice that near $\sigma=0$ it has a low likelihood. As $\sigma$ increases, its likelihood increases for a bit and then declines again. Consider three points along that line ($\mu$, $\sigma$) = (5.5, 0.2), (5.5, 1), (5.5, 2). How did we calculate the value of $L$ at each of these points? We just plugged in these $(\mu, \sigma)$ pairs along with $x=5$ into the expression above. Let's visualize our doing that, but letting x vary again (notice these curves are PDFs now).
 
 <div style="text-align: center;">
-<img src="resources/cross.png" width="60%"/>
+<img src="resources/likelihood/cross.png" width="60%"/>
 </div>
 
 The value of our likelihood surface for each combination $(\mu, \sigma)$ is the intersection of the red line with each of these PDFs. Orange performs the best. Even if we centered the green PDF on $x=5$ it would still not have as high a value as the orange curve. So we can think about the values of the likelihood function like this: "how well does this pair of parameters $(\mu,\sigma)$ fit the data point $x=5$?"
@@ -43,4 +43,4 @@ The likelihood function is useful because it helps us guess the parameters of a 
 
 Here is a simple example of this process (called a maximum likelihood estimate) for three data points assumed to be drawn from a Gaussian distribution
 
-<img src="resources/figure-4.png" width="50%"/><img src="resources/figure-5.png" width="50%"/>
+<img src="resources/likelihood/figure-4.png" width="50%"/><img src="resources/likelihood/figure-5.png" width="50%"/>
