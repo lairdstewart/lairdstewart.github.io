@@ -19,7 +19,7 @@ I'm a software engineer at [Metron Inc.](https://metsci.com) developing tracking
 ### Publications
 - [SIR Model of Time Dependent Drug and Vaccine Distribution on COVID-19](resources/covid-sir-model.pdf) (5/11/21)
 
-<br />
+<!-- <br />
 <div style="text-align: center;">
-<img src="resources/ovals.gif" width="30%" style="margin-right: 10%"/><img src="resources/rain.gif" width="30%"/>
-</div>
+<img src="resources/light-ovals.mov" width="30%" style="margin-right: 10%"/><img src="resources/dark-ovals.mov" width="30%"/>
+</div> -->
