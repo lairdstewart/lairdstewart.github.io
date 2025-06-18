@@ -1,24 +1,38 @@
-# Introduction to Particle Filters
-## Definition and Vocabulary
+<em>6/17/25</em>
+<h3>Introduction to Particle Filters</h1>
+
+#### Definition and Vocabulary
 > A particle filter is a numerical algorithm to estimate the state of an object given a sequence of measurements about it.
 
-First, to introduce some terms. "Numerical" means that it provides an approximate solution using computation. Think of the trapezoid rule for evaluating an integral. This is opposed to an "analytical" solution which provides an exact answer through the manipulation of mathematical formulae. Think of applying rules from calculus class to solve the integral directly. "Estimating state" here means finding a probability distribution on the object's state space. The object's state is unknown, it is the thing we are trying to estimate. One example of object and state space is a pedestrian (object) and their position/velocity (state space). Another could be a chemical reactor, and it's state space the temperature and concentration of reactants. Next, the "measurements" here are things we observe about the state of the object. For example, the reactor may have a temperature probe inside it. Or, a self-driving car may have a camera which, using computer vision, could place a bounding box around a pedestrian. Notice that the thermometer measures one dimension of the reactors state space (temperature) directly, while the bounding-box does not measure the pedestrian's position or velocity directly -- it would not be possible to tell if this was a very tall pedestrian standing far away or a short one nearby. Both of these are types of measurements a particle filter can ingest. "Filter" implies that the algorithm finds an estimate of the objects state at the current time. This is contrasted with "smoothing" which seeks to estimate the entire history of its state. Finally, I've mentioned that the output of a particle filter is a probability distribution. In particular, it is a probability density function constructed of a set of "particles". Each particle is a point in the object's state space (e.g., {x-position, y-position, x-velocity, y-velocity}) with a corresponding weight. You can think of a particle as a nugget of probability of the object's state. If you're familiar with PDFs and surprised I've suggested using a finite set of things to "construct" a continuous function, hold onto that thought for now.
+"Numerical" means that particle filters provide an approximate solution using computation. Think of the trapezoid rule for evaluating an integral. This is opposed to an "analytical" solution which provides an exact answer through the manipulation of mathematical formulae. Think of applying rules from calculus class to solve the integral directly. "Estimating state" here means finding a probability distribution on the object's state space. One example of object and state space is a pedestrian (object) and their position/velocity (state space). Another could be a chemical reactor, and it's state space the temperature and concentration of reactants. Next, "measurements" are observations of (or somehow related to) the object's state. For example, the reactor may have a temperature probe inside it. Or, a self-driving car may have a camera which, using computer vision, could place a bounding box around a pedestrian. Notice that the thermometer measures one dimension of the reactors state space (temperature) directly, while the bounding-box does not measure the pedestrian's position or velocity directly—it's impossible to distinguish a short pedestrian nearby from a tall one farther away. "Filter" implies that the algorithm finds an estimate of the objects state at the current time. This is contrasted with "smoothing" which estimates the entire history of its state. Finally, I've mentioned that the output of a particle filter is a probability distribution. In particular, it is a probability density function constructed of a set of "particles". Each particle is a point in the object's state space (e.g., `{x-position, y-position, x-velocity, y-velocity}`) with a corresponding weight. You can think of a particle as a nugget of probability of the object's state. If you're familiar with PDFs and surprised I've suggested using a finite set of things to "construct" a continuous function, hold onto that thought for now.
 
-## The Kalman Filter 
-To motivate particle filters, I'll start by introducing and discussing the limitations of a simpler, analytic solution to this problem known as a Kalman filter. Consider Tom and Jerry. Jerry just entered a hole in the wall and is running towards cheese on the other side. The interior of the wall is cluttered with obstacles, so through some sections he will run faster and others runs more slowly. As he runs, Tom hears him make an occasional scratching sound. The wall is thick, and a bit echoey, so these sounds may not come from Jerry's exact location. 
+#### The Kalman Filter 
+To motivate particle filters, I'll start by introducing and discussing the limitations of a simpler, analytic solution to this problem known as a Kalman filter. Imagine you're Tom tracking an object (Jerry) who has just entered a hole in the wall and is running towards cheese on the other side. The wall's interior is cluttered, so Jerry's speed will change. As he runs, Tom hears an occasional scratching sound. But the wall is thick and echoey, so these sounds don't come from Jerry's exact location. Given where Jerry entered the wall and the sequence of sounds, Tom wants to estimate Jerry's position.
 
-Jerry is inside a wall and running back and forth. Tom is outside the wall, and trying to locate Jerry based on the occasional scratching sounds he hears. However, the wall is a bit echo-y so the sounds Tom hears may not be exactly where Jerry is. Given these sounds he needs to estimate Jerry's position.
-
-Tom knows how the wall tends to echo. In other words, given Jerry's position $x_t$, he knows where he is likely to hear a sound: $y_t=g(x;x_t)$ (my notation here means that $g$ is a function of a single variable, x, parameterized by $x_t$) To be clear, Tom doesn't know $x_t$, he only knows where he *might* hear a sound *if* he knew where Jerry was. $g$ is a 1D Gaussian centered at Jerry's true location with a standard deviation of 0.5:
+Tom knows how the wall tends to echo. Given $r_t$, Jerry's position at time $t$, he knows where he is likely to hear a sound: $y_t=g(x;r_t)$ ($a(x;b)$ means $a$ is a function of x "parameterized" by $b$, i.e., $b$ is a constant which appears in $a$'s equation). $y$ typically denotes a measurement, in this case a sound. To be clear, Tom doesn't know $r_t$, he only knows where he *might* hear a sound *if* he knew where Jerry was. $g$ is a 1D Gaussian centered at Jerry's true location with a standard deviation of 5 inches:
 $$
 \begin{aligned}
 &\mathcal{N}(x; \mu, \sigma)=\frac{1}{\sigma\sqrt{2\pi}}\exp(-\frac{1}{2}(\frac{x-\mu}{\sigma})^2)\\
-&y_t=g(x; x_t, 0.5)=\frac{1}{0.5\sqrt{2\pi}}\exp(-\frac{1}{2}(\frac{x-x_t}{0.5})^2)\\
+&y_t=g(x; x_t, 5)=\frac{1}{5\sqrt{2\pi}}\exp(-\frac{1}{2}(\frac{x-x_t}{5})^2)\\
 \end{aligned}
 $$
 
+Tom also knows Jerry typically runs 10 inches per second and that the obstacles vary his speed with $\mathcal{N}(\mu=0, \sigma=1)$. This implies the obstacles are equally likely to speed up or slow down Jerry. Jerry's overall speed is $\mathcal{N}(\mu=10, \sigma=1)$ in/s.
 
-To-do: need a simpler scenario where Jerry enters the wall in a hole on the left and moves at a constant speed to the right (with noise). e.g., Tom knows how fast he runs, but not what sort of obstacles is inside the wall, so he could go faster or slower. This is necessary for conjugacy and makes the initial prior easier to describe (just say it is the hole). 
+To summarize, we know:
+- How fast Jerry typically runs $\mathcal{N}(\mu=3, \sigma=1)$
+- How the wall tends to echo: $\mathcal{N}(\mu=x_t,\sigma=0.5)$
+- Jerry's initial position and time: $\mathcal{N}(\mu=0,\sigma=0.1)$
+
+
+<details>
+<summary> Proof that the product of two normal distributions is normal </summary>
+
+hello world
+$$
+y=mx+b
+$$
+</details>
 
 Now, Tom hears a sound ($y_1$) at $x=8$. We have a probability distribution of sound-locations given an (unknown) true position in addition to a sample sound. How can we estimate Jerry's position with this information? The answer is by using a maximum likelihood estimate (MLE). This, at a high level, takes $g$ and re-imagines it as a function of $x_t$ parameterized by $x$: $g'(x_t; x, 0.5)$. We have a value for x (8) which we can plug in here. The domain of $g'$ is likelihoods, and we choose the value of $x_t$ which maximizes $g'$. In this case it is trivial -- it is also 8.
 
@@ -26,11 +40,6 @@ Now, Tom hears a sound ($y_1$) at $x=8$. We have a probability distribution of s
 
 
 How can we construct a probability distribution on Jerry's state given this? We have a probability distribution of sound-locations given 
-
-
-
-
-
 
 
 
