@@ -2,7 +2,7 @@
 <em>7/13/25</em>
 <h3 id="about">About</h3>
 
-I'm a software engineer at [Metron Inc.](https://metsci.com) developing tracking and sensor-fusion algorithms for maritime systems. I studied applied math at Emory and computer engineering at Georgia Tech. I take part-time coursework at Johns Hopkins—currently plasma physics. I plan to pursue a PhD focused on some combination of simulation, numerical analysis, and machine learning. Most of what [I read](https://www.goodreads.com/user/show/184711854-laird-stewart) centers on energy, technology, history, and progress. I'd like to write more.
+I'm a software engineer at [Metron Inc.](https://metsci.com) developing tracking and sensor-fusion algorithms for maritime systems. I studied applied math at Emory and computer engineering at Georgia Tech. I take part-time coursework at Johns Hopkins—currently plasma physics. Most of what [I read](https://www.goodreads.com/user/show/184711854-laird-stewart) centers on energy, technology, history, and progress. I'd like to write more.
 
 - [LinkedIn](https://linkedin.com/in/lairdstewart)
 - [GitHub](https://github.com/lairdstewart)
