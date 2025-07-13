@@ -5,6 +5,7 @@
 I won't use the terms AGI or super-human-AI because I don't know what "general" or "super-human" mean and others disagree anyway. It may be more useful to categorize AI based on its capabilities rather than intelligence. Consider Dangerous AI (DAI): one capable of killing all humans, and Self-Sustaining AI (SSAI): one capable of building an interstellar civilization. SSAI is DAI, and humans are SSAI. I'll focus on SSAI for now.
 
 Based on SSAI's capabilities, we can work backward to predict its characteristics:
+
 1. SSAI could autonomously change and refine its goals p=0.9.
 2. SSAI would pursue applied physics research p=0.99.
 3. SSAI would study Earth's biology p=0.5.
