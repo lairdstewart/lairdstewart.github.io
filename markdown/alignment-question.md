@@ -6,4 +6,4 @@ Cognitive psychology empowers us to identify and, perhaps temporarily, overcome 
 
 Humans, notably, are capable of constructing and re-evaluating their own goals. Cezanne’s father wanted him to inherit his bank, sending him to study law. Cezanne spent his evenings drawing instead.
 
-Meta-cognition and independent goal-setting are features of human intelligence. It would be possible to build a useful machine without these traits, but I wouldn't consider it super-intelligent. By this definition, no super-intelligent machine could be successfully aligned.
+Meta-cognition and independent goal-setting are features of human intelligence. It would be possible to build a useful machine without these traits, but I wouldn't consider it super-intelligent. By this definition, could a super-intelligent machine be successfully aligned?
