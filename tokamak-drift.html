@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Laird Stewart</title>
+    <link rel="icon" href="resources/icon.png" type="image/png">
+    <link rel="apple-touch-icon" href="resources/icon.png">
+    <link rel="stylesheet" href="build/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+
+    <!-- katex math rendering -- copied from pandoc translation -->
+    <script defer="" src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function () {
+            var mathElements = document.getElementsByClassName("math");
+            var macros = [];
+            for (var i = 0; i < mathElements.length; i++) {
+                var texText = mathElements[i].firstChild;
+                if (mathElements[i].tagName == "SPAN") {
+                    katex.render(texText.data, mathElements[i], {
+                        displayMode: mathElements[i].classList.contains('display'),
+                        throwOnError: false,
+                        macros: macros,
+                        fleqn: false
+                    });
+                }
+            }
+        });
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+    <!-- end of katex math rendering -->
+</head>
+
+<body>
+    <p><em><a href="index.html">Laird Stewart</a></em><button id="theme-toggle" aria-label="Toggle dark mode"
+            style="background:none;border:none;font-size:1em;margin-left:0.5em;vertical-align:middle;cursor:pointer;">☀️</button><br />
+        <p><em>7/13/25</em></p>
+        <p><em>This post extends my midterm project for <a
+        href="https://ep.jhu.edu/courses/615753-plasma-physics/">Plasma
+        Physics 615.753</a> at Johns Hopkins. The project was
+        open-ended: explore a particle motion you’re interested in. I’m
+        sharing because I’m happy with my results and hope someone
+        learning the material finds them useful. In particular, there
+        aren’t many guides to the poloidal/toroidal coordinate system or
+        casual introductions to particle drifts in tokamaks. <a
+        href="../src/particle-drift.py">(Python code)</a></em></p>
+        <h3>
+        Notes on Grad-B and Curvature Drifts in Tokamaks
+        </h3>
+        <h4 id="motivation">Motivation</h4>
+        <p>If held in a plasma of high enough temperature and density,
+        light ions will eventually fuse. Magnetic confinement is an
+        approach to controlled fusion which achieves these conditions
+        using the magnetic force. This force acts perpendicular to ions’
+        velocity and the magnetic field, causing them to travel in
+        helices around field lines. Tokamaks bend these field lines into
+        a torus, trapping ions like beads on a bracelet. Once this trap
+        is set, ions are injected and heated with electromagnetic
+        radiation to achieve fusion conditions. Unfortunately, the
+        centers of ion orbits drift away from their original field lines
+        causing them to escape confinement. The addition of a poloidal
+        (short way around the torus) component to the magnetic field
+        negates the effect of this drift. This post derives a
+        representative magnetic field using a toroidal/poloidal
+        coordinate system and motivates the additional poloidal
+        component by simulating the trajectory of a single particle.</p>
+        <h4 id="toroidal-coordinate-system">Toroidal Coordinate
+        System</h4>
+        <p>It’s much simpler to formulate a tokamak’s magnetic field
+        using a <a
+        href="https://en.wikipedia.org/wiki/Toroidal_and_poloidal_coordinates">toroidal/poloidal
+        coordinate system</a> because its geometry mirrors the
+        problem’s, encapsulating its complexity. This system describes
+        locations relative to a “central circle” of radius <span
+        class="math inline">R_0</span> using three coordinates: <span
+        class="math inline">r</span>, <span
+        class="math inline">\theta</span>, and <span
+        class="math inline">\zeta</span>. <span
+        class="math inline">\zeta</span> measures the toroidal angle
+        (long way around), <span class="math inline">\theta</span> the
+        poloidal, and <span class="math inline">r</span> the distance
+        from the central circle.</p>
+        <figure style="text-align: center;">
+        <img src="../resources/tokamak-drift/midterm-toroidal-coordinates-xy.png" width="50%"/>
+        <figcaption>
+        Figure 1. Toroidal Coordinate System Top View
+        </figcaption>
+        </figure>
+        <figure style="text-align: center;">
+        <img src="../resources/tokamak-drift/midterm-toroidal-coordinates-xz.png" width="80%"/>
+        <figcaption>
+        Figure 2. Toroidal Coordinate System Side View
+        </figcaption>
+        </figure>
+        <p>The translation to and from Cartesian coordinates is given by
+        <span class="math display">
+        \begin{aligned}
+        &amp;x = (R_0+r\cos\theta)\cos\zeta\quad&amp;r =
+        \sqrt{(\sqrt{x^2+y^2}-R_0)^2+z^2}\\
+        &amp;y = (R_0+r\cos\theta)\sin\zeta\quad&amp;\theta =
+        \arctan2(z, \sqrt{x^2+y^2}-R_0)\\
+        &amp;z = r\sin\theta\quad&amp;\zeta = \arctan2(y, x)\\
+        \end{aligned}
+        </span></p>
+        <p>Where <span class="math inline">\arctan2(y, x)</span> is the
+        C/Python function which returns the angle between the positive
+        x-axis and the point <span class="math inline">(x, y)</span> in
+        the plane. Notice that <span
+        class="math inline">\sqrt{x^2+y^2}-R_0</span> is the signed
+        distance to the central circle in the xy-plane where a negative
+        value indicates the point is within the circle.</p>
+        <p>The unit vectors in this system (blue vectors in the
+        figures), expressed in Cartesian coordinates, are <span
+        class="math display">
+        \hat{r}=
+        \left(
+            \begin{array}{c}
+            \cos\theta \cos \zeta \\
+            \cos \theta \sin \zeta \\
+            \sin \theta \\
+            \end{array}
+        \right),\;
+        \hat{\theta}=
+        \left(
+            \begin{array}{c}
+            -\sin\theta\cos\zeta \\
+            -\sin\theta\sin\zeta \\
+            \cos\theta \\
+            \end{array}
+        \right),\;
+        \hat{\zeta}=
+        \left(
+            \begin{array}{c}
+            -\sin\zeta \\
+            \cos\zeta \\
+            0 \\
+            \end{array}
+        \right)
+        </span></p>
+        <p>Therefore, to translate a field vector with base (<span
+        class="math inline">r</span>, <span
+        class="math inline">\theta</span>, <span
+        class="math inline">\zeta</span>) and components (<span
+        class="math inline">a</span>, <span
+        class="math inline">b</span>, <span
+        class="math inline">c</span>) to Cartesian coordinates, the base
+        can be found using the translation above, and the vector using
+        the scaled unit vectors: <span class="math display">
+        \begin{aligned}
+        \mathbf{p}&amp;=a\hat{r}+b\hat{\theta}+c\hat{\zeta}\\
+        \mathbf{p}&amp;=(a\cos\theta\cos\zeta-b\sin\theta\cos\zeta-c\sin\zeta)\hat{x}\\
+        &amp;+(a\cos\theta\sin\zeta-b\sin\theta\sin\zeta+c\cos\zeta)\hat{y}\\
+        &amp;+(a\sin\theta+b\cos\theta)\hat{z}
+        \end{aligned}
+        </span></p>
+        <details>
+        <summary>
+        Note On Handedness
+        </summary>
+        <p>
+        If you pay close attention to the figures above, you’ll notice
+        that the coordinate system is left-handed. That is, you can
+        point your left thumb in <span
+        class="math inline">\mathbf{e}_r</span>, left index in <span
+        class="math inline">\mathbf{e}_\theta</span> and your middle
+        will naturally point in <span
+        class="math inline">\mathbf{e}_\zeta</span>. This means that the
+        cross product between vectors in order (<span
+        class="math inline">r</span>, <span
+        class="math inline">\theta</span>, <span
+        class="math inline">\zeta</span>) does not act like it does
+        between (<span class="math inline">x</span>, <span
+        class="math inline">y</span>, <span
+        class="math inline">z</span>). If using equations defined for a
+        right-handed system, you would need to account for this with
+        appropriate negative signs. Alternatively, you can make this
+        system right-handed by measuring <span
+        class="math inline">\theta</span> or <span
+        class="math inline">\zeta</span> in the opposite direction.
+        Since I only use this system to define the magnetic field and
+        not do any calculations, this isn’t a concern.
+        </p>
+        </details>
+        <h4 id="basic-tokamak-magnetic-fields">Basic Tokamak Magnetic
+        Fields</h4>
+        <p>The simplest field to imagine is a torus with constant
+        magnitude in the <span class="math inline">\hat{\zeta}</span>
+        (toroidal) direction. <span class="math display">
+        \begin{aligned}
+        \textbf{B}(r, \theta, \zeta)=\begin{cases}
+        1\hat{\zeta} &amp; \text{if } r &lt; r_0 \\
+        0 &amp; \text{otherwise}
+        \end{cases}
+        \end{aligned}
+        </span></p>
+        <!-- <figure style="text-align: center;">
+        <img src="../resources/tokamak-drift/midterm-3d-uniform-toroidal-magnetic-field.png" width="80%"/>
+        <figcaption>Figure 3. Uniform Toroidal Magnetic Field</figcaption>
+        </figure> -->
+        <!-- <figure style="text-align: center;">
+        <img src="../images/midterm-2d-uniform-toroidal-magnetic-field.png" width="60%"/>
+        <figcaption>Figure 4. Uniform Toroidal Magnetic Field, z=0 slice</figcaption>
+        </figure> -->
+        <p>Where <span class="math inline">r_0</span> is the poloidal
+        radius. Remember that the major radius <span
+        class="math inline">R_0</span> is implicit in the coordinate
+        system. Unfortunately, such a field is impossible to construct.
+        Consider the integral around the central circle. Since the field
+        is constant, the integral will be proportional to the loop’s
+        radius. The integral over a loop with a slightly larger radius
+        will be slightly larger. This contradicts Ampere’s law which
+        tells us the integrals must be equal because the same amount of
+        current (from the toroidal field coils) passes through each
+        loop. In order to obey Ampere’s law, the magnitude of the
+        magnetic field must vary with <span
+        class="math inline">1/R</span>:</p>
+        <p><span class="math display">
+        \begin{aligned}
+        &amp;\oint_{C_t} \textbf{B}_t\cdot
+        d\ell=\mu_0I_{\textrm{enc}}\quad\textrm{(Ampere&#39;s law, $C_t$
+        is a toroidal loop)}\\
+        &amp;\oint_{C_t} B_t d\ell=\mu_0I_{\textrm{enc}}\quad\textrm{(B
+        is purely toroidal, parallel to }C_t)\\
+        &amp;B_t\oint_{C_t} d\ell=\mu_0I_{\textrm{enc}}\quad\textrm{(B
+        has toroidal symmetry)}\\
+        &amp;B_t\int_0^{2\pi} R
+        d\theta=\mu_0I_{\textrm{enc}}\quad\textrm{(R is the radius of
+        }C_t)\\
+        &amp;B_tR =
+        \frac{\mu_0I_{\textrm{enc}}}{2\pi}=\textrm{Constant}\Rightarrow
+        B_t\propto\frac{1}{R}
+        \end{aligned}
+        </span></p>
+        <p>Accounting for this fact leads us to the field: <span
+        class="math display">
+        \begin{aligned}
+        \textbf{B}(r, \theta, \zeta)=\begin{cases}
+        R_0/(R_0 + r\cos\theta)\hat{\zeta} &amp; \text{if } r &lt; r_0
+        \\
+        0 &amp; \text{otherwise}
+        \end{cases}
+        \end{aligned}
+        </span> Since <span
+        class="math inline">R=R_0+r\cos\theta</span>. Choosing a
+        numerator of <span class="math inline">R_0</span> normalizes
+        this so that the field along the central circle <span
+        class="math inline">1</span>.</p>
+        <figure style="text-align: center;">
+        <img src="../resources/tokamak-drift/midterm-2d-physical-toroidal-magnetic-field.png" width="60%"/>
+        <figcaption>
+        Figure 3. Toroidal Magnetic Field, z=0
+        </figcaption>
+        </figure>
+        <p>Look closely, and you’ll see that the length of the vectors
+        on the inner radius are longer than those on the outer
+        radius.</p>
+        <p>The addition of a poloidal field helps mitigate particle
+        drift (I’ll explain why in the next section). It’s not possible
+        to create such a magnetic field with external coils, so instead,
+        Tokamaks drive a toroidal current through the plasma itself. The
+        precise mechanism (induction, neutral beam injection, or
+        electromagnetic radiation) is not important here. Assuming this
+        current density <span class="math inline">\textbf{J}</span> is
+        uniform:</p>
+        <p><span class="math display">
+        \begin{aligned}
+        &amp;\oint_{C_p} \textbf{B}_p\cdot
+        d\ell=\mu_0I_{\textrm{enc}}\propto J\pi
+        r^2\quad\textrm{(Ampere&#39;s Law, $C_p$ is a poloidal loop)}\\
+        &amp;\oint_{C_p} B_p d\ell\propto r^2\quad(B_p\textrm{ is purely
+        poloidal, parallel to }C_p)\\
+        &amp;B_p\oint_{C_p} d\ell\propto r^2\quad(B_p\textrm{ has
+        poloidal symmetry)}\\
+        &amp;B_pr \propto r^2\Rightarrow B_p\propto r
+        \end{aligned}
+        </span></p>
+        <p>Ampere’s law tells us that this poloidal field is
+        proportional to the minor-distance from the central circle,
+        <span class="math inline">r</span>. Because the magnetic field
+        in a vacuum linear, the toroidal <span
+        class="math inline">\textbf{B}_t</span> and poloidal fields
+        <span class="math inline">\textbf{B}_p</span> can be combined by
+        addition:</p>
+        <p><span class="math display">
+        \begin{aligned}
+        \textbf{B}(r, \theta, \zeta)=\begin{cases}
+        R_0/(R_0 + r\cos\theta)\hat{\zeta} + (r/r_0) \hat{\theta} &amp;
+        \text{if } r &lt; r_0 \\
+        0 &amp; \text{otherwise}
+        \end{cases}
+        \end{aligned}
+        </span></p>
+        <p>I normalize the poloidal <span
+        class="math inline">\hat{\theta}</span> term, so it varies from
+        0 at the central circle to <span class="math inline">1</span> at
+        the surface.</p>
+        <figure style="text-align: center;">
+        <img src="../resources/tokamak-drift/midterm-3d-twisting-toroidal-magnetic-field.png" width="80%"/>
+        <figcaption>
+        Figure 4. Toroidal and Poloidal Magnetic Field
+        </figcaption>
+        </figure>
+        <h4 id="particle-drift">Particle drift</h4>
+        <p>There are two causes of particle drift due to complexities of
+        the magnetic field. The first is caused by the magnetic field
+        varying in magnitude. This is called grad-B <span
+        class="math inline">(\nabla B)</span> drift. It causes the
+        orbital centers of particles to move with velocity:</p>
+        <p><span class="math display">
+        \mathbf{v}_{\nabla B}=\pm\frac{1}{2}v_\perp
+        r_L\frac{\mathbf{B}\times\nabla B}{B^2},\quad
+        r_L=\frac{mv_\perp}{|q|B}
+        </span> Where <span class="math inline">v_\perp</span> is the
+        particle’s velocity perpendicular to the field line, <span
+        class="math inline">r_L</span> is the Larmour radius (radius of
+        a single orbit around the field line), and <span
+        class="math inline">B=|\textbf{B}|</span> is the magnitude of
+        the magnetic field. The <span class="math inline">\pm</span>
+        indicates that the drift is positive for ions and negative for
+        electrons. To calculate this drift for the toroidal field,
+        consider an ion anywhere in the poloidal cross-section at <span
+        class="math inline">\zeta=0</span>. Using the fact that when
+        <span class="math inline">\zeta=0</span>, <span
+        class="math inline">\hat{\zeta}=\hat{y}</span> and that <span
+        class="math inline">x=R_0+r\cos\theta</span>, we can write the
+        gradient of the field in Cartesian coordinates.</p>
+        <p><span class="math display">
+        \begin{aligned}
+        &amp;\textbf{B}=R_0/(R_0+r\cos\theta)\hat{\zeta}=(R_0/x)
+        \hat{y}\\
+        &amp;B=R_0/x\\
+        &amp;\nabla B=\frac{\partial B}{\partial
+        x}\hat{x}=-\frac{R_0}{x^2}\hat{x}
+        \end{aligned}
+        </span></p>
+        <p>The grad-B drift for an ion with charge <span
+        class="math inline">q</span> and mass <span
+        class="math inline">m</span> is then</p>
+        <p><span class="math display">
+        \mathbf{v}_{\nabla
+        B}=\frac{1}{2}v_\perp\frac{mv_\perp}{q(R_0/x)}\frac{(R_0/x)\hat{y}\times(-R_0/x^2)\hat{x}}{(R_0/x)^2}=\frac{mv_\perp^2}{2qR_0}\hat{z}
+        </span></p>
+        <p>By argument of symmetry (we could have oriented the x-axis
+        however we like) the ion will experience this same drift
+        everywhere in the torus. Notice this is a constant, so this
+        drift is the same for any particle trajectory.</p>
+        <p>The second type of drift is due to the curvature of the field
+        and arises from the centrifugal force: <span
+        class="math display">
+        \textbf{v}_R=\frac{mv_\parallel^2}{qB^2}\frac{\textbf{R}_c\times\textbf{B}}{R_c^2}
+        </span> Where <span class="math inline">\textbf{R}_c</span> is
+        the vector pointing from the center of the torus to the
+        particle, and <span class="math inline">v_\parallel</span> is
+        its velocity along the magnetic field line. Now consider an ion
+        at <span class="math inline">\zeta=\theta=0</span>, that is,
+        along the <span class="math inline">x</span>-axis so that <span
+        class="math inline">R_c=x</span>. The curvature drift will be
+        <span class="math display">
+        \textbf{v}_R=\frac{mv_\parallel^2}{q(R_0/x)^2}\frac{R_c\hat{x}\times(R_0/x)\hat{y}}{R_c^2}=\frac{mv_\parallel^2}{qR_0}\hat{z}
+        </span></p>
+        <p>If the particle has a non-zero <span
+        class="math inline">z</span>-component, this becomes more
+        complex since <span class="math inline">R_c\neq x</span> and
+        <span class="math inline">\textbf{R}_c</span> is no longer
+        perpendicular to <span
+        class="math inline">\textbf{B}</span>.</p>
+        <p>The net effect in the toroidal field is that ions traveling
+        in the direction of the field lines will drift in the <span
+        class="math inline">+\hat{z}</span> direction until they escape
+        confinement. This is obviously a concern. Fortunately, the
+        addition of a poloidal component of the magnetic field solves
+        this problem. The twisting path causes ions to spend an equal
+        amount of time in the top (<span
+        class="math inline">z&gt;0</span>) and bottom (<span
+        class="math inline">z&lt;0</span>) of the torus. While the ion
+        is in the top, its upward drift causes it to move away from the
+        central circle, but while it is in the bottom, its drift bring
+        it back towards the central circle. Therefore, on average, there
+        is no overall drift!</p>
+        <h4 id="simulation-setup">Simulation Setup</h4>
+        <p>Assume the effect of gravity is negligible and the electric
+        field is zero. The ion experiences only the magnetic force:</p>
+        <p><span class="math display">
+        \begin{aligned}
+        &amp;\textbf{F}=m\textbf{a}=q\textbf{v}\times\textbf{B}\\
+        &amp;\frac{d\textbf{v}}{dt}=\frac{q\textbf{v}\times\textbf{B}}{m}\\
+        \end{aligned}
+        </span></p>
+        <p>The ion’s trajectory will follow this ODE. This cannot be
+        solved analytically, so I use an adaptive Runge-Kutta method to
+        solve it numerically. We can simplify the code by
+        non-dimensionalizing this equation. That is, replace each
+        component of the equation with a characteristic unit (denoted by
+        a subscript <span class="math inline">c</span>) multiplied by a
+        non-dimensional term (denoted by ~). For example, <span
+        class="math inline">a=\tilde{a}a_c</span></p>
+        <p><span class="math display">
+        \begin{aligned}
+        \left(\frac{v_c}{t_c}\right)\frac{d\tilde{\textbf{v}}}{d\tilde{t}}&amp;=\left(\frac{q_cv_cB_c}{m_c}\right)\frac{\tilde{q}\tilde{\textbf{v}}\times\tilde{\textbf{B}}}{\tilde{m}}\\
+        \frac{d\tilde{\textbf{v}}}{d\tilde{t}}&amp;=\left(\frac{q_cB_ct_c}{m_c}\right)\frac{\tilde{q}\tilde{\textbf{v}}\times\tilde{\textbf{B}}}{\tilde{m}}\\
+        \frac{d\tilde{\textbf{v}}}{d\tilde{t}}&amp;=\frac{\tilde{q}\tilde{\textbf{v}}\times\tilde{\textbf{B}}}{\tilde{m}}\\
+        \end{aligned}
+        </span></p>
+        <p>Fix <span class="math inline">q_c</span>, <span
+        class="math inline">B_c</span>, and <span
+        class="math inline">m_c</span> to scales relevant to the
+        problem, and then choose <span class="math inline">t_c</span> so
+        that this pre-factor becomes 1. Characteristic length is then
+        derived from the other units.</p>
+        <ul>
+        <li>Magnetic field: <span class="math inline">B_c=1</span> T
+        (Typical Tokamak field)</li>
+        <li>Electric charge: <span
+        class="math inline">q_c=1.6\times10^{-19}</span> C (proton
+        charge)</li>
+        <li>Mass: <span
+        class="math inline">m_c=1.67\times10^{-27}</span> kg (proton
+        mass)</li>
+        <li>Velocity: <span class="math inline">v_c=2.2\times10^5</span>
+        m/s (typical thermal velocity in a fusion reactor)</li>
+        <li>Time: <span
+        class="math inline">t_c=\frac{m_c}{q_cB_c}=1.04\times10^{-8}</span>
+        s</li>
+        <li>Length: <span class="math inline">L_c=v_ct_c=0.00230</span>
+        m</li>
+        </ul>
+        <p>The simulation will use this simplified, non-dimensional
+        equation. To recover a dimensional-quantity, simply multiply the
+        non-dimensional value by the characteristic unit.</p>
+        <p>I use the following parameters and initial conditions:</p>
+        <ul>
+        <li>Major radius: <span
+        class="math inline">R_0=2\textrm{m}=870</span></li>
+        <li>Minor radius: <span
+        class="math inline">r_0=0.5\textrm{m}=217</span></li>
+        <li>Initial position: <span
+        class="math inline">\textbf{r}=(R_0+r_0/2, 0, 0)=(979, 0,
+        0)</span></li>
+        <li>Initial velocity: <span
+        class="math inline">\textbf{v}=(\frac{1}{\sqrt{2}},
+        \frac{1}{\sqrt{2}}, 0)</span></li>
+        </ul>
+        <h4 id="particle-trajectories">Particle Trajectories</h4>
+        <p>At the stating time, <span
+        class="math inline">v_\parallel=v_y=v_\perp=v_x</span>. Since
+        <span class="math inline">v_\parallel^2+v_\perp^2=v^2</span>, we
+        have that <span
+        class="math inline">v_\perp^2=v_\parallel^2=v^2/2</span>, so the
+        drift velocity should be roughly <span class="math display">
+        \begin{aligned}
+        &amp;\textbf{v}_{drift}=\textbf{v}_{\nabla B} +
+        \textbf{v}_R=\left(\frac{mv_\perp^2}{2qR_0}+\frac{mv_\parallel^2}{qR_0}\right)\hat{z}\\
+        &amp;\textbf{v}_{drift}=\left(\frac{mv^2}{4qR_0}+\frac{mv^2}{2qR_0}\right)\hat{z}=\left(\frac{3mv^2}{4qR_0}\right)\hat{z}\\
+        &amp;\textbf{v}_{drift}=189\hat{z}\textrm{ m/s}=0.00086\hat{z}
+        \end{aligned}
+        </span></p>
+        <p>In the toroidal field, the particle follows a circular path
+        while drifting upward as expected. The rate of this drift is
+        slightly smaller than <span class="math inline">0.00086</span>.
+        I don’t know why. Remember that while the particle loops the
+        torus, it travels in a helical path around the field line, this
+        is why the line in Figure 6 is thick.</p>
+        <figure style="text-align: center;">
+        <img src="../resources/tokamak-drift/midterm-physical-field-position-xyz.png" width="80%"/>
+        <figcaption>
+        Figure 5. Toroidal Field: Particle Trajectory XYZ
+        </figcaption>
+        </figure>
+        <div
+        style="display: flex; justify-content: center; align-items: flex-start; gap: 10px;">
+        <figure style="display: flex; flex-direction: column; align-items: center; margin: 0; padding: 0; width: 50%; box-sizing: border-box;">
+        <img src="../resources/tokamak-drift/midterm-physical-field-position-z.png" alt="Description of Image 1" style="width: 100%; height: auto; display: block;">
+        <figcaption style="text-align: center; margin-top: 5px;">
+        Figure 6. Toroidal Field: Particle Trajectory Z
+        </figcaption>
+        </figure>
+        <figure style="display: flex; flex-direction: column; align-items: center; margin: 0; padding: 0; width: 50%; box-sizing: border-box;">
+        <img src="../resources/tokamak-drift/midterm-physical-field-position-xy.png" alt="Description of Image 2" style="width: 100%; height: auto; display: block;">
+        <figcaption style="text-align: center; margin-top: 5px;">
+        Figure 7. Toroidal Field: Particle Trajectory XY
+        </figcaption>
+        </figure>
+        </div>
+        <p>The addition of a poloidal field adds a periodic poloidal
+        motion to the trajectory. The amplitude of the particle’s
+        oscillation in the <span class="math inline">z</span>-direction
+        does not grow with time, so the drift has been mitigated.</p>
+        <figure style="text-align: center;">
+        <img src="../resources/tokamak-drift/midterm-twisting-field-position-xyz.png" width="80%"/>
+        <figcaption>
+        Figure 8. Toroidal and Poloidal Field: Particle Trajectory XYZ
+        </figcaption>
+        </figure>
+        <div
+        style="display: flex; justify-content: center; align-items: flex-start; gap: 10px;">
+        <figure style="display: flex; flex-direction: column; align-items: center; margin: 0; padding: 0; width: 50%; box-sizing: border-box;">
+        <img src="../resources/tokamak-drift/midterm-twisting-field-position-z.png" alt="Description of Image 1" style="width: 100%; height: auto; display: block;">
+        <figcaption style="text-align: center; margin-top: 5px;">
+        Figure 9. Toroidal and Poloidal Field: Particle Trajectory Z
+        </figcaption>
+        </figure>
+        <figure style="display: flex; flex-direction: column; align-items: center; margin: 0; padding: 0; width: 50%; box-sizing: border-box;">
+        <img src="../resources/tokamak-drift/midterm-twisting-field-position-xy.png" alt="Description of Image 2" style="width: 100%; height: auto; display: block;">
+        <figcaption style="text-align: center; margin-top: 5px;">
+        Figure 10. Toroidal and Poloidal Field: Particle Trajectory XY
+        </figcaption>
+        </figure>
+        </div>
+        <h4 id="resources">Resources</h4>
+        <p>I’ve only provided the analytic form of these drifts to keep
+        this short. If you’re looking for a conceptual understanding, I
+        suggest chapter 4 of <a
+        href="https://www.amazon.com/Future-Fusion-Energy-Jason-Parisi/dp/1786345420">“The
+        Future of Fusion Energy”</a> by Parisi and Ball. For an
+        introduction to the Runge-Kutta method, see Chapter 6 of Toby
+        Driscoll’s <a
+        href="https://tobydriscoll.net/fnc-julia/ivp/overview.html">“Fundamentals
+        of Numerical Computation”</a>.</p>
+
+        <script>
+            (function () {
+                const toggle = document.getElementById('theme-toggle');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const stored = localStorage.getItem('theme');
+                if (stored === 'dark' || (!stored && prefersDark)) {
+                    document.body.classList.add('dark');
+                    toggle.textContent = '🌙';
+                    toggle.style.color = '#fff';
+                }
+                toggle.addEventListener('click', () => {
+                    if (document.body.classList.contains('dark')) {
+                        document.body.classList.remove('dark');
+                        toggle.textContent = '☀️';
+                        toggle.style.color = '#000';
+                        localStorage.setItem('theme', 'light');
+                    } else {
+                        document.body.classList.add('dark');
+                        toggle.textContent = '🌙';
+                        toggle.style.color = '#fff';
+                        localStorage.setItem('theme', 'dark');
+                    }
+                });
+            })();
+        </script>
+</body>
+
+</html>

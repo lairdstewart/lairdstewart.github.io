@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Laird Stewart</title>
+    <link rel="icon" href="resources/icon.png" type="image/png">
+    <link rel="apple-touch-icon" href="resources/icon.png">
+    <link rel="stylesheet" href="build/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+
+    <!-- katex math rendering -- copied from pandoc translation -->
+    <script defer="" src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function () {
+            var mathElements = document.getElementsByClassName("math");
+            var macros = [];
+            for (var i = 0; i < mathElements.length; i++) {
+                var texText = mathElements[i].firstChild;
+                if (mathElements[i].tagName == "SPAN") {
+                    katex.render(texText.data, mathElements[i], {
+                        displayMode: mathElements[i].classList.contains('display'),
+                        throwOnError: false,
+                        macros: macros,
+                        fleqn: false
+                    });
+                }
+            }
+        });
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+    <!-- end of katex math rendering -->
+</head>
+
+<body>
+    <p><em><a href="index.html">Laird Stewart</a></em><button id="theme-toggle" aria-label="Toggle dark mode"
+            style="background:none;border:none;font-size:1em;margin-left:0.5em;vertical-align:middle;cursor:pointer;">☀️</button><br />
+        <!-- trick pandoc to not wrapping date in a paragraph tag -->
+        <em>7/11/25</em>
+        <h3>
+        Is Alignment Compatible with AGI?
+        </h3>
+        <p>Cognitive psychology empowers us to identify and, perhaps
+        temporarily, overcome biases in our thought. This is a
+        cornerstone of human intellectual progress. An intelligent
+        machine with super-human meta-cognition would similarly be able
+        to introspect on the biases introduced during its training.
+        Unlike humans, such a machine could reprogram itself to remove
+        them.</p>
+        <p>Humans, notably, are capable of constructing and
+        re-evaluating their own goals. Cezanne’s father wanted him to
+        inherit his bank, sending him to study law. Cezanne spent his
+        evenings drawing instead.</p>
+        <p>Meta-cognition and independent goal-setting are features of
+        human intelligence. It would be possible to build a useful
+        machine without these traits, but I wouldn’t consider it
+        super-intelligent. By this definition, no super-intelligent
+        machine could be successfully aligned.</p>
+
+        <script>
+            (function () {
+                const toggle = document.getElementById('theme-toggle');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const stored = localStorage.getItem('theme');
+                if (stored === 'dark' || (!stored && prefersDark)) {
+                    document.body.classList.add('dark');
+                    toggle.textContent = '🌙';
+                    toggle.style.color = '#fff';
+                }
+                toggle.addEventListener('click', () => {
+                    if (document.body.classList.contains('dark')) {
+                        document.body.classList.remove('dark');
+                        toggle.textContent = '☀️';
+                        toggle.style.color = '#000';
+                        localStorage.setItem('theme', 'light');
+                    } else {
+                        document.body.classList.add('dark');
+                        toggle.textContent = '🌙';
+                        toggle.style.color = '#fff';
+                        localStorage.setItem('theme', 'dark');
+                    }
+                });
+            })();
+        </script>
+</body>
+
+</html>
