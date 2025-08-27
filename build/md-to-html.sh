@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/zsh
 
 SCRIPT_DIR="${0:A:h}"
 PARENT_DIR="${SCRIPT_DIR:h}"
