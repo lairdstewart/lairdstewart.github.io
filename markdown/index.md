@@ -1,5 +1,5 @@
 <!-- trick pandoc to not wrapping date in a paragraph tag -->
-<em>8/27/25</em>
+<em>10/11/25</em>
 <h3 id="about">About</h3>
 
 I'm a software engineer at [Metron Inc.](https://metsci.com) developing tracking and sensor-fusion algorithms for maritime systems. I studied applied math at Emory and computer engineering at Georgia Tech. I take part-time coursework at Johns Hopkins—currently Theory of Machine Learning. Most of what [I read](https://www.goodreads.com/user/show/184711854-laird-stewart) centers on energy, technology, history, and progress. I'd like to write more.
@@ -10,6 +10,7 @@ I'm a software engineer at [Metron Inc.](https://metsci.com) developing tracking
 - [Email](mailto:me@lairdstewart.com)
 
 ### Posts
+- [Online Master's Degrees are Worthless](online-masters.html) (10/11/25)
 - [Reflections on Two Years Of Software Engineering](2-years.html) (8/27/25)
 - [Notes on Grad-B and Curvature Drifts in Tokamaks](tokamak-drift.html) (7/13/25)
 - [Is Alignment Compatible with AGI?](alignment-question.html) (7/11/25)
