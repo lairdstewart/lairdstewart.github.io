@@ -28,8 +28,4 @@ Given the following observations:
 - What previously costed $2,500 (assuming instruction is 1/2 the value of these courses) can now be offered for the price of an LLM subscription.
 - Demand for post-graduate education will increase as students drop out of (or never begin) these programs
 
-There's an opportunity here for a startup (or open source project). I'm imagining a service that organizes publicly released lectures and syllabi and matches students with others in their city to form study groups. What remains is solving the signaling and student motivation problems[1]. Perhaps signaling could be solved by peer reviews or in-person final exams at testing centers. Motivation is trickier.
-
----
-
-[1] Four fifths of students with the expressed intention to finish HarvardX EdX MOOCs don't ([Reich](https://er.educause.edu/articles/2014/12/MOOC-completion-and-retention-in-the-context-of-student-intent))
+There's an opportunity here for a startup (or open source project). I'm imagining a service that organizes publicly released lectures and syllabi and matches students with others in their city to form study groups. What remains is recovering the lost signaling value. Perhaps peer reviews or in-person final exams at testing centers.
