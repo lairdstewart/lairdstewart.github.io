@@ -377,3 +377,21 @@ body.dark details {
     border: 1px solid rgb(64, 64, 64);
     background-color: rgb(48, 48, 48);
 }
+
+body.dark table {
+    border-bottom: 1px solid #555;
+    border-right: 1px solid #555;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+body.dark table th {
+    background-color: #333;
+    border-top: 1px solid #555;
+    border-left: 1px solid #555;
+}
+
+body.dark table td {
+    border-top: 1px solid #555;
+    border-left: 1px solid #555;
+}
