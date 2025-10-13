@@ -1,5 +1,3 @@
-<!-- trick pandoc to not wrapping date in a paragraph tag -->
-<em>10/11/25</em>
 <h3 id="about">About</h3>
 
 I'm a software engineer at [Metron Inc.](https://metsci.com) developing tracking and sensor-fusion algorithms for maritime systems. I studied applied math at Emory and computer engineering at Georgia Tech. I take part-time coursework at Johns Hopkins—currently Theory of Machine Learning. Most of what [I read](https://www.goodreads.com/user/show/184711854-laird-stewart) centers on energy, technology, history, and progress. I'd like to write more.
@@ -19,6 +17,9 @@ I'm a software engineer at [Metron Inc.](https://metsci.com) developing tracking
 - [Notes on Likelihood](/posts/likelihood.html) (4/16/25)
 - [Readability is Overrated](/posts/readability-is-overrated.html) (1/5/25)
 - [Beware of Pithy Rules About Software](/posts/beware-pithy-rules.html) (1/5/25)
+
+### Recaps
+- [September 2025](/recaps/september-25.html)
 
 ### Publications
 - [SIR Model of Time Dependent Drug and Vaccine Distribution on COVID-19](resources/covid-sir-model.pdf) (5/11/21)

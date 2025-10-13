@@ -1,9 +1,6 @@
-<!-- trick pandoc to not wrapping date in a paragraph tag -->
-<em>10/1/25</em>
-
 *I publish a monthly email newsletter with personal updates and interesting things I read or learned that month. The latter is archived below. If you'd like to be added to the newsletter, email me.*
 
-<h3>October Recap</h3>
+<h3>September Recap</h3>
 
 ▶️ Gemini has met Larry Page's 2000 definition of artificial intelligence:
 
