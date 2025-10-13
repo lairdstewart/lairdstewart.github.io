@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Laird Stewart</title>
+    <link rel="icon" href="resources/icon.png" type="image/png">
+    <link rel="apple-touch-icon" href="resources/icon.png">
+    <link rel="stylesheet" href="/build/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+
+    <!-- katex math rendering -- copied from pandoc translation -->
+    <script defer="" src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function () {
+            var mathElements = document.getElementsByClassName("math");
+            var macros = [];
+            for (var i = 0; i < mathElements.length; i++) {
+                var texText = mathElements[i].firstChild;
+                if (mathElements[i].tagName == "SPAN") {
+                    katex.render(texText.data, mathElements[i], {
+                        displayMode: mathElements[i].classList.contains('display'),
+                        throwOnError: false,
+                        macros: macros,
+                        fleqn: false
+                    });
+                }
+            }
+        });
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+    <!-- end of katex math rendering -->
+</head>
+
+<body>
+    <p><em><a href="/index.html">Laird Stewart</a></em><button id="theme-toggle" aria-label="Toggle dark mode"
+            style="background:none;border:none;font-size:1em;margin-left:0.5em;vertical-align:middle;cursor:pointer;">☀️</button><br />
+        <!-- trick pandoc to not wrapping date in a paragraph tag -->
+        <em>1/5/25</em>
+        <h3>
+        Readability is Overrated
+        </h3>
+        <blockquote>
+        <p>Dealing with complexity is the most important challenge in
+        software design—John Ousterhout</p>
+        </blockquote>
+        <p>When I say a piece of code is readable I typically mean
+        understandable or grokable. And I typically take others to mean
+        that as well. However, it seems that some think of readable code
+        like they think of readable prose: that which is
+        straightforward, simple, and pleasing. Code and prose share many
+        similarities, but they are not the same. Therefore, we shouldn’t
+        expect our preferences for clearly written English to translate
+        to good code. According to this definition, Example 3-7 from
+        Clean Code is readable.
+        <code>includeSetupAndTeardownPages()</code> is visually clean,
+        quick to read, and appears straightforward. However, after
+        reading this you have no idea what it does or how it works.
+        Which fields does it update? Where does the exception come from?
+        Would it break if the order of the methods changed?</p>
+        <div class="sourceCode" id="cb1"><pre
+        class="sourceCode java"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// from example 3-7 of Clean Code</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span> PageData pageData<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span> <span class="dt">boolean</span> isSuite<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span> WikiPage testPage<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span> <span class="bu">StringBuffer</span> newPageContent<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span> PageCrawler pageCrawler<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span> <span class="dt">void</span> <span class="fu">includeSetupAndTeardownPages</span><span class="op">()</span> <span class="kw">throws</span> <span class="bu">Exception</span> <span class="op">{</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">includeSetupPages</span><span class="op">();</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">includePageContent</span><span class="op">();</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">includeTeardownPages</span><span class="op">();</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">updatePageContent</span><span class="op">();</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+        <p>Understandability isn’t a great metric either because it’s
+        relative. Senior devs can grok code more quickly than junior
+        devs. A developer with vim motions and keybindings to jump
+        between methods will find deeply nested code easier to
+        understand. Most important, code’s understandability is relative
+        to the difficulty of the problem the code is solving. The
+        problem may require a complicated algorithm or advanced data
+        structure with irreducible complexity. Therefore, I suggest
+        minimizing the difference in complexity between the underlying
+        problem and the code written to solve it.</p>
+
+        <script>
+            (function () {
+                const toggle = document.getElementById('theme-toggle');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const stored = localStorage.getItem('theme');
+                if (stored === 'dark' || (!stored && prefersDark)) {
+                    document.body.classList.add('dark');
+                    toggle.textContent = '🌙';
+                    toggle.style.color = '#fff';
+                }
+                toggle.addEventListener('click', () => {
+                    if (document.body.classList.contains('dark')) {
+                        document.body.classList.remove('dark');
+                        toggle.textContent = '☀️';
+                        toggle.style.color = '#000';
+                        localStorage.setItem('theme', 'light');
+                    } else {
+                        document.body.classList.add('dark');
+                        toggle.textContent = '🌙';
+                        toggle.style.color = '#fff';
+                        localStorage.setItem('theme', 'dark');
+                    }
+                });
+            })();
+        </script>
+</body>
+
+</html>

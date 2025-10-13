@@ -1,6 +1,6 @@
 <em>7/13/25</em>
 
-*This post extends my midterm project for [Plasma Physics 615.753](https://ep.jhu.edu/courses/615753-plasma-physics/) at Johns Hopkins. The project was open-ended: explore a particle motion you're interested in. I'm sharing because I'm happy with my results and hope someone learning the material finds them useful. In particular, there aren't many guides to the poloidal/toroidal coordinate system or casual introductions to particle drifts in tokamaks. [(Python code)](../src/particle-drift.py)*
+*This post extends my midterm project for [Plasma Physics 615.753](https://ep.jhu.edu/courses/615753-plasma-physics/) at Johns Hopkins. The project was open-ended: explore a particle motion you're interested in. I'm sharing because I'm happy with my results and hope someone learning the material finds them useful. In particular, there aren't many guides to the poloidal/toroidal coordinate system or casual introductions to particle drifts in tokamaks. [(Python code)](/resources/tokamak-drift/particle-drift.py)*
 
 <h3>Notes on Grad-B and Curvature Drifts in Tokamaks</h3>
 
@@ -11,11 +11,11 @@ If held in a plasma of high enough temperature and density, light ions will even
 It's much simpler to formulate a tokamak's magnetic field using a [toroidal/poloidal coordinate system](https://en.wikipedia.org/wiki/Toroidal_and_poloidal_coordinates) because its geometry mirrors the problem's, encapsulating its complexity. This system describes locations relative to a "central circle" of radius $R_0$ using three coordinates: $r$, $\theta$, and $\zeta$. $\zeta$ measures the toroidal angle (long way around), $\theta$ the poloidal, and $r$ the distance from the central circle. 
 
 <figure style="text-align: center;">
-<img src="../resources/tokamak-drift/midterm-toroidal-coordinates-xy.png" width="50%"/>
+<img src="/resources/tokamak-drift/midterm-toroidal-coordinates-xy.png" width="50%"/>
 <figcaption>Figure 1. Toroidal Coordinate System Top View</figcaption>
 </figure>
 <figure style="text-align: center;">
-<img src="../resources/tokamak-drift/midterm-toroidal-coordinates-xz.png" width="80%"/>
+<img src="/resources/tokamak-drift/midterm-toroidal-coordinates-xz.png" width="80%"/>
 <figcaption>Figure 2. Toroidal Coordinate System Side View</figcaption>
 </figure>
 
@@ -89,11 +89,11 @@ $$
 $$
 
 <!-- <figure style="text-align: center;">
-<img src="../resources/tokamak-drift/midterm-3d-uniform-toroidal-magnetic-field.png" width="80%"/>
+<img src="/resources/tokamak-drift/midterm-3d-uniform-toroidal-magnetic-field.png" width="80%"/>
 <figcaption>Figure 3. Uniform Toroidal Magnetic Field</figcaption>
 </figure> -->
 <!-- <figure style="text-align: center;">
-<img src="../images/midterm-2d-uniform-toroidal-magnetic-field.png" width="60%"/>
+<img src="/images/midterm-2d-uniform-toroidal-magnetic-field.png" width="60%"/>
 <figcaption>Figure 4. Uniform Toroidal Magnetic Field, z=0 slice</figcaption>
 </figure> -->
 
@@ -122,7 +122,7 @@ Since $R=R_0+r\cos\theta$. Choosing a numerator of $R_0$ normalizes this so that
 
 
 <figure style="text-align: center;">
-<img src="../resources/tokamak-drift/midterm-2d-physical-toroidal-magnetic-field.png" width="60%"/>
+<img src="/resources/tokamak-drift/midterm-2d-physical-toroidal-magnetic-field.png" width="60%"/>
 <figcaption>Figure 3. Toroidal Magnetic Field, z=0</figcaption>
 </figure>
 
@@ -153,7 +153,7 @@ $$
 I normalize the poloidal $\hat{\theta}$ term, so it varies from 0 at the central circle to $1$ at the surface.
 
 <figure style="text-align: center;">
-<img src="../resources/tokamak-drift/midterm-3d-twisting-toroidal-magnetic-field.png" width="80%"/>
+<img src="/resources/tokamak-drift/midterm-3d-twisting-toroidal-magnetic-field.png" width="80%"/>
 <figcaption>Figure 4. Toroidal and Poloidal Magnetic Field</figcaption>
 </figure>
 
@@ -248,17 +248,17 @@ $$
 In the toroidal field, the particle follows a circular path while drifting upward as expected. The rate of this drift is slightly smaller than $0.00086$. I don't know why. Remember that while the particle loops the torus, it travels in a helical path around the field line, this is why the line in Figure 6 is thick.
 
 <figure style="text-align: center;">
-<img src="../resources/tokamak-drift/midterm-physical-field-position-xyz.png" width="80%"/>
+<img src="/resources/tokamak-drift/midterm-physical-field-position-xyz.png" width="80%"/>
 <figcaption>Figure 5. Toroidal Field: Particle Trajectory XYZ</figcaption>
 </figure>
 
 <div style="display: flex; justify-content: center; align-items: flex-start; gap: 10px;">
   <figure style="display: flex; flex-direction: column; align-items: center; margin: 0; padding: 0; width: 50%; box-sizing: border-box;">
-    <img src="../resources/tokamak-drift/midterm-physical-field-position-z.png" alt="Description of Image 1" style="width: 100%; height: auto; display: block;">
+    <img src="/resources/tokamak-drift/midterm-physical-field-position-z.png" alt="Description of Image 1" style="width: 100%; height: auto; display: block;">
     <figcaption style="text-align: center; margin-top: 5px;">Figure 6. Toroidal Field: Particle Trajectory Z</figcaption>
   </figure>
   <figure style="display: flex; flex-direction: column; align-items: center; margin: 0; padding: 0; width: 50%; box-sizing: border-box;">
-    <img src="../resources/tokamak-drift/midterm-physical-field-position-xy.png" alt="Description of Image 2" style="width: 100%; height: auto; display: block;">
+    <img src="/resources/tokamak-drift/midterm-physical-field-position-xy.png" alt="Description of Image 2" style="width: 100%; height: auto; display: block;">
     <figcaption style="text-align: center; margin-top: 5px;">Figure 7. Toroidal Field: Particle Trajectory XY</figcaption>
   </figure>
 </div>
@@ -266,17 +266,17 @@ In the toroidal field, the particle follows a circular path while drifting upwar
 The addition of a poloidal field adds a periodic poloidal motion to the trajectory. The amplitude of the particle's oscillation in the $z$-direction does not grow with time, so the drift has been mitigated.
 
 <figure style="text-align: center;">
-<img src="../resources/tokamak-drift/midterm-twisting-field-position-xyz.png" width="80%"/>
+<img src="/resources/tokamak-drift/midterm-twisting-field-position-xyz.png" width="80%"/>
 <figcaption>Figure 8. Toroidal and Poloidal Field: Particle Trajectory XYZ</figcaption>
 </figure>
 
 <div style="display: flex; justify-content: center; align-items: flex-start; gap: 10px;">
   <figure style="display: flex; flex-direction: column; align-items: center; margin: 0; padding: 0; width: 50%; box-sizing: border-box;">
-    <img src="../resources/tokamak-drift/midterm-twisting-field-position-z.png" alt="Description of Image 1" style="width: 100%; height: auto; display: block;">
+    <img src="/resources/tokamak-drift/midterm-twisting-field-position-z.png" alt="Description of Image 1" style="width: 100%; height: auto; display: block;">
     <figcaption style="text-align: center; margin-top: 5px;">Figure 9. Toroidal and Poloidal Field: Particle Trajectory Z</figcaption>
   </figure>
   <figure style="display: flex; flex-direction: column; align-items: center; margin: 0; padding: 0; width: 50%; box-sizing: border-box;">
-    <img src="../resources/tokamak-drift/midterm-twisting-field-position-xy.png" alt="Description of Image 2" style="width: 100%; height: auto; display: block;">
+    <img src="/resources/tokamak-drift/midterm-twisting-field-position-xy.png" alt="Description of Image 2" style="width: 100%; height: auto; display: block;">
     <figcaption style="text-align: center; margin-top: 5px;">Figure 10. Toroidal and Poloidal Field: Particle Trajectory XY</figcaption>
   </figure>
 </div>

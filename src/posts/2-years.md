@@ -39,7 +39,7 @@ I read a few books on software engineering. It was a good use of my time. Ranked
 5. Refactoring for Software Design Smells -- Suryanarayana, Samarthyam, Sharma
 6. Clean Code -- Robert Martin
 
-And finally, a few tips I try to follow (but [beware pithy rules](beware-pithy-rules.html) like these)
+And finally, a few tips I try to follow (but [beware pithy rules](/posts/beware-pithy-rules.html) like these)
 
 - Make simplicity the number one priority
 - Use pure methods and immutable data whenever possible

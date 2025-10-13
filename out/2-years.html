@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Laird Stewart</title>
+    <link rel="icon" href="resources/icon.png" type="image/png">
+    <link rel="apple-touch-icon" href="resources/icon.png">
+    <link rel="stylesheet" href="/build/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+
+    <!-- katex math rendering -- copied from pandoc translation -->
+    <script defer="" src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function () {
+            var mathElements = document.getElementsByClassName("math");
+            var macros = [];
+            for (var i = 0; i < mathElements.length; i++) {
+                var texText = mathElements[i].firstChild;
+                if (mathElements[i].tagName == "SPAN") {
+                    katex.render(texText.data, mathElements[i], {
+                        displayMode: mathElements[i].classList.contains('display'),
+                        throwOnError: false,
+                        macros: macros,
+                        fleqn: false
+                    });
+                }
+            }
+        });
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+    <!-- end of katex math rendering -->
+</head>
+
+<body>
+    <p><em><a href="/index.html">Laird Stewart</a></em><button id="theme-toggle" aria-label="Toggle dark mode"
+            style="background:none;border:none;font-size:1em;margin-left:0.5em;vertical-align:middle;cursor:pointer;">☀️</button><br />
+        <!-- trick pandoc to not wrapping date in a paragraph tag -->
+        <em>8/27/25</em>
+        <h3>
+        Reflections on Two Years Of Software Engineering
+        </h3>
+        <p>This advice is general, but probably biased by my background
+        with legacy Java applications.</p>
+        <p>First, work through MIT’s <a
+        href="https://missing.csail.mit.edu">“The Missing Semester of
+        Your CS Education”</a></p>
+        <p>Useful concepts</p>
+        <ul>
+        <li>Chesterton’s Fence: A hiker comes across a small wooden
+        fence on a beautiful hillside which anyone could step over. He
+        removes it to restore the place’s beauty; it wouldn’t stop
+        trespassers anyway. Once he has left, over the next months the
+        cows from the neighboring farm eat all its grass and trample it
+        into a muddy slope. When building software, if you encounter
+        something that seems poorly designed, figure out why it was
+        designed that way before refactoring or removing it.</li>
+        <li>Pareto Principle (power law): Most real-world relationships
+        are non-linear. E.g., 80% of revenue comes from 20% of
+        customers.</li>
+        </ul>
+        <p>One example of the Pareto Principle is methods which speed up
+        typing:</p>
+        <ol type="1">
+        <li>Touch typing</li>
+        <li>Vim key bindings</li>
+        <li>Dvoark layout</li>
+        <li>Ergonomic keyboard</li>
+        </ol>
+        <p>Touch typing will get you 80% of the way to a “pro” typist
+        while Vim keybindings will get you another 15%. Changing
+        keyboard layouts could help a little beyond that. Although touch
+        typing provides 5x more value than Vim keybindings, it’s about
+        the same difficulty to learn. My suggestion: if you can’t
+        already touch type, learn now. If you can, learn vim
+        keybindings. Don’t worry about keyboard layouts, taking “The
+        Missing Semester”, reading books about software development, and
+        networking are all better uses of your time.</p>
+        <p>Minimize configuration. “Every line of configuration is a
+        liability” - ThePrimagen. It’s tempting to spend a lot of time
+        configuring your IDE, terminal emulator, and shell. First,
+        remember Chesterton’s Fence – the creators of dev tools designed
+        their tool’s features and configuration intentionally (often for
+        their own use!). Another drawback is that you will inevitably
+        need to switch computers, help colleagues, or ssh into a server.
+        These are all more difficult if you can’t use default
+        configurations. My suggestion: when starting with a new tool,
+        use its vanilla configuration for the first month (or more).
+        Learn its core features before configuring settings or
+        installing plugins.</p>
+        <p>Learn the command line versions of tools</p>
+        <ol type="1">
+        <li>They are more feature-rich</li>
+        <li>They can be scripted</li>
+        <li>Amortize costs of learning the CLI (terminal emulator,
+        shell) and supporting tools (e.g., tmux, man) across multiple
+        applications.</li>
+        </ol>
+        <p>Try the simple/open source tool first. More often than not it
+        has all the functionality you’ll need and is easier to learn. If
+        you discover a functionality it doesn’t have, you’ll be more
+        prepared to choose a paid offering. For example, VisualVM has
+        suited all my Java profiling needs so far.</p>
+        <p>I read a few books on software engineering. It was a good use
+        of my time. Ranked (power law applies here):</p>
+        <ol type="1">
+        <li>A Philosophy of Software Design – John Ousterhout</li>
+        <li>Code that Fits in Your Head – Mark Seemann</li>
+        <li>Working Effectively with Legacy Code – Michael Feathers</li>
+        <li>Design Patterns – Gamma, Helm, Johnson, Vlissides</li>
+        <li>Refactoring for Software Design Smells – Suryanarayana,
+        Samarthyam, Sharma</li>
+        <li>Clean Code – Robert Martin</li>
+        </ol>
+        <p>And finally, a few tips I try to follow (but <a
+        href="/out/beware-pithy-rules.html">beware pithy rules</a> like
+        these)</p>
+        <ul>
+        <li>Make simplicity the number one priority</li>
+        <li>Use pure methods and immutable data whenever possible</li>
+        <li>Favor composition over inheritance</li>
+        <li>Favor strong typing</li>
+        </ul>
+
+        <script>
+            (function () {
+                const toggle = document.getElementById('theme-toggle');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const stored = localStorage.getItem('theme');
+                if (stored === 'dark' || (!stored && prefersDark)) {
+                    document.body.classList.add('dark');
+                    toggle.textContent = '🌙';
+                    toggle.style.color = '#fff';
+                }
+                toggle.addEventListener('click', () => {
+                    if (document.body.classList.contains('dark')) {
+                        document.body.classList.remove('dark');
+                        toggle.textContent = '☀️';
+                        toggle.style.color = '#000';
+                        localStorage.setItem('theme', 'light');
+                    } else {
+                        document.body.classList.add('dark');
+                        toggle.textContent = '🌙';
+                        toggle.style.color = '#fff';
+                        localStorage.setItem('theme', 'dark');
+                    }
+                });
+            })();
+        </script>
+</body>
+
+</html>
