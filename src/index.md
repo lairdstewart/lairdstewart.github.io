@@ -1,6 +1,6 @@
 <h3 id="about">About</h3>
 
-I'm a software engineer at [Metron Inc.](https://metsci.com) developing tracking and sensor-fusion algorithms for maritime systems. I studied applied math at Emory and computer engineering at Georgia Tech. I take part-time coursework at Johns Hopkins—currently Theory of Machine Learning. Most of what [I read](https://www.goodreads.com/user/show/184711854-laird-stewart) centers on energy, technology, history, and progress. I'd like to write more.
+I'm a software engineer at [Metron Inc.](https://metsci.com) developing tracking and signal processing algorithms for sonar systems. I studied applied math at Emory and computer engineering at Georgia Tech. I take part-time coursework at Johns Hopkins—currently Theory of Machine Learning. Most of what [I read](https://www.goodreads.com/user/show/184711854-laird-stewart) centers on energy, technology, history, and progress. I'd like to write more.
 
 - [LinkedIn](https://linkedin.com/in/lairdstewart)
 - [GitHub](https://github.com/lairdstewart)
@@ -18,7 +18,7 @@ I'm a software engineer at [Metron Inc.](https://metsci.com) developing tracking
 - [Readability is Overrated](/posts/readability-is-overrated.html) (1/5/25)
 - [Beware of Pithy Rules About Software](/posts/beware-pithy-rules.html) (1/5/25)
 
-### Recaps
+### Roundups
 - [September 2025](/recaps/september-25.html)
 
 ### Publications
