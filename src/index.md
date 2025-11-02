@@ -19,7 +19,8 @@ I'm a software engineer at [Metron Inc.](https://metsci.com) developing tracking
 - [Beware of Pithy Rules About Software](/posts/beware-pithy-rules.html) (1/5/25)
 
 ### Roundups
-- [September 2025](/recaps/september-25.html)
+- [September 2025](/roundups/september-25.html)
+- [October 2025](/roundups/october-25.html)
 
 ### Publications
 - [SIR Model of Time Dependent Drug and Vaccine Distribution on COVID-19](resources/covid-sir-model.pdf) (5/11/21)

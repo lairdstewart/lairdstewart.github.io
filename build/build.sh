@@ -4,7 +4,7 @@ SCRIPT_DIR="${0:A:h}"
 PARENT_DIR="${SCRIPT_DIR:h}"
 SRC_DIR="$PARENT_DIR/src"
 POSTS_DIR="$PARENT_DIR/posts"
-RECAPS_DIR="$PARENT_DIR/recaps"
+ROUNDUPS_DIR="$PARENT_DIR/roundups"
 
 # Process index.html (src/index.md -> /index.html)
 pandoc "$SRC_DIR/index.md" \
@@ -27,8 +27,8 @@ for file in "$SRC_DIR"/posts/*.md; do
         -o "$POSTS_DIR/$filename.html"
 done
 
-# Process recaps (src/recaps/*.md -> /recaps/*.html)
-for file in "$SRC_DIR"/recaps/*.md; do
+# Process roundups (src/roundups/*.md -> /roundups/*.html)
+for file in "$SRC_DIR"/roundups/*.md; do
     filename=$(basename "$file" .md)
     pandoc "$file" \
         -s \
@@ -36,5 +36,5 @@ for file in "$SRC_DIR"/recaps/*.md; do
         --katex \
         --css /build/style.css \
         --template "$SCRIPT_DIR"/template.html \
-        -o "$RECAPS_DIR/$filename.html"
+        -o "$ROUNDUPS_DIR/$filename.html"
 done
