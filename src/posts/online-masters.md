@@ -15,7 +15,7 @@ The introduction of reasoning models represents a drastic decrease in the value 
 | Lectures          | X         | X        |                 |
 | Tutoring/Feedback | X         |          | X               |
 
-Second, the elephant in the room, reasoning models can get As in most classes. I’ve only tested these models on physics, math, and CS courses, but I suspect this is the case for all STEM subjects. Whether or not you want to call this cheating, if a student wishes to do so, they can get an A with almost no effort and without learning anything. If they haven't already, employers and PhD admissions committees will soon realize that online Master's degrees are only worth the student's word.
+Second, the elephant in the room, reasoning models can get As in most classes. I’ve tested these models on physics, math, and CS problems and suspect this is the case for all STEM subjects. If a student wishes to do so, they can get an A with almost no effort and without learning anything. If they haven't already, employers and PhD admissions committees will soon realize that online Master's degrees are only worth the student's word.
 
 I predict online Master's programs will lose 90% of their value in the next year as LLM tutors improve and employers wake up. Assuming these programs won't suddenly fall 90% in price, I expect enrollment to fall. 
 
