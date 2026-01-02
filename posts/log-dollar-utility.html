@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Laird Stewart</title>
+    <link rel="icon" href="resources/icon.png" type="image/png">
+    <link rel="apple-touch-icon" href="resources/icon.png">
+    <link rel="stylesheet" href="/build/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+
+    <!-- katex math rendering -- copied from pandoc translation -->
+    <script defer="" src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function () {
+            var mathElements = document.getElementsByClassName("math");
+            var macros = [];
+            for (var i = 0; i < mathElements.length; i++) {
+                var texText = mathElements[i].firstChild;
+                if (mathElements[i].tagName == "SPAN") {
+                    katex.render(texText.data, mathElements[i], {
+                        displayMode: mathElements[i].classList.contains('display'),
+                        throwOnError: false,
+                        macros: macros,
+                        fleqn: false
+                    });
+                }
+            }
+        });
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+    <!-- end of katex math rendering -->
+</head>
+
+<body>
+    <p><em><a href="/index.html">Laird Stewart</a></em><button id="theme-toggle" aria-label="Toggle dark mode"
+            style="background:none;border:none;font-size:1em;margin-left:0.5em;vertical-align:middle;cursor:pointer;">☀️</button><br />
+        <!-- trick pandoc to not wrapping date in a paragraph tag -->
+        <em>12/30/25</em>
+
+<h3>
+SBF and Log Dollar Utility
+</h3>
+It would have served Sam Bankman-Fried to separate utility from dollars.
+<br>
+<br>
+I was given <i>How Not to Be Wrong</i> for Christmas and am enjoying it so far.
+I've watched plenty of Numberphile and Veritasium and have read Stephen Pinker's
+similar book, <i>Rationality</i>, yet it introduces many topics I haven't come
+across before. One of which is
+<a href="https://en.wikipedia.org/wiki/St._Petersburg_paradox">
+St. Petersburg paradox</a>:
+<ol>
+<li>I put $2 in a pot then flip a coin</li>
+<li>If tails, the game ends and you win the money. If heads, I double the
+	money</li>
+<li>I flip the coin again. Repeat step 2</li>
+</ol>
+Clearly you should want to play this game, as you win no matter what. The
+question is, how much should you be willing to stake for the opportunity to
+play? $10? $20? If you do the math you'll find that the expected value (EV) of
+this game is infinite — the series diverges. Therefore in theory you should be
+willing to stake any finite amount to play the game. This feels wrong. I
+wouldn't stake my entire net worth, let alone one paycheck to play.  The
+mathematics is sound, so the paradox is of human behavior. Perhaps humans
+underestimate small probabilities (I've never seen a coin land 10 heads in a
+row) or perhaps the question is nonsense (no house could ever fund the other
+side of the bet).
+<br>
+<br>
+The traditional solution is to say the premise of the EV
+calculation is wrong: the player should calculate the EV of their utility not of
+the raw dollar amount. Further, their utility should be the logarithm of the
+dollar amount. I had never heard of doing such a thing: every example in school,
+every analysis of a casino/board game, every quant interview question
+calculates EV directly with dollars. However, on consideration, it doesn't seem
+outlandish. To rappers, money is logarithmic; lines are as often about figures
+as they are absolute dollars. Further, for most millionaires it would hurt more
+to go broke than it would feel good making another million. With this conception
+of utility, the expected value is no longer infinite.
+<br>
+<br>
+How does this relate to SBF? In Sam's appearance on <i>Conversations with
+Tyler</i>, he was posed a similar question: if you could push a button with a
+51% chance of doubling the number of sentient beings in the universe (e.g.,
+double the number of earths) and a 49% chance of killing all living beings,
+would you press it? He answered that he would press it repeatedly. Most
+commentators flawed Sam for lacking empathy or being hyper-rational in his
+answer. From what I know from <i>Going Infinite</i> the former is fair. But I
+don't think the latter is. If Sam calculated his EV using the logarithm of the
+number of living beings (which I'm starting to think is correct), he wouldn't
+have arrived at the same conclusion and his answer would have been <i>more</i>
+wonky/"hyper-rational".
+<br>
+<br>
+Taking this a step further, could solve some of the problems/paradoxes that
+arise with longtermist utilitarian ideas. If you're not familiar, some people
+argue that we should not (or should only barely) discount the utility of future
+sentient being's lives with time. Therefore since there could be many more
+living people in the future we should prioritize protecting the future above all
+else. Therefore, even if you choose not to discount with time, you could still
+avoid some of the problems with expected values and infinity if you consider
+utility to be the logarithm of the number of beings.  Surprisingly, in all I've
+read about utilitarian philosophy I've never heard this idea, though I'm sure
+I'm not the first.
+<br>
+<br>
+For another time, but you could obviously extend this to SBF's Alameda Research.
+I'm curious to what extent, if at all, hedge funds separate EV/utility from
+dollars.
+
+        <script>
+            (function () {
+                const toggle = document.getElementById('theme-toggle');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const stored = localStorage.getItem('theme');
+                if (stored === 'dark' || (!stored && prefersDark)) {
+                    document.body.classList.add('dark');
+                    toggle.textContent = '🌙';
+                    toggle.style.color = '#fff';
+                }
+                toggle.addEventListener('click', () => {
+                    if (document.body.classList.contains('dark')) {
+                        document.body.classList.remove('dark');
+                        toggle.textContent = '☀️';
+                        toggle.style.color = '#000';
+                        localStorage.setItem('theme', 'light');
+                    } else {
+                        document.body.classList.add('dark');
+                        toggle.textContent = '🌙';
+                        toggle.style.color = '#fff';
+                        localStorage.setItem('theme', 'dark');
+                    }
+                });
+            })();
+        </script>
+</body>
+
+</html>

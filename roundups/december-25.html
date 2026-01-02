@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Laird Stewart</title>
+    <link rel="icon" href="resources/icon.png" type="image/png">
+    <link rel="apple-touch-icon" href="resources/icon.png">
+    <link rel="stylesheet" href="/build/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+
+    <!-- katex math rendering -- copied from pandoc translation -->
+    <script defer="" src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function () {
+            var mathElements = document.getElementsByClassName("math");
+            var macros = [];
+            for (var i = 0; i < mathElements.length; i++) {
+                var texText = mathElements[i].firstChild;
+                if (mathElements[i].tagName == "SPAN") {
+                    katex.render(texText.data, mathElements[i], {
+                        displayMode: mathElements[i].classList.contains('display'),
+                        throwOnError: false,
+                        macros: macros,
+                        fleqn: false
+                    });
+                }
+            }
+        });
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+    <!-- end of katex math rendering -->
+</head>
+
+<body>
+<table style="all: revert; max-width: 42em;">
+<td style="all: revert;">
+
+<p><em><a href="/index.html">Laird Stewart</a></em><button id="theme-toggle" aria-label="Toggle dark mode"
+        style="background:none;border:none;font-size:1em;margin-left:0.5em;vertical-align:middle;cursor:pointer;">☀️</button><br />
+
+<p><em>
+I publish a monthly email newsletter with personal updates and interesting
+things I read or learned that month. The latter is archived below. If you’d
+like to be added to the newsletter, email me.
+</em></p>
+<h3> December 2025 Roundup </h3>
+
+<p>
+School cellphone bans likely have a small, positive impact on test performance
+</p>
+<div style="padding-left: 1em;">
+A recent difference in difference study finds Florida's 2023 secondary school
+cell phone ban increased test scores by 0.6 percentiles; a smaller effect than I
+expected.
+<br>
+<br>
+<a href="https://www.nber.org/system/files/working_papers/w34388/w34388.pdf">
+The Impact of Cellphone Bans in Schools on Student Outcomes: Evidence from
+Florida</a>, National Bureau of Economic Research
+</div>
+<br>
+
+<p>The UK without London is poorer than Mississippi</p>
+<div style="padding-left: 1em;">
+<img src="/resources/uk-without-london.jpg">
+</div>
+<br>
+
+<p>Tyler Cowen's alternative to Fischer Random Chess</p>
+</p>
+<div style="padding-left: 1em;">
+In his conversation with Kenneth Rogoff, Tyler Cowen suggests an alternative to
+Fischer Random Chess: select starting positions from a database of equal
+positions 2 or 4 moves in. In Fischer Random, the back rank is randomized
+emphasizing over-the-board play over preparation. Cowen's alternative achieves
+the same goal, but results in more standard positions which observers can
+empathize with. An interesting idea I hadn't heard before.
+<br>
+<br>
+<a href="https://conversationswithtyler.com/episodes/kenneth-rogoff/">
+Kenneth Rogoff on Monetary Moves, Fiscal Gambits, and Classical Chess (Ep. 241)
+</a>, Conversations with Tyler
+</div>
+<br>
+
+<p>
+St. Petersburg Paradox
+</p>
+<div style="padding-left: 1em;">
+I was given <i>How Not to Be Wrong</i> for Christmas and am enjoying it so far.
+I've watched plenty of Numberphile and Veritasium and have read Stephen Pinker's
+similar book, <i>Rationality</i>, yet it introduces many topics I haven't come
+across before. One of which is
+<a href="https://en.wikipedia.org/wiki/St._Petersburg_paradox">
+St. Petersburg paradox</a>:
+<ol>
+<li>I put $2 in a pot then flip a coin</li>
+<li>If tails, the game ends and you win the money. If heads, I double the
+	money</li>
+<li>I flip the coin again. Repeat step 2</li>
+</ol>
+Clearly you should want to play this game, as you win no matter what. The
+question is, how much should you be willing to stake for the opportunity to
+play? Blog post with the answer and related thoughts
+ <a href="/posts/log-dollar-utility.html">here</a>.
+<br>
+<br>
+<a href="https://en.wikipedia.org/wiki/How_Not_to_Be_Wrong">
+How Not to Be Wrong</a>, Jordan Ellenberg
+</div>
+<br>
+
+<p>I like how Casey Handmer and Terraform think about resumes</p>
+</p>
+<div style="padding-left: 1em;">
+<blockquote>
+I could look at two identical candidates with similar career paths, and have no
+way of knowing that one of them built a jet engine in their living room. Their
+resumes are very similar and have no ability to choose between them. But a
+single photo of them in front of their own jet engine would tell me 95% of what
+I need to know to make a job offer. It would pretty much instantly put them on
+the top of the screening pile too
+</blockquote>
+<br>
+<blockquote>
+For Terraform, send us your one pagers. Ideally they will contain photos of
+awesome hardware you personally created, together with a brief and informative
+summary of how the project relates to your desired role with us
+</blockquote>
+<br>
+<a href="https://caseyhandmer.wordpress.com/2022/03/22/maximizing-resume-snr/">
+Maximizing Resume SNR</a>, Casey Handmer
+</div>
+<br>
+
+<p>
+An argument to emphasize culture over process and incentives in software
+engineering teams
+</p>
+<div style="padding-left: 1em;">
+<a href="https://danluu.com/culture/">Culture matters</a>, Dan Luu
+</div>
+<br>
+
+<p>
+Gregory Clark's <i>The Son Also Rises</i> gets repetitive but is worth the read.
+</p>
+<div style="padding-left: 1em;">
+Clark's central insight is that if you track the prevalence of a surname in an
+elite institution, it remains over- or under-represented much longer than
+traditional social mobility rates would suggest. The majority of the book is
+spent showing this holds regardless of time-period or location.
+<br>
+<br>
+To explain this, Clark models status as latent variable. This variable is
+"indistinguishable" from genetics, depending only on that of the parents and
+randomness. The variable determines, again with random noise, observable
+outcomes like income or educational attainment. Traditional methods measure
+observable variables regressing to the mean, and therefore overestimate the pace
+of social mobility.
+<br>
+<br>
+Clark concludes that status is mostly inherited, government efforts to increase
+social mobility have largely failed and as long as marriage is assortative
+(high-status people marry other high-status people) social mobility will remain
+slow.
+<br>
+<br>
+<a href="https://en.wikipedia.org/wiki/The_Son_Also_Rises_(book)">
+The Son Also Rises</a>, Gregory Clark
+</div>
+<br>
+
+<p>
+Bryan Caplan's <i>The Case Against Education</i> argues higher-ed is mostly
+signaling.
+</p>
+<div style="padding-left: 1em;">
+<blockquote>
+When we look at countries around the world, a year of education appears to raise
+an individual’s income by 8 to 11 percent. By contrast, increasing education
+across a country’s population by an average of one year per person raises the
+national income by only 1 to 3 percent. In other words, education enriches
+individuals much more than it enriches nations.
+</blockquote>
+<br>
+Correcting for underlying cognitive ability, Caplan estimates 60% or more of the
+education-wage premium is <a href="https://en.wikipedia.org/wiki/Sheepskin_effect">
+the sheepskin effect</a>. In particular, he argues education signals
+intelligence, conscientiousness, and conformity. Firms pay this premium, so an
+open question on my mind is why probationary periods aren't more common.
+<br>
+<br>
+<a href="https://en.wikipedia.org/wiki/The_Case_Against_Education">The Case
+Against Education</a>, Bryan Caplan
+<br>
+<a href="https://www.theatlantic.com/magazine/archive/2018/01/whats-college-good-for/546590/">
+The World Might be Better off Without College for Everyone</a>, Bryan Caplan
+</div>
+<br>
+
+</td>
+</table>
+
+
+</body>
+        <script>
+            (function () {
+                const toggle = document.getElementById('theme-toggle');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const stored = localStorage.getItem('theme');
+                if (stored === 'dark' || (!stored && prefersDark)) {
+                    document.body.classList.add('dark');
+                    toggle.textContent = '🌙';
+                    toggle.style.color = '#fff';
+                }
+                toggle.addEventListener('click', () => {
+                    if (document.body.classList.contains('dark')) {
+                        document.body.classList.remove('dark');
+                        toggle.textContent = '☀️';
+                        toggle.style.color = '#000';
+                        localStorage.setItem('theme', 'light');
+                    } else {
+                        document.body.classList.add('dark');
+                        toggle.textContent = '🌙';
+                        toggle.style.color = '#fff';
+                        localStorage.setItem('theme', 'dark');
+                    }
+                });
+            })();
+        </script>
+
+</html>
