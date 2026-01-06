@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Laird Stewart</title>
+    <link rel="icon" href="resources/icon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="resources/icon.png" />
+    <link rel="stylesheet" href="/build/style.css" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+
+    <!-- katex math rendering -- copied from pandoc translation -->
+    <script
+      defer=""
+      src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"
+    ></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var mathElements = document.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains("display"),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false,
+            });
+          }
+        }
+      });
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"
+    />
+    <!-- end of katex math rendering -->
+  </head>
+
+  <body>
+    <p>
+      <em><a href="/index.html">Laird Stewart</a></em
+      ><button
+        id="theme-toggle"
+        aria-label="Toggle dark mode"
+        style="
+          background: none;
+          border: none;
+          font-size: 1em;
+          margin-left: 0.5em;
+          vertical-align: middle;
+          cursor: pointer;
+        "
+      >
+        ☀️</button
+      ><br />
+      <!-- trick pandoc to not wrapping date in a paragraph tag -->
+      <em>01/05/26</em>
+    </p>
+
+    <h3>Interface Comments Should Address the Caller</h3>
+
+    As a proxy for the average advice on the internet, I asked Gemini three
+    times how to write interface comments and got these principles (ordered
+    relative to their frequency):
+    <ol>
+      <li>Document "What" not "How"</li>
+      <li>Be Complete</li>
+      <li>Avoid Redundancy</li>
+      <li>Imagine your audience</li>
+      <li>Use Documentation Generators</li>
+    </ol>
+
+    I've found the first can lead to contradictions. Consider the following
+    example: <code>FooCache</code> is a utility for caching and later
+    accessing <code>foo</code>s:
+
+    <pre><code>public interface FooCache {
+    public void cache(Foo foo, Id id);
+    public Optional&lt;Foo&gt; getFoo(Id id);
+}</code></pre>
+    You have two implementations. The first stores them on disk and deletes the
+    least recently used while the second is a <code>NullFooCache</code> which
+    doesn't store them at all. A comment following Gemini's advice:
+    <i
+      >"Describe the abstract purpose of the interface and its methods. Explain,
+      at a higher level than the code, what it does, not necessarily how it does
+      it"</i
+    >, would look something like
+
+    <pre><code>/**
+ * Caches the provided foo with the associated Id
+ */
+public void cache(Foo foo, Id id);
+</code></pre>
+
+    The problem with this comment is that when the <code>FooCache</code> is a
+    <code>NullFooCache</code>, it isn't true. You could claim the interface's
+    "contract" was violated. On the other hand, this comment
+
+</code></pre>
+    <pre><code>/**
+ * Cache your foo along with an Id for later lookup
+ */
+public void cache(Foo foo, Id id);
+</code></pre>
+
+    avoids any contradictions. The trick is to address the caller rather than
+    future implementers. Gemini mentions "audience" but not in this respect; it
+    only suggests to <i>"write comments for someone who is familiar with the
+    project but hasn't used this specific interface before,"</i> not address
+    them directly.
+    <br />
+    <br />
+    If we really wanted to describe "What" without contradiction, perhaps we
+    could write:
+</code></pre>
+    <pre><code>/**
+ * Accepts a foo for caching. Implementations may define different
+ * retention policies (e.g., permanent, LRU, or no-op)
+ */
+public void cache(Foo foo, Id id);
+</code></pre>
+
+    Aside from leaking implementation details, apply this to more complicated
+    (legacy) real-life code, and all of a sudden you could find yourself writing
+    something like
+</code></pre>
+    <pre><code>/**
+ * Accepts an element. Implementations may or may not use it.
+ */
+public void addElement(Element elem);
+</code></pre>
+
+   A user may think "hold on, I want my element to be used, am I using this
+   interface correctly?" even though this is what they should use.
+
+    <script>
+      (function () {
+        const toggle = document.getElementById("theme-toggle");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+        const stored = localStorage.getItem("theme");
+        if (stored === "dark" || (!stored && prefersDark)) {
+          document.body.classList.add("dark");
+          toggle.textContent = "🌙";
+          toggle.style.color = "#fff";
+        }
+        toggle.addEventListener("click", () => {
+          if (document.body.classList.contains("dark")) {
+            document.body.classList.remove("dark");
+            toggle.textContent = "☀️";
+            toggle.style.color = "#000";
+            localStorage.setItem("theme", "light");
+          } else {
+            document.body.classList.add("dark");
+            toggle.textContent = "🌙";
+            toggle.style.color = "#fff";
+            localStorage.setItem("theme", "dark");
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
