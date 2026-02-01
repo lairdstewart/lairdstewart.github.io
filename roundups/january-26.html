@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Laird Stewart</title>
+    <link rel="icon" href="resources/icon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="resources/icon.png" />
+    <link rel="stylesheet" href="/build/style.css" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+
+    <!-- katex math rendering -- copied from pandoc translation -->
+    <script
+      defer=""
+      src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"
+    ></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var mathElements = document.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains("display"),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false,
+            });
+          }
+        }
+      });
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"
+    />
+    <!-- end of katex math rendering -->
+  </head>
+
+  <body>
+    <table style="all: revert; max-width: 42em">
+      <td style="all: revert">
+        <p>
+          <em><a href="/index.html">Laird Stewart</a></em
+          ><button
+            id="theme-toggle"
+            aria-label="Toggle dark mode"
+            style="
+              background: none;
+              border: none;
+              font-size: 1em;
+              margin-left: 0.5em;
+              vertical-align: middle;
+              cursor: pointer;
+            "
+          >
+            ☀️</button
+          ><br />
+        </p>
+
+        <p>
+          <em>
+            I publish a monthly email newsletter with personal updates and
+            interesting things I read or learned that month. The latter is
+            archived below. If you’d like to be added to the newsletter, email
+            me.
+          </em>
+        </p>
+        <h3>January 2026 Roundup</h3>
+
+        <p>
+          Fewer questions were asked last month on Stack Overflow than during
+          its first month of operation.
+        </p>
+        <div style="padding-left: 1em">
+          <img src="/resources/stack-overflow-questions.png" />
+          <br />
+          <br />
+          <a
+            href="https://data.stackexchange.com/stackoverflow/query/1926661#graph"
+            >Stack Exchange</a
+          >, Anonymous Post
+        </div>
+        <br />
+
+        <p>
+          Every contribution to Claude Code in December by its creator was via
+          Claude Code.
+        </p>
+
+        <div style="padding-left: 1em">
+          <blockquote>
+            <p lang="en" dir="ltr">
+              A year ago, Claude struggled to generate bash commands without
+              escaping issues. It worked for seconds or minutes at a time. We
+              saw early signs that it may become broadly useful for coding one
+              day.
+              <br />
+              <br />
+              Fast forward to today. In the last thirty days, I landed 259 PRs
+              -- 497 commits, 40k lines added, 38k lines removed. Every single
+              line was written by Claude Code + Opus 4.5. Claude consistently
+              runs for minutes, hours, and days at a time (using Stop hooks)
+            </p>
+          </blockquote>
+          <a href="https://x.com/bcherny/status/2004887829252317325">X.com</a>,
+          Boris Cherny
+        </div>
+        <br>
+
+        <p>
+            India received $140B in personal remittances in 2024. That's more
+            than the profit of their largest 70 publicly traded companies
+            combined ($120B). The U.S. accounts for roughly 30%.
+        </p>
+        <div style="padding-left: 1em">
+          <a href="https://data.worldbank.org/indicator/BX.TRF.PWKR.CD.DT?locations=IN">Personal remittances, received (current US$) - India</a>, World Bank
+          <br>
+          <a href="https://en.wikipedia.org/wiki/List_of_largest_companies_in_India">List of largest companies in India</a>, Wikipedia
+          <br>
+          <a href="https://en.wikipedia.org/wiki/Remittances_to_India">Remittances to India</a>, Wikipedia
+        </div>
+        <br>
+
+        <p>
+            A good blog post on software work estimation
+        </p>
+        <div style="padding-left: 1em">
+            <blockquote>
+            The common view is that a manager proposes some technical project,
+            the team gets together to figure out how long it would take to
+            build, and then the manager makes staffing and planning decisions
+            with that information. In fact, it’s the reverse: a manager comes
+            to the team with an estimate already in hand, and then the team
+            must figure out what kind of technical project might be possible
+            within that estimate.
+            </blockquote>
+          <br>
+          <a
+              href="https://www.seangoedecke.com/how-i-estimate-work/">How
+              I estimate work as a staff software engineer</a>, Sean Goedecke
+
+        </div>
+        <br>
+
+        <p>
+            Central Stockholm renters face a 20-year wait due to rent control
+        </p>
+        <div style="padding-left: 1em">
+            <blockquote>
+            If you’re looking for a standard rental contract in Stockholm, you’ll have to
+            be prepared to wait. Apartments are allocated through a waitlist, and in 2025,
+            new tenants in the city center had waited an average of 21 years. Rents are
+            regulated, and can be far below half of market rents at the most attractive
+            addresses.
+            </blockquote>
+          <br>
+          <a
+              href="https://open.substack.com/pub/theupdatebrief/p/american-voters-reject-trumps-most?r=xadhy&utm_medium=ios&shareImageVariant=overlay">
+              the up•date</a>, Stefan Schubert
+        </div>
+        <br>
+
+        <p>
+            Gemini's performance on the "Needle in a Haystack" test blows competition out of the water.
+        </p>
+        <div style="padding-left: 1em">
+            They've got some secret sauce, maybe sub-quadratic attention, maybe
+            RL improvements. Unfortunately, we won't know anytime soon.
+          <img src="/resources/gemini-needle-in-haystack.png" />
+          <a
+              href="https://ceselder.substack.com/p/google-seeming-solved-efficient-attention">
+              google seemingly solved efficient attention</a>, Celeste
+        </div>
+        <br>
+
+        <p>
+        A 2014 interview with Walter Isaacson at Khan Academy
+
+        </p>
+        <div style="padding-left: 1em">
+            I'm a fan of Isaacson's books, but had never heard him speak. He's
+            quite charismatic. He thinks one driver of creativity which we've
+            lost is the connection between the arts/humanities and
+            science/engineering (the classic Steve Jobs mantra). Similarly, he
+            thinks that cities which lack creative types and a culture of
+            humanities will fail to produce innovation in the long run. He was
+            more bullish on SF than Palo Alto/Mountain View. Granted, this was
+            10 years ago. SF is back on the rise, but confounded by AI. Suggest
+            starting at 24:00
+
+            <br>
+            <br>
+
+            <blockquote>
+            Yeah, and I'm trying to say if you look at Ben Franklin, the most important
+            scientist of his period. Even though you probably don't... You know, we think
+            of him as a doddering dude playing his kite in the rain. Single fluid theory of
+            electricity that comes from his electricity experiments is up there in that
+            century, you know, with Newton, even. I mean, he's the best experimental
+            scientist of his time. Jefferson would have thought you were a Philistine if
+            you didn't study botany and everything else. Nowadays, people like a Ben
+            Franklin don't do electricity experiments.
+            </blockquote>
+          <br>
+          <a
+              href="https://www.khanacademy.org/college-careers-more/talks-and-interviews/talks-and-interviews-unit/khan-academy-living-room-chats/v/walter-isaacson-president-and-ceo-of-the-aspen-institute">
+              Walter Isaacson - President and CEO of the Aspen Institute</a>, Khan Academy
+        </div>
+        <br>
+
+        </div>
+      </td>
+    </table>
+  </body>
+  <script>
+    (function () {
+      const toggle = document.getElementById("theme-toggle");
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      ).matches;
+      const stored = localStorage.getItem("theme");
+      if (stored === "dark" || (!stored && prefersDark)) {
+        document.body.classList.add("dark");
+        toggle.textContent = "🌙";
+        toggle.style.color = "#fff";
+      }
+      toggle.addEventListener("click", () => {
+        if (document.body.classList.contains("dark")) {
+          document.body.classList.remove("dark");
+          toggle.textContent = "☀️";
+          toggle.style.color = "#000";
+          localStorage.setItem("theme", "light");
+        } else {
+          document.body.classList.add("dark");
+          toggle.textContent = "🌙";
+          toggle.style.color = "#fff";
+          localStorage.setItem("theme", "dark");
+        }
+      });
+    })();
+  </script>
+</html>
