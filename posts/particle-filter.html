@@ -34,173 +34,813 @@
 <body>
     <p><em><a href="/index.html">Laird Stewart</a></em><button id="theme-toggle" aria-label="Toggle dark mode"
             style="background:none;border:none;font-size:1em;margin-left:0.5em;vertical-align:middle;cursor:pointer;">☀️</button><br />
-        <em>6/17/25</em>
+        <p><em>2/26/26</em></p>
         <h3>
-        Introduction to Particle Filters
+        Motivating the Particle Filter
         </h1>
-        <h4 id="definition-and-vocabulary">Definition and
-        Vocabulary</h4>
-        <blockquote>
-        <p>A particle filter is a numerical algorithm to estimate the
-        state of an object given a sequence of measurements about
-        it.</p>
-        </blockquote>
-        <p>“Numerical” means that particle filters provide an
-        approximate solution using computation. Think of the trapezoid
-        rule for evaluating an integral. This is opposed to an
-        “analytical” solution which provides an exact answer through the
-        manipulation of mathematical formulae. Think of applying rules
-        from calculus class to solve the integral directly. “Estimating
-        state” here means finding a probability distribution on the
-        object’s state space. One example of object and state space is a
-        pedestrian (object) and their position/velocity (state space).
-        Another could be a chemical reactor, and it’s state space the
-        temperature and concentration of reactants. Next, “measurements”
-        are observations of (or somehow related to) the object’s state.
-        For example, the reactor may have a temperature probe inside it.
-        Or, a self-driving car may have a camera which, using computer
-        vision, could place a bounding box around a pedestrian. Notice
-        that the thermometer measures one dimension of the reactors
-        state space (temperature) directly, while the bounding-box does
-        not measure the pedestrian’s position or velocity directly—it’s
-        impossible to distinguish a short pedestrian nearby from a tall
-        one farther away. “Filter” implies that the algorithm finds an
-        estimate of the objects state at the current time. This is
-        contrasted with “smoothing” which estimates the entire history
-        of its state. Finally, I’ve mentioned that the output of a
-        particle filter is a probability distribution. In particular, it
-        is a probability density function constructed of a set of
-        “particles”. Each particle is a point in the object’s state
-        space (e.g.,
-        <code>{x-position, y-position, x-velocity, y-velocity}</code>)
-        with a corresponding weight. You can think of a particle as a
-        nugget of probability of the object’s state. If you’re familiar
-        with PDFs and surprised I’ve suggested using a finite set of
-        things to “construct” a continuous function, hold onto that
-        thought for now.</p>
-        <h4 id="the-kalman-filter">The Kalman Filter</h4>
-        <p>To motivate particle filters, I’ll start by introducing and
-        discussing the limitations of a simpler, analytic solution to
-        this problem known as a Kalman filter. Imagine you’re Tom
-        tracking an object (Jerry) who has just entered a hole in the
-        wall and is running towards cheese on the other side. The wall’s
-        interior is cluttered, so Jerry’s speed will change. As he runs,
-        Tom hears an occasional scratching sound. But the wall is thick
-        and echoey, so these sounds don’t come from Jerry’s exact
-        location. Given where Jerry entered the wall and the sequence of
-        sounds, Tom wants to estimate Jerry’s position.</p>
-        <p>Tom knows how the wall tends to echo. Given <span
-        class="math inline">r_t</span>, Jerry’s position at time <span
-        class="math inline">t</span>, he knows where he is likely to
-        hear a sound: <span class="math inline">y_t=g(x;r_t)</span>
-        (<span class="math inline">a(x;b)</span> means <span
-        class="math inline">a</span> is a function of x “parameterized”
-        by <span class="math inline">b</span>, i.e., <span
-        class="math inline">b</span> is a constant which appears in
-        <span class="math inline">a</span>’s equation). <span
-        class="math inline">y</span> typically denotes a measurement, in
-        this case a sound. To be clear, Tom doesn’t know <span
-        class="math inline">r_t</span>, he only knows where he
-        <em>might</em> hear a sound <em>if</em> he knew where Jerry was.
-        <span class="math inline">g</span> is a 1D Gaussian centered at
-        Jerry’s true location with a standard deviation of 5 inches:
-        <span class="math display">
-        \begin{aligned}
-        &amp;\mathcal{N}(x; \mu,
-        \sigma)=\frac{1}{\sigma\sqrt{2\pi}}\exp(-\frac{1}{2}(\frac{x-\mu}{\sigma})^2)\\
-        &amp;y_t=g(x; x_t,
-        5)=\frac{1}{5\sqrt{2\pi}}\exp(-\frac{1}{2}(\frac{x-x_t}{5})^2)\\
-        \end{aligned}
+        <p>I’ve spent a while searching for resources to provide new
+        hires on particle filters. There are two main categories:
+        theoretical introductions (e.g., <a
+        href="https://www.irisa.fr/aspi/legland/ref/arulampalam02a.pdf">A
+        Tutorial on Particle Filters for Online Nonelinear/Non-Gaussian
+        Bayesian Tracking</a> and conceptual blog posts (e.g., <a
+        href="https://sassafras13.github.io/PF/">Emma Benjaminson’s
+        Series</a>). I’ve yet to find a resource with the following
+        characteristics</p>
+        <ol type="1">
+        <li>Accessible to a Math/CS undergrad</li>
+        <li>Follows a single example, from Bayesian Inference to a
+        Kalman Filter</li>
+        <li>Has visualizations of multiple-dimensions and hidden
+        variables</li>
+        <li>Demonstrates the problems Kalman and Histogram filters
+        encounter</li>
+        </ol>
+        <p>I hope to fill that gap. These notes grew out of a recruiting
+        talk I gave at UIUC and are intended as a conceptual primer for
+        one of the theoretical introductions. A familiarity with
+        calculus, statistics, and linear algebra is useful.</p>
+        <h3 id="outline">Outline</h3>
+        <p>I’ll follow a single, unifying example: Imagine we’re in a
+        submarine equipped with active sonar. Like a bat, we can emit a
+        sound and listen for its echo. Given the echo’s elapsed time and
+        speed of sound, we can calculate our distance to things.
+        Unfortunately, we don’t have a perfect knowledge of the speed of
+        sound underwater, as it varies depending on temperature,
+        salinity, and depth. We are tasked to find another submarine
+        which is somewhere nearby. We’ll start with the simplest case:
+        Both submarines are stationary and we want to estimate only the
+        distance to the other submarine.</p>
+        <p>Each act builds on the previous by adding one layer of
+        complexity. A new technique (and limitations of the old one if
+        applicable) will be discussed at each stage</p>
+        <table>
+        <colgroup>
+        <col style="width: 3%" />
+        <col style="width: 62%" />
+        <col style="width: 33%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th style="text-align: left;">Act</th>
+        <th style="text-align: left;">Added complexity</th>
+        <th style="text-align: left;">Topic</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td style="text-align: left;">1</td>
+        <td style="text-align: left;">Single measurement, stationary
+        submarine (Baseline)</td>
+        <td style="text-align: left;">Bayesian Inference</td>
+        </tr>
+        <tr>
+        <td style="text-align: left;">2</td>
+        <td style="text-align: left;">Multiple measurements</td>
+        <td style="text-align: left;">Recursive Bayesian Inference</td>
+        </tr>
+        <tr>
+        <td style="text-align: left;">3</td>
+        <td style="text-align: left;">Moving submarine</td>
+        <td style="text-align: left;">Kalman Filter</td>
+        </tr>
+        <tr>
+        <td style="text-align: left;">4</td>
+        <td style="text-align: left;">Non-Gaussian prior</td>
+        <td style="text-align: left;">Histogram Filter</td>
+        </tr>
+        <tr>
+        <td style="text-align: left;">5</td>
+        <td style="text-align: left;">Tracking more dimensions than
+        range (e.g., lat, lon)</td>
+        <td style="text-align: left;">Particle Filter</td>
+        </tr>
+        </tbody>
+        </table>
+        <p>Act 0 provides a recap of Bayes’ rule. Act 6 describes
+        resampling and perturbations: two heuristics for better
+        performance with less computation.</p>
+        <h3 id="act-0-math-recap">Act 0: Math Recap</h3>
+        <p>The easiest way to remind yourself of Bayes’ theorem is to
+        re-arrange the law of conditional probability (the comma means
+        “and”, and the bar means “given”):</p>
+        <p><span class="math display"> P(A, B) = P(A|B)P(B) = P(B|A)P(A)
         </span></p>
-        <p>Tom also knows Jerry typically runs 10 inches per second and
-        that the obstacles vary his speed with <span
-        class="math inline">\mathcal{N}(\mu=0, \sigma=1)</span>. This
-        implies the obstacles are equally likely to speed up or slow
-        down Jerry. Jerry’s overall speed is <span
-        class="math inline">\mathcal{N}(\mu=10, \sigma=1)</span>
-        in/s.</p>
-        <p>To summarize, we know: - How fast Jerry typically runs <span
-        class="math inline">\mathcal{N}(\mu=3, \sigma=1)</span> - How
-        the wall tends to echo: <span
-        class="math inline">\mathcal{N}(\mu=x_t,\sigma=0.5)</span> -
-        Jerry’s initial position and time: <span
-        class="math inline">\mathcal{N}(\mu=0,\sigma=0.1)</span></p>
-        <details>
-        <summary>
-        Proof that the product of two normal distributions is normal
-        </summary>
-        hello world <span class="math display">
-        y=mx+b
-        </span>
-        </details>
-        <p>Now, Tom hears a sound (<span class="math inline">y_1</span>)
-        at <span class="math inline">x=8</span>. We have a probability
-        distribution of sound-locations given an (unknown) true position
-        in addition to a sample sound. How can we estimate Jerry’s
-        position with this information? The answer is by using a maximum
-        likelihood estimate (MLE). This, at a high level, takes <span
-        class="math inline">g</span> and re-imagines it as a function of
-        <span class="math inline">x_t</span> parameterized by <span
-        class="math inline">x</span>: <span
-        class="math inline">g&#39;(x_t; x, 0.5)</span>. We have a value
-        for x (8) which we can plug in here. The domain of <span
-        class="math inline">g&#39;</span> is likelihoods, and we choose
-        the value of <span class="math inline">x_t</span> which
-        maximizes <span class="math inline">g&#39;</span>. In this case
-        it is trivial – it is also 8.</p>
-        <p>How can we construct a probability distribution on Jerry’s
-        state given this? We have a probability distribution of
-        sound-locations given</p>
-        <p>Fortunately for Tom, he knows the following things. First, he
-        knows the probabilistic patterns of Jerry’s movement. Given
-        Jerry’s position at time <span class="math inline">t</span>,
-        <span class="math inline">x_t</span>, he has a probability
-        distribution of Jerry’s position at time <span
-        class="math inline">t+1</span>: <span
-        class="math inline">x_{t+1}=f(x;x_t)</span>. <span
-        class="math display">
-        f(x;x_t)=
+        <p><span class="math display"> P(A|B)=\frac{P(B|A)P(A)}{P(B)}
         </span></p>
-        <p>Here’s our first problem, we don’t have <span
-        class="math inline">x_t</span> – in fact that’s what we are
-        trying to find. Fortunately we don’t need to know it, we only
-        need a probability distribution of where we thought Jerry was
-        before hearing the sound. This may not sound fortunate, since we
-        knew nothing about his location before the sound! But that is
-        ok, because we can just shrug and give an equal probability to
-        every position. This is called a uniform prior. Uniform because
-        the probability everywhere is the same. A “prior” is just what
-        we call this distribution which represents our knowledge before
-        receiving any data. Assuming the wall is 10 meters long, our
-        uniform prior will look like this:</p>
-        <p><img src="uniform-prior.png" alt="Alt text" width="500"/></p>
-        <p>Beyond these distributions, Tom has been listening and kept
-        track of the time and location of each sound he has heard. We
-        write this as <span class="math inline">y_1, y_2, ... y_t =
-        y_{1:t}</span>. He wants to guess Jerry’s position at time <span
-        class="math inline">t</span>. This is called the filtering
-        problem.</p>
-        <p>Now, assume we hear the noise at <span
-        class="math inline">x=8</span>. We can use the continuous form
-        of Bayes’ rule <span class="math display">
-        \pi^*(p \mid x)=\frac{P(x \mid p) \pi(p)}{\int_0^1 P(x \mid p)
-        \pi(p) d p}
+        <p>Bayesian inference is a technique which repeatedly uses
+        Bayes’ theorem to understand some outcome/event of interest
+        <span class="math inline">(A)</span> as we observe
+        events/collect data which tells us something about it <span
+        class="math inline">(\textrm{e.g., } B)</span>. For example,
+        <em>“given that a card is red, what is the probability it is a
+        heart?”</em></p>
+        <ul>
+        <li><span class="math inline">P(A)</span> is called the prior.
+        This is the initial degree of belief in the hypothesis <span
+        class="math inline">A</span>.</li>
+        <li><span class="math inline">P(A|B)</span> is called the
+        posterior. It is the degree of belief in <span
+        class="math inline">A</span> after incorporating the news of
+        <span class="math inline">B</span>.</li>
+        <li><span class="math inline">P(B|A)</span> is the likelihood.
+        It is the probability of the data given the hypothesis</li>
+        <li><span class="math inline">P(B)</span> is called the
+        evidence, or marginal likelihood. It is the probability of the
+        data under all hypotheses.</li>
+        </ul>
+        <p>The crux of Bayesian inference is that once we have <span
+        class="math inline">P(A|B)</span>, if we observe another event,
+        <span class="math inline">C</span> (which is independent of
+        <span class="math inline">B</span>) we can “update” our belief
+        about <span class="math inline">A</span> by making <span
+        class="math inline">P(A|B)</span> our prior and starting again
+        to find a new posterior, <span
+        class="math inline">P(A|B,C)</span>. Note that we don’t have to
+        start from scratch each time we get additional evidence, only
+        compute Bayes’ theorem one more time. All of our knowledge thus
+        far about <span class="math inline">A</span> is contained in the
+        posterior.</p>
+        <p>What do I mean by “degree of belief”? If you haven’t come
+        across the distinction between Frequentest and Bayesian
+        statistics, a frequentest will take a weighted coin, and will
+        say “flip it 1 million times, and the ratio of <span
+        class="math inline">\frac{\text{\#heads}}{\text{\#flips}}</span>
+        is the probability it lands heads. A Bayesian will take a
+        weighted coin and say probability is the”degree of belief” I
+        hold that it will land heads. i.e., if I had to place a bet on
+        it, what “probability” would make for a fair betting line?</p>
+        <p>We can derive Bayes’ theorem for probability density
+        functions similarly:</p>
+        <p><span class="math display">
+        f_{X,Y}(x,y)=f_{X|Y=y}(x)f_Y(y)=f_{Y|X=x}(y)f_X(x)
         </span></p>
         <p><span class="math display">
-        P(x_t=x|\textrm{noise at x=8})=\frac{P(\textrm{noise at
-        x=8}|x_t=x)P(x_t=x)}{P(\textrm{noise at x=8})}
+        f_{X|Y=y}(x)=\frac{f_{Y|X=x}(y)f_X(x)}{f_Y(y)}
         </span></p>
-        <p>P(noise at x=8) is zero … how to go from here?</p>
-        <p>To-do: use the Gaussian example first to explain how this can
-        be solved analytically, then motivate particle filter by saying
-        the wall is only 10 ft long, and beta distribution isn’t quite
-        right.</p>
-        <p>Question - what is <span class="math inline">f</span> called?
-        This suggests that <span class="math inline">f</span> must be a
-        PDF. Is that correct? Must <span class="math inline">g</span> be
-        a PDF too? (think so)</p>
-        <p>update step - motion model - prior - Likelihood -
-        Resampling</p>
+        <p>Remember the evidence, <span
+        class="math inline">f_Y(y)</span>, is the probability density of
+        the data under all hypothesis (possible values of <span
+        class="math inline">x</span>). In the continuous case you would
+        write this as an integral</p>
+        <p><span class="math display">
+        f_Y(y)=\int f_{Y|X=x}(y)f_X(x)dx
+        </span></p>
+        <h3 id="act-1-one-measurement-of-a-stationary-submarine">Act 1:
+        One Measurement of A Stationary Submarine</h3>
+        <p>To our submarine example, let’s make the following
+        simplifications:</p>
+        <ul>
+        <li>The problem is one-dimensional</li>
+        <li>Both submarines are stationary</li>
+        <li>The sonar readings are centered on the true distance with
+        some noise. To be precise, they follow the normal distribution
+        with <span class="math inline">\mu=\text{true distance}</span>,
+        and <span class="math inline">\sigma=100</span>. A positive
+        value means the object is in front, negative means it is
+        behind.</li>
+        </ul>
+        <pre><code>   🛥️ ········))       🛥️
+&lt;───┼───────────────────┼───&gt; x
+    0                  ❓</code></pre>
+        <p>Given the following measurement</p>
+        <!-- truth: 4900 meters -->
+        <table>
+        <thead>
+        <tr>
+        <th style="text-align: left;">Measurement</th>
+        <th style="text-align: center;">Range</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td style="text-align: left;">#1</td>
+        <td style="text-align: center;">4781 meters</td>
+        </tr>
+        </tbody>
+        </table>
+        <p>what is the probability distribution of position of the other
+        sub? Let’s approach this as a Bayesian. Call the distance to the
+        other submarine <span class="math inline">x</span> and the sonar
+        reading <span class="math inline">y</span>. Here’s Bayes’
+        theorem again:</p>
+        <p><span class="math display">
+        f_{X|Y=y}(x)=\frac{f_{Y|X=x}(y)f_X(x)}{f_Y(y)}=\frac{f_{Y|X=x}(y)f_X(x)}{\int
+        f_{Y|X=x}(y)f_X(x)dx}
+        </span></p>
+        <p><span class="math display">
+        \substack{\text{p-distribution of the distance x} \\ \text{given
+        the sensor
+        reading y}} = \frac{\substack{{\text{p-distribution of the
+        sensor }}\\
+        {\text{reading y given distance x}}} \times
+        \substack{\text{prior
+        p-distribution}\\{\text{ of the distance
+        x}}}}{\substack{\text{p-distribution of
+        the sensor}\\{\text{reading y across all possible x}}}}
+        </span></p>
+        <p>Here, <span class="math inline">X</span> represents the
+        “state” of the other submarine (also called our “hypothesis”)
+        and <span class="math inline">Y</span> represents the
+        Evidence/Data we have about this state. The core problem is that
+        we have a probability density over possible observations, <span
+        class="math inline">f(Y|X)</span>, but we want a pdf over state,
+        <span class="math inline">X</span>. Bayes’ theorem is what
+        achieves this.</p>
+        <p>We need two things to calculate our posterior. First, the
+        prior <span class="math inline">f_X(x)</span>. This represents
+        our belief about the other sub’s position before receiving any
+        measurement. Since we don’t have any a-priori knowledge, we can
+        use a Gaussian distribution with extremely high variance (i.e.,
+        very flat) which loosely says “it could be anywhere”.</p>
+        <p><span class="math display">
+        f_X(x)=\mathcal{N}(\mu=0,
+        \sigma^2=10^8)=\frac{1}{\sqrt{10^8\times2\pi}}\exp\left(-\frac{1}{2}\left(\frac{x^2}{10^8}\right)\right)
+        </span></p>
+        <blockquote>
+        <p><em>Aside: however wide, this prior is not uniform: it has
+        slightly more probability around 0 than at 1000m. We can’t make
+        our prior’s variance infinite as that is ill defined, but we
+        could have used an uninformative, improper prior.
+        “Uninformative” meaning it contains no information (uniform
+        everywhere) and “improper” because it doesn’t integrate to 1.
+        While I won’t go into more detail here, I point it out because
+        sometimes people say you can “initialize the particle filter
+        using the first measurement” (i.e., use the normalized
+        likelihood function of the first measurement as your prior), but
+        really what they’re doing is applying Bayes’ rule with an
+        uninformative prior.</em></p>
+        </blockquote>
+        <p>Second, we need our likelihood function, <span
+        class="math inline">f_{Y|X=x}(y)</span>. This is defined as the
+        probability of measuring <span class="math inline">y</span>
+        given the state, <span class="math inline">x</span>. The problem
+        statement directly gives this to us: “The sonar readings are
+        centered on the true distance with standard deviation of 100”.
+        Here, the “true distance” is <span
+        class="math inline">x</span></p>
+        <p><span class="math display">
+        f_{Y|X=x}(y)=\mathcal{N}(\mu=x,
+        \sigma^2=10^4)=\frac{1}{\sqrt{10^4\times2\pi}}\exp\left(-\frac{1}{2}\frac{(y-x)^2}{10^4}\right)
+        </span></p>
+        <p>Now, we can plug these into Bayes’ theorem and solve for the
+        posterior <span class="math inline">f_{X|Y=y}(x)</span>.
+        Fortunately, the product of two Gaussian Distributions is also
+        Gaussian <a
+        href="https://web.archive.org/web/20130517221128/http://www.tina-vision.net/docs/memos/2003-003.pdf">(proof)</a>
+        with mean and variance</p>
+        <p><span class="math display">
+        \sigma=\sqrt{\frac{\sigma_1^2\sigma_2^2}{\sigma_1^2+\sigma_2^2}},\quad\mu=\frac{\mu_1\sigma_2^2+\mu_2\sigma_1^2}{\sigma_1^2+\sigma_2^2}
+        </span></p>
+        <p>The denominator (evidence), <span
+        class="math inline">f_Y(y)</span>, is a scalar value (remember,
+        <span class="math inline">y</span> is given). Therefore, the
+        posterior is also a Gaussian. I won’t go through the entire
+        derivation here, but understand the solution is analytical</p>
+        <blockquote>
+        <p><em>Aside: an analytical solution is derived by moving around
+        variables with pencil and paper (e.g., anything you did in a
+        high school algebra class). It is exact. Numerical solutions, on
+        the other hand, are calculated via an algorithm and are
+        approximate. They typically incur some discretization or
+        rounding error which approaches zero in the limit of infinite
+        memory or compute time.</em></p>
+        </blockquote>
+        <figure>
+        <img src="./problem-1.png" alt="problem-1" />
+        <figcaption aria-hidden="true">problem-1</figcaption>
+        </figure>
+        <p>I’ll note a few things. First, the prior is hard to see
+        because it is pretty close to a flat line right around 0.
+        Second, the mean of the posterior is very slightly less than the
+        measurement. This is because our prior is centered at zero, so
+        it will still “pull” the posterior towards it, no matter how
+        flat it is. Third, the equation for the standard deviation,
+        <span class="math inline">\sigma</span>, above guarantees that
+        the variance of the posterior is less than or equal to the
+        variance of prior and likelihood Gaussians.</p>
+        <h3
+        id="act-2-multiple-measurements-of-a-stationary-submarine">Act
+        2: Multiple Measurements of A Stationary Submarine</h3>
+        <p>Now, we get a second measurement,</p>
+        <pre><code>   🛥️ ···))·····))     🛥️
+&lt;───┼───────────────────┼───&gt; x
+    0                  ❓</code></pre>
+        <!-- truth: 4900 meters -->
+        <table>
+        <thead>
+        <tr>
+        <th style="text-align: left;">Measurement</th>
+        <th style="text-align: center;">Range</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td style="text-align: left;">#2</td>
+        <td style="text-align: center;">4952 meters</td>
+        </tr>
+        </tbody>
+        </table>
+        <p>And we’d like to update our probability distribution of the
+        other submarine’s position, <span
+        class="math inline">f_X(x)</span>. Recalling the math recap from
+        the beginning, we can use the posterior from Act 1 as our new
+        prior, rinse and repeat.</p>
+        <p><span class="math display">
+        \text{Act 2 posterior} = \frac{\substack{{\text{measurement
+        \#2}}\\
+        {\text{likelihood}}} \times \text{Act 1
+        posterior}}{\substack{\text{probability
+        of measurement \#2 }\\{\text{across all possible x}}}}
+        </span></p>
+        <figure>
+        <img src="./problem-2.png" alt="problem-2" />
+        <figcaption aria-hidden="true">problem-2</figcaption>
+        </figure>
+        <p>Again, the variance of the posterior is smaller than the two
+        inputs. Since the variance of the prior and likelihood are
+        roughly the same, the mean of the posterior is half way in
+        between the two.</p>
+        <p>One of the powers of Bayesian inference is that it allows
+        subjective priors. By that, I mean your domain knowledge and
+        lived experience may give you a hunch that the other sub likes
+        to hang out in some area and is therefore probably some distance
+        away. Bayesian inference allows you to turn this “hunch” into a
+        prior. This is possible because (in theory) no matter what prior
+        you choose (so long as it is not zero where it matters) with
+        enough measurement updates eventually your posterior will
+        converge on the true distribution. Therefore we can leverage
+        subjective “hunches” while maintaining some mathematical
+        guarantees.</p>
+        <h3 id="act-3-multiple-measurements-of-a-moving-submarine">Act
+        3: Multiple Measurements of a Moving Submarine</h3>
+        <p>Now, the other submarine is moving, but we don’t know how
+        fast. We take sequential sensor measurements. Our goal is to
+        estimate (at the time of the last measurement) the velocity and
+        range of the other submarine. We’ll make the following
+        assumptions</p>
+        <pre><code>   🛥️ ···))······))    🛥️💨
+&lt;───┼───────────────────┼───&gt; x
+    0                  ❓</code></pre>
+        <ul>
+        <li>Everything is still in one dimension</li>
+        <li>The other sub is moving at a constant velocity</li>
+        <li>Our prior on the other submarine’s velocity is <span
+        class="math inline">\mathcal{N}(\mu=0,
+        \sigma^2=5)</span> where a negative value means it is getting
+        closer.</li>
+        </ul>
+        <p>The state of the other submarine is now a random vector <span
+        class="math inline">X</span>:</p>
+        <p><span class="math display">
+        x= \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}= \begin{bmatrix}
+        \text{position}
+        \\ \text{velocity} \end{bmatrix}
+        </span></p>
+        <p>And its probability distribution is now multivariate Gaussian
+        <span class="math inline">X\sim\mathcal{N}(\mu,\Sigma)</span>.
+        Our prior is</p>
+        <p><span class="math display">
+        \mu =\begin{bmatrix} 0 \\ 0 \end{bmatrix}, \quad
+        \Sigma=\begin{bmatrix} 10^8
+        &amp; 0 \\ 0 &amp; 5 \end{bmatrix}
+        </span></p>
+        <p>Again, we will employ Bayesian inference. The problem is now
+        two dimensions, but conceptually the technique is the same. We
+        will treat the first measurement just as we did in Act 2.
+        However, after calculating the posterior <span
+        class="math inline">f_X(x)</span> of the random vector, instead
+        of immediately turning it into our next prior, we first must
+        update it with time. To do this, we need something called a
+        “motion model” or “state update equation”. Given a state at
+        <span class="math inline">t-1</span>, and our assumption of
+        constant velocity, the state at <span
+        class="math inline">t</span> is given by</p>
+        <p><span class="math display">
+        \textrm{pos}_t=\textrm{pos}_{t-1}+\text{vel}_{t-1}\Delta t \\
+        \textrm{vel}_t=\textrm{vel}_{t-1}
+        </span></p>
+        <p>where <span class="math inline">\Delta t</span> is the time
+        in between each sensor reading. This is a linear transformation
+        we can write in matrix form:</p>
+        <p><span class="math display">
+        \begin{bmatrix} \text{pos} \\ \text{vel} \end{bmatrix}_t =
+        \begin{bmatrix} 1
+        &amp; \Delta t \\ 0 &amp; 1 \end{bmatrix} \begin{bmatrix}
+        \text{pos} \\ \text{vel}
+        \end{bmatrix}_{t-1} = A \begin{bmatrix} \text{pos} \\ \text{vel}
+        \end{bmatrix}_{t-1}
+        </span></p>
+        <p>(I’m sticking with convention here to call this matrix <span
+        class="math inline">A</span>).</p>
+        <p>Given a state vector we can transform it with time, but how
+        do we transform a continuous distribution? Let’s change our
+        framing slightly; instead of thinking about probability
+        distributions, let’s consider the random variable <span
+        class="math inline">X=\{\text{pos},\text{vel}\}</span> which
+        this distribution describes. Again, we are fortunate that our
+        variable is Gaussian. Thinking back to an intro stats class, you
+        may remember that multiplying a random variable by a constant
+        <span class="math inline">b</span> scales its mean by <span
+        class="math inline">b</span> and its variance by <span
+        class="math inline">b^2</span>. This extends to random vectors.
+        Given any linear transformation <span
+        class="math inline">Y=BX</span>,</p>
+        <p><span class="math display"> E[Y]=B E[X] </span></p>
+        <p><span class="math display"> Cov(Y)=B Cov(X)B^T </span></p>
+        <p>Because the Gaussian distribution is defined by this mean and
+        variance, the resulting distribution of our random variable is
+        also Gaussian with</p>
+        <p><span class="math display"> \mathcal{N}(\mu,\Sigma)\to
+        \mathcal{N}(A\mu,A\Sigma A^T) </span></p>
+        <p>So long as our motion model is a linear transformation and
+        our prior and measurements are still Gaussian, the posterior
+        will remain Gaussian, and therefore the entire process can be
+        solved analytically. Say we receive the following three
+        measurements:</p>
+        <!-- true initial position: 7500 meters true constant velocity: 3 m/s (moving
+        away)
+
+        | Measurement |    Time     |  True pos   | measured pos |
+        | :---------- | :---------: | :---------: | :----------: |
+        | #1          | 0 seconds   | 7500 meters | 7507 meters  |
+        | #2          | 60 seconds  | 7680 meters | 7691 meters  |
+        | #3          | 200 seconds | 8100 meters | 8099 meters  |
+
+        -->
+        <table>
+        <thead>
+        <tr>
+        <th style="text-align: left;">Measurement</th>
+        <th style="text-align: center;">Time</th>
+        <th style="text-align: center;">Range</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td style="text-align: left;">#1</td>
+        <td style="text-align: center;">0 seconds</td>
+        <td style="text-align: center;">7507 meters</td>
+        </tr>
+        <tr>
+        <td style="text-align: left;">#2</td>
+        <td style="text-align: center;">60 seconds</td>
+        <td style="text-align: center;">7671 meters</td>
+        </tr>
+        <tr>
+        <td style="text-align: left;">#3</td>
+        <td style="text-align: center;">200 seconds</td>
+        <td style="text-align: center;">8099 meters</td>
+        </tr>
+        </tbody>
+        </table>
+        <p>To process the first, we apply Bayes’ theorem just as we did
+        in Act 2. I’ve plotted top-down heatmaps of our probability
+        distributions. Getting oriented, an informationless prior would
+        look like a uniform, light orange background. Our prior is a bit
+        better than informationless: we know the velocity is probably
+        between <span class="math inline">\pm 4</span> m/s.</p>
+        <p>Our sensor still provides only range information. Therefore
+        it appears as a 1D Gaussian smeared uniformly across the
+        velocity axis.</p>
+        <figure>
+        <img src="problem-3-meas-1.png" alt="problem-3-meas-1" />
+        <figcaption aria-hidden="true">problem-3-meas-1</figcaption>
+        </figure>
+        <blockquote>
+        <p><em>Aside: I haven’t plotted the actual prior here – it would
+        appear as a single color. I’ve emphasized things for visual
+        effect.</em></p>
+        </blockquote>
+        <p>Notice how the posterior mean is slightly lower than 7507.
+        This is because our prior is not truly “informationless” it is
+        just a very flat Gaussian centered at 0, so it will pull the
+        posterior slightly towards 0.</p>
+        <figure>
+        <img src="problem-3-meas-2.png" alt="problem-3-meas-2" />
+        <figcaption aria-hidden="true">problem-3-meas-2</figcaption>
+        </figure>
+        <figure>
+        <img src="problem-3-meas-3.png" alt="problem-3-meas-3" />
+        <figcaption aria-hidden="true">problem-3-meas-3</figcaption>
+        </figure>
+        <blockquote>
+        <p>Aside: the first posterior’s covariance matrix has 0s in its
+        off diagonals. This is a fancy way of pointing out that it isn’t
+        slanted. After we apply the motion model, these off-diagonal
+        elements become non-zero and it becomes slanted. It is this
+        covariance matrix that carries the “information” about the
+        relationship between the possible positions and velocities:
+        i.e., “If the sub has a positive velocity it is probably further
+        away now”.</p>
+        </blockquote>
+        <p>Let’s zoom out for one moment. Our goal is to motivate the
+        particle filter. Until this point we haven’t defined
+        <em>“particle”</em> or <em>“filter”</em>. The approach I’ve just
+        described is is called <em>“recursive Bayesian estimation”</em>
+        or a <em>“Bayesian Filter”</em>. The first phrase describes
+        exactly what we’ve done: recursively apply Bayes’ theorem to
+        estimate the state of the submarine. As for the latter,
+        <em>“filtering”</em> simply means we are estimating the state of
+        the submarine at the time of the last measurement as opposed to
+        during the whole encounter. At this point you know literally 1/2
+        of <em>“particle filter”</em>, and our conceptual understanding
+        is roughly half way there as well.</p>
+        <p>In particular, a Bayesian filter where the prior and
+        measurements are Gaussian and the state update is linear is
+        called a <em>“Kalman Filter”</em>.</p>
+        <p>Notice one more thing about our results. Our final posterior
+        tells us that the other submarine’s velocity is between +2 and
+        +4. This is remarkable because we never received any information
+        about its velocity! We call velocity a “hidden state” because it
+        is never observed. One powerful trait of Kalman Filters is that
+        they can provide estimates of states which are never
+        observed.</p>
+        <blockquote>
+        <p><em>Aside: the Kalman filter can also represent Gaussian
+        noise in the state update. For example, imagine the velocity of
+        the submarine depended on the temperature/salinity of the water.
+        We could model the effect of this unknown environment as
+        Gaussian noise (just like we did with the
+        measurements).</em></p>
+        </blockquote>
+        <blockquote>
+        <p><em>Aside: the “extended Kalman filter” (EKF) can use any
+        differentiable function for the state-transition model (rather
+        than linear). This involves constructing a Jacobian (matrix of
+        partial derivatives) to update the covariance with. The EKF is
+        the de facto technique of GPS systems.</em></p>
+        </blockquote>
+        <h3 id="act-4-histogram-filter">Act 4: Histogram Filter</h3>
+        <p>Now imagine that before receiving the first sensor report, we
+        receive an intelligence that the other submarine is between
+        4,600 and 6,000 meters away.</p>
+        <pre><code>   🛥️ ···))······))       🛥️
+&lt;───┼────────────────┼──────────┼───&gt; x
+0                  4,600  ❓  6,000</code></pre>
+        <p>And then we receive the following three measurements:</p>
+        <!-- true initial position: 4900 meters true constant velocity: 3 m/s (moving
+        away)
+
+        | Measurement |    Time     |  True pos   | measured pos |
+        | :---------- | :---------: | :---------: | :----------: |
+        | #1          | 0 seconds   | 4900 meters | 4781 meters  |
+        | #2          | 60 seconds  | 5080 meters | 5063 meters  |
+        | #3          | 200 seconds | 5500 meters | 5510 meters  |
+
+        -->
+        <table>
+        <thead>
+        <tr>
+        <th style="text-align: left;">Measurement</th>
+        <th style="text-align: center;">Time</th>
+        <th style="text-align: center;">Range</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td style="text-align: left;">#1</td>
+        <td style="text-align: center;">0 seconds</td>
+        <td style="text-align: center;">4781 meters</td>
+        </tr>
+        <tr>
+        <td style="text-align: left;">#2</td>
+        <td style="text-align: center;">60 seconds</td>
+        <td style="text-align: center;">5063 meters</td>
+        </tr>
+        <tr>
+        <td style="text-align: left;">#3</td>
+        <td style="text-align: center;">200 seconds</td>
+        <td style="text-align: center;">5510 meters</td>
+        </tr>
+        </tbody>
+        </table>
+        <p>We can incorporate the intelligence report into our Bayesian
+        framework as a uniform prior:</p>
+        <p><span class="math display">
+        f_X(x) = \frac{1}{\text{1,400}} \quad \text{for } x \in
+        [\text{4,600},
+        \text{6,000}]
+        </span></p>
+        <p>The problem with a uniform prior is that we can no longer
+        solve the problem analytically. What can we do instead? One
+        option divide the x-dimension into 200 “bins” then calculate the
+        prior and likelihood for each bin. Then, using the same linear
+        motion update</p>
+        <p><span class="math display">
+        \begin{bmatrix} \text{pos} \\ \text{vel} \end{bmatrix}_t =
+        \begin{bmatrix} 1
+        &amp; \Delta t \\ 0 &amp; 1 \end{bmatrix} \begin{bmatrix}
+        \text{pos} \\ \text{vel}
+        \end{bmatrix}_{t-1} = A \begin{bmatrix} \text{pos} \\ \text{vel}
+        \end{bmatrix}_{t-1}
+        </span></p>
+        <p>For each bin in step <span class="math inline">(t-1)</span>’s
+        posterior, transform its state <span
+        class="math inline">x_1</span> into <span
+        class="math inline">x_2</span> using <span
+        class="math inline">A</span> and add that probability to step
+        <span class="math inline">t</span>’s prior’s bin at <span
+        class="math inline">x_2</span>.</p>
+        <blockquote>
+        <p><em>Aside: alternatively we could have used a Gaussian prior
+        with (<span class="math inline">\mu=5,300,
+        \sigma=700)</span>, called it close enough, and used a Kalman
+        Filter. This sounds hacky, but it’s often often a good
+        option.</em></p>
+        </blockquote>
+        <figure>
+        <img src="problem-5-meas-1.png" alt="problem-5-meas-1" />
+        <figcaption aria-hidden="true">problem-5-meas-1</figcaption>
+        </figure>
+        <figure>
+        <img src="problem-5-meas-2.png" alt="problem-5-meas-2" />
+        <figcaption aria-hidden="true">problem-5-meas-2</figcaption>
+        </figure>
+        <figure>
+        <img src="problem-5-meas-3.png" alt="problem-5-meas-3" />
+        <figcaption aria-hidden="true">problem-5-meas-3</figcaption>
+        </figure>
+        <p>Let’s take one more step back. What we’ve just constructed is
+        called a “Histogram Filter”. Our solution is no longer
+        analytical – that is we’ve approximated our continuous
+        distributions with a finite grid. This sacrifices some
+        precision, but allows us to consider non-Gaussian priors.</p>
+        <p>In this Act we used the same motion model <span
+        class="math inline">A</span> as in Act 3. However, now that
+        we’ve abandoned the requirement of an analytical solution, our
+        motion model no longer needs to be linear either. So long as we
+        can come up with a way to “update” the probability in the
+        posterior forward in time, we can do so however we wish. For
+        example, say we know that every 10 minutes the other submarine
+        turns around. We could have a literal if-else statement in our
+        motion update that if <span
+        class="math inline">t\%(10*60)==0</span>, negate the velocity.
+        This is impossible with a Kalman Filter.</p>
+        <p>Finally, note that while our measurements have remained
+        Gaussian they need not have. Once we start solving things
+        numerically, we can drop any requirements about functions being
+        Gaussian.</p>
+        <h3 id="act-5-particle-filter">Act 5: Particle Filter</h3>
+        <p>Now let’s consider a higher-dimensional problem: both
+        submarines move in three dimensions. We would like to track both
+        position <span class="math inline">\{x,y,z\}</span> and velocity
+        <span class="math inline">\{v_x,v_y,v_z\}</span>. Assume our
+        measurements are 3d Gaussians on <span
+        class="math inline">\{x,y,z\}</span> and our prior is a uniform
+        distribution over a cube in <span
+        class="math inline">\{x,y,z\}</span>.</p>
+        <p>If, like before, we split each dimension into 200 bins, we
+        now have <span
+        class="math inline">200^6=64\;\text{Trillion}</span> bins. Using
+        one float (32 bits) to store each bin’s value would require
+        <span class="math inline">32\times 64\times 10^{12}
+        \;\text{bits}\approx250\;\text{Terabytes}</span>. This is an
+        example of “the curse of dimensionality”.</p>
+        <p>Let’s think about what’s happening here. In our 2-dimensional
+        example, after 3 measurements we are almost certain the other
+        submarine has a positive velocity. We nonetheless multiply the
+        prior (0) by the likelihood (0) to get the posterior (0) for
+        every bin with negative velocity. This is a tremendous waste of
+        compute. There are some tricks like having a dynamic
+        discretization: have very wide bins where there is no
+        probability and very small grids where the probability is
+        non-zero. Possible, but adds quite a bit of complexity.</p>
+        <p>Note that the Kalman filter does not suffer from the curse of
+        dimensionality. Since it only needs to keep track of the mean
+        and covariance matrix, which, in 6 dimensions only require 42
+        floats.</p>
+        <blockquote>
+        <p><em>Aside: the idea of assuming a Gaussian distribution to
+        avoid the curse of dimensionality is not unique to the Kalman
+        Filter. In machine learning, Quadratic Discriminant Analysis and
+        Naive Bayes leverage this idea.</em></p>
+        </blockquote>
+        <p>The particle filter solves this problem. Instead of moving
+        our probability between bins, leaving many bins with zero
+        probability, why not <em>move the bins themselves</em>? Call
+        these moving bins “particles”. Each particle is comprised of its
+        state <span
+        class="math inline">\{\text{position},\text{velocity}\}</span>
+        and its probability which we call its “weight”.</p>
+        <p>To construct our set of particles, sample from the first
+        prior distribution. There is no longer a need to discretize our
+        likelihood functions as we can evaluate them directly at the
+        state of each particle. After applying the likelihood function,
+        we update each particle using our state-transition model <span
+        class="math inline">A</span>. Like the histogram filter, we need
+        not use a linear state-transition model or Gaussian
+        prior/likelihoods. Note that the superscripts denote the
+        particle index, not an exponent. Typically, the subscript is
+        reserved for the time index.</p>
+        <p><span class="math display">
+        \text{particle 1 (state}\ x^1):\quad x^1_t = \begin{bmatrix} 1
+        &amp; \Delta t \\
+        0 &amp; 1 \end{bmatrix} x^1_{t-1}
+        </span></p>
+        <p><span class="math display">
+        \text{particle 2 (state}\ x^2):\quad x^2_t = \begin{bmatrix} 1
+        &amp; \Delta t \\
+        0 &amp; 1 \end{bmatrix} x^2_{t-1}
+        </span></p>
+        <p><span class="math display"> \vdots </span></p>
+        <p>At each step the prior is the set of original particles and
+        their weights and the posterior is the set of particles with
+        updated weights. Each particle’s weight is updated according to
+        Bayes’ theorem.</p>
+        <p><span class="math display">
+        \text{particle 1 (state}\ x^1):\quad \text{new weight} \propto
+        \frac{\substack{{\text{likelihood of sensor }}\\ {\text{reading
+        y given }x^1}}
+        \times \text{old weight}} {\text{evidence}} \propto
+        \text{likelihood}\times\text{old weight}
+        </span></p>
+        <p><span class="math display">
+        \text{particle 2 (state}\ x^2):\quad \text{new weight} \propto
+        \frac{\substack{{\text{likelihood of sensor }}\\ {\text{reading
+        y given }x^2}}
+        \times \text{old weight}} {\text{evidence}} \propto
+        \text{likelihood}\times\text{old weight}
+        </span></p>
+        <p><span class="math display"> \vdots </span></p>
+        <p>I’ve written “<span class="math inline">\propto</span>”
+        (proportional to) instead of “<span
+        class="math inline">=</span>” because there is one more step to
+        calculate the new weight. The particles comprise a probability
+        distribution, so the sum of their weights should sum to 1.
+        Therefore, we divide each weight by their sum. The effect of
+        this normalization is the same regardless of any constant
+        factor, so we can ignore the evidence constant.</p>
+        <blockquote>
+        <p><em>Aside: people often get lazy and say “the particle’s
+        likelihood”. This is short for “the likelihood of the
+        measurement conditioned on the particle’s state”. Particles
+        don’t have likelihoods.</em></p>
+        </blockquote>
+        <p>For consistency, I’ll show the same 2D example as from Act 5.
+        It’s important to understand that this technique can scale to
+        higher dimensions, but things are simpler to visualize in
+        2D.</p>
+        <p><img src="problem-6-meas-1.png" alt="problem-6-meas-1" />
+        <img src="problem-6-meas-2.png" alt="problem-6-meas-2" /> <img
+        src="problem-6-meas-3.png" alt="problem-6-meas-3" /></p>
+        <p>Note that in these plots I’ve set a floor on the opacity of
+        each particle to help visualize things. Had I let the opacity go
+        to zero, the very opaque particles would all disappear.</p>
+        <p>I’ll pause here and say that a particle filter with infinite
+        particles and a histogram filter with infinite bins, will
+        converge on the same analytical posterior provided by a Kalman
+        filter. Of course, we’re doing all this to avoid trillions of
+        cells let alone infinite ones, but it’s good to know things will
+        converge to the correct answer. Everything from here on is a
+        trick to use less compute, not a mathematical requirement.</p>
+        <blockquote>
+        <p><em>Aside: what I’ve described here is called a “bootstrap
+        filter”. It is a particular kind of particle filter where
+        certain assumptions are made so that <span
+        class="math inline">\text{new weight}\propto
+        \text{likelihood}\times\text{old weight}</span>. This isn’t
+        always the case. I’ve omitted the mathematical details since I
+        don’t think they are necessary for a conceptual understanding.
+        You can read more on Wikepdia</em> <a
+        href="https://en.wikipedia.org/wiki/Particle_filter#Sequential_Importance_Resampling_(SIR)">here</a>.</p>
+        </blockquote>
+        <h3 id="act-6-resampling-and-perturbations">Act 6: Resampling
+        and Perturbations</h3>
+        <p>My critique of the histogram filter was that it wasted effort
+        computing bins which had zero probability. We could make the
+        same critique here: most of the particles have near-zero weight
+        but we keep them around.</p>
+        <p>The solution is to “resample” the particles. Imagine we have
+        100 particles. Originally each has weight <span
+        class="math inline">1/100</span>. After performing the
+        measurement update, half have weight zero and half have weight
+        <span class="math inline">1/50</span>. To resample we throw away
+        the particles with 0 weight and duplicate each of the survivors.
+        We’re left with a total weight of 1 and our surviving particles
+        are all in the “region of interest”. I won’t go into more detail
+        about resampling, there is no shortage of explainers on the
+        internet which focus on it.</p>
+        <p>A common technique which accompanies resampling is to add
+        “perturbations” to the resampled particles. That is, add a bit
+        of Gaussian noise to each perturbed particle’s state. This is
+        because we only have finite particles, so we would like to
+        “smear out” the survivors to more evenly cover the space.</p>
+        <blockquote>
+        <p><em>Aside: it’s at this point that things start becoming more
+        of an art than a science. As you progress developing a particle
+        filter, more and more decisions will start to fall in the former
+        category</em></p>
+        </blockquote>
+        <p>Here are the results of adding resampling and perturbing to
+        our particle filter:</p>
+        <p><img src="problem-7-meas-1.png" alt="problem-7-meas-1" />
+        <img src="problem-7-meas-2.png" alt="problem-7-meas-2" /> <img
+        src="problem-7-meas-3.png" alt="problem-7-meas-3" /></p>
+        <p>Fair warning: particle filters fall apart in high dimensions.
+        There just aren’t enough particles to cover the space (curse of
+        dimensionality). Things fare better if things are roughly
+        Gaussian.</p>
 
         <script>
             (function () {
