@@ -307,8 +307,7 @@
         memory or compute time.</em></p>
         </blockquote>
         <figure>
-        <img src="./problem-1.png" alt="problem-1" />
-        <figcaption aria-hidden="true">problem-1</figcaption>
+        <img src="/resources/particle-filter/problem-1.png"/>
         </figure>
         <p>I’ll note a few things. First, the prior is hard to see
         because it is pretty close to a flat line right around 0.
@@ -354,8 +353,7 @@
         of measurement \#2 }\\{\text{across all possible x}}}}
         </span></p>
         <figure>
-        <img src="./problem-2.png" alt="problem-2" />
-        <figcaption aria-hidden="true">problem-2</figcaption>
+        <img src="/resources/particle-filter/problem-2.png" alt="problem-2" />
         </figure>
         <p>Again, the variance of the posterior is smaller than the two
         inputs. Since the variance of the prior and likelihood are
@@ -504,8 +502,7 @@
         it appears as a 1D Gaussian smeared uniformly across the
         velocity axis.</p>
         <figure>
-        <img src="problem-3-meas-1.png" alt="problem-3-meas-1" />
-        <figcaption aria-hidden="true">problem-3-meas-1</figcaption>
+        <img src="/resources/particle-filter/problem-3-meas-1.png" alt="problem-3-meas-1" />
         </figure>
         <blockquote>
         <p><em>Aside: I haven’t plotted the actual prior here – it would
@@ -517,12 +514,10 @@
         just a very flat Gaussian centered at 0, so it will pull the
         posterior slightly towards 0.</p>
         <figure>
-        <img src="problem-3-meas-2.png" alt="problem-3-meas-2" />
-        <figcaption aria-hidden="true">problem-3-meas-2</figcaption>
+        <img src="/resources/particle-filter/problem-3-meas-2.png" alt="problem-3-meas-2" />
         </figure>
         <figure>
-        <img src="problem-3-meas-3.png" alt="problem-3-meas-3" />
-        <figcaption aria-hidden="true">problem-3-meas-3</figcaption>
+        <img src="/resources/particle-filter/problem-3-meas-3.png" alt="problem-3-meas-3" />
         </figure>
         <blockquote>
         <p>Aside: the first posterior’s covariance matrix has 0s in its
@@ -650,16 +645,13 @@
         option.</em></p>
         </blockquote>
         <figure>
-        <img src="problem-5-meas-1.png" alt="problem-5-meas-1" />
-        <figcaption aria-hidden="true">problem-5-meas-1</figcaption>
+        <img src="/resources/particle-filter/problem-5-meas-1.png" alt="problem-5-meas-1" />
         </figure>
         <figure>
-        <img src="problem-5-meas-2.png" alt="problem-5-meas-2" />
-        <figcaption aria-hidden="true">problem-5-meas-2</figcaption>
+        <img src="/resources/particle-filter/problem-5-meas-2.png" alt="problem-5-meas-2" />
         </figure>
         <figure>
-        <img src="problem-5-meas-3.png" alt="problem-5-meas-3" />
-        <figcaption aria-hidden="true">problem-5-meas-3</figcaption>
+        <img src="/resources/particle-filter/problem-5-meas-3.png" alt="problem-5-meas-3" />
         </figure>
         <p>Let’s take one more step back. What we’ve just constructed is
         called a “Histogram Filter”. Our solution is no longer
@@ -781,9 +773,9 @@
         It’s important to understand that this technique can scale to
         higher dimensions, but things are simpler to visualize in
         2D.</p>
-        <p><img src="problem-6-meas-1.png" alt="problem-6-meas-1" />
-        <img src="problem-6-meas-2.png" alt="problem-6-meas-2" /> <img
-        src="problem-6-meas-3.png" alt="problem-6-meas-3" /></p>
+        <p><img src="/resources/particle-filter/problem-6-meas-1.png" alt="problem-6-meas-1" />
+        <img src="/resources/particle-filter/problem-6-meas-2.png" alt="problem-6-meas-2" /> <img
+        src="/resources/particle-filter/problem-6-meas-3.png" alt="problem-6-meas-3" /></p>
         <p>Note that in these plots I’ve set a floor on the opacity of
         each particle to help visualize things. Had I let the opacity go
         to zero, the very opaque particles would all disappear.</p>
@@ -834,9 +826,9 @@
         </blockquote>
         <p>Here are the results of adding resampling and perturbing to
         our particle filter:</p>
-        <p><img src="problem-7-meas-1.png" alt="problem-7-meas-1" />
-        <img src="problem-7-meas-2.png" alt="problem-7-meas-2" /> <img
-        src="problem-7-meas-3.png" alt="problem-7-meas-3" /></p>
+        <p><img src="/resources/particle-filter/problem-7-meas-1.png" alt="problem-7-meas-1" />
+        <img src="/resources/particle-filter/problem-7-meas-2.png" alt="problem-7-meas-2" /> <img
+        src="/resources/particle-filter/problem-7-meas-3.png" alt="problem-7-meas-3" /></p>
         <p>Fair warning: particle filters fall apart in high dimensions.
         There just aren’t enough particles to cover the space (curse of
         dimensionality). Things fare better if things are roughly
