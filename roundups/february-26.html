@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Laird Stewart</title>
+    <link rel="icon" href="resources/icon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="resources/icon.png" />
+    <link rel="stylesheet" href="/build/style.css" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+
+    <!-- katex math rendering -- copied from pandoc translation -->
+    <script
+      defer=""
+      src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"
+    ></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var mathElements = document.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains("display"),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false,
+            });
+          }
+        }
+      });
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"
+    />
+    <!-- end of katex math rendering -->
+  </head>
+
+  <body>
+    <table style="all: revert; max-width: 42em">
+      <td style="all: revert">
+        <p>
+          <em><a href="/index.html">Laird Stewart</a></em
+          ><button
+            id="theme-toggle"
+            aria-label="Toggle dark mode"
+            style="
+              background: none;
+              border: none;
+              font-size: 1em;
+              margin-left: 0.5em;
+              vertical-align: middle;
+              cursor: pointer;
+            "
+          >
+            ☀️</button
+          ><br />
+        </p>
+
+        <p>
+          <em>
+            I publish a monthly email newsletter with personal updates and
+            interesting things I read or learned that month. The latter is
+            archived below. If you’d like to be added to the newsletter, email
+            me.
+          </em>
+        </p>
+        <h3>February 2026 Roundup</h3>
+
+        <!--
+        EXAMPLE IMAGE BLOCK
+
+        <p>
+          pithy summary 
+        </p>
+        <div style="padding-left: 1em">
+          <img src="/resources/image-name.png" />
+          <br />
+          <br />
+          <aref="https://data.stackexchange.com">Stack Exchange</a>, Anonymous Post
+        </div>
+        <br />
+
+        EXAMPLE QUOTE BLOCK
+        <p>
+          pithy summary
+        </p>
+        <div style="padding-left: 1em">
+          <blockquote>
+            <p lang="en" dir="ltr">
+              quote goes here
+            </p>
+          </blockquote>
+          <a href="www.google.com">Goolge.com</a>, Boris Cherny
+        </div>
+        <br>
+        -->
+
+        <p>
+          Plenty was written on the Pentagon's falling out with Anthropic this
+          week. This was one of the more clear-headed articles.
+        </p>
+        <div style="padding-left: 1em">
+          <blockquote>
+            <p lang="en" dir="ltr">
+              But the deeper problem isn't who's right in this negotiation; it's
+              that the negotiation is happening at all. The terms governing how
+              the military uses the most transformative technology of the
+              century are being set through bilateral haggling between a defense
+              secretary and a startup CEO, with no democratic input and no
+              durable constraints. Congress should be setting these rules. And
+              it should do so in a hurry.
+            </p>
+          </blockquote>
+          <a
+            href="https://www.lawfaremedia.org/article/congress-not-the-pentagon-or-anthropic-should-set-military-ai-rules"
+            >Lawfare</a
+          >, Alan Z. Rozenshtein
+        </div>
+        <br />
+
+        <p>
+          A good visualization of grid-scale energy being brought online in
+          2026.
+        </p>
+        <div style="padding-left: 1em">
+          <img
+            src="/resources/roundups/feb-26/utility-scale-energy-2026-map.png"
+          />
+          <br />
+          <br />
+          <a
+            href="https://www.eia.gov/states/data/dashboard/energy-infrastructure"
+            >U.S. Energy Information Administration</a
+          >
+        </div>
+        <br />
+
+        <p>
+          A two-part series considering the policy implications of recursively
+          improving AI systems.
+        </p>
+
+        <div style="padding-left: 1em">
+          <blockquote>
+            <p lang="en" dir="ltr">
+              There is one assumption I’ll ask you to make with me, which is
+              that substantial automation of AI research is a near-term
+              possibility. This requires believing a few things. First, that AI
+              research and engineering is substantively composed of work like:
+              finding optimizations in various complex software systems;
+              designing and testing experiments for AI model training and
+              posttraining; and creating software interfaces to expose AI model
+              capabilities to users. Second, that a great deal of this work is
+              essentially reducible to the engineering of software. Third, that
+              AI models, while not yet geniuses, are reaching quite high levels
+              of human competence. Fourth, that frontier lab leadership and
+              staff are serious when they describe AI research automation as a
+              near-term goal, and that frontier lab research staff are telling
+              the truth when they say that AI is already writing a large
+              fraction of their code.
+            </p>
+          </blockquote>
+
+          I agree with Dean that policymakers should seriously discuss recursive
+          self improvement. However, his last two premises are weak.
+          "Competence" is too vague to be useful. Models have exceeded human
+          "competence" on narrowly defined math and coding tasks for 12 months.
+          It shouldn't be a surprise they write most code at these companies.
+          However, without metacognitive monitoring and self-directed planning,
+          these look more like another step in the evolution of compilers, IDEs,
+          and build tools than a drop-in labor replacement. I'm not saying that
+          won't happen, just that he's missing a premise.
+          <br />
+          <br />
+          <a
+            href="https://www.hyperdimensional.co/p/on-recursive-self-improvement-part"
+            >On Recursive Self-Improvement (Part 1)</a
+          >, Dean Ball
+        </div>
+        <br />
+
+        <p>The vegetables in VeggieTales are not Christian</p>
+        <div style="padding-left: 1em">
+          <a
+            href="https://justinkuiper.substack.com/p/the-vegetables-in-veggietales-are"
+            >Substack</a
+          >, Justin Kuiper
+        </div>
+        <br />
+
+        <p>Scott Alexander's rebuttal to the "stochastic parrot" argument</p>
+        <div style="padding-left: 1em">
+          Scott argues that the "LLMs are just next token predictors" argument
+          is confused. It can't say anything about a model's intelligence or
+          world model. After all, humans are "just next sensory input
+          predictors".
+          <blockquote>
+            <p lang="en" dir="ltr">
+              Recently, they [Anthropic] explored how Claude predicts where a
+              line break will be in a page of text. Since line break is a token,
+              this is literally a next-token prediction task. The answer was:
+              the AI represents various features of the line breaking process as
+              one-dimensional helical manifolds in a six-dimensional space, then
+              rotates the manifolds in some way that corresponds to multiplying
+              or comparing the numbers that they’re representing ... Next-token
+              prediction created this system, but the system itself can involve
+              arbitrary choices about how to represent and manipulate data.
+            </p>
+          </blockquote>
+          <a
+            href="https://www.astralcodexten.com/p/next-token-predictor-is-an-ais-job"
+            >Next-Token Predictor Is An AI's Job, Not Its Species</a
+          >, Scott Alexander
+        </div>
+        <br />
+
+        <p>Film students can't sit through films</p>
+        <div style="padding-left: 1em">
+          <blockquote>
+            <p lang="en" dir="ltr">
+              At Indiana University, where Erpelding worked until 2024,
+              professors could track whether students watched films on the
+              campus’s internal streaming platform. Fewer than 50 percent would
+              even start the movies, he said, and only about 20 percent made it
+              to the end
+            </p>
+          </blockquote>
+          A lot of discussion around this article focused on attention span. I
+          think it's as much a sign of decreasing effort/standards. If I had to
+          guess, I'd say fewer than 50 percent of students at IU read the
+          assigned books in English classes.
+          <br />
+          <br />
+          <a
+            href="https://www.theatlantic.com/ideas/2026/01/college-students-movies-attention-span/685812/"
+            >The Atlantic</a
+          >, Rose Horowitch
+        </div>
+        <br />
+
+        <p>
+          Bacteria as a treatment for cancer. An idea I hadn't heard before.
+        </p>
+        <div style="padding-left: 1em">
+          <blockquote>
+            <p lang="en" dir="ltr">
+              Ewingella americana exhibited remarkably potent cytotoxic activity
+              with selective tumor-targeting ability characteristic of
+              facultative anaerobic bacteria. Mechanistic investigations
+              revealed that E. americana functions through a dual-action
+              mechanism: direct tumor cell killing and robust activation of host
+              immunity, leading to enhanced T cell, neutrophil, and B
+              cell-mediated tumor attack. Treatment with E. americana
+              significantly outperformed standard therapies, including
+              anti-PD-L1 antibody and doxorubicin, in tumor regression studies.
+            </p>
+          </blockquote>
+          These are mice studies, so take with a grain of salt.
+          <br />
+          <br />
+          <a
+            href="https://www.tandfonline.com/doi/full/10.1080/19490976.2025.2599562#abstract"
+            >Discovery and characterization of antitumor gut microbiota from
+            amphibians and reptiles</a
+          >, Iwata et al.
+        </div>
+        <br />
+
+        <p>Luxury apartment construction is bringing down rent.</p>
+        <div style="padding-left: 1em">
+          Building more housing brings down rent prices (not surprising). More
+          important, rent prices come down for Class-C housing even when most of
+          those additions are in luxury apartments. Austin, Phoenix, and Denver
+          have had an average growth in new units of 6.8%, 4.9%, and 4.3%
+          respectively over the past 5 years.
+          <br />
+          <br />
+          <img src="/resources/roundups/feb-26/rent-of-class-c-buildings.png" />
+          <br />
+          <br />
+          <a
+            href="https://www.bloomberg.com/news/articles/2025-12-23/luxury-apartments-are-bringing-rent-down-in-austin-denver"
+            >Luxury Apartments Are Bringing Rent Down in Some Big Cities</a
+          >, Bloomberg
+        </div>
+        <br />
+
+        <br />
+      </td>
+    </table>
+  </body>
+  <script>
+    (function () {
+      const toggle = document.getElementById("theme-toggle");
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      ).matches;
+      const stored = localStorage.getItem("theme");
+      if (stored === "dark" || (!stored && prefersDark)) {
+        document.body.classList.add("dark");
+        toggle.textContent = "🌙";
+        toggle.style.color = "#fff";
+      }
+      toggle.addEventListener("click", () => {
+        if (document.body.classList.contains("dark")) {
+          document.body.classList.remove("dark");
+          toggle.textContent = "☀️";
+          toggle.style.color = "#000";
+          localStorage.setItem("theme", "light");
+        } else {
+          document.body.classList.add("dark");
+          toggle.textContent = "🌙";
+          toggle.style.color = "#fff";
+          localStorage.setItem("theme", "dark");
+        }
+      });
+    })();
+  </script>
+</html>
