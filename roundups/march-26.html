@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Laird Stewart</title>
+    <link rel="icon" href="resources/icon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="resources/icon.png" />
+    <link rel="stylesheet" href="/build/style.css" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+
+    <!-- katex math rendering -- copied from pandoc translation -->
+    <script
+      defer=""
+      src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"
+    ></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var mathElements = document.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains("display"),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false,
+            });
+          }
+        }
+      });
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"
+    />
+    <!-- end of katex math rendering -->
+  </head>
+
+  <body>
+    <table style="all: revert; max-width: 42em">
+      <td style="all: revert">
+        <p>
+          <em><a href="/index.html">Laird Stewart</a></em
+          ><button
+            id="theme-toggle"
+            aria-label="Toggle dark mode"
+            style="
+              background: none;
+              border: none;
+              font-size: 1em;
+              margin-left: 0.5em;
+              vertical-align: middle;
+              cursor: pointer;
+            "
+          >
+            ☀️</button
+          ><br />
+        </p>
+
+        <p>
+          <em>
+            I publish a monthly email newsletter with personal updates and
+            interesting things I read or learned that month. The latter is
+            archived below. If you’d like to be added to the newsletter, email
+            me.
+          </em>
+        </p>
+        <h3>March 2026 Roundup</h3>
+
+        <p>Grade inflation hurts students in the long run</p>
+        <div style="padding-left: 1em">
+          <blockquote>
+            <p lang="en" dir="ltr">
+              Being assigned a higher average grade inflating teacher reduces a
+              student's future test scores, the likelihood of graduating from
+              high school, college enrollment, and ultimately earnings. ...The
+              cumulative impact is economically significant: a teacher with one
+              standard deviation higher average grade inflation reduces the
+              present discounted value of lifetime earnings of their students by
+              $213,872 per year.
+            </p>
+          </blockquote>
+          <a href="https://www.nber.org/papers/w34952"
+            >Easy A's, Less Pay: The Long-Term Effects of Grade Inflation</a
+          >, NBER, 3/2026
+        </div>
+        <br />
+
+        <p>
+          Related, one proposed solution to grade inflation: capping the number
+          of A grades awardable, penalizes students for taking difficult
+          courses.
+        </p>
+        <div style="padding-left: 1em">
+          <blockquote>
+            <p lang="en" dir="ltr">
+              The real problem is not inflation per se. It’s that students are
+              penalized for taking harder courses with stronger peers. A grade
+              cap leaves that distortion intact—and can even amplify it.
+              <br />
+              ...
+              <br />
+              The underlying issue is informational. A grade tries to capture
+              two things—student ability and course difficulty—with a single
+              number. Gans and Kominers show that in general this is impossible:
+              if some students take math and earn B’s while others take
+              political science and earn A’s, there is no way, from grades
+              alone, to tell whether the difference reflects ability or course
+              difficulty.
+            </p>
+          </blockquote>
+          <a
+            href="https://marginalrevolution.com/marginalrevolution/2026/03/grade-caps-are-not-a-good-solution-to-grade-inflation.html?utm_source=rss&utm_medium=rss&utm_campaign=grade-caps-are-not-a-good-solution-to-grade-inflation"
+            >Grade Caps are Not a Good Solution to Grade Inflation</a
+          >, Marginal Revolution, 3/30/2026
+        </div>
+        <br />
+
+        <p>
+          Malus provides "clean room as a service" (i.e., the removal of
+          external dependencies from a software project)
+        </p>
+        <div style="padding-left: 1em">
+          <blockquote>
+            <p lang="en" dir="ltr">
+              Our proprietary AI robots independently recreate any open source
+              project from scratch. The result? Legally distinct code with
+              corporate-friendly licensing. No attribution. No copyleft. No
+              problems.
+            </p>
+          </blockquote>
+          This is a consequence of zero-cost software I hadn't considered. An
+          important question is whether the negative effects of this on the open
+          source ecosystem will be outweighed by the increase in AI-assisted
+          contributions. Also raises some interesting legal questions.
+          <br />
+          <a href="https://malus.sh">https://malus.sh</a>
+        </div>
+        <br />
+
+        <!--
+        <p>
+          Cris Arnade is known for having walked many cities around the world.
+          He was one of the better recent guests on Conversations with Tyler.
+          Here's his much-shared perspective on American public disorder.
+        </p>
+        <div style="padding-left: 1em">
+          <blockquote>
+            <p lang="en" dir="ltr">
+              I walked twelve miles through Seoul yesterday, and I saw zero
+              destitute people. Certainly no homeless. I did see the same group
+              of drunk men I always see, playing cards near the river, because
+              Koreans drink an immense amount, but as far as daytime drunks go,
+              their behavior was exemplary. When they had to piss, they walked
+              the two hundred yards to the bathroom, which they left as clean as
+              when they came. When they threw away their empty bottles, they
+              collected them and walked it to the trash can, even putting them
+              into the correct bin.
+            </p>
+          </blockquote>
+          <a
+            href="https://walkingtheworld.substack.com/p/america-and-public-disorder"
+            >America and Public Disorder</a
+          >, Chris Arnade, 3/9/2026
+        </div>
+        <br />
+        -->
+
+        <p>
+          Robin Hanson's "Grabby Aliens" model (2020) suggests that if humans
+          stay put on Earth, we won't discover aliens for 500 million years
+          (median estimate) but once we do, it will only be a few years before
+          they arrive on our doorstep. Fun idea.
+        </p>
+        <div style="padding-left: 1em">
+          <blockquote>
+            <p lang="en" dir="ltr">
+              I think this factor is under-estimated when discussing the Fermi
+              Paradox. If most of the planets in the universe are too far away
+              for us to see alien life, then if we see it at all we’ll be seeing
+              their space ships as they come to us. But we won’t even see them
+              launch to us, even with perfect telescopes staring out into the
+              galaxy, until they’re almost here. In practice this means that, in
+              the grand scheme of human history, the phase between becoming
+              aware of aliens and meeting them is vanishingly short.
+            </p>
+          </blockquote>
+          <a
+            href="https://caseyhandmer.wordpress.com/2026/03/03/notes-on-the-fermi-paradox/"
+            >Notes on the Fermi Paradox</a
+          >, Casey Handmer, 3/3/2026
+          <br />
+          <a
+            href="https://www.overcomingbias.com/p/how-far-aggressive-alienshtml"
+            >How Far to Grabby Aliens?</a
+          >, Robin Hanson, 12/2020
+        </div>
+        <br />
+
+        <p>
+          Trained to play tennis, humanoid robots can hold a cooperative rally.
+        </p>
+        <div style="padding-left: 1em">
+          <img src="/resources/roundups/march-26/robot-tennis.gif" />
+          <br />
+
+          This is the most recent jaw-dropping robotics demo I've seen. The
+          footwork is particularly impressive.
+          <br />
+          <a href="https://zzk273.github.io/LATENT/"
+            >LATENT: Learning Athletic Humanoid Tennis Skills from Imperfect
+            Human Motion Data</a
+          >, 3/13/26
+        </div>
+        <br />
+
+        <p>
+          When it comes to AI's economic impact,
+          <a
+            href="https://www.econlib.org/archives/2015/02/always_keep_you.html"
+            >always keep your eye on production </a
+          >.
+        </p>
+        <div style="padding-left: 1em">
+          <blockquote>
+            <p lang="en" dir="ltr">
+              The real issue is not “Who will get the profits from AI?”; the
+              most interesting question is whether AI will lead to the
+              production of 130 million household servant robots, or the
+              production of another 2000 mega-yachts. When examining issues of
+              inequality, it often makes more sense to focus on the structure of
+              output, not the distribution of income.
+              <br />
+              ...
+              <br />
+              I often see discussions of AI that makes a similar error, failing
+              to understand that the essential question is output, not
+              distribution. Many worriers about AI don’t seem to understand that
+              these two scenarios are almost identical:
+              <br />
+              <br />
+              1. What if AI replaces all jobs?
+              <br />
+              2. What if America becomes so rich that we can all live as
+              billionaires?
+            </p>
+          </blockquote>
+          <a
+            href="https://scottsumner.substack.com/p/imagine-130000000-washing-machines"
+            >Imagine 130,000,000 Washing Machines</a
+          >, Scott Sumner, 01/01/2026
+          <br />
+        </div>
+        <br />
+
+        <p>
+          Brain-drain to the U.S. has significantly slowed Canada's economic
+          growth
+        </p>
+        <div style="padding-left: 1em">
+          <blockquote>
+            <p lang="en" dir="ltr">
+              From 2014 to 2024, Canada’s real GDP per capita adjusted for
+              purchasing power parity grew by just 3.2 percent in total, an
+              anemic 0.4 percent per year on average, and the third lowest among
+              38 advanced nations. Over the same period, the United States
+              posted 20.2 percent total growth (1.9 percent annually), and the
+              OECD average reached 15.3 percent (1.4 percent annually). The
+              measurement shortcomings cannot explain five-to six-fold
+              differences in growth rates.
+              <br />
+              ...
+              <br />
+
+              The analysis estimates that a substantial share of Canadians who
+              would rank among top earners in Canada have emigrated to the
+              United States—roughly 40 percent of potential top 1 percent
+              earners and 30 to 50 percent of the next nine percentiles.
+              Canadian-born individuals in the United States are more educated
+              than native-born Americans, earn substantially more, and cluster
+              disproportionately in top income deciles.
+              <br />
+              ...
+              <br />
+
+              Canada is effectively exporting its inequality to the U.S. The
+              brain drain simultaneously lowers our average income while raising
+              American income, accounting for a significant share of the
+              persistent GDP gap.
+            </p>
+          </blockquote>
+          <a
+            href="https://thehub.ca/2026/03/20/why-canadas-gdp-per-capita-crisis-is-real-deepdive/"
+            >Why Canada's GDP per capita crisis is real: DeepDive</a
+          >, The Hub, 03/20/2026
+          <br />
+        </div>
+        <br />
+
+        <br />
+      </td>
+    </table>
+  </body>
+  <script>
+    (function () {
+      const toggle = document.getElementById("theme-toggle");
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      ).matches;
+      const stored = localStorage.getItem("theme");
+      if (stored === "dark" || (!stored && prefersDark)) {
+        document.body.classList.add("dark");
+        toggle.textContent = "🌙";
+        toggle.style.color = "#fff";
+      }
+      toggle.addEventListener("click", () => {
+        if (document.body.classList.contains("dark")) {
+          document.body.classList.remove("dark");
+          toggle.textContent = "☀️";
+          toggle.style.color = "#000";
+          localStorage.setItem("theme", "light");
+        } else {
+          document.body.classList.add("dark");
+          toggle.textContent = "🌙";
+          toggle.style.color = "#fff";
+          localStorage.setItem("theme", "dark");
+        }
+      });
+    })();
+  </script>
+</html>
