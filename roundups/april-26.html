@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Laird Stewart</title>
+    <link rel="icon" href="resources/icon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="resources/icon.png" />
+    <link rel="stylesheet" href="/build/style.css" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+
+    <!-- katex math rendering -- copied from pandoc translation -->
+    <script
+      defer=""
+      src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"
+    ></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var mathElements = document.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains("display"),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false,
+            });
+          }
+        }
+      });
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"
+    />
+    <!-- end of katex math rendering -->
+  </head>
+
+  <body>
+    <table style="all: revert; max-width: 42em">
+      <td style="all: revert">
+        <p>
+          <em><a href="/index.html">Laird Stewart</a></em
+          ><button
+            id="theme-toggle"
+            aria-label="Toggle dark mode"
+            style="
+              background: none;
+              border: none;
+              font-size: 1em;
+              margin-left: 0.5em;
+              vertical-align: middle;
+              cursor: pointer;
+            "
+          >
+            ☀️</button
+          ><br />
+        </p>
+
+        <p>
+          <em>
+            I publish a monthly email newsletter with personal updates and
+            interesting things I read or learned that month. The latter is
+            archived below. If you’d like to be added to the newsletter, email
+            me.
+          </em>
+        </p>
+        <h3>April 2026 Roundup</h3>
+        <!--
+        <p>title...</p>
+        <div style="padding-left: 1em">
+          <blockquote>
+            <p lang="en" dir="ltr">
+              quote, quote, quote
+            </p>
+          </blockquote>
+          <a href="https://www.google.com">article title</a>, author, 1/1/26
+        </div>
+        <br />
+        -->
+
+        <p>A demand-side analysis of AI's impact on the job market</p>
+        <div style="padding-left: 1em">
+          <p>
+            This is the best article I've read since starting this newsletter.
+            If you click on one link, make it this one.
+          </p>
+          <blockquote>
+            <p lang="en" dir="ltr">
+              As people get richer, they don’t just want more commodities. They
+              want things that aren’t commodities in the standard sense of the
+              word. The social aspects of products such as the relationships,
+              the status, and exclusivity—what Rene Girard called the mimetic
+              properties of desire—become much more relevant once people’s basic
+              needs are satisfied. And the demand for these properties will
+              bring the human element back into the production process, and with
+              it, the jobs.
+            </p>
+          </blockquote>
+          <blockquote>
+            <p lang="en" dir="ltr">
+              When AI automates commodity production, prices in that sector
+              fall. That raises real income. If the goods and services people
+              want more of as they get richer lie disproportionately in the
+              relational sector, demand shifts in that direction. Baumol’s cost
+              disease then amplifies the result: if the relational sector
+              remains harder to automate, it becomes relatively more expensive
+              and absorbs a growing share of total expenditure.
+            </p>
+          </blockquote>
+          <a href="https://aleximas.substack.com/p/what-will-be-scarce"
+            >What will be scarce?</a
+          >, Alex Imas, 4/14/26
+        </div>
+        <br />
+
+        <p>If you collaborate using Git, here are some fun commands to run</p>
+        <div style="padding-left: 1em">
+          <pre><code>git log --format=format: --name-only --since="1 year ago" | sort | uniq -c | sort -nr | head -20</code>
+git shortlog -sn --no-merges
+git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c
+          </pre>
+          <a href="https://piechowski.io/post/git-commands-before-reading-code/"
+            >The Git Commands I Run Before Reading Any Code</a
+          >, Ally Piechowski, 4/8/26
+        </div>
+        <br />
+
+        <p>One Dimensional chess</p>
+        <div style="padding-left: 1em">
+          <img src="/resources/roundups/apr-26/1d-chess.png" />
+          <a href="https://rowan441.github.io/1dchess/chess.html">1D-Chess</a>,
+          Rowan Monk
+        </div>
+        <br />
+
+        <p>Frontier AI labs are profitable on the margin</p>
+        <div style="padding-left: 1em">
+          <p>
+            I had a discussion this week with co-workers about future AI cost
+            for consumers. They argued that the model companies aren't
+            profitable, and that they will inevitably raise prices to recoup
+            their investments. This is a suspect claim, but apparently popular
+            among otherwise well-informed people, so I thought I'd address it
+            here. Two important pieces of information
+          </p>
+          <ol>
+            <li>
+              Holding capability constant, inference cost has fallen 10x-100x
+              year over year
+            </li>
+            <li>
+              While providers are operating at net losses, they are profitable
+              on the margin
+            </li>
+          </ol>
+
+          <p>
+            Micro 101 tells us that the firms will serve their models at the
+            point where marginal cost equals marginal revenue. Importantly,
+            upfront costs don't affect this equilibrium. Even if OpenAI were a
+            monopoly and faced no competition, so long as the elasticity of
+            demand is not 0, if marginal costs decrease, part of those savings
+            will be passed along to consumers.
+          </p>
+          <p>
+            <a href="https://epoch.ai/data-insights/llm-inference-price-trends"
+              >LLM inference prices have fallen rapidly but unequally across
+              tasks</a
+            >, EpochAI, 3/12/25
+            <br />
+            <a
+              href="https://martinalderson.com/posts/no-it-doesnt-cost-anthropic-5k-per-claude-code-user/"
+              >No, it doesn't cost Anthropic $5k per Claude Code user</a
+            >, Martin Alderson, 3/9/26
+          </p>
+        </div>
+        <br />
+        <br />
+      </td>
+    </table>
+  </body>
+  <script>
+    (function () {
+      const toggle = document.getElementById("theme-toggle");
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      ).matches;
+      const stored = localStorage.getItem("theme");
+      if (stored === "dark" || (!stored && prefersDark)) {
+        document.body.classList.add("dark");
+        toggle.textContent = "🌙";
+        toggle.style.color = "#fff";
+      }
+      toggle.addEventListener("click", () => {
+        if (document.body.classList.contains("dark")) {
+          document.body.classList.remove("dark");
+          toggle.textContent = "☀️";
+          toggle.style.color = "#000";
+          localStorage.setItem("theme", "light");
+        } else {
+          document.body.classList.add("dark");
+          toggle.textContent = "🌙";
+          toggle.style.color = "#fff";
+          localStorage.setItem("theme", "dark");
+        }
+      });
+    })();
+  </script>
+</html>
