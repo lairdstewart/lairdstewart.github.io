@@ -47,7 +47,7 @@
         <pre>
           <code>/**
  * Assumes that bar() was called first.
-*/
+ */
 public void foo(Key key)
 {
     Preconditions.checkArgument(key != null);
