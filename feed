@@ -44,8 +44,7 @@
       and API contracts! We should therefore strive to write methods that looks
       like
     </p>
-        <pre>
-          <code>/**
+        <pre xml:space="preserve"><code>/**
  * Assumes that bar() was called first.
  */
 public void foo(Key key)

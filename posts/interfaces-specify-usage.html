@@ -78,7 +78,7 @@
     example: <code>FooCache</code> is a utility for caching and later
     accessing <code>foo</code>s:
 
-    <pre><code>public interface FooCache {
+    <pre xml:space="preserve"><code>public interface FooCache {
     public void cache(Foo foo, Id id);
     public Optional&lt;Foo&gt; getFoo(Id id);
 }</code></pre>
@@ -91,7 +91,7 @@
       it"</i
     >, would look something like
 
-    <pre><code>/**
+    <pre xml:space="preserve"><code>/**
  * Caches the provided foo with the associated Id
  */
 public void cache(Foo foo, Id id);
@@ -102,7 +102,7 @@ public void cache(Foo foo, Id id);
     "contract" was violated. On the other hand, this comment
 
 </code></pre>
-    <pre><code>/**
+    <pre xml:space="preserve"><code>/**
  * Cache your foo along with an Id for later lookup
  */
 public void cache(Foo foo, Id id);
@@ -118,7 +118,7 @@ public void cache(Foo foo, Id id);
     If we really wanted to describe "What" without contradiction, perhaps we
     could write:
 </code></pre>
-    <pre><code>/**
+    <pre xml:space="preserve"><code>/**
  * Accepts a foo for caching. Implementations may define different
  * retention policies (e.g., permanent, LRU, or no-op)
  */
@@ -129,7 +129,7 @@ public void cache(Foo foo, Id id);
     (legacy) real-life code, and all of a sudden you could find yourself writing
     something like
 </code></pre>
-    <pre><code>/**
+    <pre xml:space="preserve"><code>/**
  * Accepts an element. Implementations may or may not use it.
  */
 public void addElement(Element elem);
