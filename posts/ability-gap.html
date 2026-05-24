@@ -1,0 +1,205 @@
+<!--
+  Noah Smith recently proposed social comparison to influencers could be one
+  driver of consumer sentiment levels dropping below 2008 levels despite a
+  typical economy: [Trapped in the hell of social comparison
+  (Substack)](https://substack.com/@noahpinion/p-184741278).
+
+  This got me thinking about social comparisons. My new pet theory is that
+  social comparisons leave us unhappy because the outcome variables (e.g.,
+  income, job status) follow a power law while the underlying traits (e.g.,
+  intelligence, work ethic) are normally distributed.
+
+  **(1) Outcome Variables Follow a Power Law**
+
+  Pareto originally conceived of the power law while studying wealth
+  distribution across society. The income distribution in a market economy
+  generally follows a power law -- most economic models are a hybrid of
+  Log-Normal distribution for most incomes and a Pareto distribution at the
+  tail. 
+
+  **(2) Underlying traits are Normal**
+
+  IQ is, by construction, normally distributed with mean 100 and variance 10. To
+  think general aptitude or conscientiousness is normally distributed seems
+  reasonable. Or at least my point is most poepl 
+
+  ** The problem**
+
+  When you overlay a 
+
+
+  income and job "status" follow a power
+  law while most p
+
+  Pocket theory: part of why "Keeping up with the Joneses" is so pernicious is
+  that income and job status follow a log-normal distribution while intelligence 
+
+  Another consequence of the difference in these distributions is that given a
+  group of friends (or coworkers or neighbors) with simmilar intelligence, the
+  mean income will be greater than the median. So if you are in the 50th
+  percentile of intelligence among your peers, you'll make less than average.
+  This is bad news given that having rich neighbors makes you less happy
+  [Neighbors as Negatives: Relative Earnings and
+  Well-Being](https://academic.oup.com/qje/article-abstract/120/3/963/1841496?login=false)
+
+
+
+  and
+  his diagnosis of unhappiness of elites in America -- 
+
+  caused by a fierce
+  competition to aquire high-status jobs and uncertainty around keeping them or
+  ensuring one for their children. This got me thinking about why exactly the
+  problem of social comparison (especially among elites) is so pronounced.
+
+  My pocket theory is that part of this unrest is a mismatch between the
+  distribution of job desirability (Log-normal) and that of underlying ability
+  (Normal). Pareto showed that wealth follows a power law, and economists now
+  will model income as a hybrid Log-normal/Pareto distribution. Similarly, if
+  you consider the basic model of a corporate heirarchy as a tree with each node
+  having 5 children 
+
+
+  the desirability of jobs follows a log-normal
+  distribution (perhaps with a power-law tail) while
+
+
+ relative to their number follows a 
+
+
+  I think there's another thing here missing: when people look around at others
+  of simmilar intelligence and education they see a high variance in outcome. I
+  think this is because intelligence is normally distributed while high paying
+  and/or high status jobs follow a power law.
+
+  question: how does credential inflation play a role? it doesn't change the
+  number of important jobs, but it increases the number of people with "joneses"
+  degrees i.e., theres the same number of important jobs that require a
+  bachelors, too many bachelors graduates to fill them 
+
+  so here's the idea basically if you think about income or status of a job as
+  following a log normal distribution then if you plot on the X axis the
+  percentile and on the Y axis the number of multiples above the mean instead of
+  plotting like Z value or something then you basically see a plot where it
+  getting a lot steeper towards the right side so basically if you're at the 8th
+  percentile and you're looking at your neighbor who's at the 85 percentile
+  they're making a hell of a lot more than you versus if you're at the 50th
+  percentile and looking at your neighbor at the 55th percentil they're not
+  making that much more than you so maybe that's one explanation of what's
+  happening here the second thing is it gets even worse if you assume that you
+  know intelligence or natural ability is normally distributed because if you
+  make that assumption and then you also plots on that same plot with the X axis
+  being percentile in the Y being a multiple above the mean with the normal
+  distribution then you'll look at it and be like oh again at the 80th
+  percentile they'll look at that person at the fifth person talent say oh
+  they're not that much smarter than me but shoot they're making a hell of a lot
+  more than I am so that's no good now of course this falls apart if you you
+  know chances are probably underlying ability however you wanna measure it or
+  productivity how you wanna measure it if it's in intelligence or
+  conscientiousness sir or under liability whatever it's probably not normally
+  distributed it's probably also following a you know log normal or even power
+  law at the end right so then if you plot those side-by-side then it actually
+  seems fair again but maybe my hunch is that most people it's not a haunted I
+  think most people think of things is gauging and not as log normal or power
+  law so that counts for maybe some of this mismatch between you know keeping up
+  with the Joneses Joneses and such. This thing is called pens plot
+
+
+-->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Laird Stewart</title>
+    <link rel="icon" href="resources/icon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="resources/icon.png" />
+    <link rel="stylesheet" href="/build/style.css" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+
+    <!-- katex math rendering -- copied from pandoc translation -->
+    <script
+      defer=""
+      src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"
+    ></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var mathElements = document.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains("display"),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false,
+            });
+          }
+        }
+      });
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"
+    />
+    <!-- end of katex math rendering -->
+  </head>
+
+  <body>
+    <p>
+      <em><a href="/index.html">Laird Stewart</a></em
+      ><button
+        id="theme-toggle"
+        aria-label="Toggle dark mode"
+        style="
+          background: none;
+          border: none;
+          font-size: 1em;
+          margin-left: 0.5em;
+          vertical-align: middle;
+          cursor: pointer;
+        "
+      >
+        ☀️</button
+      ><br />
+      <!-- trick pandoc to not wrapping date in a paragraph tag -->
+      <em>12/30/25</em>
+    </p>
+
+    <h3>title ...</h3>
+
+    body ...
+
+    <script>
+      (function () {
+        const toggle = document.getElementById("theme-toggle");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+        const stored = localStorage.getItem("theme");
+        if (stored === "dark" || (!stored && prefersDark)) {
+          document.body.classList.add("dark");
+          toggle.textContent = "🌙";
+          toggle.style.color = "#fff";
+        }
+        toggle.addEventListener("click", () => {
+          if (document.body.classList.contains("dark")) {
+            document.body.classList.remove("dark");
+            toggle.textContent = "☀️";
+            toggle.style.color = "#000";
+            localStorage.setItem("theme", "light");
+          } else {
+            document.body.classList.add("dark");
+            toggle.textContent = "🌙";
+            toggle.style.color = "#fff";
+            localStorage.setItem("theme", "dark");
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

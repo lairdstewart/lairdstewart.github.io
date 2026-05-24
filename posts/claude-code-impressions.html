@@ -1,0 +1,286 @@
+<!--
+https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-pro/
+
+*These notes accompany a presentation I gave to Metron's software engineering
+staff as part of our our "Brown Bag" lecture series. Presented on 2/20/26.*
+
+# 2026: Year of DevOps
+
+In 2025, the mental-model of most people regarding AI coding tools was that they
+could make you a supercharged developer. You could ask questions about a
+codebase, autocomplete multiple lines at once, or task it to write a method from
+scratch. If this is your model, I hope to dispose of it. As of 2026 these models
+are developers not development tools. Today
+
+- 4% of daily commits on GitHub are authored by Claude (was 0.3% in October)
+- 90% of code written at Anthropic is by Claude
+
+There is no shortage of discussion and reporting on Claude Code online. However,
+if you want to understand for yourself, first hand experience cannot be
+replaced. Anthropic's Pro plan costs $20 per month and equates to 1-2 hours of
+coding per day. All things considered, that's cheap for a glimpse into the
+future of your career. I hope today's demo provides a useful overview, but I
+won't be able to share all of my tacit knowledge.
+
+When working with Claude, play the part of a DevOps engineer. Your primary job
+is to create an environment in which Claude can flourish. The first thing to
+understand is that while Claude is fantastic at following instructions, but is
+*not proactive*. For example, it will never write a test unless you instruct it
+to. It will repeatedly give you code that doesn't compile, but won't compile it
+itself unless you tell it to. I could go on.
+
+> *Note: just because Claude isn't proactive doesn't mean it can't help you with
+> this, ask it "What could be improved about our development process?" and it will
+> give you good suggestions.*
+
+Your ultimate goal is to increase the probability Claude can "one shot" a task
+(i.e., complete it correctly and without intervention). The two most important
+things to consider are
+
+  1. Context
+  2. Verification
+
+I will focus on these two themes. While I'll provide details for Claude code,
+they apply to any agentic tool.
+
+## Context
+
+Aside from Glimpse/Gleam, Claude has no knowledge our code. **Everything**
+Claude will "learn" about your codebase, project, and preferences is through in
+context learning. The context window is constructed of
+
+  1. Anthropic's system prompt
+  2. Claude.md
+  3. Claude's "memory"
+  4. Your prompt
+  5. Things Claude looks up itself
+    a. Source files
+    b. Documentation
+    c. CLI tools (e.g., Grep, Maven, GitHub CLI)
+    e. MCP (e.g., Google search)
+  6. Agent Skills (aka. slash commands)
+  7. Current session's conversation history
+  8. Sub-agent output
+
+**The system prompt** is the one piece you cannot either directly or indirectly
+control. It (I presume) explains what Claude Code is, what set of standard tools
+Claude has available, to speak in English and refuse to write malware.
+
+**Claude.md** is a project specific file which is typically version controlled.
+Think `.editorconfig`. It describes at a high level the project, its structure,
+testing suite, build tools, where to find documentation, coding styles, design
+preferences, etc. It's sort of a high level catch all. It should be kept short
+because it is included in every context window. Provide paths to documentation
+or "further reading" on specific things it doesn't need for every response. It
+is your responsibility to write and maintain this document. Of course, Claude
+can help. *Tip: the `/init` command prompts Claude to read your codebase and
+write an initial `Claude.md`.
+
+**Claude's memory** is a collection of plain text(?) files which it writes,
+organized, and retrieves on its own. These are stored in a hidden `.claude`
+directory either in the project or your root directory. Claude manages a
+separate "memory" for each of your projects. It will automatically manage this
+memory, but if you want to make sure it adds something just say "please
+remember" or "add that to your memory" and it will take care of it.
+
+In the development of Claude Code, the Claude.md preceded the dedicated memory
+management. Claude's memory management is really a successor rather than an
+alternative to the Claude.md. I believe in 6 months Claude.md won't be used and
+it will be remembered as a leaky implementation detail.
+
+> *Security Note: although Claude manages its own memory we should probably want
+to keep a very close eye on it. We may even want to version control it and
+manually review changes. It is an obvious vector for a prompt injection attack.
+
+**Your prompt** includes the text and images you provide Claude through the chat
+interface. You can write plain text prompts, use `@./file/path.py` to reference
+files, or trigger slash commands with `/`. You can also copy and paste
+multi-line stack traces or code snippets and it will format things nicely. *Tip:
+use ctrl+g to open the prompt box in your editor*. Reference images by path,
+or by dragging/pasting them into the terminal window.
+
+**Things Claude looks up itself** include
+
+
+explain the others ... 
+
+With plan mode, you start with an initial prompt, then Claude goes away, reads
+through your documentation and codebase figures out a plan for implementing the
+task. If it has questions, it asks you (gives you a multi-select) and then it
+presents you with its plan. You then go back and forth, iterating on the plan,
+making suggestions asking it questions until you've got a plan you are both
+happy with. Then you send it off, it clears all of its context window except the
+plan and it fires away.
+
+## Validation
+
+Validation is ultimately important because it enables parallelization of agents.
+All of a sudden you can 2x your output by managing multiple agents at once. You
+can't just 10x your output because of Ahmdal's law: The things which used to be
+relatively quick like writing tickets, setting up a Google developer account,
+coming up with new features, and context switching become the barriers.
+
+
+## My workflow
+
+git worktrees
+
+github issues
+
+"claude" branch, "dev" branch, "main" branch
+
+play a sound when finished
+
+Multiple terminal tabs (can see the icon when its ready, not possible in tmux)
+
+## DEMO
+
+computer use
+
+basic task, show workflow
+
+implement reccommendation algorithm
+
+## Lessons/Improvements
+
+- ask claude to propose refactoring ideas and write up tickets
+- ask claude to propose security vurlerability issues and write tickets
+- ask claude to propose performance improvements and write tickets
+- (theme here is that Claude isn't proactive you have to know to ask for these
+things)
+
+- Since the first day of coding, I haven't reviewed any of Claude's code
+- I set out with the plan to see how far I could get before things became
+sphagehtii and broke and haven't gotten there yet.
+- I have yet to come across a bug which Claude hasn't figured out
+- Figure out how to give it access to a development Neon database and neon CLI.
+- coding is not the bottleneck but that doesn't make things instant. My time is
+now made up figuring out the google auth/books api, figuring out neon, managing
+git, testing, coming up with ideas!
+
+
+## What comes next
+
+scaling laws, time horizon, token cost
+
+When I first played with LLMs, my thought was, like many others, that if these
+things asked questions and optimized for the helpfulness of the entire
+conversation instead of a single response they would be much more helpful. I'm
+afraid that still hasn't really happened with the chat interfaces, but it is
+working with claude code and it works great.
+
+Similarly, today, one of the main blockers is that Claude isn't "proactive". I
+have no doubt that there are teams of engineers at the frontier labs working on
+this as well. I predict that will be a big unlock, just like asking questions
+and plan mode was.
+
+## How I would setup TRK 
+
+Constraints:
+
+- We will still need to review every line of code
+
+Anthropic is moving away from developers managing Claude's "memory" in a
+Claude.md to their own, presumably optimized, mechanisms for Claude to manage
+its memory. Therefore, we will need some way for the team to share the same
+memory. Otherwise a new developer will join, and their agent will not be very
+helpful! There is probably a way to point it to use memory in a certain place.
+An easy option would be to version control the local .claude folder with all of
+its memory.
+
+Eventually I'd expect we would want a fully autonomous agent which we can fire
+off tickets to and review its PRs. 
+
+
+## FIN
+
+sources
+https://epoch.ai/data-insights/llm-inference-price-trends
+https://newsletter.semianalysis.com/p/claude-code-is-the-inflection-point
+
+
+Theres a lot of hype, 
+
+- Dario Amodei: 90% probability we have a "country of geniuses in a datacenter"
+within 10 years.
+- Mustafa Suleyman: most white collar tasks will be fully automatable by AI in
+18 months.
+
+Suggested reading:
+- Situational awareness: https://situational-awareness.ai
+- AI 2027: https://ai-2027.com
+- Machines of loving grace: https://darioamodei.com/essay/machines-of-loving-grace
+- Claude Code is the Inflection Point: https://newsletter.semianalysis.com/p/claude-code-is-the-inflection-point
+
+
+In the limit, this looks like
+
+Homework
+1. Create a Gemini/Claude/ChatGPT free account
+2. Select the highest performing model
+3. If you previously asked a question or gave a task and got a bad result (more
+than 1 month ago) try again with the same task
+4. Ask the hardest question you are currently thinking about. Provide as much
+detail as you would give to a colleague.
+
+- you kind of have to tell it what to do, and "give it permission" e.g., tell it to run curl and hit the open library api itself. Once it got the hang of it it was firing on all cylinders, but i don't think it would have done that on its own.
+- had a memory leak at one point, removed ~/.claude/ and ~/.claude.json, re-installed
+- be sure to tell it at the end of a session to update its claude.md. sometimes it doesn't do that.
+- it loses context otherwise and will strugle when you first boot it up.
+- coding is not the bottleneck but that doesn't make things instant. My time is now made up figuring out the google auth/books api, figuring out neon, managing git, testing, coming up with ideas!
+- rough estimate: taking all of that into account, probably 1/3 of my time would have been with this stuff ^ so I'm now 66% faster. I haven't run into any bugs that require me to look at the code yet otherwise this may change.
+- today I think this can be used for building prototypes or demos (if you need to turn around a demo in 24 hours)
+- today I think tools that make PRs autonomously (and you still reveiw them) could be used
+- in 1-2 years, 50% chance that we could vibe code our UIs for all our applications. Focusing on the algorithms and backend ourselves. If there is a bug 
+- the first bug it took a while to fix was this. For the first time I created a second run configration to do different things and the two conflicted. It probably didn't set up the second one correctly to begin with.
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field clientRegistrationRepository in armchair.config.SecurityConfig required a bean of type 'org.springframework.security.oauth2.client.registration.ClientRegistrationRepository' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'org.springframework.security.oauth2.client.registration.ClientRegistrationRepository' in your configuration.
+
+
+attempt #3
+ The key difference from before: @SpringBootApplication is a meta-annotation that includes @ComponentScan, and since @ComponentScan is @Repeatable,  
+  adding a second one meant both ran - the unfiltered one from @SpringBootApplication still found everything. By decomposing into                     
+  @SpringBootConfiguration + @EnableAutoConfiguration + @ComponentScan(...), there's now exactly one @ComponentScan with the regex filter that        
+  excludes the entire armchair.tool package.
+
+## google books to open library api migration.
+
+claude decides to re-write the main class (sure lol)
+
+    ● Now for the big one — the BookController. Since it's the largest file and
+    needs many changes throughout, I'll rewrite it entirely to avoid any missed
+    references.                         
+
+## figuring out open library api with curl commands
+
+❯ I just searched "the red and the black" in the searchbox and presumably you made an api request something like this: https://openlibrary.org/search.json?q=the+red+and+the+black+language:eng&limit=3&fields=author_name,title,cover_edition_key,key. the first result for the work displays the primary edition as the french "le rouge et le noir". Is there any way to avoid this? I tried myself adding &lang=en but that didn't seem to work. if you need to make a couple api calls yourself to test go for it                               
+
+● Bash(curl -s "https://openlibrary.org/search.json?q=the+red+and+the+black&limit=3&fields=author_name,title,cover_edition_key,key,language,edition_count" | python3 -m…)               
+
+● Done. The fix adds lang=en and requests edition-level fields from the Open Library API. When an English edition exists, its title is used instead of the work-level title (which is in the original language). For "the red and the black", this means the result now shows "The Red and the Black" by Stendhal instead of "Le rouge et le noir". The English edition's OLID is also used as coverEditionOlid for better cover matching.
+
+● Done. When the search API returns a non-ASCII author name, the service now fetches the author entity from /authors/<key>.json and uses:
+  1. personal_name (converting "Last, First" → "First Last") — e.g. "Tolstoy, Leo" → "Leo Tolstoy" 
+  2. First ASCII alternate_name as fallback — e.g. "Leo Tolstoy" for Tolstoy                   
+  3. Original name if neither works
+  This only triggers for non-ASCII names, so most searches have zero extra API calls. For   
+  Tolstoy it yields "Leo Tolstoy", for Dostoevsky "Fyodor Mikhaylovich Dostoyevsky".        
+
+- [x] Fix special characters in API URLs: `RestTemplate.getForObject(String, Class)` re-encodes already-encoded characters like `%26` (`&`) and `%2C` (`,`), breaking titles with `&` or `,` (e.g. "How to Win Friends & Influence People", "Thinking, Fast and Slow"). Switched to `URI.create()` which tells RestTemplate to use the URL as-is without re-encoding.
+- 
+
+
+-->
