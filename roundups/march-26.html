@@ -5,6 +5,7 @@
     <title>Laird Stewart</title>
     <link rel="icon" href="resources/icon.png" type="image/png" />
     <link rel="apple-touch-icon" href="resources/icon.png" />
+    <link rel="alternate" type="application/atom+xml" title="Laird Stewart's blog" href="/feed.xml" />
     <link rel="stylesheet" href="/build/style.css" />
     <meta
       name="viewport"
@@ -44,8 +45,7 @@
     <table style="all: revert; max-width: 42em">
       <td style="all: revert">
         <p>
-          <em><a href="/index.html">Laird Stewart</a></em
-          ><button
+          <a href="/index.html">Laird Stewart</a><a href="/rss.html" aria-label="RSS feed" style="margin-left:0.5em;vertical-align:middle;display:inline-block;line-height:0;"><img src="/resources/rss.svg" alt="RSS" style="height: 1em; width: auto" /></a><button
             id="theme-toggle"
             aria-label="Toggle dark mode"
             style="
@@ -55,9 +55,11 @@
               margin-left: 0.5em;
               vertical-align: middle;
               cursor: pointer;
+            padding: 0;
+            line-height: 0;
             "
           >
-            ☀️</button
+            <img src="/resources/moon.svg" alt="Switch to dark mode" style="height: 1em; width: auto" /></button
           ><br />
         </p>
 
@@ -314,18 +316,18 @@
       const stored = localStorage.getItem("theme");
       if (stored === "dark" || (!stored && prefersDark)) {
         document.body.classList.add("dark");
-        toggle.textContent = "🌙";
+        toggle.innerHTML = '<img src="/resources/sun.svg" alt="Switch to light mode" style="height: 1em; width: auto" />';
         toggle.style.color = "#fff";
       }
       toggle.addEventListener("click", () => {
         if (document.body.classList.contains("dark")) {
           document.body.classList.remove("dark");
-          toggle.textContent = "☀️";
+          toggle.innerHTML = '<img src="/resources/moon.svg" alt="Switch to dark mode" style="height: 1em; width: auto" />';
           toggle.style.color = "#000";
           localStorage.setItem("theme", "light");
         } else {
           document.body.classList.add("dark");
-          toggle.textContent = "🌙";
+          toggle.innerHTML = '<img src="/resources/sun.svg" alt="Switch to light mode" style="height: 1em; width: auto" />';
           toggle.style.color = "#fff";
           localStorage.setItem("theme", "dark");
         }

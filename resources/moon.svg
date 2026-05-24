@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8" width="256" height="256">
+  <!-- Deep purple background with rounded corners -->
+  <rect width="8" height="8" rx="1.5" fill="#3b0764"/>
+  <!-- Crescent moon: big white circle minus a smaller offset circle using clipPath -->
+  <defs>
+    <clipPath id="moonClip">
+      <circle cx="4" cy="4" r="2.5"/>
+    </clipPath>
+  </defs>
+  <!-- Full white circle -->
+  <circle cx="4" cy="4" r="2.5" fill="#ffffff" clip-path="url(#moonClip)"/>
+  <!-- Overlay circle to cut out the crescent -->
+  <circle cx="5" cy="3.2" r="1.9" fill="#3b0764"/>
+</svg>

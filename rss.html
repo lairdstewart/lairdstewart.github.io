@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Laird Stewart</title>
+    <link rel="icon" href="resources/icon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="resources/icon.png" />
+    <link
+      rel="alternate"
+      type="application/atom+xml"
+      title="Laird Stewart's blog"
+      href="/feed.xml"
+    />
+    <link rel="stylesheet" href="/build/style.css" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+
+    <!-- katex math rendering -- copied from pandoc translation -->
+    <script
+      defer=""
+      src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"
+    ></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var mathElements = document.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains("display"),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false,
+            });
+          }
+        }
+      });
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"
+    />
+    <!-- end of katex math rendering -->
+  </head>
+
+  <body>
+    <p>
+      <a href="/index.html">Laird Stewart</a
+      ><a
+        href="/feed.xml"
+        aria-label="RSS feed"
+        style="
+          margin-left: 0.5em;
+          vertical-align: middle;
+          display: inline-block;
+          line-height: 0;
+        "
+        ><img
+          src="/resources/rss.svg"
+          alt="RSS"
+          style="height: 1em; width: auto"
+        /> </a
+      ><button
+        id="theme-toggle"
+        aria-label="Toggle dark mode"
+        style="
+          background: none;
+          border: none;
+          font-size: 1em;
+          margin-left: 0.5em;
+          vertical-align: middle;
+          cursor: pointer;
+          padding: 0;
+          line-height: 0;
+        "
+      >
+        <img
+          src="/resources/moon.svg"
+          alt="Switch to dark mode"
+          style="height: 1em; width: auto"
+        />
+      </button>
+      <br />
+    </p>
+
+    <h3 id="about">RSS</h3>
+    <p>
+      <code>https://www.lairdstewart.com/feed.xml</code>
+    </p>
+    <p>
+      New to RSS? RSS is like an email inbox for blogs and websites you read.
+      Subscribe to feeds by copying their feed URL into your RSS reader of
+      choice. Like email, you can choose which app/website to read your feed in.
+      I suggest
+      <a href="https://netnewswire.com/">NetNewsWire</a> and
+      <a href="https://www.thunderbird.net/en-US/">Thunderbird</a>. Often, you
+      can simply copy the base URL of the website (e.g.,
+      <code>https://www.lairdstewart.com</code>) into your RSS reader.
+    </p>
+    <p>
+      Many websites have RSS feeds even if they don't advertise it. It works
+      with Substack, Reddit, and Wordpress. There are also services which turn
+      (almost) any website into an RSS feed like
+      <a href="https://rss.app/rss-feed">rss.app</a>. Here are a few I enjoy:
+    </p>
+
+    <script>
+      (function () {
+        const toggle = document.getElementById("theme-toggle");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+        const stored = localStorage.getItem("theme");
+        if (stored === "dark" || (!stored && prefersDark)) {
+          document.body.classList.add("dark");
+          toggle.innerHTML =
+            '<img src="/resources/sun.svg" alt="Switch to light mode" style="height: 1em; width: auto" />';
+          toggle.style.color = "#fff";
+        }
+        toggle.addEventListener("click", () => {
+          if (document.body.classList.contains("dark")) {
+            document.body.classList.remove("dark");
+            toggle.innerHTML =
+              '<img src="/resources/moon.svg" alt="Switch to dark mode" style="height: 1em; width: auto" />';
+            toggle.style.color = "#000";
+            localStorage.setItem("theme", "light");
+          } else {
+            document.body.classList.add("dark");
+            toggle.innerHTML =
+              '<img src="/resources/sun.svg" alt="Switch to light mode" style="height: 1em; width: auto" />';
+            toggle.style.color = "#fff";
+            localStorage.setItem("theme", "dark");
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
