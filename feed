@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>https://www.lairdstewart.com/</id>
+  <title>Laird Stewart's blog</title>
+  <updated>2026-05-24T14:20:00Z</updated>
+  <author>
+    <name>Laird Stewart</name>
+  </author>
+  <link rel="self" href="https://www.lairdstewart.com/feed"/>
+  <link rel="alternate" href="https://www.lairdstewart.com/"/>
+  <icon>resources/icon.png</icon>
+  <entry>
+    <id>https://www.lairdstewart.com/posts/no-free-lunch-software.html</id>
+    <title>There's no free lunch in software</title>
+    <updated>2026-05-22T00:00:00Z</updated>
+    <link rel="alternate" href="posts/no-free-lunch-software.html"/>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p>
+      Scott Sumner wrote a good post earlier this month on the
+      <a href="https://scottsumner.substack.com/p/the-beauty-of-tautologies">usefulness of tautologies</a>
+      which got me thinking about tautologies in software development. One which
+      came to mind is
+    </p>
+        <blockquote>
+      "To reduce intrinsic complexity of a program one must reduce the
+      complexity of the problem it's solving"
+    </blockquote>
+        <p>
+      I liken this to the no free lunch theorem (hence the title of this post)
+      because when designing ML algorithms, you can only improve performance by
+      limiting the set of problems under consideration (i.e., making assumptions
+      about the problem at hand). Similarly, in software, you can only simplify
+      code by making simplifying assumptions about the problem you're solving.
+    </p>
+        <p>
+      So what can we learn from this tautology? If you believe that software
+      developers should strive for simplicity (as John Ousterhout argues in
+      <a href="https://www.goodreads.com/en/book/show/39996759-a-philosophy-of-software-design">"A Philosophy of Software Design"</a>), then you must also believe software developers should focus on making
+      assumptions.
+    </p>
+        <p>
+      What are assumptions to a software engineer? Assertions, preconditions,
+      and API contracts! We should therefore strive to write methods that looks
+      like
+    </p>
+        <pre>
+          <code>/**
+ * Assumes that bar() was called first.
+*/
+public void foo(Key key)
+{
+    Preconditions.checkArgument(key != null);
+    Preconditions.checkArgument(cache.contains(key));
+    Preconditions.checkState(isCacheInitialized());
+    ...
+}</code>
+        </pre>
+        <p>
+      with the understanding that it will simplify the final program. I've
+      recently found myself writing more and more methods that look like this.
+      When I started out, I would have looked at comments like
+    </p>
+        <blockquote>
+      "this method assumes that it will only be invoked once"
+    </blockquote>
+        <p>or</p>
+        <blockquote>
+      "this only works assuming no more data will be added to this collection"
+    </blockquote>
+        <p>
+      as "cop-outs" or lazy coding, when in reality they are important design
+      decisions. Every simplification is the flip-side of an assumption, and
+      it's better to document (or code!) assumptions directly than leave them
+      implicit.
+    </p>
+        <br/>
+        <br/>
+      </div>
+    </content>
+  </entry>
+</feed>
