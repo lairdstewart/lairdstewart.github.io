@@ -35,98 +35,80 @@
   <body>
     <p>
       <a href="/index.html">Laird Stewart</a><a href="/rss.html" aria-label="RSS feed" style="margin-left:0.5em;vertical-align:middle;display:inline-block;line-height:0;"><img src="/resources/rss.svg" alt="RSS" style="height: 1em; width: auto" /></a><button id="theme-toggle" aria-label="Toggle dark mode" style="background:none;border:none;font-size:1em;margin-left:0.5em;vertical-align:middle;cursor:pointer;padding:0;line-height:0;"><img src="/resources/moon.svg" alt="Switch to dark mode" style="height: 1em; width: auto" /></button><br />
+      <em>5/22/26</em>
     </p>
 
-<h3 id="about">RSS</h3>
-    <p>
-      <code>https://www.lairdstewart.com/feed</code>
-    </p>
-    <p>
-      New to RSS? RSS is like an email inbox for blogs and websites you read.
-      Subscribe to feeds by copying their feed URL into your RSS reader of
-      choice. Like email, you can choose which app/website to read your feed in.
-      I suggest
-      <a href="https://netnewswire.com/">NetNewsWire</a> and
-      <a href="https://www.thunderbird.net/en-US/">Thunderbird</a>. Often, you
-      can simply copy the base URL of the website (e.g.,
-      <code>https://www.lairdstewart.com</code>) into your RSS reader.
-    </p>
-    <p>
-      Many websites have RSS feeds even if they don't advertise it. It works
-      with Substack, Reddit, and Wordpress. There are also services which turn
-      (almost) any website into an RSS feed like
-      <a href="https://rss.app/rss-feed">rss.app</a>. Here are a few I enjoy:
+    <h3>There's no free lunch in software</h3>
+
+<p>
+      Scott Sumner wrote a good post earlier this month on the
+      <a href="https://scottsumner.substack.com/p/the-beauty-of-tautologies"
+        >usefulness of tautologies</a
+      >
+      which got me thinking about tautologies in software development. One which
+      came to mind is
     </p>
 
-    <ul>
-      <li>
-        <a href="https://aleximas.substack.com/">Alex Imas</a> (economics, AI)
-      </li>
-      <li>
-        <a href="https://caseyhandmer.wordpress.com/">Casey Handmer</a> (space,
-        energy)
-      </li>
-      <li>
-        <a href="https://www.daemonology.net/hn-daily/">Hacker News</a> (links)
-      </li>
-      <li>
-        <a href="https://marginalrevolution.com/">Marginal Revolution</a>
-        (economics, links)
-      </li>
-      <li>
-        <a href="https://www.noahpinion.blog/">Noah Smith</a> (economics,
-        policy, links)
-      </li>
-      <li>
-        <a href="https://www.astralcodexten.com/">Scott Alexander</a>
-        (rationalism, links)
-      </li>
-      <li>
-        <a href="https://thezvi.substack.com/">Zvi Mowshowitz</a> (AI,
-        rationalism)
-      </li>
-      <li>
-        <a href="https://humaninvariant.substack.com/">@HumanInvariant</a>
-        (prediction markets)
-      </li>
-      <li>
-        <a href="https://www.planned-obsolescence.org/">Ajeya Corta</a> (AI
-        safety)
-      </li>
-      <li>
-        <a href="https://stratechery.com/">Ben Thompson</a> (business, tech)
-      </li>
-      <li><a href="https://www.betonit.ai/">Bryan Caplan</a> (economics)</li>
-      <li><a href="https://nintil.com/">Jose Ricon</a> (AI, biotech, links)</li>
-      <li><a href="https://www.lesswrong.com/">LessWrong</a> (rationalism)</li>
-      <li>
-        <a href="https://nicholasdecker.substack.com/">Nicholas Decker</a>
-        (economics)
-      </li>
-      <li>
-        <a href="https://blog.peterwildeford.com/">Peter Wildeford</a> (AI,
-        forecasting)
-      </li>
-      <li>
-        <a href="https://www.razibkhan.com/">Razib Khan</a> (progress, podcast)
-      </li>
-      <li>
-        <a href="https://www.overcomingbias.com/">Robin Hanson</a> (economics,
-        prediction markets)
-      </li>
-      <li>
-        <a href="https://scottsumner.substack.com/">Scott Sumner</a> (economics)
-      </li>
-      <li>
-        <a href="https://www.siliconcontinent.com/">Silicon Continent</a> (AI,
-        economics)
-      </li>
-      <li>
-        <a href="https://statmodeling.stat.columbia.edu/"
-          >Statistical Modeling, Causal Inference, and Social Science</a
-        >
-      </li>
-    </ul>
+    <blockquote>
+      "To reduce intrinsic complexity of a program one must reduce the
+      complexity of the problem it's solving"
+    </blockquote>
+
+    <p>
+      I liken this to the no free lunch theorem (hence the title of this post)
+      because when designing ML algorithms, you can only improve performance by
+      limiting the set of problems under consideration (i.e., making assumptions
+      about the problem at hand). Similarly, in software, you can only simplify
+      code by making simplifying assumptions about the problem you're solving.
+    </p>
+
+    <p>
+      So what can we learn from this tautology? If you believe that software
+      developers should strive for simplicity (as John Ousterhout argues in
+      <a
+        href="https://www.goodreads.com/en/book/show/39996759-a-philosophy-of-software-design"
+        >"A Philosophy of Software Design"</a
+      >), then you must also believe software developers should focus on making
+      assumptions.
+    </p>
+
+    <p>
+      What are assumptions to a software engineer? Assertions, preconditions,
+      and API contracts! We should therefore strive to write methods that looks
+      like
+    </p>
+
+    <pre xml:space="preserve"><code>/**
+ * Assumes that bar() was called first.
+ */
+public void foo(Key key)
+{
+    Preconditions.checkArgument(key != null);
+    Preconditions.checkArgument(cache.contains(key));
+    Preconditions.checkState(isCacheInitialized());
+    ...
+}</code></pre>
+
+    <p>
+      with the understanding that it will simplify the final program. I've
+      recently found myself writing more and more methods that look like this.
+      When I started out, I would have looked at comments like
+    </p>
+    <blockquote>
+      "this method assumes that it will only be invoked once"
+    </blockquote>
+    <p>or</p>
+    <blockquote>
+      "this only works assuming no more data will be added to this collection"
+    </blockquote>
+    <p>
+      as "cop-outs" or lazy coding, when in reality they are important design
+      decisions. Every simplification is the flip-side of an assumption, and
+      it's better to document (or code!) assumptions directly than leave them
+      implicit.
+    </p>
+
+    <br /><br />
 
     <script>
       (function () {

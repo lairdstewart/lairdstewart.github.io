@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>https://www.lairdstewart.com/</id>
+  <title>Laird Stewart's blog</title>
+  <updated>{{FEED_UPDATED}}</updated>
+  <author>
+    <name>Laird Stewart</name>
+  </author>
+  <link rel="self" href="https://www.lairdstewart.com/feed"/>
+  <link rel="alternate" href="https://www.lairdstewart.com/"/>
+  <icon>resources/icon.png</icon>
+{{ENTRIES}}
+</feed>
