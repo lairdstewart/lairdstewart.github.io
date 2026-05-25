@@ -201,7 +201,7 @@ def main():
         "ENTRIES": "\n".join(entry_xml),
         "FEED_UPDATED": feed_updated,
     })
-    (ROOT / "feed").write_text(feed)
+    (ROOT / "feed.xml").write_text(feed)
 
     print(f"built {len(blog_entries)} blog, {len(news_entries)} newsletter entries")
 
