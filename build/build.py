@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Build rendered HTML pages and Atom feed from src/content/ fragments."""
 
+import html
 import json
+import re
 import subprocess
 import sys
 from datetime import datetime
@@ -10,6 +12,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "src"
 CONTENT = SRC / "content"
+BUILD = ROOT / "build"
+
+MATH_SPAN = re.compile(
+    r'<span\s+class="math\s+(inline|display)"[^>]*>(.*?)</span>',
+    re.DOTALL,
+)
+MATHML_ELEMENT = re.compile(r'<math\b[^>]*>.*?</math>', re.DOTALL)
 
 
 def fail(msg):
@@ -57,6 +66,58 @@ def render(template, mapping):
     return out
 
 
+def _collect_math(bodies):
+    items = []
+    for body in bodies:
+        for m in MATH_SPAN.finditer(body):
+            items.append((m.group(1) == "display", html.unescape(m.group(2)).strip()))
+    return items
+
+
+def _substitute(bodies, rendered):
+    it = iter(rendered)
+    return [MATH_SPAN.sub(lambda _: next(it), body) for body in bodies]
+
+
+def render_math_katex(bodies):
+    """Substitute math spans with pre-rendered KaTeX HTML (for the static page)."""
+    items = _collect_math(bodies)
+    if not items:
+        return bodies
+    payload = [{"tex": tex, "display": display} for display, tex in items]
+    result = subprocess.run(
+        ["node", str(BUILD / "render_math.js")],
+        input=json.dumps(payload),
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"katex render failed:\n{result.stderr}")
+    return _substitute(bodies, json.loads(result.stdout))
+
+
+def render_math_pandoc(bodies):
+    """Substitute math spans with MathML via pandoc (for the Atom feed)."""
+    items = _collect_math(bodies)
+    if not items:
+        return bodies
+    latex_doc = "\n\n".join(
+        (f"\\[{tex}\\]" if display else f"\\({tex}\\)") for display, tex in items
+    )
+    result = subprocess.run(
+        ["pandoc", "-f", "latex", "-t", "html", "--mathml"],
+        input=latex_doc,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        fail(f"pandoc render failed:\n{result.stderr}")
+    rendered = MATHML_ELEMENT.findall(result.stdout)
+    if len(rendered) != len(items):
+        fail(f"pandoc returned {len(rendered)} <math> elements, expected {len(items)}")
+    return _substitute(bodies, rendered)
+
+
 def main():
     blog_template = (SRC / "blog.template.html").read_text()
     newsletter_template = (SRC / "newsletter.template.html").read_text()
@@ -75,35 +136,41 @@ def main():
         validate_xhtml(path)
 
     # 2. Render blog entries.
+    blog_paths = sorted(blog_dir.glob("*.html"))
+    src_bodies = [p.read_text().rstrip() for p in blog_paths]
+    page_bodies = render_math_katex(src_bodies)
+    feed_bodies = render_math_pandoc(src_bodies)
     blog_entries = []
-    for src_path in sorted(blog_dir.glob("*.html")):
+    for src_path, page_body, feed_body in zip(blog_paths, page_bodies, feed_bodies):
         meta = load_sidecar(src_path)
-        body = src_path.read_text().rstrip()
         slug = src_path.stem
         page = render(blog_template, {
             "TITLE": meta["title"],
             "DATE_DISPLAY": format_display_date(meta["date"]),
-            "BODY": body,
+            "BODY": page_body,
         })
         out = ROOT / "blog" / f"{slug}.html"
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(page)
-        blog_entries.append({"kind": "blog", "slug": slug, "title": meta["title"], "date": meta["date"], "body": body})
+        blog_entries.append({"kind": "blog", "slug": slug, "title": meta["title"], "date": meta["date"], "body": feed_body})
 
     # 3. Render newsletter entries.
+    news_paths = sorted(news_dir.glob("*.html"))
+    src_bodies = [p.read_text().rstrip() for p in news_paths]
+    page_bodies = render_math_katex(src_bodies)
+    feed_bodies = render_math_pandoc(src_bodies)
     news_entries = []
-    for src_path in sorted(news_dir.glob("*.html")):
+    for src_path, page_body, feed_body in zip(news_paths, page_bodies, feed_bodies):
         meta = load_sidecar(src_path)
-        body = src_path.read_text().rstrip()
         slug = src_path.stem
         page = render(newsletter_template, {
             "TITLE": meta["title"],
-            "BODY": body,
+            "BODY": page_body,
         })
         out = ROOT / "newsletter" / f"{slug}.html"
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(page)
-        news_entries.append({"kind": "newsletter", "slug": slug, "title": meta["title"], "date": meta["date"], "body": body})
+        news_entries.append({"kind": "newsletter", "slug": slug, "title": meta["title"], "date": meta["date"], "body": feed_body})
 
     # 4. Render top-level pages.
     for name in ("index.html", "rss.html"):

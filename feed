@@ -536,68 +536,51 @@ git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c
         <p>The easiest way to remind yourself of Bayes’ theorem is to
         re-arrange the law of conditional probability (the comma means
         “and”, and the bar means “given”):</p>
-        <p><span class="math display"> P(A, B) = P(A|B)P(B) = P(B|A)P(A)
-        </span></p>
-        <p><span class="math display"> P(A|B)=\frac{P(B|A)P(A)}{P(B)}
-        </span></p>
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo>,</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="prefix">|</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>B</mi><mo stretchy="false" form="prefix">|</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P(A, B) = P(A|B)P(B) = P(B|A)P(A)</annotation></semantics></math></p>
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="prefix">|</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>B</mi><mo stretchy="false" form="prefix">|</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">P(A|B)=\frac{P(B|A)P(A)}{P(B)}</annotation></semantics></math></p>
         <p>Bayesian inference is a technique which repeatedly uses
         Bayes’ theorem to understand some outcome/event of interest
-        <span class="math inline">(A)</span> as we observe
-        events/collect data which tells us something about it <span
-        class="math inline">(\textrm{e.g., } B)</span>. For example,
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(A)</annotation></semantics></math> as we observe
+        events/collect data which tells us something about it <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mrow><mtext mathvariant="normal">e.g., </mtext><mspace width="0.333em"></mspace></mrow><mi>B</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(\textrm{e.g., } B)</annotation></semantics></math>. For example,
         <em>“given that a card is red, what is the probability it is a
         heart?”</em></p>
         <ul>
-        <li><span class="math inline">P(A)</span> is called the prior.
-        This is the initial degree of belief in the hypothesis <span
-        class="math inline">A</span>.</li>
-        <li><span class="math inline">P(A|B)</span> is called the
-        posterior. It is the degree of belief in <span
-        class="math inline">A</span> after incorporating the news of
-        <span class="math inline">B</span>.</li>
-        <li><span class="math inline">P(B|A)</span> is the likelihood.
+        <li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P(A)</annotation></semantics></math> is called the prior.
+        This is the initial degree of belief in the hypothesis <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>.</li>
+        <li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="prefix">|</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P(A|B)</annotation></semantics></math> is called the
+        posterior. It is the degree of belief in <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> after incorporating the news of
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>.</li>
+        <li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>B</mi><mo stretchy="false" form="prefix">|</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P(B|A)</annotation></semantics></math> is the likelihood.
         It is the probability of the data given the hypothesis</li>
-        <li><span class="math inline">P(B)</span> is called the
+        <li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P(B)</annotation></semantics></math> is called the
         evidence, or marginal likelihood. It is the probability of the
         data under all hypotheses.</li>
         </ul>
-        <p>The crux of Bayesian inference is that once we have <span
-        class="math inline">P(A|B)</span>, if we observe another event,
-        <span class="math inline">C</span> (which is independent of
-        <span class="math inline">B</span>) we can “update” our belief
-        about <span class="math inline">A</span> by making <span
-        class="math inline">P(A|B)</span> our prior and starting again
-        to find a new posterior, <span
-        class="math inline">P(A|B,C)</span>. Note that we don’t have to
+        <p>The crux of Bayesian inference is that once we have <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="prefix">|</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P(A|B)</annotation></semantics></math>, if we observe another event,
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math> (which is independent of
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>) we can “update” our belief
+        about <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> by making <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="prefix">|</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P(A|B)</annotation></semantics></math> our prior and starting again
+        to find a new posterior, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="prefix">|</mo><mi>B</mi><mo>,</mo><mi>C</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P(A|B,C)</annotation></semantics></math>. Note that we don’t have to
         start from scratch each time we get additional evidence, only
         compute Bayes’ theorem one more time. All of our knowledge thus
-        far about <span class="math inline">A</span> is contained in the
+        far about <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> is contained in the
         posterior.</p>
         <p>What do I mean by “degree of belief”? If you haven’t come
         across the distinction between Frequentest and Bayesian
         statistics, a frequentest will take a weighted coin, and will
-        say “flip it 1 million times, and the ratio of <span
-        class="math inline">\frac{\text{\#heads}}{\text{\#flips}}</span>
+        say “flip it 1 million times, and the ratio of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac><mtext mathvariant="normal">#heads</mtext><mtext mathvariant="normal">#flips</mtext></mfrac><annotation encoding="application/x-tex">\frac{\text{\#heads}}{\text{\#flips}}</annotation></semantics></math>
         is the probability it lands heads. A Bayesian will take a
         weighted coin and say probability is the”degree of belief” I
         hold that it will land heads. i.e., if I had to place a bet on
         it, what “probability” would make for a fair betting line?</p>
         <p>We can derive Bayes’ theorem for probability density
         functions similarly:</p>
-        <p><span class="math display">
-        f_{X,Y}(x,y)=f_{X|Y=y}(x)f_Y(y)=f_{Y|X=x}(y)f_X(x)
-        </span></p>
-        <p><span class="math display">
-        f_{X|Y=y}(x)=\frac{f_{Y|X=x}(y)f_X(x)}{f_Y(y)}
-        </span></p>
-        <p>Remember the evidence, <span
-        class="math inline">f_Y(y)</span>, is the probability density of
-        the data under all hypothesis (possible values of <span
-        class="math inline">x</span>). In the continuous case you would
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>f</mi><mrow><mi>X</mi><mo stretchy="false" form="prefix">|</mo><mi>Y</mi><mo>=</mo><mi>y</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>f</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>f</mi><mrow><mi>Y</mi><mo stretchy="false" form="prefix">|</mo><mi>X</mi><mo>=</mo><mi>x</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>f</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f_{X,Y}(x,y)=f_{X|Y=y}(x)f_Y(y)=f_{Y|X=x}(y)f_X(x)</annotation></semantics></math></p>
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mrow><mi>X</mi><mo stretchy="false" form="prefix">|</mo><mi>Y</mi><mo>=</mo><mi>y</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mrow><msub><mi>f</mi><mrow><mi>Y</mi><mo stretchy="false" form="prefix">|</mo><mi>X</mi><mo>=</mo><mi>x</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>f</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msub><mi>f</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">f_{X|Y=y}(x)=\frac{f_{Y|X=x}(y)f_X(x)}{f_Y(y)}</annotation></semantics></math></p>
+        <p>Remember the evidence, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f_Y(y)</annotation></semantics></math>, is the probability density of
+        the data under all hypothesis (possible values of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>). In the continuous case you would
         write this as an integral</p>
-        <p><span class="math display">
-        f_Y(y)=\int f_{Y|X=x}(y)f_X(x)dx
-        </span></p>
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mo>∫</mo><msub><mi>f</mi><mrow><mi>Y</mi><mo stretchy="false" form="prefix">|</mo><mi>X</mi><mo>=</mo><mi>x</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>f</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mi>d</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">f_Y(y)=\int f_{Y|X=x}(y)f_X(x)dx</annotation></semantics></math></p>
         <h3 id="act-1-one-measurement-of-a-stationary-submarine">Act 1:
         One Measurement of A Stationary Submarine</h3>
         <p>To our submarine example, let’s make the following
@@ -607,8 +590,8 @@ git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c
         <li>Both submarines are stationary</li>
         <li>The sonar readings are centered on the true distance with
         some noise. To be precise, they follow the normal distribution
-        with <span class="math inline">\mu=\text{true distance}</span>,
-        and <span class="math inline">\sigma=100</span>. A positive
+        with <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><mo>=</mo><mtext mathvariant="normal">true distance</mtext></mrow><annotation encoding="application/x-tex">\mu=\text{true distance}</annotation></semantics></math>,
+        and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>σ</mi><mo>=</mo><mn>100</mn></mrow><annotation encoding="application/x-tex">\sigma=100</annotation></semantics></math>. A positive
         value means the object is in front, negative means it is
         behind.</li>
         </ul>
@@ -633,15 +616,18 @@ git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c
         </table>
         <p>what is the probability distribution of position of the other
         sub? Let’s approach this as a Bayesian. Call the distance to the
-        other submarine <span class="math inline">x</span> and the sonar
-        reading <span class="math inline">y</span>. Here’s Bayes’
+        other submarine <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math> and the sonar
+        reading <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math>. Here’s Bayes’
         theorem again:</p>
-        <p><span class="math display">
-        f_{X|Y=y}(x)=\frac{f_{Y|X=x}(y)f_X(x)}{f_Y(y)}=\frac{f_{Y|X=x}(y)f_X(x)}{\int
-        f_{Y|X=x}(y)f_X(x)dx}
-        </span></p>
-        <p><span class="math display">
-        \substack{\text{p-distribution of the distance x} \\ \text{given
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mrow><mi>X</mi><mo stretchy="false" form="prefix">|</mo><mi>Y</mi><mo>=</mo><mi>y</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mrow><msub><mi>f</mi><mrow><mi>Y</mi><mo stretchy="false" form="prefix">|</mo><mi>X</mi><mo>=</mo><mi>x</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>f</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msub><mi>f</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac><mo>=</mo><mfrac><mrow><msub><mi>f</mi><mrow><mi>Y</mi><mo stretchy="false" form="prefix">|</mo><mi>X</mi><mo>=</mo><mi>x</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>f</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><mo>∫</mo><msub><mi>f</mi><mrow><mi>Y</mi><mo stretchy="false" form="prefix">|</mo><mi>X</mi><mo>=</mo><mi>x</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>f</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mi>d</mi><mi>x</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">f_{X|Y=y}(x)=\frac{f_{Y|X=x}(y)f_X(x)}{f_Y(y)}=\frac{f_{Y|X=x}(y)f_X(x)}{\int
+        f_{Y|X=x}(y)f_X(x)dx}</annotation></semantics></math></p>
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtable><mtr><mtd columnalign="center" style="text-align: center"><mtext mathvariant="normal">p-distribution of the distance x</mtext></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mtext mathvariant="normal">given
+ the sensor
+ reading y</mtext></mtd></mtr></mtable><mo>=</mo><mfrac><mrow><mtable><mtr><mtd columnalign="center" style="text-align: center"><mrow><mtext mathvariant="normal">p-distribution of the
+ sensor </mtext><mspace width="0.333em"></mspace></mrow></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mtext mathvariant="normal">reading y given distance x</mtext></mtd></mtr></mtable><mo>×</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mtext mathvariant="normal">prior
+ p-distribution</mtext></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> of the distance
+ x</mtext></mrow></mtd></mtr></mtable></mrow><mtable><mtr><mtd columnalign="center" style="text-align: center"><mtext mathvariant="normal">p-distribution of
+ the sensor</mtext></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mtext mathvariant="normal">reading y across all possible x</mtext></mtd></mtr></mtable></mfrac></mrow><annotation encoding="application/x-tex">\substack{\text{p-distribution of the distance x} \\ \text{given
         the sensor
         reading y}} = \frac{\substack{{\text{p-distribution of the
         sensor }}\\
@@ -649,26 +635,22 @@ git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c
         \substack{\text{prior
         p-distribution}\\{\text{ of the distance
         x}}}}{\substack{\text{p-distribution of
-        the sensor}\\{\text{reading y across all possible x}}}}
-        </span></p>
-        <p>Here, <span class="math inline">X</span> represents the
+        the sensor}\\{\text{reading y across all possible x}}}}</annotation></semantics></math></p>
+        <p>Here, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math> represents the
         “state” of the other submarine (also called our “hypothesis”)
-        and <span class="math inline">Y</span> represents the
+        and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math> represents the
         Evidence/Data we have about this state. The core problem is that
-        we have a probability density over possible observations, <span
-        class="math inline">f(Y|X)</span>, but we want a pdf over state,
-        <span class="math inline">X</span>. Bayes’ theorem is what
+        we have a probability density over possible observations, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo stretchy="false" form="prefix">|</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f(Y|X)</annotation></semantics></math>, but we want a pdf over state,
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>. Bayes’ theorem is what
         achieves this.</p>
         <p>We need two things to calculate our posterior. First, the
-        prior <span class="math inline">f_X(x)</span>. This represents
+        prior <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f_X(x)</annotation></semantics></math>. This represents
         our belief about the other sub’s position before receiving any
         measurement. Since we don’t have any a-priori knowledge, we can
         use a Gaussian distribution with extremely high variance (i.e.,
         very flat) which loosely says “it could be anywhere”.</p>
-        <p><span class="math display">
-        f_X(x)=\mathcal{N}(\mu=0,
-        \sigma^2=10^8)=\frac{1}{\sqrt{10^8\times2\pi}}\exp\left(-\frac{1}{2}\left(\frac{x^2}{10^8}\right)\right)
-        </span></p>
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>𝒩</mi><mo stretchy="false" form="prefix">(</mo><mi>μ</mi><mo>=</mo><mn>0</mn><mo>,</mo><msup><mi>σ</mi><mn>2</mn></msup><mo>=</mo><msup><mn>10</mn><mn>8</mn></msup><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mn>1</mn><msqrt><mrow><msup><mn>10</mn><mn>8</mn></msup><mo>×</mo><mn>2</mn><mi>π</mi></mrow></msqrt></mfrac><mrow><mi>exp</mi><mo>&#8289;</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>−</mi><mfrac><mn>1</mn><mn>2</mn></mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><msup><mi>x</mi><mn>2</mn></msup><msup><mn>10</mn><mn>8</mn></msup></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f_X(x)=\mathcal{N}(\mu=0,
+        \sigma^2=10^8)=\frac{1}{\sqrt{10^8\times2\pi}}\exp\left(-\frac{1}{2}\left(\frac{x^2}{10^8}\right)\right)</annotation></semantics></math></p>
         <blockquote>
         <p><em>Aside: however wide, this prior is not uniform: it has
         slightly more probability around 0 than at 1000m. We can’t make
@@ -683,30 +665,23 @@ git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c
         really what they’re doing is applying Bayes’ rule with an
         uninformative prior.</em></p>
         </blockquote>
-        <p>Second, we need our likelihood function, <span
-        class="math inline">f_{Y|X=x}(y)</span>. This is defined as the
-        probability of measuring <span class="math inline">y</span>
-        given the state, <span class="math inline">x</span>. The problem
+        <p>Second, we need our likelihood function, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mrow><mi>Y</mi><mo stretchy="false" form="prefix">|</mo><mi>X</mi><mo>=</mo><mi>x</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f_{Y|X=x}(y)</annotation></semantics></math>. This is defined as the
+        probability of measuring <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math>
+        given the state, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>. The problem
         statement directly gives this to us: “The sonar readings are
         centered on the true distance with standard deviation of 100”.
-        Here, the “true distance” is <span
-        class="math inline">x</span></p>
-        <p><span class="math display">
-        f_{Y|X=x}(y)=\mathcal{N}(\mu=x,
-        \sigma^2=10^4)=\frac{1}{\sqrt{10^4\times2\pi}}\exp\left(-\frac{1}{2}\frac{(y-x)^2}{10^4}\right)
-        </span></p>
+        Here, the “true distance” is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math></p>
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mrow><mi>Y</mi><mo stretchy="false" form="prefix">|</mo><mi>X</mi><mo>=</mo><mi>x</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>𝒩</mi><mo stretchy="false" form="prefix">(</mo><mi>μ</mi><mo>=</mo><mi>x</mi><mo>,</mo><msup><mi>σ</mi><mn>2</mn></msup><mo>=</mo><msup><mn>10</mn><mn>4</mn></msup><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mn>1</mn><msqrt><mrow><msup><mn>10</mn><mn>4</mn></msup><mo>×</mo><mn>2</mn><mi>π</mi></mrow></msqrt></mfrac><mrow><mi>exp</mi><mo>&#8289;</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>−</mi><mfrac><mn>1</mn><mn>2</mn></mfrac><mfrac><mrow><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo>−</mo><mi>x</mi><msup><mo stretchy="false" form="postfix">)</mo><mn>2</mn></msup></mrow><msup><mn>10</mn><mn>4</mn></msup></mfrac><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f_{Y|X=x}(y)=\mathcal{N}(\mu=x,
+        \sigma^2=10^4)=\frac{1}{\sqrt{10^4\times2\pi}}\exp\left(-\frac{1}{2}\frac{(y-x)^2}{10^4}\right)</annotation></semantics></math></p>
         <p>Now, we can plug these into Bayes’ theorem and solve for the
-        posterior <span class="math inline">f_{X|Y=y}(x)</span>.
+        posterior <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mrow><mi>X</mi><mo stretchy="false" form="prefix">|</mo><mi>Y</mi><mo>=</mo><mi>y</mi></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f_{X|Y=y}(x)</annotation></semantics></math>.
         Fortunately, the product of two Gaussian Distributions is also
         Gaussian <a
         href="https://web.archive.org/web/20130517221128/http://www.tina-vision.net/docs/memos/2003-003.pdf">(proof)</a>
         with mean and variance</p>
-        <p><span class="math display">
-        \sigma=\sqrt{\frac{\sigma_1^2\sigma_2^2}{\sigma_1^2+\sigma_2^2}},\quad\mu=\frac{\mu_1\sigma_2^2+\mu_2\sigma_1^2}{\sigma_1^2+\sigma_2^2}
-        </span></p>
-        <p>The denominator (evidence), <span
-        class="math inline">f_Y(y)</span>, is a scalar value (remember,
-        <span class="math inline">y</span> is given). Therefore, the
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>σ</mi><mo>=</mo><msqrt><mfrac><mrow><msubsup><mi>σ</mi><mn>1</mn><mn>2</mn></msubsup><msubsup><mi>σ</mi><mn>2</mn><mn>2</mn></msubsup></mrow><mrow><msubsup><mi>σ</mi><mn>1</mn><mn>2</mn></msubsup><mo>+</mo><msubsup><mi>σ</mi><mn>2</mn><mn>2</mn></msubsup></mrow></mfrac></msqrt><mo>,</mo><mspace width="1.0em"></mspace><mi>μ</mi><mo>=</mo><mfrac><mrow><msub><mi>μ</mi><mn>1</mn></msub><msubsup><mi>σ</mi><mn>2</mn><mn>2</mn></msubsup><mo>+</mo><msub><mi>μ</mi><mn>2</mn></msub><msubsup><mi>σ</mi><mn>1</mn><mn>2</mn></msubsup></mrow><mrow><msubsup><mi>σ</mi><mn>1</mn><mn>2</mn></msubsup><mo>+</mo><msubsup><mi>σ</mi><mn>2</mn><mn>2</mn></msubsup></mrow></mfrac></mrow><annotation encoding="application/x-tex">\sigma=\sqrt{\frac{\sigma_1^2\sigma_2^2}{\sigma_1^2+\sigma_2^2}},\quad\mu=\frac{\mu_1\sigma_2^2+\mu_2\sigma_1^2}{\sigma_1^2+\sigma_2^2}</annotation></semantics></math></p>
+        <p>The denominator (evidence), <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f_Y(y)</annotation></semantics></math>, is a scalar value (remember,
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math> is given). Therefore, the
         posterior is also a Gaussian. I won’t go through the entire
         derivation here, but understand the solution is analytical</p>
         <blockquote>
@@ -727,7 +702,7 @@ git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c
         measurement. This is because our prior is centered at zero, so
         it will still “pull” the posterior towards it, no matter how
         flat it is. Third, the equation for the standard deviation,
-        <span class="math inline">\sigma</span>, above guarantees that
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>σ</mi><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>, above guarantees that
         the variance of the posterior is less than or equal to the
         variance of prior and likelihood Gaussians.</p>
         <h3
@@ -753,17 +728,17 @@ git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c
         </tbody>
         </table>
         <p>And we’d like to update our probability distribution of the
-        other submarine’s position, <span
-        class="math inline">f_X(x)</span>. Recalling the math recap from
+        other submarine’s position, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f_X(x)</annotation></semantics></math>. Recalling the math recap from
         the beginning, we can use the posterior from Act 1 as our new
         prior, rinse and repeat.</p>
-        <p><span class="math display">
-        \text{Act 2 posterior} = \frac{\substack{{\text{measurement
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Act 2 posterior</mtext><mo>=</mo><mfrac><mrow><mtable><mtr><mtd columnalign="center" style="text-align: center"><mtext mathvariant="normal">measurement
+ #2</mtext></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mtext mathvariant="normal">likelihood</mtext></mtd></mtr></mtable><mo>×</mo><mtext mathvariant="normal">Act 1
+ posterior</mtext></mrow><mtable><mtr><mtd columnalign="center" style="text-align: center"><mrow><mtext mathvariant="normal">probability
+ of measurement #2 </mtext><mspace width="0.333em"></mspace></mrow></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mtext mathvariant="normal">across all possible x</mtext></mtd></mtr></mtable></mfrac></mrow><annotation encoding="application/x-tex">\text{Act 2 posterior} = \frac{\substack{{\text{measurement
         \#2}}\\
         {\text{likelihood}}} \times \text{Act 1
         posterior}}{\substack{\text{probability
-        of measurement \#2 }\\{\text{across all possible x}}}}
-        </span></p>
+        of measurement \#2 }\\{\text{across all possible x}}}}</annotation></semantics></math></p>
         <figure>
         <img src="/resources/particle-filter/problem-2.png" alt="problem-2" />
         </figure>
@@ -795,74 +770,59 @@ git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c
         <ul>
         <li>Everything is still in one dimension</li>
         <li>The other sub is moving at a constant velocity</li>
-        <li>Our prior on the other submarine’s velocity is <span
-        class="math inline">\mathcal{N}(\mu=0,
-        \sigma^2=5)</span> where a negative value means it is getting
+        <li>Our prior on the other submarine’s velocity is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝒩</mi><mo stretchy="false" form="prefix">(</mo><mi>μ</mi><mo>=</mo><mn>0</mn><mo>,</mo><msup><mi>σ</mi><mn>2</mn></msup><mo>=</mo><mn>5</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{N}(\mu=0,
+        \sigma^2=5)</annotation></semantics></math> where a negative value means it is getting
         closer.</li>
         </ul>
-        <p>The state of the other submarine is now a random vector <span
-        class="math inline">X</span>:</p>
-        <p><span class="math display">
-        x= \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}= \begin{bmatrix}
+        <p>The state of the other submarine is now a random vector <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>:</p>
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><msub><mi>x</mi><mn>1</mn></msub></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><msub><mi>x</mi><mn>2</mn></msub></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow><mo>=</mo><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mtext mathvariant="normal">position</mtext></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mtext mathvariant="normal">velocity</mtext></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">x= \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}= \begin{bmatrix}
         \text{position}
-        \\ \text{velocity} \end{bmatrix}
-        </span></p>
+        \\ \text{velocity} \end{bmatrix}</annotation></semantics></math></p>
         <p>And its probability distribution is now multivariate Gaussian
-        <span class="math inline">X\sim\mathcal{N}(\mu,\Sigma)</span>.
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>∼</mo><mi>𝒩</mi><mo stretchy="false" form="prefix">(</mo><mi>μ</mi><mo>,</mo><mi mathvariant="normal">Σ</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">X\sim\mathcal{N}(\mu,\Sigma)</annotation></semantics></math>.
         Our prior is</p>
-        <p><span class="math display">
-        \mu =\begin{bmatrix} 0 \\ 0 \end{bmatrix}, \quad
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow><mo>,</mo><mspace width="1.0em"></mspace><mi mathvariant="normal">Σ</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><msup><mn>10</mn><mn>8</mn></msup></mtd><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd><mtd columnalign="center" style="text-align: center"><mn>5</mn></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">\mu =\begin{bmatrix} 0 \\ 0 \end{bmatrix}, \quad
         \Sigma=\begin{bmatrix} 10^8
-        &amp; 0 \\ 0 &amp; 5 \end{bmatrix}
-        </span></p>
+        &amp; 0 \\ 0 &amp; 5 \end{bmatrix}</annotation></semantics></math></p>
         <p>Again, we will employ Bayesian inference. The problem is now
         two dimensions, but conceptually the technique is the same. We
         will treat the first measurement just as we did in Act 2.
-        However, after calculating the posterior <span
-        class="math inline">f_X(x)</span> of the random vector, instead
+        However, after calculating the posterior <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f_X(x)</annotation></semantics></math> of the random vector, instead
         of immediately turning it into our next prior, we first must
         update it with time. To do this, we need something called a
         “motion model” or “state update equation”. Given a state at
-        <span class="math inline">t-1</span>, and our assumption of
-        constant velocity, the state at <span
-        class="math inline">t</span> is given by</p>
-        <p><span class="math display">
-        \textrm{pos}_t=\textrm{pos}_{t-1}+\text{vel}_{t-1}\Delta t \\
-        \textrm{vel}_t=\textrm{vel}_{t-1}
-        </span></p>
-        <p>where <span class="math inline">\Delta t</span> is the time
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">t-1</annotation></semantics></math>, and our assumption of
+        constant velocity, the state at <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math> is given by</p>
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><msub><mtext mathvariant="normal">pos</mtext><mi>t</mi></msub></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><msub><mtext mathvariant="normal">pos</mtext><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><msub><mtext mathvariant="normal">vel</mtext><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mi mathvariant="normal">Δ</mi><mi>t</mi></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><msub><mtext mathvariant="normal">vel</mtext><mi>t</mi></msub></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><msub><mtext mathvariant="normal">vel</mtext><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+        \textrm{pos}_t&amp;=\textrm{pos}_{t-1}+\text{vel}_{t-1}\Delta t \\
+        \textrm{vel}_t&amp;=\textrm{vel}_{t-1}
+        \end{aligned}</annotation></semantics></math></p>
+        <p>where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Δ</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">\Delta t</annotation></semantics></math> is the time
         in between each sensor reading. This is a linear transformation
         we can write in matrix form:</p>
-        <p><span class="math display">
-        \begin{bmatrix} \text{pos} \\ \text{vel} \end{bmatrix}_t =
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mtext mathvariant="normal">pos</mtext></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mtext mathvariant="normal">vel</mtext></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow><mi>t</mi></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mn>1</mn></mtd><mtd columnalign="center" style="text-align: center"><mi mathvariant="normal">Δ</mi><mi>t</mi></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd><mtd columnalign="center" style="text-align: center"><mn>1</mn></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow><msub><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mtext mathvariant="normal">pos</mtext></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mtext mathvariant="normal">vel</mtext></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>=</mo><mi>A</mi><msub><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mtext mathvariant="normal">pos</mtext></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mtext mathvariant="normal">vel</mtext></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">\begin{bmatrix} \text{pos} \\ \text{vel} \end{bmatrix}_t =
         \begin{bmatrix} 1
         &amp; \Delta t \\ 0 &amp; 1 \end{bmatrix} \begin{bmatrix}
         \text{pos} \\ \text{vel}
         \end{bmatrix}_{t-1} = A \begin{bmatrix} \text{pos} \\ \text{vel}
-        \end{bmatrix}_{t-1}
-        </span></p>
-        <p>(I’m sticking with convention here to call this matrix <span
-        class="math inline">A</span>).</p>
+        \end{bmatrix}_{t-1}</annotation></semantics></math></p>
+        <p>(I’m sticking with convention here to call this matrix <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>).</p>
         <p>Given a state vector we can transform it with time, but how
         do we transform a continuous distribution? Let’s change our
         framing slightly; instead of thinking about probability
-        distributions, let’s consider the random variable <span
-        class="math inline">X=\{\text{pos},\text{vel}\}</span> which
+        distributions, let’s consider the random variable <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>=</mo><mo stretchy="false" form="prefix">{</mo><mtext mathvariant="normal">pos</mtext><mo>,</mo><mtext mathvariant="normal">vel</mtext><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">X=\{\text{pos},\text{vel}\}</annotation></semantics></math> which
         this distribution describes. Again, we are fortunate that our
         variable is Gaussian. Thinking back to an intro stats class, you
         may remember that multiplying a random variable by a constant
-        <span class="math inline">b</span> scales its mean by <span
-        class="math inline">b</span> and its variance by <span
-        class="math inline">b^2</span>. This extends to random vectors.
-        Given any linear transformation <span
-        class="math inline">Y=BX</span>,</p>
-        <p><span class="math display"> E[Y]=B E[X] </span></p>
-        <p><span class="math display"> Cov(Y)=B Cov(X)B^T </span></p>
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math> scales its mean by <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math> and its variance by <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>b</mi><mn>2</mn></msup><annotation encoding="application/x-tex">b^2</annotation></semantics></math>. This extends to random vectors.
+        Given any linear transformation <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>=</mo><mi>B</mi><mi>X</mi></mrow><annotation encoding="application/x-tex">Y=BX</annotation></semantics></math>,</p>
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>Y</mi><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mi>B</mi><mi>E</mi><mo stretchy="false" form="prefix">[</mo><mi>X</mi><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">E[Y]=B E[X]</annotation></semantics></math></p>
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>o</mi><mi>v</mi><mo stretchy="false" form="prefix">(</mo><mi>Y</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>B</mi><mi>C</mi><mi>o</mi><mi>v</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo><msup><mi>B</mi><mi>T</mi></msup></mrow><annotation encoding="application/x-tex">Cov(Y)=B Cov(X)B^T</annotation></semantics></math></p>
         <p>Because the Gaussian distribution is defined by this mean and
         variance, the resulting distribution of our random variable is
         also Gaussian with</p>
-        <p><span class="math display"> \mathcal{N}(\mu,\Sigma)\to
-        \mathcal{N}(A\mu,A\Sigma A^T) </span></p>
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝒩</mi><mo stretchy="false" form="prefix">(</mo><mi>μ</mi><mo>,</mo><mi mathvariant="normal">Σ</mi><mo stretchy="false" form="postfix">)</mo><mo>→</mo><mi>𝒩</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mi>μ</mi><mo>,</mo><mi>A</mi><mi mathvariant="normal">Σ</mi><msup><mi>A</mi><mi>T</mi></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{N}(\mu,\Sigma)\to
+        \mathcal{N}(A\mu,A\Sigma A^T)</annotation></semantics></math></p>
         <p>So long as our motion model is a linear transformation and
         our prior and measurements are still Gaussian, the posterior
         will remain Gaussian, and therefore the entire process can be
@@ -899,7 +859,7 @@ git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c
         distributions. Getting oriented, an informationless prior would
         look like a uniform, light orange background. Our prior is a bit
         better than informationless: we know the velocity is probably
-        between <span class="math inline">\pm 4</span> m/s.</p>
+        between <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>±</mi><mn>4</mn></mrow><annotation encoding="application/x-tex">\pm 4</annotation></semantics></math> m/s.</p>
         <p>Our sensor still provides only range information. Therefore
         it appears as a 1D Gaussian smeared uniformly across the
         velocity axis.</p>
@@ -1004,35 +964,27 @@ git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c
         </table>
         <p>We can incorporate the intelligence report into our Bayesian
         framework as a uniform prior:</p>
-        <p><span class="math display">
-        f_X(x) = \frac{1}{\text{1,400}} \quad \text{for } x \in
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>X</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mn>1</mn><mtext mathvariant="normal">1,400</mtext></mfrac><mspace width="1.0em"></mspace><mrow><mtext mathvariant="normal">for </mtext><mspace width="0.333em"></mspace></mrow><mi>x</mi><mo>∈</mo><mo stretchy="false" form="prefix">[</mo><mtext mathvariant="normal">4,600</mtext><mo>,</mo><mtext mathvariant="normal">6,000</mtext><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">f_X(x) = \frac{1}{\text{1,400}} \quad \text{for } x \in
         [\text{4,600},
-        \text{6,000}]
-        </span></p>
+        \text{6,000}]</annotation></semantics></math></p>
         <p>The problem with a uniform prior is that we can no longer
         solve the problem analytically. What can we do instead? One
         option divide the x-dimension into 200 “bins” then calculate the
         prior and likelihood for each bin. Then, using the same linear
         motion update</p>
-        <p><span class="math display">
-        \begin{bmatrix} \text{pos} \\ \text{vel} \end{bmatrix}_t =
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mtext mathvariant="normal">pos</mtext></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mtext mathvariant="normal">vel</mtext></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow><mi>t</mi></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mn>1</mn></mtd><mtd columnalign="center" style="text-align: center"><mi mathvariant="normal">Δ</mi><mi>t</mi></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd><mtd columnalign="center" style="text-align: center"><mn>1</mn></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow><msub><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mtext mathvariant="normal">pos</mtext></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mtext mathvariant="normal">vel</mtext></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>=</mo><mi>A</mi><msub><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mtext mathvariant="normal">pos</mtext></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mtext mathvariant="normal">vel</mtext></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">\begin{bmatrix} \text{pos} \\ \text{vel} \end{bmatrix}_t =
         \begin{bmatrix} 1
         &amp; \Delta t \\ 0 &amp; 1 \end{bmatrix} \begin{bmatrix}
         \text{pos} \\ \text{vel}
         \end{bmatrix}_{t-1} = A \begin{bmatrix} \text{pos} \\ \text{vel}
-        \end{bmatrix}_{t-1}
-        </span></p>
-        <p>For each bin in step <span class="math inline">(t-1)</span>’s
-        posterior, transform its state <span
-        class="math inline">x_1</span> into <span
-        class="math inline">x_2</span> using <span
-        class="math inline">A</span> and add that probability to step
-        <span class="math inline">t</span>’s prior’s bin at <span
-        class="math inline">x_2</span>.</p>
+        \end{bmatrix}_{t-1}</annotation></semantics></math></p>
+        <p>For each bin in step <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(t-1)</annotation></semantics></math>’s
+        posterior, transform its state <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>x</mi><mn>1</mn></msub><annotation encoding="application/x-tex">x_1</annotation></semantics></math> into <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>x</mi><mn>2</mn></msub><annotation encoding="application/x-tex">x_2</annotation></semantics></math> using <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> and add that probability to step
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>’s prior’s bin at <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>x</mi><mn>2</mn></msub><annotation encoding="application/x-tex">x_2</annotation></semantics></math>.</p>
         <blockquote>
         <p><em>Aside: alternatively we could have used a Gaussian prior
-        with (<span class="math inline">\mu=5,300,
-        \sigma=700)</span>, called it close enough, and used a Kalman
+        with (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><mo>=</mo><mn>5</mn><mo>,</mo><mn>300</mn><mo>,</mo><mi>σ</mi><mo>=</mo><mn>700</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\mu=5,300,
+        \sigma=700)</annotation></semantics></math>, called it close enough, and used a Kalman
         Filter. This sounds hacky, but it’s often often a good
         option.</em></p>
         </blockquote>
@@ -1050,16 +1002,14 @@ git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c
         analytical – that is we’ve approximated our continuous
         distributions with a finite grid. This sacrifices some
         precision, but allows us to consider non-Gaussian priors.</p>
-        <p>In this Act we used the same motion model <span
-        class="math inline">A</span> as in Act 3. However, now that
+        <p>In this Act we used the same motion model <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> as in Act 3. However, now that
         we’ve abandoned the requirement of an analytical solution, our
         motion model no longer needs to be linear either. So long as we
         can come up with a way to “update” the probability in the
         posterior forward in time, we can do so however we wish. For
         example, say we know that every 10 minutes the other submarine
         turns around. We could have a literal if-else statement in our
-        motion update that if <span
-        class="math inline">t\%(10*60)==0</span>, negate the velocity.
+        motion update that if <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mi>%</mi><mo stretchy="false" form="prefix">(</mo><mn>10</mn><mo>*</mo><mn>60</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">t\%(10*60)==0</annotation></semantics></math>, negate the velocity.
         This is impossible with a Kalman Filter.</p>
         <p>Finally, note that while our measurements have remained
         Gaussian they need not have. Once we start solving things
@@ -1068,18 +1018,15 @@ git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c
         <h3 id="act-5-particle-filter">Act 5: Particle Filter</h3>
         <p>Now let’s consider a higher-dimensional problem: both
         submarines move in three dimensions. We would like to track both
-        position <span class="math inline">\{x,y,z\}</span> and velocity
-        <span class="math inline">\{v_x,v_y,v_z\}</span>. Assume our
-        measurements are 3d Gaussians on <span
-        class="math inline">\{x,y,z\}</span> and our prior is a uniform
-        distribution over a cube in <span
-        class="math inline">\{x,y,z\}</span>.</p>
+        position <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo>,</mo><mi>z</mi><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{x,y,z\}</annotation></semantics></math> and velocity
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><msub><mi>v</mi><mi>x</mi></msub><mo>,</mo><msub><mi>v</mi><mi>y</mi></msub><mo>,</mo><msub><mi>v</mi><mi>z</mi></msub><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{v_x,v_y,v_z\}</annotation></semantics></math>. Assume our
+        measurements are 3d Gaussians on <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo>,</mo><mi>z</mi><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{x,y,z\}</annotation></semantics></math> and our prior is a uniform
+        distribution over a cube in <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo>,</mo><mi>z</mi><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{x,y,z\}</annotation></semantics></math>.</p>
         <p>If, like before, we split each dimension into 200 bins, we
-        now have <span
-        class="math inline">200^6=64\;\text{Trillion}</span> bins. Using
+        now have <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>200</mn><mn>6</mn></msup><mo>=</mo><mn>64</mn><mspace width="0.278em"></mspace><mtext mathvariant="normal">Trillion</mtext></mrow><annotation encoding="application/x-tex">200^6=64\;\text{Trillion}</annotation></semantics></math> bins. Using
         one float (32 bits) to store each bin’s value would require
-        <span class="math inline">32\times 64\times 10^{12}
-        \;\text{bits}\approx250\;\text{Terabytes}</span>. This is an
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>32</mn><mo>×</mo><mn>64</mn><mo>×</mo><msup><mn>10</mn><mn>12</mn></msup><mspace width="0.278em"></mspace><mtext mathvariant="normal">bits</mtext><mo>≈</mo><mn>250</mn><mspace width="0.278em"></mspace><mtext mathvariant="normal">Terabytes</mtext></mrow><annotation encoding="application/x-tex">32\times 64\times 10^{12}
+        \;\text{bits}\approx250\;\text{Terabytes}</annotation></semantics></math>. This is an
         example of “the curse of dimensionality”.</p>
         <p>Let’s think about what’s happening here. In our 2-dimensional
         example, after 3 measurements we are almost certain the other
@@ -1104,52 +1051,43 @@ git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c
         our probability between bins, leaving many bins with zero
         probability, why not <em>move the bins themselves</em>? Call
         these moving bins “particles”. Each particle is comprised of its
-        state <span
-        class="math inline">\{\text{position},\text{velocity}\}</span>
+        state <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mtext mathvariant="normal">position</mtext><mo>,</mo><mtext mathvariant="normal">velocity</mtext><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{\text{position},\text{velocity}\}</annotation></semantics></math>
         and its probability which we call its “weight”.</p>
         <p>To construct our set of particles, sample from the first
         prior distribution. There is no longer a need to discretize our
         likelihood functions as we can evaluate them directly at the
         state of each particle. After applying the likelihood function,
-        we update each particle using our state-transition model <span
-        class="math inline">A</span>. Like the histogram filter, we need
+        we update each particle using our state-transition model <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>. Like the histogram filter, we need
         not use a linear state-transition model or Gaussian
         prior/likelihoods. Note that the superscripts denote the
         particle index, not an exponent. Typically, the subscript is
         reserved for the time index.</p>
-        <p><span class="math display">
-        \text{particle 1 (state}\ x^1):\quad x^1_t = \begin{bmatrix} 1
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">particle 1 (state</mtext><mspace width="0.222em"></mspace><msup><mi>x</mi><mn>1</mn></msup><mo stretchy="false" form="postfix">)</mo><mo>:</mo><mspace width="1.0em"></mspace><msubsup><mi>x</mi><mi>t</mi><mn>1</mn></msubsup><mo>=</mo><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mn>1</mn></mtd><mtd columnalign="center" style="text-align: center"><mi mathvariant="normal">Δ</mi><mi>t</mi></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd><mtd columnalign="center" style="text-align: center"><mn>1</mn></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow><msubsup><mi>x</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow><mn>1</mn></msubsup></mrow><annotation encoding="application/x-tex">\text{particle 1 (state}\ x^1):\quad x^1_t = \begin{bmatrix} 1
         &amp; \Delta t \\
-        0 &amp; 1 \end{bmatrix} x^1_{t-1}
-        </span></p>
-        <p><span class="math display">
-        \text{particle 2 (state}\ x^2):\quad x^2_t = \begin{bmatrix} 1
+        0 &amp; 1 \end{bmatrix} x^1_{t-1}</annotation></semantics></math></p>
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">particle 2 (state</mtext><mspace width="0.222em"></mspace><msup><mi>x</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo><mo>:</mo><mspace width="1.0em"></mspace><msubsup><mi>x</mi><mi>t</mi><mn>2</mn></msubsup><mo>=</mo><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mn>1</mn></mtd><mtd columnalign="center" style="text-align: center"><mi mathvariant="normal">Δ</mi><mi>t</mi></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd><mtd columnalign="center" style="text-align: center"><mn>1</mn></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow><msubsup><mi>x</mi><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow><mn>2</mn></msubsup></mrow><annotation encoding="application/x-tex">\text{particle 2 (state}\ x^2):\quad x^2_t = \begin{bmatrix} 1
         &amp; \Delta t \\
-        0 &amp; 1 \end{bmatrix} x^2_{t-1}
-        </span></p>
-        <p><span class="math display"> \vdots </span></p>
+        0 &amp; 1 \end{bmatrix} x^2_{t-1}</annotation></semantics></math></p>
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>⋮</mi><annotation encoding="application/x-tex">\vdots</annotation></semantics></math></p>
         <p>At each step the prior is the set of original particles and
         their weights and the posterior is the set of particles with
         updated weights. Each particle’s weight is updated according to
         Bayes’ theorem.</p>
-        <p><span class="math display">
-        \text{particle 1 (state}\ x^1):\quad \text{new weight} \propto
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">particle 1 (state</mtext><mspace width="0.222em"></mspace><msup><mi>x</mi><mn>1</mn></msup><mo stretchy="false" form="postfix">)</mo><mo>:</mo><mspace width="1.0em"></mspace><mtext mathvariant="normal">new weight</mtext><mo>∝</mo><mfrac><mrow><mtable><mtr><mtd columnalign="center" style="text-align: center"><mrow><mtext mathvariant="normal">likelihood of sensor </mtext><mspace width="0.333em"></mspace></mrow></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mrow><mrow><mtext mathvariant="normal">reading
+ y given </mtext><mspace width="0.333em"></mspace></mrow><msup><mi>x</mi><mn>1</mn></msup></mrow></mtd></mtr></mtable><mo>×</mo><mtext mathvariant="normal">old weight</mtext></mrow><mtext mathvariant="normal">evidence</mtext></mfrac><mo>∝</mo><mtext mathvariant="normal">likelihood</mtext><mo>×</mo><mtext mathvariant="normal">old weight</mtext></mrow><annotation encoding="application/x-tex">\text{particle 1 (state}\ x^1):\quad \text{new weight} \propto
         \frac{\substack{{\text{likelihood of sensor }}\\ {\text{reading
         y given }x^1}}
         \times \text{old weight}} {\text{evidence}} \propto
-        \text{likelihood}\times\text{old weight}
-        </span></p>
-        <p><span class="math display">
-        \text{particle 2 (state}\ x^2):\quad \text{new weight} \propto
+        \text{likelihood}\times\text{old weight}</annotation></semantics></math></p>
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">particle 2 (state</mtext><mspace width="0.222em"></mspace><msup><mi>x</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo><mo>:</mo><mspace width="1.0em"></mspace><mtext mathvariant="normal">new weight</mtext><mo>∝</mo><mfrac><mrow><mtable><mtr><mtd columnalign="center" style="text-align: center"><mrow><mtext mathvariant="normal">likelihood of sensor </mtext><mspace width="0.333em"></mspace></mrow></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mrow><mrow><mtext mathvariant="normal">reading
+ y given </mtext><mspace width="0.333em"></mspace></mrow><msup><mi>x</mi><mn>2</mn></msup></mrow></mtd></mtr></mtable><mo>×</mo><mtext mathvariant="normal">old weight</mtext></mrow><mtext mathvariant="normal">evidence</mtext></mfrac><mo>∝</mo><mtext mathvariant="normal">likelihood</mtext><mo>×</mo><mtext mathvariant="normal">old weight</mtext></mrow><annotation encoding="application/x-tex">\text{particle 2 (state}\ x^2):\quad \text{new weight} \propto
         \frac{\substack{{\text{likelihood of sensor }}\\ {\text{reading
         y given }x^2}}
         \times \text{old weight}} {\text{evidence}} \propto
-        \text{likelihood}\times\text{old weight}
-        </span></p>
-        <p><span class="math display"> \vdots </span></p>
-        <p>I’ve written “<span class="math inline">\propto</span>”
-        (proportional to) instead of “<span
-        class="math inline">=</span>” because there is one more step to
+        \text{likelihood}\times\text{old weight}</annotation></semantics></math></p>
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>⋮</mi><annotation encoding="application/x-tex">\vdots</annotation></semantics></math></p>
+        <p>I’ve written “<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>∝</mo><annotation encoding="application/x-tex">\propto</annotation></semantics></math>”
+        (proportional to) instead of “<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>=</mo><annotation encoding="application/x-tex">=</annotation></semantics></math>” because there is one more step to
         calculate the new weight. The particles comprise a probability
         distribution, so the sum of their weights should sum to 1.
         Therefore, we divide each weight by their sum. The effect of
@@ -1181,9 +1119,8 @@ git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c
         <blockquote>
         <p><em>Aside: what I’ve described here is called a “bootstrap
         filter”. It is a particular kind of particle filter where
-        certain assumptions are made so that <span
-        class="math inline">\text{new weight}\propto
-        \text{likelihood}\times\text{old weight}</span>. This isn’t
+        certain assumptions are made so that <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">new weight</mtext><mo>∝</mo><mtext mathvariant="normal">likelihood</mtext><mo>×</mo><mtext mathvariant="normal">old weight</mtext></mrow><annotation encoding="application/x-tex">\text{new weight}\propto
+        \text{likelihood}\times\text{old weight}</annotation></semantics></math>. This isn’t
         always the case. I’ve omitted the mathematical details since I
         don’t think they are necessary for a conceptual understanding.
         You can read more on Wikepdia</em> <a
@@ -1196,10 +1133,9 @@ git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c
         same critique here: most of the particles have near-zero weight
         but we keep them around.</p>
         <p>The solution is to “resample” the particles. Imagine we have
-        100 particles. Originally each has weight <span
-        class="math inline">1/100</span>. After performing the
+        100 particles. Originally each has weight <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mn>100</mn></mrow><annotation encoding="application/x-tex">1/100</annotation></semantics></math>. After performing the
         measurement update, half have weight zero and half have weight
-        <span class="math inline">1/50</span>. To resample we throw away
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mn>50</mn></mrow><annotation encoding="application/x-tex">1/50</annotation></semantics></math>. To resample we throw away
         the particles with 0 weight and duplicate each of the survivors.
         We’re left with a total weight of 1 and our surviving particles
         are all in the “region of interest”. I won’t go into more detail
@@ -2499,14 +2435,9 @@ Gemini has met Larry Page’s 2000 definition of artificial
         href="https://en.wikipedia.org/wiki/Toroidal_and_poloidal_coordinates">toroidal/poloidal
         coordinate system</a> because its geometry mirrors the
         problem’s, encapsulating its complexity. This system describes
-        locations relative to a “central circle” of radius <span
-        class="math inline">R_0</span> using three coordinates: <span
-        class="math inline">r</span>, <span
-        class="math inline">\theta</span>, and <span
-        class="math inline">\zeta</span>. <span
-        class="math inline">\zeta</span> measures the toroidal angle
-        (long way around), <span class="math inline">\theta</span> the
-        poloidal, and <span class="math inline">r</span> the distance
+        locations relative to a “central circle” of radius <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>R</mi><mn>0</mn></msub><annotation encoding="application/x-tex">R_0</annotation></semantics></math> using three coordinates: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math>, and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ζ</mi><annotation encoding="application/x-tex">\zeta</annotation></semantics></math>. <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ζ</mi><annotation encoding="application/x-tex">\zeta</annotation></semantics></math> measures the toroidal angle
+        (long way around), <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math> the
+        poloidal, and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math> the distance
         from the central circle.</p>
         <figure style="text-align: center;">
         <img src="/resources/tokamak-drift/midterm-toroidal-coordinates-xy.png" width="50%"/>
@@ -2521,26 +2452,21 @@ Gemini has met Larry Page’s 2000 definition of artificial
         </figcaption>
         </figure>
         <p>The translation to and from Cartesian coordinates is given by
-        <span class="math display">
-        \begin{aligned}
+        <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><mi>x</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>R</mi><mn>0</mn></msub><mo>+</mo><mi>r</mi><mrow><mi>cos</mi><mo>&#8289;</mo></mrow><mi>θ</mi><mo stretchy="false" form="postfix">)</mo><mrow><mi>cos</mi><mo>&#8289;</mo></mrow><mi>ζ</mi><mspace width="1.0em"></mspace></mtd><mtd columnalign="right" style="text-align: right"><mi>r</mi><mo>=</mo><msqrt><mrow><mo stretchy="false" form="prefix">(</mo><msqrt><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup></mrow></msqrt><mo>−</mo><msub><mi>R</mi><mn>0</mn></msub><msup><mo stretchy="false" form="postfix">)</mo><mn>2</mn></msup><mo>+</mo><msup><mi>z</mi><mn>2</mn></msup></mrow></msqrt></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><mi>y</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>R</mi><mn>0</mn></msub><mo>+</mo><mi>r</mi><mrow><mi>cos</mi><mo>&#8289;</mo></mrow><mi>θ</mi><mo stretchy="false" form="postfix">)</mo><mrow><mi>sin</mi><mo>&#8289;</mo></mrow><mi>ζ</mi><mspace width="1.0em"></mspace></mtd><mtd columnalign="right" style="text-align: right"><mi>θ</mi><mo>=</mo><mrow><mi>arctan</mi><mo>&#8289;</mo></mrow><mn>2</mn><mo stretchy="false" form="prefix">(</mo><mi>z</mi><mo>,</mo><msqrt><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup></mrow></msqrt><mo>−</mo><msub><mi>R</mi><mn>0</mn></msub><mo stretchy="false" form="postfix">)</mo></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><mi>z</mi><mo>=</mo><mi>r</mi><mrow><mi>sin</mi><mo>&#8289;</mo></mrow><mi>θ</mi><mspace width="1.0em"></mspace></mtd><mtd columnalign="right" style="text-align: right"><mi>ζ</mi><mo>=</mo><mrow><mi>arctan</mi><mo>&#8289;</mo></mrow><mn>2</mn><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo>,</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
         &amp;x = (R_0+r\cos\theta)\cos\zeta\quad&amp;r =
         \sqrt{(\sqrt{x^2+y^2}-R_0)^2+z^2}\\
         &amp;y = (R_0+r\cos\theta)\sin\zeta\quad&amp;\theta =
         \arctan2(z, \sqrt{x^2+y^2}-R_0)\\
         &amp;z = r\sin\theta\quad&amp;\zeta = \arctan2(y, x)\\
-        \end{aligned}
-        </span></p>
-        <p>Where <span class="math inline">\arctan2(y, x)</span> is the
+        \end{aligned}</annotation></semantics></math></p>
+        <p>Where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi>arctan</mi><mo>&#8289;</mo></mrow><mn>2</mn><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo>,</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\arctan2(y, x)</annotation></semantics></math> is the
         C/Python function which returns the angle between the positive
-        x-axis and the point <span class="math inline">(x, y)</span> in
-        the plane. Notice that <span
-        class="math inline">\sqrt{x^2+y^2}-R_0</span> is the signed
+        x-axis and the point <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(x, y)</annotation></semantics></math> in
+        the plane. Notice that <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msqrt><mrow><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><msup><mi>y</mi><mn>2</mn></msup></mrow></msqrt><mo>−</mo><msub><mi>R</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">\sqrt{x^2+y^2}-R_0</annotation></semantics></math> is the signed
         distance to the central circle in the xy-plane where a negative
         value indicates the point is within the circle.</p>
         <p>The unit vectors in this system (blue vectors in the
-        figures), expressed in Cartesian coordinates, are <span
-        class="math display">
-        \hat{r}=
+        figures), expressed in Cartesian coordinates, are <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>r</mi><mo accent="true">̂</mo></mover><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mrow><mi>cos</mi><mo>&#8289;</mo></mrow><mi>θ</mi><mrow><mi>cos</mi><mo>&#8289;</mo></mrow><mi>ζ</mi></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mrow><mi>cos</mi><mo>&#8289;</mo></mrow><mi>θ</mi><mrow><mi>sin</mi><mo>&#8289;</mo></mrow><mi>ζ</mi></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mrow><mi>sin</mi><mo>&#8289;</mo></mrow><mi>θ</mi></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"></mtd></mtr></mtable><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="0.278em"></mspace><mover><mi>θ</mi><mo accent="true">̂</mo></mover><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mi>−</mi><mrow><mi>sin</mi><mo>&#8289;</mo></mrow><mi>θ</mi><mrow><mi>cos</mi><mo>&#8289;</mo></mrow><mi>ζ</mi></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mi>−</mi><mrow><mi>sin</mi><mo>&#8289;</mo></mrow><mi>θ</mi><mrow><mi>sin</mi><mo>&#8289;</mo></mrow><mi>ζ</mi></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mrow><mi>cos</mi><mo>&#8289;</mo></mrow><mi>θ</mi></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"></mtd></mtr></mtable><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="0.278em"></mspace><mover><mi>ζ</mi><mo accent="true">̂</mo></mover><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mi>−</mi><mrow><mi>sin</mi><mo>&#8289;</mo></mrow><mi>ζ</mi></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mrow><mi>cos</mi><mo>&#8289;</mo></mrow><mi>ζ</mi></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mn>0</mn></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"></mtd></mtr></mtable><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\hat{r}=
         \left(
             \begin{array}{c}
             \cos\theta \cos \zeta \\
@@ -2563,24 +2489,15 @@ Gemini has met Larry Page’s 2000 definition of artificial
             \cos\zeta \\
             0 \\
             \end{array}
-        \right)
-        </span></p>
-        <p>Therefore, to translate a field vector with base (<span
-        class="math inline">r</span>, <span
-        class="math inline">\theta</span>, <span
-        class="math inline">\zeta</span>) and components (<span
-        class="math inline">a</span>, <span
-        class="math inline">b</span>, <span
-        class="math inline">c</span>) to Cartesian coordinates, the base
+        \right)</annotation></semantics></math></p>
+        <p>Therefore, to translate a field vector with base (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ζ</mi><annotation encoding="application/x-tex">\zeta</annotation></semantics></math>) and components (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>) to Cartesian coordinates, the base
         can be found using the translation above, and the vector using
-        the scaled unit vectors: <span class="math display">
-        \begin{aligned}
+        the scaled unit vectors: <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>𝐩</mi></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mi>a</mi><mover><mi>r</mi><mo accent="true">̂</mo></mover><mo>+</mo><mi>b</mi><mover><mi>θ</mi><mo accent="true">̂</mo></mover><mo>+</mo><mi>c</mi><mover><mi>ζ</mi><mo accent="true">̂</mo></mover></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>𝐩</mi></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mrow><mi>cos</mi><mo>&#8289;</mo></mrow><mi>θ</mi><mrow><mi>cos</mi><mo>&#8289;</mo></mrow><mi>ζ</mi><mo>−</mo><mi>b</mi><mrow><mi>sin</mi><mo>&#8289;</mo></mrow><mi>θ</mi><mrow><mi>cos</mi><mo>&#8289;</mo></mrow><mi>ζ</mi><mo>−</mo><mi>c</mi><mrow><mi>sin</mi><mo>&#8289;</mo></mrow><mi>ζ</mi><mo stretchy="false" form="postfix">)</mo><mover><mi>x</mi><mo accent="true">̂</mo></mover></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mi>+</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mrow><mi>cos</mi><mo>&#8289;</mo></mrow><mi>θ</mi><mrow><mi>sin</mi><mo>&#8289;</mo></mrow><mi>ζ</mi><mo>−</mo><mi>b</mi><mrow><mi>sin</mi><mo>&#8289;</mo></mrow><mi>θ</mi><mrow><mi>sin</mi><mo>&#8289;</mo></mrow><mi>ζ</mi><mo>+</mo><mi>c</mi><mrow><mi>cos</mi><mo>&#8289;</mo></mrow><mi>ζ</mi><mo stretchy="false" form="postfix">)</mo><mover><mi>y</mi><mo accent="true">̂</mo></mover></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mi>+</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mrow><mi>sin</mi><mo>&#8289;</mo></mrow><mi>θ</mi><mo>+</mo><mi>b</mi><mrow><mi>cos</mi><mo>&#8289;</mo></mrow><mi>θ</mi><mo stretchy="false" form="postfix">)</mo><mover><mi>z</mi><mo accent="true">̂</mo></mover></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
         \mathbf{p}&amp;=a\hat{r}+b\hat{\theta}+c\hat{\zeta}\\
         \mathbf{p}&amp;=(a\cos\theta\cos\zeta-b\sin\theta\cos\zeta-c\sin\zeta)\hat{x}\\
         &amp;+(a\cos\theta\sin\zeta-b\sin\theta\sin\zeta+c\cos\zeta)\hat{y}\\
         &amp;+(a\sin\theta+b\cos\theta)\hat{z}
-        \end{aligned}
-        </span></p>
+        \end{aligned}</annotation></semantics></math></p>
         <details>
         <summary>
         Note On Handedness
@@ -2588,23 +2505,13 @@ Gemini has met Larry Page’s 2000 definition of artificial
         <p>
         If you pay close attention to the figures above, you’ll notice
         that the coordinate system is left-handed. That is, you can
-        point your left thumb in <span
-        class="math inline">\mathbf{e}_r</span>, left index in <span
-        class="math inline">\mathbf{e}_\theta</span> and your middle
-        will naturally point in <span
-        class="math inline">\mathbf{e}_\zeta</span>. This means that the
-        cross product between vectors in order (<span
-        class="math inline">r</span>, <span
-        class="math inline">\theta</span>, <span
-        class="math inline">\zeta</span>) does not act like it does
-        between (<span class="math inline">x</span>, <span
-        class="math inline">y</span>, <span
-        class="math inline">z</span>). If using equations defined for a
+        point your left thumb in <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐞</mi><mi>r</mi></msub><annotation encoding="application/x-tex">\mathbf{e}_r</annotation></semantics></math>, left index in <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐞</mi><mi>θ</mi></msub><annotation encoding="application/x-tex">\mathbf{e}_\theta</annotation></semantics></math> and your middle
+        will naturally point in <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>𝐞</mi><mi>ζ</mi></msub><annotation encoding="application/x-tex">\mathbf{e}_\zeta</annotation></semantics></math>. This means that the
+        cross product between vectors in order (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ζ</mi><annotation encoding="application/x-tex">\zeta</annotation></semantics></math>) does not act like it does
+        between (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>z</mi><annotation encoding="application/x-tex">z</annotation></semantics></math>). If using equations defined for a
         right-handed system, you would need to account for this with
         appropriate negative signs. Alternatively, you can make this
-        system right-handed by measuring <span
-        class="math inline">\theta</span> or <span
-        class="math inline">\zeta</span> in the opposite direction.
+        system right-handed by measuring <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math> or <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>ζ</mi><annotation encoding="application/x-tex">\zeta</annotation></semantics></math> in the opposite direction.
         Since I only use this system to define the magnetic field and
         not do any calculations, this isn’t a concern.
         </p>
@@ -2612,15 +2519,13 @@ Gemini has met Larry Page’s 2000 definition of artificial
         <h4 id="basic-tokamak-magnetic-fields">Basic Tokamak Magnetic
         Fields</h4>
         <p>The simplest field to imagine is a torus with constant
-        magnitude in the <span class="math inline">\hat{\zeta}</span>
-        (toroidal) direction. <span class="math display">
-        \begin{aligned}
+        magnitude in the <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>ζ</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat{\zeta}</annotation></semantics></math>
+        (toroidal) direction. <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mtext mathvariant="bold">𝐁</mtext><mo stretchy="false" form="prefix">(</mo><mi>r</mi><mo>,</mo><mi>θ</mi><mo>,</mo><mi>ζ</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mrow><mo stretchy="true" form="prefix">{</mo><mtable><mtr><mtd columnalign="left" style="text-align: left"><mn>1</mn><mover><mi>ζ</mi><mo accent="true">̂</mo></mover></mtd><mtd columnalign="left" style="text-align: left"><mrow><mtext mathvariant="normal">if </mtext><mspace width="0.333em"></mspace></mrow><mi>r</mi><mo>&lt;</mo><msub><mi>r</mi><mn>0</mn></msub></mtd></mtr><mtr><mtd columnalign="left" style="text-align: left"><mn>0</mn></mtd><mtd columnalign="left" style="text-align: left"><mtext mathvariant="normal">otherwise</mtext></mtd></mtr></mtable></mrow></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
         \textbf{B}(r, \theta, \zeta)=\begin{cases}
         1\hat{\zeta} &amp; \text{if } r &lt; r_0 \\
         0 &amp; \text{otherwise}
         \end{cases}
-        \end{aligned}
-        </span></p>
+        \end{aligned}</annotation></semantics></math></p>
         <!-- <figure style="text-align: center;">
         <img src="/resources/tokamak-drift/midterm-3d-uniform-toroidal-magnetic-field.png" width="80%"/>
         <figcaption>Figure 3. Uniform Toroidal Magnetic Field</figcaption>
@@ -2629,9 +2534,8 @@ Gemini has met Larry Page’s 2000 definition of artificial
         <img src="/images/midterm-2d-uniform-toroidal-magnetic-field.png" width="60%"/>
         <figcaption>Figure 4. Uniform Toroidal Magnetic Field, z=0 slice</figcaption>
         </figure> -->
-        <p>Where <span class="math inline">r_0</span> is the poloidal
-        radius. Remember that the major radius <span
-        class="math inline">R_0</span> is implicit in the coordinate
+        <p>Where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>r</mi><mn>0</mn></msub><annotation encoding="application/x-tex">r_0</annotation></semantics></math> is the poloidal
+        radius. Remember that the major radius <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>R</mi><mn>0</mn></msub><annotation encoding="application/x-tex">R_0</annotation></semantics></math> is implicit in the coordinate
         system. Unfortunately, such a field is impossible to construct.
         Consider the integral around the central circle. Since the field
         is constant, the integral will be proportional to the loop’s
@@ -2640,10 +2544,12 @@ Gemini has met Larry Page’s 2000 definition of artificial
         tells us the integrals must be equal because the same amount of
         current (from the toroidal field coils) passes through each
         loop. In order to obey Ampere’s law, the magnitude of the
-        magnetic field must vary with <span
-        class="math inline">1/R</span>:</p>
-        <p><span class="math display">
-        \begin{aligned}
+        magnetic field must vary with <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">1/R</annotation></semantics></math>:</p>
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><msub><mo>∮</mo><msub><mi>C</mi><mi>t</mi></msub></msub><msub><mtext mathvariant="bold">𝐁</mtext><mi>t</mi></msub><mo>⋅</mo><mi>d</mi><mi>ℓ</mi><mo>=</mo><msub><mi>μ</mi><mn>0</mn></msub><msub><mi>I</mi><mtext mathvariant="normal">enc</mtext></msub><mspace width="1.0em"></mspace><mrow><mrow><mtext mathvariant="normal">(Ampere’s law, </mtext><mspace width="0.333em"></mspace></mrow><msub><mi>C</mi><mi>t</mi></msub><mtext mathvariant="normal">
+ is a toroidal loop)</mtext></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><msub><mo>∮</mo><msub><mi>C</mi><mi>t</mi></msub></msub><msub><mi>B</mi><mi>t</mi></msub><mi>d</mi><mi>ℓ</mi><mo>=</mo><msub><mi>μ</mi><mn>0</mn></msub><msub><mi>I</mi><mtext mathvariant="normal">enc</mtext></msub><mspace width="1.0em"></mspace><mrow><mtext mathvariant="normal">(B
+ is purely toroidal, parallel to </mtext><mspace width="0.333em"></mspace></mrow><msub><mi>C</mi><mi>t</mi></msub><mo stretchy="false" form="postfix">)</mo></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><msub><mi>B</mi><mi>t</mi></msub><msub><mo>∮</mo><msub><mi>C</mi><mi>t</mi></msub></msub><mi>d</mi><mi>ℓ</mi><mo>=</mo><msub><mi>μ</mi><mn>0</mn></msub><msub><mi>I</mi><mtext mathvariant="normal">enc</mtext></msub><mspace width="1.0em"></mspace><mtext mathvariant="normal">(B
+ has toroidal symmetry)</mtext></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><msub><mi>B</mi><mi>t</mi></msub><msubsup><mo>∫</mo><mn>0</mn><mrow><mn>2</mn><mi>π</mi></mrow></msubsup><mi>R</mi><mi>d</mi><mi>θ</mi><mo>=</mo><msub><mi>μ</mi><mn>0</mn></msub><msub><mi>I</mi><mtext mathvariant="normal">enc</mtext></msub><mspace width="1.0em"></mspace><mrow><mtext mathvariant="normal">(R is the radius of
+ </mtext><mspace width="0.333em"></mspace></mrow><msub><mi>C</mi><mi>t</mi></msub><mo stretchy="false" form="postfix">)</mo></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><msub><mi>B</mi><mi>t</mi></msub><mi>R</mi><mo>=</mo><mfrac><mrow><msub><mi>μ</mi><mn>0</mn></msub><msub><mi>I</mi><mtext mathvariant="normal">enc</mtext></msub></mrow><mrow><mn>2</mn><mi>π</mi></mrow></mfrac><mo>=</mo><mtext mathvariant="normal">Constant</mtext><mo>⇒</mo><msub><mi>B</mi><mi>t</mi></msub><mo>∝</mo><mfrac><mn>1</mn><mi>R</mi></mfrac></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
         &amp;\oint_{C_t} \textbf{B}_t\cdot
         d\ell=\mu_0I_{\textrm{enc}}\quad\textrm{(Ampere&#39;s law, $C_t$
         is a toroidal loop)}\\
@@ -2657,22 +2563,16 @@ Gemini has met Larry Page’s 2000 definition of artificial
         &amp;B_tR =
         \frac{\mu_0I_{\textrm{enc}}}{2\pi}=\textrm{Constant}\Rightarrow
         B_t\propto\frac{1}{R}
-        \end{aligned}
-        </span></p>
-        <p>Accounting for this fact leads us to the field: <span
-        class="math display">
-        \begin{aligned}
+        \end{aligned}</annotation></semantics></math></p>
+        <p>Accounting for this fact leads us to the field: <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mtext mathvariant="bold">𝐁</mtext><mo stretchy="false" form="prefix">(</mo><mi>r</mi><mo>,</mo><mi>θ</mi><mo>,</mo><mi>ζ</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mrow><mo stretchy="true" form="prefix">{</mo><mtable><mtr><mtd columnalign="left" style="text-align: left"><msub><mi>R</mi><mn>0</mn></msub><mi>/</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>R</mi><mn>0</mn></msub><mo>+</mo><mi>r</mi><mrow><mi>cos</mi><mo>&#8289;</mo></mrow><mi>θ</mi><mo stretchy="false" form="postfix">)</mo><mover><mi>ζ</mi><mo accent="true">̂</mo></mover></mtd><mtd columnalign="left" style="text-align: left"><mrow><mtext mathvariant="normal">if </mtext><mspace width="0.333em"></mspace></mrow><mi>r</mi><mo>&lt;</mo><msub><mi>r</mi><mn>0</mn></msub></mtd></mtr><mtr><mtd columnalign="left" style="text-align: left"><mn>0</mn></mtd><mtd columnalign="left" style="text-align: left"><mtext mathvariant="normal">otherwise</mtext></mtd></mtr></mtable></mrow></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
         \textbf{B}(r, \theta, \zeta)=\begin{cases}
         R_0/(R_0 + r\cos\theta)\hat{\zeta} &amp; \text{if } r &lt; r_0
         \\
         0 &amp; \text{otherwise}
         \end{cases}
-        \end{aligned}
-        </span> Since <span
-        class="math inline">R=R_0+r\cos\theta</span>. Choosing a
-        numerator of <span class="math inline">R_0</span> normalizes
-        this so that the field along the central circle <span
-        class="math inline">1</span>.</p>
+        \end{aligned}</annotation></semantics></math> Since <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo><msub><mi>R</mi><mn>0</mn></msub><mo>+</mo><mi>r</mi><mrow><mi>cos</mi><mo>&#8289;</mo></mrow><mi>θ</mi></mrow><annotation encoding="application/x-tex">R=R_0+r\cos\theta</annotation></semantics></math>. Choosing a
+        numerator of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>R</mi><mn>0</mn></msub><annotation encoding="application/x-tex">R_0</annotation></semantics></math> normalizes
+        this so that the field along the central circle <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>.</p>
         <figure style="text-align: center;">
         <img src="/resources/tokamak-drift/midterm-2d-physical-toroidal-magnetic-field.png" width="60%"/>
         <figcaption>
@@ -2688,10 +2588,11 @@ Gemini has met Larry Page’s 2000 definition of artificial
         Tokamaks drive a toroidal current through the plasma itself. The
         precise mechanism (induction, neutral beam injection, or
         electromagnetic radiation) is not important here. Assuming this
-        current density <span class="math inline">\textbf{J}</span> is
+        current density <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtext mathvariant="bold">𝐉</mtext><annotation encoding="application/x-tex">\textbf{J}</annotation></semantics></math> is
         uniform:</p>
-        <p><span class="math display">
-        \begin{aligned}
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><msub><mo>∮</mo><msub><mi>C</mi><mi>p</mi></msub></msub><msub><mtext mathvariant="bold">𝐁</mtext><mi>p</mi></msub><mo>⋅</mo><mi>d</mi><mi>ℓ</mi><mo>=</mo><msub><mi>μ</mi><mn>0</mn></msub><msub><mi>I</mi><mtext mathvariant="normal">enc</mtext></msub><mo>∝</mo><mi>J</mi><mi>π</mi><msup><mi>r</mi><mn>2</mn></msup><mspace width="1.0em"></mspace><mrow><mrow><mtext mathvariant="normal">(Ampere’s Law, </mtext><mspace width="0.333em"></mspace></mrow><msub><mi>C</mi><mi>p</mi></msub><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> is a poloidal loop)</mtext></mrow></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><msub><mo>∮</mo><msub><mi>C</mi><mi>p</mi></msub></msub><msub><mi>B</mi><mi>p</mi></msub><mi>d</mi><mi>ℓ</mi><mo>∝</mo><msup><mi>r</mi><mn>2</mn></msup><mspace width="1.0em"></mspace><mo stretchy="false" form="prefix">(</mo><msub><mi>B</mi><mi>p</mi></msub><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> is purely
+ poloidal, parallel to </mtext><mspace width="0.333em"></mspace></mrow><msub><mi>C</mi><mi>p</mi></msub><mo stretchy="false" form="postfix">)</mo></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><msub><mi>B</mi><mi>p</mi></msub><msub><mo>∮</mo><msub><mi>C</mi><mi>p</mi></msub></msub><mi>d</mi><mi>ℓ</mi><mo>∝</mo><msup><mi>r</mi><mn>2</mn></msup><mspace width="1.0em"></mspace><mo stretchy="false" form="prefix">(</mo><msub><mi>B</mi><mi>p</mi></msub><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> has
+ poloidal symmetry)</mtext></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><msub><mi>B</mi><mi>p</mi></msub><mi>r</mi><mo>∝</mo><msup><mi>r</mi><mn>2</mn></msup><mo>⇒</mo><msub><mi>B</mi><mi>p</mi></msub><mo>∝</mo><mi>r</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
         &amp;\oint_{C_p} \textbf{B}_p\cdot
         d\ell=\mu_0I_{\textrm{enc}}\propto J\pi
         r^2\quad\textrm{(Ampere&#39;s Law, $C_p$ is a poloidal loop)}\\
@@ -2700,27 +2601,22 @@ Gemini has met Larry Page’s 2000 definition of artificial
         &amp;B_p\oint_{C_p} d\ell\propto r^2\quad(B_p\textrm{ has
         poloidal symmetry)}\\
         &amp;B_pr \propto r^2\Rightarrow B_p\propto r
-        \end{aligned}
-        </span></p>
+        \end{aligned}</annotation></semantics></math></p>
         <p>Ampere’s law tells us that this poloidal field is
         proportional to the minor-distance from the central circle,
-        <span class="math inline">r</span>. Because the magnetic field
-        in a vacuum linear, the toroidal <span
-        class="math inline">\textbf{B}_t</span> and poloidal fields
-        <span class="math inline">\textbf{B}_p</span> can be combined by
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>. Because the magnetic field
+        in a vacuum linear, the toroidal <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mtext mathvariant="bold">𝐁</mtext><mi>t</mi></msub><annotation encoding="application/x-tex">\textbf{B}_t</annotation></semantics></math> and poloidal fields
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mtext mathvariant="bold">𝐁</mtext><mi>p</mi></msub><annotation encoding="application/x-tex">\textbf{B}_p</annotation></semantics></math> can be combined by
         addition:</p>
-        <p><span class="math display">
-        \begin{aligned}
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mtext mathvariant="bold">𝐁</mtext><mo stretchy="false" form="prefix">(</mo><mi>r</mi><mo>,</mo><mi>θ</mi><mo>,</mo><mi>ζ</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mrow><mo stretchy="true" form="prefix">{</mo><mtable><mtr><mtd columnalign="left" style="text-align: left"><msub><mi>R</mi><mn>0</mn></msub><mi>/</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>R</mi><mn>0</mn></msub><mo>+</mo><mi>r</mi><mrow><mi>cos</mi><mo>&#8289;</mo></mrow><mi>θ</mi><mo stretchy="false" form="postfix">)</mo><mover><mi>ζ</mi><mo accent="true">̂</mo></mover><mo>+</mo><mo stretchy="false" form="prefix">(</mo><mi>r</mi><mi>/</mi><msub><mi>r</mi><mn>0</mn></msub><mo stretchy="false" form="postfix">)</mo><mover><mi>θ</mi><mo accent="true">̂</mo></mover></mtd><mtd columnalign="left" style="text-align: left"><mrow><mtext mathvariant="normal">if </mtext><mspace width="0.333em"></mspace></mrow><mi>r</mi><mo>&lt;</mo><msub><mi>r</mi><mn>0</mn></msub></mtd></mtr><mtr><mtd columnalign="left" style="text-align: left"><mn>0</mn></mtd><mtd columnalign="left" style="text-align: left"><mtext mathvariant="normal">otherwise</mtext></mtd></mtr></mtable></mrow></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
         \textbf{B}(r, \theta, \zeta)=\begin{cases}
         R_0/(R_0 + r\cos\theta)\hat{\zeta} + (r/r_0) \hat{\theta} &amp;
         \text{if } r &lt; r_0 \\
         0 &amp; \text{otherwise}
         \end{cases}
-        \end{aligned}
-        </span></p>
-        <p>I normalize the poloidal <span
-        class="math inline">\hat{\theta}</span> term, so it varies from
-        0 at the central circle to <span class="math inline">1</span> at
+        \end{aligned}</annotation></semantics></math></p>
+        <p>I normalize the poloidal <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>θ</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat{\theta}</annotation></semantics></math> term, so it varies from
+        0 at the central circle to <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math> at
         the surface.</p>
         <figure style="text-align: center;">
         <img src="/resources/tokamak-drift/midterm-3d-twisting-toroidal-magnetic-field.png" width="80%"/>
@@ -2731,76 +2627,51 @@ Gemini has met Larry Page’s 2000 definition of artificial
         <h4 id="particle-drift">Particle drift</h4>
         <p>There are two causes of particle drift due to complexities of
         the magnetic field. The first is caused by the magnetic field
-        varying in magnitude. This is called grad-B <span
-        class="math inline">(\nabla B)</span> drift. It causes the
+        varying in magnitude. This is called grad-B <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>∇</mi><mi>B</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(\nabla B)</annotation></semantics></math> drift. It causes the
         orbital centers of particles to move with velocity:</p>
-        <p><span class="math display">
-        \mathbf{v}_{\nabla B}=\pm\frac{1}{2}v_\perp
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝐯</mi><mrow><mi>∇</mi><mi>B</mi></mrow></msub><mo>=</mo><mi>±</mi><mfrac><mn>1</mn><mn>2</mn></mfrac><msub><mi>v</mi><mo>⟂</mo></msub><msub><mi>r</mi><mi>L</mi></msub><mfrac><mrow><mi>𝐁</mi><mo>×</mo><mi>∇</mi><mi>B</mi></mrow><msup><mi>B</mi><mn>2</mn></msup></mfrac><mo>,</mo><mspace width="1.0em"></mspace><msub><mi>r</mi><mi>L</mi></msub><mo>=</mo><mfrac><mrow><mi>m</mi><msub><mi>v</mi><mo>⟂</mo></msub></mrow><mrow><mo stretchy="false" form="prefix">|</mo><mi>q</mi><mo stretchy="false" form="prefix">|</mo><mi>B</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\mathbf{v}_{\nabla B}=\pm\frac{1}{2}v_\perp
         r_L\frac{\mathbf{B}\times\nabla B}{B^2},\quad
-        r_L=\frac{mv_\perp}{|q|B}
-        </span> Where <span class="math inline">v_\perp</span> is the
-        particle’s velocity perpendicular to the field line, <span
-        class="math inline">r_L</span> is the Larmour radius (radius of
-        a single orbit around the field line), and <span
-        class="math inline">B=|\textbf{B}|</span> is the magnitude of
-        the magnetic field. The <span class="math inline">\pm</span>
+        r_L=\frac{mv_\perp}{|q|B}</annotation></semantics></math> Where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mo>⟂</mo></msub><annotation encoding="application/x-tex">v_\perp</annotation></semantics></math> is the
+        particle’s velocity perpendicular to the field line, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>r</mi><mi>L</mi></msub><annotation encoding="application/x-tex">r_L</annotation></semantics></math> is the Larmour radius (radius of
+        a single orbit around the field line), and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mo>=</mo><mo stretchy="false" form="prefix">|</mo><mtext mathvariant="bold">𝐁</mtext><mo stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">B=|\textbf{B}|</annotation></semantics></math> is the magnitude of
+        the magnetic field. The <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>±</mi><annotation encoding="application/x-tex">\pm</annotation></semantics></math>
         indicates that the drift is positive for ions and negative for
         electrons. To calculate this drift for the toroidal field,
-        consider an ion anywhere in the poloidal cross-section at <span
-        class="math inline">\zeta=0</span>. Using the fact that when
-        <span class="math inline">\zeta=0</span>, <span
-        class="math inline">\hat{\zeta}=\hat{y}</span> and that <span
-        class="math inline">x=R_0+r\cos\theta</span>, we can write the
+        consider an ion anywhere in the poloidal cross-section at <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ζ</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\zeta=0</annotation></semantics></math>. Using the fact that when
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ζ</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\zeta=0</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>ζ</mi><mo accent="true">̂</mo></mover><mo>=</mo><mover><mi>y</mi><mo accent="true">̂</mo></mover></mrow><annotation encoding="application/x-tex">\hat{\zeta}=\hat{y}</annotation></semantics></math> and that <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><msub><mi>R</mi><mn>0</mn></msub><mo>+</mo><mi>r</mi><mrow><mi>cos</mi><mo>&#8289;</mo></mrow><mi>θ</mi></mrow><annotation encoding="application/x-tex">x=R_0+r\cos\theta</annotation></semantics></math>, we can write the
         gradient of the field in Cartesian coordinates.</p>
-        <p><span class="math display">
-        \begin{aligned}
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mtext mathvariant="bold">𝐁</mtext><mo>=</mo><msub><mi>R</mi><mn>0</mn></msub><mi>/</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>R</mi><mn>0</mn></msub><mo>+</mo><mi>r</mi><mrow><mi>cos</mi><mo>&#8289;</mo></mrow><mi>θ</mi><mo stretchy="false" form="postfix">)</mo><mover><mi>ζ</mi><mo accent="true">̂</mo></mover><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>R</mi><mn>0</mn></msub><mi>/</mi><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mover><mi>y</mi><mo accent="true">̂</mo></mover></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mi>B</mi><mo>=</mo><msub><mi>R</mi><mn>0</mn></msub><mi>/</mi><mi>x</mi></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mi>∇</mi><mi>B</mi><mo>=</mo><mfrac><mrow><mi>∂</mi><mi>B</mi></mrow><mrow><mi>∂</mi><mi>x</mi></mrow></mfrac><mover><mi>x</mi><mo accent="true">̂</mo></mover><mo>=</mo><mi>−</mi><mfrac><msub><mi>R</mi><mn>0</mn></msub><msup><mi>x</mi><mn>2</mn></msup></mfrac><mover><mi>x</mi><mo accent="true">̂</mo></mover></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
         &amp;\textbf{B}=R_0/(R_0+r\cos\theta)\hat{\zeta}=(R_0/x)
         \hat{y}\\
         &amp;B=R_0/x\\
         &amp;\nabla B=\frac{\partial B}{\partial
         x}\hat{x}=-\frac{R_0}{x^2}\hat{x}
-        \end{aligned}
-        </span></p>
-        <p>The grad-B drift for an ion with charge <span
-        class="math inline">q</span> and mass <span
-        class="math inline">m</span> is then</p>
-        <p><span class="math display">
-        \mathbf{v}_{\nabla
-        B}=\frac{1}{2}v_\perp\frac{mv_\perp}{q(R_0/x)}\frac{(R_0/x)\hat{y}\times(-R_0/x^2)\hat{x}}{(R_0/x)^2}=\frac{mv_\perp^2}{2qR_0}\hat{z}
-        </span></p>
+        \end{aligned}</annotation></semantics></math></p>
+        <p>The grad-B drift for an ion with charge <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math> and mass <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math> is then</p>
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>𝐯</mi><mrow><mi>∇</mi><mi>B</mi></mrow></msub><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msub><mi>v</mi><mo>⟂</mo></msub><mfrac><mrow><mi>m</mi><msub><mi>v</mi><mo>⟂</mo></msub></mrow><mrow><mi>q</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>R</mi><mn>0</mn></msub><mi>/</mi><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac><mfrac><mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>R</mi><mn>0</mn></msub><mi>/</mi><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mover><mi>y</mi><mo accent="true">̂</mo></mover><mo>×</mo><mo stretchy="false" form="prefix">(</mo><mi>−</mi><msub><mi>R</mi><mn>0</mn></msub><mi>/</mi><msup><mi>x</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo><mover><mi>x</mi><mo accent="true">̂</mo></mover></mrow><mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>R</mi><mn>0</mn></msub><mi>/</mi><mi>x</mi><msup><mo stretchy="false" form="postfix">)</mo><mn>2</mn></msup></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>m</mi><msubsup><mi>v</mi><mo>⟂</mo><mn>2</mn></msubsup></mrow><mrow><mn>2</mn><mi>q</mi><msub><mi>R</mi><mn>0</mn></msub></mrow></mfrac><mover><mi>z</mi><mo accent="true">̂</mo></mover></mrow><annotation encoding="application/x-tex">\mathbf{v}_{\nabla
+        B}=\frac{1}{2}v_\perp\frac{mv_\perp}{q(R_0/x)}\frac{(R_0/x)\hat{y}\times(-R_0/x^2)\hat{x}}{(R_0/x)^2}=\frac{mv_\perp^2}{2qR_0}\hat{z}</annotation></semantics></math></p>
         <p>By argument of symmetry (we could have oriented the x-axis
         however we like) the ion will experience this same drift
         everywhere in the torus. Notice this is a constant, so this
         drift is the same for any particle trajectory.</p>
         <p>The second type of drift is due to the curvature of the field
-        and arises from the centrifugal force: <span
-        class="math display">
-        \textbf{v}_R=\frac{mv_\parallel^2}{qB^2}\frac{\textbf{R}_c\times\textbf{B}}{R_c^2}
-        </span> Where <span class="math inline">\textbf{R}_c</span> is
+        and arises from the centrifugal force: <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext mathvariant="bold">𝐯</mtext><mi>R</mi></msub><mo>=</mo><mfrac><mrow><mi>m</mi><msubsup><mi>v</mi><mo>∥</mo><mn>2</mn></msubsup></mrow><mrow><mi>q</mi><msup><mi>B</mi><mn>2</mn></msup></mrow></mfrac><mfrac><mrow><msub><mtext mathvariant="bold">𝐑</mtext><mi>c</mi></msub><mo>×</mo><mtext mathvariant="bold">𝐁</mtext></mrow><msubsup><mi>R</mi><mi>c</mi><mn>2</mn></msubsup></mfrac></mrow><annotation encoding="application/x-tex">\textbf{v}_R=\frac{mv_\parallel^2}{qB^2}\frac{\textbf{R}_c\times\textbf{B}}{R_c^2}</annotation></semantics></math> Where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mtext mathvariant="bold">𝐑</mtext><mi>c</mi></msub><annotation encoding="application/x-tex">\textbf{R}_c</annotation></semantics></math> is
         the vector pointing from the center of the torus to the
-        particle, and <span class="math inline">v_\parallel</span> is
+        particle, and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mo>∥</mo></msub><annotation encoding="application/x-tex">v_\parallel</annotation></semantics></math> is
         its velocity along the magnetic field line. Now consider an ion
-        at <span class="math inline">\zeta=\theta=0</span>, that is,
-        along the <span class="math inline">x</span>-axis so that <span
-        class="math inline">R_c=x</span>. The curvature drift will be
-        <span class="math display">
-        \textbf{v}_R=\frac{mv_\parallel^2}{q(R_0/x)^2}\frac{R_c\hat{x}\times(R_0/x)\hat{y}}{R_c^2}=\frac{mv_\parallel^2}{qR_0}\hat{z}
-        </span></p>
-        <p>If the particle has a non-zero <span
-        class="math inline">z</span>-component, this becomes more
-        complex since <span class="math inline">R_c\neq x</span> and
-        <span class="math inline">\textbf{R}_c</span> is no longer
-        perpendicular to <span
-        class="math inline">\textbf{B}</span>.</p>
+        at <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ζ</mi><mo>=</mo><mi>θ</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\zeta=\theta=0</annotation></semantics></math>, that is,
+        along the <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>-axis so that <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>c</mi></msub><mo>=</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">R_c=x</annotation></semantics></math>. The curvature drift will be
+        <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mtext mathvariant="bold">𝐯</mtext><mi>R</mi></msub><mo>=</mo><mfrac><mrow><mi>m</mi><msubsup><mi>v</mi><mo>∥</mo><mn>2</mn></msubsup></mrow><mrow><mi>q</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>R</mi><mn>0</mn></msub><mi>/</mi><mi>x</mi><msup><mo stretchy="false" form="postfix">)</mo><mn>2</mn></msup></mrow></mfrac><mfrac><mrow><msub><mi>R</mi><mi>c</mi></msub><mover><mi>x</mi><mo accent="true">̂</mo></mover><mo>×</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>R</mi><mn>0</mn></msub><mi>/</mi><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mover><mi>y</mi><mo accent="true">̂</mo></mover></mrow><msubsup><mi>R</mi><mi>c</mi><mn>2</mn></msubsup></mfrac><mo>=</mo><mfrac><mrow><mi>m</mi><msubsup><mi>v</mi><mo>∥</mo><mn>2</mn></msubsup></mrow><mrow><mi>q</mi><msub><mi>R</mi><mn>0</mn></msub></mrow></mfrac><mover><mi>z</mi><mo accent="true">̂</mo></mover></mrow><annotation encoding="application/x-tex">\textbf{v}_R=\frac{mv_\parallel^2}{q(R_0/x)^2}\frac{R_c\hat{x}\times(R_0/x)\hat{y}}{R_c^2}=\frac{mv_\parallel^2}{qR_0}\hat{z}</annotation></semantics></math></p>
+        <p>If the particle has a non-zero <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>z</mi><annotation encoding="application/x-tex">z</annotation></semantics></math>-component, this becomes more
+        complex since <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mi>c</mi></msub><mo>≠</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">R_c\neq x</annotation></semantics></math> and
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mtext mathvariant="bold">𝐑</mtext><mi>c</mi></msub><annotation encoding="application/x-tex">\textbf{R}_c</annotation></semantics></math> is no longer
+        perpendicular to <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtext mathvariant="bold">𝐁</mtext><annotation encoding="application/x-tex">\textbf{B}</annotation></semantics></math>.</p>
         <p>The net effect in the toroidal field is that ions traveling
-        in the direction of the field lines will drift in the <span
-        class="math inline">+\hat{z}</span> direction until they escape
+        in the direction of the field lines will drift in the <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>+</mi><mover><mi>z</mi><mo accent="true">̂</mo></mover></mrow><annotation encoding="application/x-tex">+\hat{z}</annotation></semantics></math> direction until they escape
         confinement. This is obviously a concern. Fortunately, the
         addition of a poloidal component of the magnetic field solves
         this problem. The twisting path causes ions to spend an equal
-        amount of time in the top (<span
-        class="math inline">z&gt;0</span>) and bottom (<span
-        class="math inline">z&lt;0</span>) of the torus. While the ion
+        amount of time in the top (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">z&gt;0</annotation></semantics></math>) and bottom (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi><mo>&lt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">z&lt;0</annotation></semantics></math>) of the torus. While the ion
         is in the top, its upward drift causes it to move away from the
         central circle, but while it is in the bottom, its drift bring
         it back towards the central circle. Therefore, on average, there
@@ -2808,48 +2679,38 @@ Gemini has met Larry Page’s 2000 definition of artificial
         <h4 id="simulation-setup">Simulation Setup</h4>
         <p>Assume the effect of gravity is negligible and the electric
         field is zero. The ion experiences only the magnetic force:</p>
-        <p><span class="math display">
-        \begin{aligned}
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mtext mathvariant="bold">𝐅</mtext><mo>=</mo><mi>m</mi><mtext mathvariant="bold">𝐚</mtext><mo>=</mo><mi>q</mi><mtext mathvariant="bold">𝐯</mtext><mo>×</mo><mtext mathvariant="bold">𝐁</mtext></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mfrac><mrow><mi>d</mi><mtext mathvariant="bold">𝐯</mtext></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>q</mi><mtext mathvariant="bold">𝐯</mtext><mo>×</mo><mtext mathvariant="bold">𝐁</mtext></mrow><mi>m</mi></mfrac></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
         &amp;\textbf{F}=m\textbf{a}=q\textbf{v}\times\textbf{B}\\
         &amp;\frac{d\textbf{v}}{dt}=\frac{q\textbf{v}\times\textbf{B}}{m}\\
-        \end{aligned}
-        </span></p>
+        \end{aligned}</annotation></semantics></math></p>
         <p>The ion’s trajectory will follow this ODE. This cannot be
         solved analytically, so I use an adaptive Runge-Kutta method to
         solve it numerically. We can simplify the code by
         non-dimensionalizing this equation. That is, replace each
         component of the equation with a characteristic unit (denoted by
-        a subscript <span class="math inline">c</span>) multiplied by a
-        non-dimensional term (denoted by ~). For example, <span
-        class="math inline">a=\tilde{a}a_c</span></p>
-        <p><span class="math display">
-        \begin{aligned}
+        a subscript <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>) multiplied by a
+        non-dimensional term (denoted by ~). For example, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>=</mo><mover><mi>a</mi><mo accent="true">̃</mo></mover><msub><mi>a</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">a=\tilde{a}a_c</annotation></semantics></math></p>
+        <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><msub><mi>v</mi><mi>c</mi></msub><msub><mi>t</mi><mi>c</mi></msub></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mfrac><mrow><mi>d</mi><mover><mtext mathvariant="bold">𝐯</mtext><mo accent="true">̃</mo></mover></mrow><mrow><mi>d</mi><mover><mi>t</mi><mo accent="true">̃</mo></mover></mrow></mfrac></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><msub><mi>q</mi><mi>c</mi></msub><msub><mi>v</mi><mi>c</mi></msub><msub><mi>B</mi><mi>c</mi></msub></mrow><msub><mi>m</mi><mi>c</mi></msub></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mfrac><mrow><mover><mi>q</mi><mo accent="true">̃</mo></mover><mover><mtext mathvariant="bold">𝐯</mtext><mo accent="true">̃</mo></mover><mo>×</mo><mover><mtext mathvariant="bold">𝐁</mtext><mo accent="true">̃</mo></mover></mrow><mover><mi>m</mi><mo accent="true">̃</mo></mover></mfrac></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mfrac><mrow><mi>d</mi><mover><mtext mathvariant="bold">𝐯</mtext><mo accent="true">̃</mo></mover></mrow><mrow><mi>d</mi><mover><mi>t</mi><mo accent="true">̃</mo></mover></mrow></mfrac></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><msub><mi>q</mi><mi>c</mi></msub><msub><mi>B</mi><mi>c</mi></msub><msub><mi>t</mi><mi>c</mi></msub></mrow><msub><mi>m</mi><mi>c</mi></msub></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mfrac><mrow><mover><mi>q</mi><mo accent="true">̃</mo></mover><mover><mtext mathvariant="bold">𝐯</mtext><mo accent="true">̃</mo></mover><mo>×</mo><mover><mtext mathvariant="bold">𝐁</mtext><mo accent="true">̃</mo></mover></mrow><mover><mi>m</mi><mo accent="true">̃</mo></mover></mfrac></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mfrac><mrow><mi>d</mi><mover><mtext mathvariant="bold">𝐯</mtext><mo accent="true">̃</mo></mover></mrow><mrow><mi>d</mi><mover><mi>t</mi><mo accent="true">̃</mo></mover></mrow></mfrac></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mfrac><mrow><mover><mi>q</mi><mo accent="true">̃</mo></mover><mover><mtext mathvariant="bold">𝐯</mtext><mo accent="true">̃</mo></mover><mo>×</mo><mover><mtext mathvariant="bold">𝐁</mtext><mo accent="true">̃</mo></mover></mrow><mover><mi>m</mi><mo accent="true">̃</mo></mover></mfrac></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
         \left(\frac{v_c}{t_c}\right)\frac{d\tilde{\textbf{v}}}{d\tilde{t}}&amp;=\left(\frac{q_cv_cB_c}{m_c}\right)\frac{\tilde{q}\tilde{\textbf{v}}\times\tilde{\textbf{B}}}{\tilde{m}}\\
         \frac{d\tilde{\textbf{v}}}{d\tilde{t}}&amp;=\left(\frac{q_cB_ct_c}{m_c}\right)\frac{\tilde{q}\tilde{\textbf{v}}\times\tilde{\textbf{B}}}{\tilde{m}}\\
         \frac{d\tilde{\textbf{v}}}{d\tilde{t}}&amp;=\frac{\tilde{q}\tilde{\textbf{v}}\times\tilde{\textbf{B}}}{\tilde{m}}\\
-        \end{aligned}
-        </span></p>
-        <p>Fix <span class="math inline">q_c</span>, <span
-        class="math inline">B_c</span>, and <span
-        class="math inline">m_c</span> to scales relevant to the
-        problem, and then choose <span class="math inline">t_c</span> so
+        \end{aligned}</annotation></semantics></math></p>
+        <p>Fix <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>q</mi><mi>c</mi></msub><annotation encoding="application/x-tex">q_c</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>B</mi><mi>c</mi></msub><annotation encoding="application/x-tex">B_c</annotation></semantics></math>, and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>m</mi><mi>c</mi></msub><annotation encoding="application/x-tex">m_c</annotation></semantics></math> to scales relevant to the
+        problem, and then choose <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>t</mi><mi>c</mi></msub><annotation encoding="application/x-tex">t_c</annotation></semantics></math> so
         that this pre-factor becomes 1. Characteristic length is then
         derived from the other units.</p>
         <ul>
-        <li>Magnetic field: <span class="math inline">B_c=1</span> T
+        <li>Magnetic field: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>B</mi><mi>c</mi></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">B_c=1</annotation></semantics></math> T
         (Typical Tokamak field)</li>
-        <li>Electric charge: <span
-        class="math inline">q_c=1.6\times10^{-19}</span> C (proton
+        <li>Electric charge: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>q</mi><mi>c</mi></msub><mo>=</mo><mn>1.6</mn><mo>×</mo><msup><mn>10</mn><mrow><mi>−</mi><mn>19</mn></mrow></msup></mrow><annotation encoding="application/x-tex">q_c=1.6\times10^{-19}</annotation></semantics></math> C (proton
         charge)</li>
-        <li>Mass: <span
-        class="math inline">m_c=1.67\times10^{-27}</span> kg (proton
+        <li>Mass: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>c</mi></msub><mo>=</mo><mn>1.67</mn><mo>×</mo><msup><mn>10</mn><mrow><mi>−</mi><mn>27</mn></mrow></msup></mrow><annotation encoding="application/x-tex">m_c=1.67\times10^{-27}</annotation></semantics></math> kg (proton
         mass)</li>
-        <li>Velocity: <span class="math inline">v_c=2.2\times10^5</span>
+        <li>Velocity: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mi>c</mi></msub><mo>=</mo><mn>2.2</mn><mo>×</mo><msup><mn>10</mn><mn>5</mn></msup></mrow><annotation encoding="application/x-tex">v_c=2.2\times10^5</annotation></semantics></math>
         m/s (typical thermal velocity in a fusion reactor)</li>
-        <li>Time: <span
-        class="math inline">t_c=\frac{m_c}{q_cB_c}=1.04\times10^{-8}</span>
+        <li>Time: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>t</mi><mi>c</mi></msub><mo>=</mo><mfrac><msub><mi>m</mi><mi>c</mi></msub><mrow><msub><mi>q</mi><mi>c</mi></msub><msub><mi>B</mi><mi>c</mi></msub></mrow></mfrac><mo>=</mo><mn>1.04</mn><mo>×</mo><msup><mn>10</mn><mrow><mi>−</mi><mn>8</mn></mrow></msup></mrow><annotation encoding="application/x-tex">t_c=\frac{m_c}{q_cB_c}=1.04\times10^{-8}</annotation></semantics></math>
         s</li>
-        <li>Length: <span class="math inline">L_c=v_ct_c=0.00230</span>
+        <li>Length: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>L</mi><mi>c</mi></msub><mo>=</mo><msub><mi>v</mi><mi>c</mi></msub><msub><mi>t</mi><mi>c</mi></msub><mo>=</mo><mn>0.00230</mn></mrow><annotation encoding="application/x-tex">L_c=v_ct_c=0.00230</annotation></semantics></math>
         m</li>
         </ul>
         <p>The simulation will use this simplified, non-dimensional
@@ -2857,34 +2718,26 @@ Gemini has met Larry Page’s 2000 definition of artificial
         non-dimensional value by the characteristic unit.</p>
         <p>I use the following parameters and initial conditions:</p>
         <ul>
-        <li>Major radius: <span
-        class="math inline">R_0=2\textrm{m}=870</span></li>
-        <li>Minor radius: <span
-        class="math inline">r_0=0.5\textrm{m}=217</span></li>
-        <li>Initial position: <span
-        class="math inline">\textbf{r}=(R_0+r_0/2, 0, 0)=(979, 0,
-        0)</span></li>
-        <li>Initial velocity: <span
-        class="math inline">\textbf{v}=(\frac{1}{\sqrt{2}},
-        \frac{1}{\sqrt{2}}, 0)</span></li>
+        <li>Major radius: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mn>0</mn></msub><mo>=</mo><mn>2</mn><mtext mathvariant="normal">m</mtext><mo>=</mo><mn>870</mn></mrow><annotation encoding="application/x-tex">R_0=2\textrm{m}=870</annotation></semantics></math></li>
+        <li>Minor radius: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>r</mi><mn>0</mn></msub><mo>=</mo><mn>0.5</mn><mtext mathvariant="normal">m</mtext><mo>=</mo><mn>217</mn></mrow><annotation encoding="application/x-tex">r_0=0.5\textrm{m}=217</annotation></semantics></math></li>
+        <li>Initial position: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="bold">𝐫</mtext><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>R</mi><mn>0</mn></msub><mo>+</mo><msub><mi>r</mi><mn>0</mn></msub><mi>/</mi><mn>2</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mn>979</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\textbf{r}=(R_0+r_0/2, 0, 0)=(979, 0,
+        0)</annotation></semantics></math></li>
+        <li>Initial velocity: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="bold">𝐯</mtext><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mfrac><mn>1</mn><msqrt><mn>2</mn></msqrt></mfrac><mo>,</mo><mfrac><mn>1</mn><msqrt><mn>2</mn></msqrt></mfrac><mo>,</mo><mn>0</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\textbf{v}=(\frac{1}{\sqrt{2}},
+        \frac{1}{\sqrt{2}}, 0)</annotation></semantics></math></li>
         </ul>
         <h4 id="particle-trajectories">Particle Trajectories</h4>
-        <p>At the stating time, <span
-        class="math inline">v_\parallel=v_y=v_\perp=v_x</span>. Since
-        <span class="math inline">v_\parallel^2+v_\perp^2=v^2</span>, we
-        have that <span
-        class="math inline">v_\perp^2=v_\parallel^2=v^2/2</span>, so the
-        drift velocity should be roughly <span class="math display">
-        \begin{aligned}
+        <p>At the stating time, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mo>∥</mo></msub><mo>=</mo><msub><mi>v</mi><mi>y</mi></msub><mo>=</mo><msub><mi>v</mi><mo>⟂</mo></msub><mo>=</mo><msub><mi>v</mi><mi>x</mi></msub></mrow><annotation encoding="application/x-tex">v_\parallel=v_y=v_\perp=v_x</annotation></semantics></math>. Since
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>v</mi><mo>∥</mo><mn>2</mn></msubsup><mo>+</mo><msubsup><mi>v</mi><mo>⟂</mo><mn>2</mn></msubsup><mo>=</mo><msup><mi>v</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">v_\parallel^2+v_\perp^2=v^2</annotation></semantics></math>, we
+        have that <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>v</mi><mo>⟂</mo><mn>2</mn></msubsup><mo>=</mo><msubsup><mi>v</mi><mo>∥</mo><mn>2</mn></msubsup><mo>=</mo><msup><mi>v</mi><mn>2</mn></msup><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">v_\perp^2=v_\parallel^2=v^2/2</annotation></semantics></math>, so the
+        drift velocity should be roughly <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><msub><mtext mathvariant="bold">𝐯</mtext><mrow><mi>d</mi><mi>r</mi><mi>i</mi><mi>f</mi><mi>t</mi></mrow></msub><mo>=</mo><msub><mtext mathvariant="bold">𝐯</mtext><mrow><mi>∇</mi><mi>B</mi></mrow></msub><mo>+</mo><msub><mtext mathvariant="bold">𝐯</mtext><mi>R</mi></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><mi>m</mi><msubsup><mi>v</mi><mo>⟂</mo><mn>2</mn></msubsup></mrow><mrow><mn>2</mn><mi>q</mi><msub><mi>R</mi><mn>0</mn></msub></mrow></mfrac><mo>+</mo><mfrac><mrow><mi>m</mi><msubsup><mi>v</mi><mo>∥</mo><mn>2</mn></msubsup></mrow><mrow><mi>q</mi><msub><mi>R</mi><mn>0</mn></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mover><mi>z</mi><mo accent="true">̂</mo></mover></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><msub><mtext mathvariant="bold">𝐯</mtext><mrow><mi>d</mi><mi>r</mi><mi>i</mi><mi>f</mi><mi>t</mi></mrow></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><mi>m</mi><msup><mi>v</mi><mn>2</mn></msup></mrow><mrow><mn>4</mn><mi>q</mi><msub><mi>R</mi><mn>0</mn></msub></mrow></mfrac><mo>+</mo><mfrac><mrow><mi>m</mi><msup><mi>v</mi><mn>2</mn></msup></mrow><mrow><mn>2</mn><mi>q</mi><msub><mi>R</mi><mn>0</mn></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mover><mi>z</mi><mo accent="true">̂</mo></mover><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mfrac><mrow><mn>3</mn><mi>m</mi><msup><mi>v</mi><mn>2</mn></msup></mrow><mrow><mn>4</mn><mi>q</mi><msub><mi>R</mi><mn>0</mn></msub></mrow></mfrac><mo stretchy="true" form="postfix">)</mo></mrow><mover><mi>z</mi><mo accent="true">̂</mo></mover></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><msub><mtext mathvariant="bold">𝐯</mtext><mrow><mi>d</mi><mi>r</mi><mi>i</mi><mi>f</mi><mi>t</mi></mrow></msub><mo>=</mo><mn>189</mn><mover><mi>z</mi><mo accent="true">̂</mo></mover><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> m/s</mtext></mrow><mo>=</mo><mn>0.00086</mn><mover><mi>z</mi><mo accent="true">̂</mo></mover></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
         &amp;\textbf{v}_{drift}=\textbf{v}_{\nabla B} +
         \textbf{v}_R=\left(\frac{mv_\perp^2}{2qR_0}+\frac{mv_\parallel^2}{qR_0}\right)\hat{z}\\
         &amp;\textbf{v}_{drift}=\left(\frac{mv^2}{4qR_0}+\frac{mv^2}{2qR_0}\right)\hat{z}=\left(\frac{3mv^2}{4qR_0}\right)\hat{z}\\
         &amp;\textbf{v}_{drift}=189\hat{z}\textrm{ m/s}=0.00086\hat{z}
-        \end{aligned}
-        </span></p>
+        \end{aligned}</annotation></semantics></math></p>
         <p>In the toroidal field, the particle follows a circular path
         while drifting upward as expected. The rate of this drift is
-        slightly smaller than <span class="math inline">0.00086</span>.
+        slightly smaller than <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>0.00086</mn><annotation encoding="application/x-tex">0.00086</annotation></semantics></math>.
         I don’t know why. Remember that while the particle loops the
         torus, it travels in a helical path around the field line, this
         is why the line in Figure 6 is thick.</p>
@@ -2911,7 +2764,7 @@ Gemini has met Larry Page’s 2000 definition of artificial
         </div>
         <p>The addition of a poloidal field adds a periodic poloidal
         motion to the trajectory. The amplitude of the particle’s
-        oscillation in the <span class="math inline">z</span>-direction
+        oscillation in the <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>z</mi><annotation encoding="application/x-tex">z</annotation></semantics></math>-direction
         does not grow with time, so the drift has been mitigated.</p>
         <figure style="text-align: center;">
         <img src="/resources/tokamak-drift/midterm-twisting-field-position-xyz.png" width="80%"/>
@@ -2957,64 +2810,46 @@ Gemini has met Larry Page’s 2000 definition of artificial
 <div style="text-align: center;">
         <p><img src="/resources/bayes-rule/venn-diagram.svg" width="35%"/></p>
         </div>
-        <p>Consider a rectangular dartboard with two circles <span
-        class="math inline">A</span> and <span
-        class="math inline">B</span> drawn on it. A monkey is throwing
+        <p>Consider a rectangular dartboard with two circles <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math> drawn on it. A monkey is throwing
         darts at the board, and they fall randomly within it. The
-        probability that the dart falls within the circle labeled <span
-        class="math inline">A</span> is its area divided by the area of
-        the rectangle, <span class="math inline">20/100=0.2</span>. Now
+        probability that the dart falls within the circle labeled <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> is its area divided by the area of
+        the rectangle, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>20</mn><mi>/</mi><mn>100</mn><mo>=</mo><mn>0.2</mn></mrow><annotation encoding="application/x-tex">20/100=0.2</annotation></semantics></math>. Now
         imagine you’re facing the other way and the money throws the
-        dart. The bartender tells you it landed in <span
-        class="math inline">B</span>. What is the probability it also
-        landed in <span class="math inline">A</span> (i.e., in the
+        dart. The bartender tells you it landed in <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>. What is the probability it also
+        landed in <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> (i.e., in the
         purple intersection)? It’s hopefully intuitive this is the area
-        of the purple section divided by the red section, <span
-        class="math inline">4/12=0.33</span>.</p>
-        <p>Bayes’ rule formalizes this: <span class="math display">
-        P(A|B)=\frac{P(B|A)P(A)}{P(B)}\tag{1}
-        </span></p>
-        <p>Where <span class="math inline">P(A)</span> is the
-        probability of event <span class="math inline">A</span>
-        occurring and <span class="math inline">P(A|B)</span> is the
-        probability of <span class="math inline">A</span> occurring
-        given that <span class="math inline">B</span> occurred. Plugging
+        of the purple section divided by the red section, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mi>/</mi><mn>12</mn><mo>=</mo><mn>0.33</mn></mrow><annotation encoding="application/x-tex">4/12=0.33</annotation></semantics></math>.</p>
+        <p>Bayes’ rule formalizes this: <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="prefix">|</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>B</mi><mo stretchy="false" form="prefix">|</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">P(A|B)=\frac{P(B|A)P(A)}{P(B)}\tag{1}</annotation></semantics></math></p>
+        <p>Where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P(A)</annotation></semantics></math> is the
+        probability of event <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+        occurring and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="prefix">|</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P(A|B)</annotation></semantics></math> is the
+        probability of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math> occurring
+        given that <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math> occurred. Plugging
         in the probabilities from the dartboard example, we get the
-        result we expect: <span class="math display">
-        P(A|B)=\frac{(4/20)\times (20/100)}{(12/100)}=4/12=0.33\tag{2}
-        </span></p>
+        result we expect: <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="prefix">|</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mrow><mo stretchy="false" form="prefix">(</mo><mn>4</mn><mi>/</mi><mn>20</mn><mo stretchy="false" form="postfix">)</mo><mo>×</mo><mo stretchy="false" form="prefix">(</mo><mn>20</mn><mi>/</mi><mn>100</mn><mo stretchy="false" form="postfix">)</mo></mrow><mrow><mo stretchy="false" form="prefix">(</mo><mn>12</mn><mi>/</mi><mn>100</mn><mo stretchy="false" form="postfix">)</mo></mrow></mfrac><mo>=</mo><mn>4</mn><mi>/</mi><mn>12</mn><mo>=</mo><mn>0.33</mn></mrow><annotation encoding="application/x-tex">P(A|B)=\frac{(4/20)\times (20/100)}{(12/100)}=4/12=0.33\tag{2}</annotation></semantics></math></p>
         <p>One way to derive Bayes rule is by starting with the
-        definition of joint probability: <span class="math display">
-        P(A\cap B)=P(A|B)P(B)=P(B|A)P(A)\tag{3}
-        </span></p>
+        definition of joint probability: <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo>∩</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="prefix">|</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>B</mi><mo stretchy="false" form="prefix">|</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P(A\cap B)=P(A|B)P(B)=P(B|A)P(A)\tag{3}</annotation></semantics></math></p>
         <p>If you aren’t convinced of this fact, consider the dartboard
-        again. You can think of <span class="math inline">P(A|B)</span>
+        again. You can think of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="prefix">|</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P(A|B)</annotation></semantics></math>
         as what % of the red circle is covered by the purple section.
         Or, in other words, the ratio of the area of the purple section
         to that of the red section. If we then multiply that by the area
         of the red section, we’re left with the area of the purple
         section. You can use the same logic to convince yourself of the
         third term in (3). Finding Bayes’ rule is as simple as dividing
-        (3) by <span class="math inline">P(B)</span>.</p>
-        <p>Let’s take a step back, and think more about (1). <span
-        class="math inline">P(A|B)</span> is a probability and therefore
+        (3) by <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P(B)</annotation></semantics></math>.</p>
+        <p>Let’s take a step back, and think more about (1). <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="prefix">|</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P(A|B)</annotation></semantics></math> is a probability and therefore
         bounded between 0 and 1. How does this fraction ensure this is
         the case? It’s clear that it won’t be negative as the three
-        components are all positive. But if <span
-        class="math inline">P(B)\to 0</span>, why wouldn’t this fraction
-        grow to infinity? The reason is that <span
-        class="math inline">P(B|A)P(A)=P(A\cap B)</span> which is
-        strictly less than or equal to <span
-        class="math inline">P(B)</span>.</p>
-        <p>In (1), <span class="math inline">P(A)</span> is called the
-        prior and <span class="math inline">P(A|B)</span> the posterior
-        since <span class="math inline">P(A)</span> was our belief about
-        the probability of event <span class="math inline">A</span>
-        occurring before observing the event <span
-        class="math inline">B</span>, and <span
-        class="math inline">P(A|B)</span> is our belief about its
-        probability after (prior to) observing <span
-        class="math inline">B</span>.</p>
+        components are all positive. But if <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo><mo>→</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">P(B)\to 0</annotation></semantics></math>, why wouldn’t this fraction
+        grow to infinity? The reason is that <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>B</mi><mo stretchy="false" form="prefix">|</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo>∩</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P(B|A)P(A)=P(A\cap B)</annotation></semantics></math> which is
+        strictly less than or equal to <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P(B)</annotation></semantics></math>.</p>
+        <p>In (1), <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P(A)</annotation></semantics></math> is called the
+        prior and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="prefix">|</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P(A|B)</annotation></semantics></math> the posterior
+        since <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P(A)</annotation></semantics></math> was our belief about
+        the probability of event <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+        occurring before observing the event <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>, and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>A</mi><mo stretchy="false" form="prefix">|</mo><mi>B</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P(A|B)</annotation></semantics></math> is our belief about its
+        probability after (prior to) observing <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>B</mi><annotation encoding="application/x-tex">B</annotation></semantics></math>.</p>
         <h4 id="resources">Resources</h4>
         <ul>
         <li><a href="https://statswithr.github.io/book/">An Introduction
@@ -3032,79 +2867,55 @@ Gemini has met Larry Page’s 2000 definition of artificial
     <link rel="alternate" href="blog/likelihood.html"/>
     <content type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
-<p>Take a Gaussian probability distribution <span
-        class="math display">
-        f(x; \mu,
-        \sigma)=\frac{1}{\sigma\sqrt{2\pi}}\exp(-\frac{1}{2}(\frac{x-\mu}{\sigma})^2)
-        </span></p>
+<p>Take a Gaussian probability distribution <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>;</mo><mi>μ</mi><mo>,</mo><mi>σ</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mn>1</mn><mrow><mi>σ</mi><msqrt><mrow><mn>2</mn><mi>π</mi></mrow></msqrt></mrow></mfrac><mrow><mi>exp</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>−</mi><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="false" form="prefix">(</mo><mfrac><mrow><mi>x</mi><mo>−</mo><mi>μ</mi></mrow><mi>σ</mi></mfrac><msup><mo stretchy="false" form="postfix">)</mo><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f(x; \mu,
+        \sigma)=\frac{1}{\sigma\sqrt{2\pi}}\exp(-\frac{1}{2}(\frac{x-\mu}{\sigma})^2)</annotation></semantics></math></p>
         <div style="text-align: center;">
         <p><img src="/resources/likelihood/pdf.png" width="60%"/></p>
         </div>
-        This is a function of <span class="math inline">x</span> and is
-        parameterized by <span class="math inline">\mu</span> and <span
-        class="math inline">\sigma</span>. If we instead consider the
-        expression on the right as a function of <span
-        class="math inline">\mu</span> and <span
-        class="math inline">\sigma</span>, parameterized by <span
-        class="math inline">x</span>, we have the likelihood function
-        <span class="math display">
-        L(\mu, \sigma;
-        x)=\frac{1}{\sigma\sqrt{2\pi}}\exp(-\frac{1}{2}(\frac{x-\mu}{\sigma})^2)
-        </span>
+        This is a function of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math> and is
+        parameterized by <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>μ</mi><annotation encoding="application/x-tex">\mu</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>σ</mi><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>. If we instead consider the
+        expression on the right as a function of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>μ</mi><annotation encoding="application/x-tex">\mu</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>σ</mi><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>, parameterized by <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>, we have the likelihood function
+        <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo stretchy="false" form="prefix">(</mo><mi>μ</mi><mo>,</mo><mi>σ</mi><mo>;</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mn>1</mn><mrow><mi>σ</mi><msqrt><mrow><mn>2</mn><mi>π</mi></mrow></msqrt></mrow></mfrac><mrow><mi>exp</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>−</mi><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="false" form="prefix">(</mo><mfrac><mrow><mi>x</mi><mo>−</mo><mi>μ</mi></mrow><mi>σ</mi></mfrac><msup><mo stretchy="false" form="postfix">)</mo><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">L(\mu, \sigma;
+        x)=\frac{1}{\sigma\sqrt{2\pi}}\exp(-\frac{1}{2}(\frac{x-\mu}{\sigma})^2)</annotation></semantics></math>
         <div style="text-align: center;">
         <p><img src="/resources/likelihood/likelihood.png" width="60%"/></p>
         </div>
         <p>This is the definition of the likelihood function.</p>
         <p>I’ll emphasize that the expression on the right hasn’t
         changed. A few things fall out of this 1) Previously the
-        integral of <span class="math inline">f</span> (holding <span
-        class="math inline">\mu</span>, <span
-        class="math inline">\sigma</span> constant) over <span
-        class="math inline">x</span> was 1. Now if we integrate <span
-        class="math inline">L</span> over <span
-        class="math inline">\mu</span> and <span
-        class="math inline">\sigma</span> (holding x constant) there is
-        no reason to expect the integral is still 1. 2) <span
-        class="math inline">L</span> evaluated at <span
-        class="math inline">(\mu=a,\sigma=b;x=5)</span> is a likelihood.
-        If <span class="math inline">f</span> happened to be
-        parameterized by <span class="math inline">\mu=a,\sigma=b</span>
-        and evaluated at <span class="math inline">x=5</span> the result
+        integral of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math> (holding <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>μ</mi><annotation encoding="application/x-tex">\mu</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>σ</mi><annotation encoding="application/x-tex">\sigma</annotation></semantics></math> constant) over <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math> was 1. Now if we integrate <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math> over <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>μ</mi><annotation encoding="application/x-tex">\mu</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>σ</mi><annotation encoding="application/x-tex">\sigma</annotation></semantics></math> (holding x constant) there is
+        no reason to expect the integral is still 1. 2) <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math> evaluated at <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>μ</mi><mo>=</mo><mi>a</mi><mo>,</mo><mi>σ</mi><mo>=</mo><mi>b</mi><mo>;</mo><mi>x</mi><mo>=</mo><mn>5</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(\mu=a,\sigma=b;x=5)</annotation></semantics></math> is a likelihood.
+        If <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math> happened to be
+        parameterized by <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><mo>=</mo><mi>a</mi><mo>,</mo><mi>σ</mi><mo>=</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">\mu=a,\sigma=b</annotation></semantics></math>
+        and evaluated at <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">x=5</annotation></semantics></math> the result
         would be the same (since the expression is the same). Therefore,
-        the value of <span class="math inline">f</span> evaluated at
-        <span class="math inline">x=5</span> is the likelihood of its
-        parameters parameterized by <span
-        class="math inline">x=5</span>. That’s a long-winded way to say
-        <span class="math inline">f(x)</span> is a likelihood. (Remember
-        it is the integral of <span class="math inline">f</span> which
-        is a probability: <span
-        class="math inline">\int_a^bfdx</span>).</p>
+        the value of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math> evaluated at
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">x=5</annotation></semantics></math> is the likelihood of its
+        parameters parameterized by <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">x=5</annotation></semantics></math>. That’s a long-winded way to say
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f(x)</annotation></semantics></math> is a likelihood. (Remember
+        it is the integral of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math> which
+        is a probability: <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mo>∫</mo><mi>a</mi><mi>b</mi></msubsup><mi>f</mi><mi>d</mi><mi>x</mi></mrow><annotation encoding="application/x-tex">\int_a^bfdx</annotation></semantics></math>).</p>
         <p>So what does it mean? Look at the line on this surface for
-        <span class="math inline">\mu=5.5</span>. Notice that near <span
-        class="math inline">\sigma=0</span> it has a low likelihood. As
-        <span class="math inline">\sigma</span> increases, its
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><mo>=</mo><mn>5.5</mn></mrow><annotation encoding="application/x-tex">\mu=5.5</annotation></semantics></math>. Notice that near <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>σ</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\sigma=0</annotation></semantics></math> it has a low likelihood. As
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>σ</mi><annotation encoding="application/x-tex">\sigma</annotation></semantics></math> increases, its
         likelihood increases for a bit and then declines again. Consider
-        three points along that line (<span
-        class="math inline">\mu</span>, <span
-        class="math inline">\sigma</span>) = (5.5, 0.2), (5.5, 1), (5.5,
-        2). How did we calculate the value of <span
-        class="math inline">L</span> at each of these points? We just
-        plugged in these <span class="math inline">(\mu, \sigma)</span>
-        pairs along with <span class="math inline">x=5</span> into the
+        three points along that line (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>μ</mi><annotation encoding="application/x-tex">\mu</annotation></semantics></math>, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>σ</mi><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>) = (5.5, 0.2), (5.5, 1), (5.5,
+        2). How did we calculate the value of <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math> at each of these points? We just
+        plugged in these <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>μ</mi><mo>,</mo><mi>σ</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(\mu, \sigma)</annotation></semantics></math>
+        pairs along with <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">x=5</annotation></semantics></math> into the
         expression above. Let’s visualize our doing that, but letting x
         vary again (notice these curves are PDFs now).</p>
         <div style="text-align: center;">
         <p><img src="/resources/likelihood/cross.png" width="60%"/></p>
         </div>
         <p>The value of our likelihood surface for each combination
-        <span class="math inline">(\mu, \sigma)</span> is the
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>μ</mi><mo>,</mo><mi>σ</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(\mu, \sigma)</annotation></semantics></math> is the
         intersection of the red line with each of these PDFs. Orange
-        performs the best. Even if we centered the green PDF on <span
-        class="math inline">x=5</span> it would still not have as high a
+        performs the best. Even if we centered the green PDF on <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">x=5</annotation></semantics></math> it would still not have as high a
         value as the orange curve. So we can think about the values of
         the likelihood function like this: “how well does this pair of
-        parameters <span class="math inline">(\mu,\sigma)</span> fit the
-        data point <span class="math inline">x=5</span>?”</p>
+        parameters <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>μ</mi><mo>,</mo><mi>σ</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(\mu,\sigma)</annotation></semantics></math> fit the
+        data point <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">x=5</annotation></semantics></math>?”</p>
         <p>That brings us to Wikipedia’s definition: “A likelihood
         function (often simply called the likelihood) measures how well
         a statistical model explains observed data by calculating the
@@ -3117,13 +2928,10 @@ Gemini has met Larry Page’s 2000 definition of artificial
         simply the PDF with its parameters considered as variables that
         was only partially true. It is actually the <em>joint</em> PDF.
         In this case we just considered a “joint” PDF with only one
-        part. <span class="math display">
-        L(\mu, \sigma; x_1,x_2,...x_n)\triangleq
-        \prod_{i=1}^nf(x_i;\mu,\sigma)=\prod_{i=1}^n\frac{1}{\sigma\sqrt{2\pi}}\exp(-\frac{1}{2}(\frac{x_i-\mu}{\sigma})^2)
-        </span> The likelihood function is useful because it helps us
+        part. <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo stretchy="false" form="prefix">(</mo><mi>μ</mi><mo>,</mo><mi>σ</mi><mo>;</mo><msub><mi>x</mi><mn>1</mn></msub><mo>,</mo><msub><mi>x</mi><mn>2</mn></msub><mo>,</mo><mi>.</mi><mi>.</mi><mi>.</mi><msub><mi>x</mi><mi>n</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>≜</mo><munderover><mo>∏</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>f</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo>;</mo><mi>μ</mi><mo>,</mo><mi>σ</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><munderover><mo>∏</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mfrac><mn>1</mn><mrow><mi>σ</mi><msqrt><mrow><mn>2</mn><mi>π</mi></mrow></msqrt></mrow></mfrac><mrow><mi>exp</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>−</mi><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="false" form="prefix">(</mo><mfrac><mrow><msub><mi>x</mi><mi>i</mi></msub><mo>−</mo><mi>μ</mi></mrow><mi>σ</mi></mfrac><msup><mo stretchy="false" form="postfix">)</mo><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">L(\mu, \sigma; x_1,x_2,...x_n)\triangleq
+        \prod_{i=1}^nf(x_i;\mu,\sigma)=\prod_{i=1}^n\frac{1}{\sigma\sqrt{2\pi}}\exp(-\frac{1}{2}(\frac{x_i-\mu}{\sigma})^2)</annotation></semantics></math> The likelihood function is useful because it helps us
         guess the parameters of a distribution given some samples from
-        it. Say we have IID samples <span
-        class="math inline">x_1,x_2,\cdots,x_n</span>, from a known
+        it. Say we have IID samples <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mn>1</mn></msub><mo>,</mo><msub><mi>x</mi><mn>2</mn></msub><mo>,</mo><mi>⋯</mi><mo>,</mo><msub><mi>x</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">x_1,x_2,\cdots,x_n</annotation></semantics></math>, from a known
         distribution with unknown parameters, and we want to find the
         parameters which maximize the probability of having drawn this
         sample. The parameters which maximize the likelihood function
