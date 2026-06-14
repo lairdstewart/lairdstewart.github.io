@@ -7,6 +7,8 @@ XHTML.
 Build: `python3 build/build.py`. Requires `pandoc` and `node` on PATH;
 `npm install` once.
 
+Run: ./build/server.sh
+
 ## Math
 
 Posts use `<span class="math inline|display">TEX</span>`. Each expression is
