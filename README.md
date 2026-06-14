@@ -1,9 +1,11 @@
-Build: `python3 build/build.py`. Requires `pandoc` and `node` on PATH;
-`npm install` once.
+## Usage
 
 New posts: drop `<slug>.html` + `<slug>.json` (`title`, `date`) into
 `src/content/blog/` or `src/content/newsletter/`. The HTML body must be valid
 XHTML.
+
+Build: `python3 build/build.py`. Requires `pandoc` and `node` on PATH;
+`npm install` once.
 
 ## Math
 
