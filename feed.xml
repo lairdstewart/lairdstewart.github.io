@@ -2,13 +2,56 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://www.lairdstewart.com/</id>
   <title>Laird Stewart's blog</title>
-  <updated>2026-05-22T00:00:00Z</updated>
+  <updated>2026-06-14T00:00:00Z</updated>
   <author>
     <name>Laird Stewart</name>
   </author>
   <link rel="self" href="https://www.lairdstewart.com/feed.xml"/>
   <link rel="alternate" href="https://www.lairdstewart.com/"/>
   <icon>resources/icon.png</icon>
+  <entry>
+    <id>https://www.lairdstewart.com/blog/meritocracy-trap.html</id>
+    <title>The Meritocracy Trap's Missing Plot</title>
+    <updated>2026-06-14T00:00:00Z</updated>
+    <link rel="alternate" href="blog/meritocracy-trap.html"/>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+<p>
+  In <i>The Meritocracy Trap</i>, Markovitz describes how meritocracy makes
+  today's elite more miserable than the old aristocracy. In particular,
+  competition from primary school to late careers causes depression, anxiety and
+  burnout. To motivate the intensity of the competition, he should have shown
+  the following graph
+</p>
+
+<img src="/resources/meritocracy-trap/income-dist-10-99.png" />
+<img src="/resources/meritocracy-trap/log-income-dist-10-99.png" />
+
+<p>
+  of income against percentile. The second plot is log-scale, note the hyper
+  exponential returns at the end. A marginal increase in IQ or effort pays off
+  much more when you're at the top ...
+</p>
+
+<hr />
+
+<ul>
+  <li>
+    <a href="/resources/meritocracy-trap/plots.py">plotting code</a>
+  </li>
+  <li>
+    <i>
+      Sarah Flood, Miriam King, Renae Rodgers, Steven Ruggles, J. Robert Warren,
+      Daniel Backman, Etienne Breton, Grace Cooper, Julia A. Rivera Drew,
+      Stephanie Richards, David Van Riper, and Kari C.W. Williams. IPUMS CPS:
+      Version 13.0 [dataset]. Minneapolis, MN: IPUMS, 2025.
+      https://doi.org/10.18128/D030.V13.0
+    </i>
+  </li>
+</ul>
+      </div>
+    </content>
+  </entry>
   <entry>
     <id>https://www.lairdstewart.com/blog/no-free-lunch-software.html</id>
     <title>There's no free lunch in software</title>
@@ -163,7 +206,7 @@ Brian Potter, 5/7/26
 >
   Why China still can’t make ballpoint pens</a
 >
-Mary Hui, 1/26/4
+Mary Hui, 1/26/24
 <ul>
   <li>
     China made its first ballpoint pen in 2017 and, as of 2024, still imported
@@ -251,7 +294,8 @@ HumanInvariant, 11/14/25
 <a
   href="https://academic.oup.com/ej/advance-article-abstract/doi/10.1093/ej/ueag054/8667139"
   >The Bright Side of Tax Evasion</a
->Mill, Schneider, 5/31/26
+>
+Mill, Schneider, 5/31/26
 
 <ul>
   <li>
