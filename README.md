@@ -9,6 +9,10 @@ Build: `python3 build/build.py`. Requires `pandoc` and `node` on PATH;
 
 Run: ./build/server.sh
 
+Start OCI remark42 instance:
+
+- `ssh -i keys/oracle-compute-instance/ssh-key-2026-06-14.key opc@157.151.137.162`
+
 ## Math
 
 Posts use `<span class="math inline|display">TEX</span>`. Each expression is
