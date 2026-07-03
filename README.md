@@ -25,8 +25,40 @@ operators come out small. Use the best tool for each renderer.
 
 ## Email recaps
 
-- juice roundups/moth-year.html email-out.html --css build/style.css
-- create a new email; add an emoji
-- right click, inspect element
-- replace the emoji's html with the body of email-out.html
-- georgia font
+Clip image widths to 600 pixels. In Preview, use Tools > Adjust Size. In Place
+html in the following table. In Thunderbird, first add photos, then insert the
+html above it with Insert > Html ...
+
+```
+<!--[if mso]>
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" align="left" style="width:600px;"><tr><td>
+<![endif]-->
+
+<table
+  role="presentation"
+  width="100%"
+  cellpadding="0"
+  cellspacing="0"
+  border="0"
+  align="left"
+  style="max-width: 600px"
+>
+  <tr>
+    <td
+      align="left"
+      style="
+        padding: 0;
+        text-align: left;
+        word-break: break-word;
+        overflow-wrap: break-word;
+      "
+    >
+      <!-- your content here -->
+    </td>
+  </tr>
+</table>
+
+<!--[if mso]>
+</td></tr></table>
+<![endif]-->
+```
