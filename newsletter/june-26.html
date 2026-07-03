@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Laird Stewart</title>
+    <link rel="icon" href="resources/icon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="resources/icon.png" />
+    <link rel="alternate" type="application/atom+xml" title="Laird Stewart's blog" href="https://www.lairdstewart.com/feed.xml" />
+    <link rel="stylesheet" href="/build/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+
+    <!-- katex math rendering -- copied from pandoc translation -->
+    <script defer="" src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var mathElements = document.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains("display"),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false,
+            });
+          }
+        }
+      });
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+    <!-- end of katex math rendering -->
+  </head>
+
+  <body>
+    <p>
+      <a href="/index.html">Laird Stewart</a><a href="/rss.html" aria-label="RSS feed" style="margin-left:0.5em;vertical-align:middle;display:inline-block;line-height:0;"><img src="/resources/rss.svg" alt="RSS" style="height: 1em; width: auto" /></a><button id="theme-toggle" aria-label="Toggle dark mode" style="background:none;border:none;font-size:1em;margin-left:0.5em;vertical-align:middle;cursor:pointer;padding:0;line-height:0;"><img src="/resources/moon.svg" alt="Switch to dark mode" style="height: 1em; width: auto" /></button><br />
+    </p>
+
+    <p><em>I publish a monthly email newsletter with personal updates and interesting things I read or learned that month. The latter is archived below. If you’d like to be added to the newsletter, email me.</em></p>
+
+    <h3>June 2026 Roundup</h3>
+
+<a href="https://worksinprogress.co/issue/albertas-war-on-rats/"
+  >How Alberta eradicated rats</a
+>
+<br />
+Deena Mousa, Works in Progress, 6/15/26
+<ul>
+  <li>
+    Alberta established a 17,000 square kilometer "control zone" on their
+    south-eastern border. Their other borders are too cold (north) mountainous
+    (west) or sparsely populated (Montana) for rat populations to survive. The
+    invention of warfarin (a pesticide that carries limited health risk for
+    humans) helped get local populations on board.
+  </li>
+  <li>
+    <i>
+      "Albertans have grown so unaccustomed to rats that they frequently mistake
+      squirrels, gophers, and other small animals for them: of the 875 reported
+      sightings in 2025, only 47 turned out to be actual rats."
+    </i>
+  </li>
+</ul>
+
+<a href="https://www.blevinsfranks.com/french-succession-law/"
+  >Understanding and avoiding French succession law</a
+>
+<br />
+5/11/24
+<ul>
+  <li>
+    French citizens are legally required to reserve 50-75% of their estate for
+    their children depending on the number of children. This has the unfortunate
+    effect of both discouraging philanthropy and having more children. France's
+    fertility rate is 1.59.
+    <a href="https://x.com/johnarnold/status/2061090368557638026?s=20"
+      >John Arnold suspects</a
+    >
+    similar laws across Europe make it less dynamic.
+  </li>
+</ul>
+
+<a href="https://importai.substack.com/p/import-ai-455-automating-ai-research"
+  >AI systems are about to start building themselves</a
+>
+<br />
+Jack Clark, Import AI, 5/4/26
+<ul>
+  <li>
+    Jack Clark (Co-founder, Head of Policy at Anthropic) thinks there is a 60%
+    chance that by the end of 2028 a frontier model will be able to autonomously
+    train its successor. He believes the majority (if not all) of AI engineering
+    can be automated by today's systems. Whether these systems can automate AI
+    research is less clear. He cites Gemini solving 2 open Erdos problems and
+    says if you squint you can see signs of field-advancing creative intuitions
+    (this was written before an OpenAI model solved the unit distance problem).
+  </li>
+  <li>
+    <i>
+      "mostly the field of AI moves forward through humans methodically going
+      through some loop of taking a well performing system, scaling up some
+      aspect of it (e.g, the amount of data and compute it is trained on),
+      seeing what breaks when you scale it up, figuring out the engineering fix
+      to allow it to scale, then scaling it again. Very little of this requires
+      extremely out-of-leftfield insights... As the public data above shows, AI
+      has got extremely good at performing many of the essential schlep
+      components of AI development...This means even if AI systems are
+      relatively uncreative, it feels safe to bet they can push themselves
+      forward - albeit at a slower rate than if they’re able to generate novel
+      insight"
+    </i>
+  </li>
+</ul>
+
+<a
+  href="https://marginalrevolution.com/marginalrevolution/2026/06/sometimes-it-is-hard-to-solve-for-the-equilibrium.html"
+  >Sometimes it is hard to solve for the equilibrium</a
+>
+<br />
+Tyler Cowen, Marginal Revolution, 6/13/26
+<ul>
+  <li>In response to the federal government's blocking of Fable's release</li>
+  <li>
+    <i>
+      "Here are a few of the constraints on the U.S. government, not the only
+      ones I might add:
+      <ol>
+        <li>
+          It needs for the main companies to stay in business. On top of that,
+          it wants their IPOs to go reasonably well. And it is now much harder
+          for the top companies to recruit foreigners, which is a significant
+          share of their highest quality workforce (Demis, Ilya, Andrej for a
+          start). It is also much harder for the main companies to drum up
+          foreign business in a credible and sustainable manner. 1b. How are
+          American multinationals operating abroad supposed to use top systems,
+          moving forward?
+        </li>
+        <li>
+          It wants to use model access as a tool of both hard and soft power, so
+          model access has to be possible at some level. But it is very hard to
+          control what foreign agents will do with their partial model access,
+          when they get it in the future.
+        </li>
+        <li>The U.S. needs to stay ahead of China in the AI race.</li>
+        <li>
+          The U.S. needs to issue restrictions that are actually enforceable,
+          and “U.S. citizens only” does not fit that bill. Furthermore (markets
+          in everything!) it is easy enough to hire a traitorous American to
+          access tools of wrongdoing, or for matter it is not difficult to fake
+          citizenship in various ways.
+        </li>
+        <li>
+          USG cannot nationalize these companies and then proceed to run them
+          effectively.
+        </li>
+        <li>
+          Chinese and other open source models do in fact improve at some
+          reasonable pace, even if they are right now considerably behind the
+          best proprietary models."
+        </li>
+      </ol>
+    </i>
+  </li>
+</ul>
+
+<a href="https://www.hyperdimensional.co/p/what-should-be-done"
+  >What Should Be Done</a
+>
+<br />
+Dean Ball, Hyperdimensional, 6/26/26
+<ul>
+  <li>
+    Dean Ball's (OpenAI, former White House staffer) lessons from the federal
+    government's recent actions and how it should address AI safety moving
+    forward. He wants the government to certify private auditors which monitor
+    the frontier AI companies. They would hold these companies accountable to
+    their own safety policies until an industry-wide policy is agreed upon.
+  </li>
+</ul>
+
+<a
+  href="https://therepublicofletters.substack.com/p/calvin-and-hobbes-and-the-price-of"
+  >Calvin and Hobbes and the Price of Integrity</a
+>
+<br />
+Matthew Morgan, The Republic of Letters, 6/11/26
+<ul>
+  <li>
+    Ever wonder why, despite the popularity of Calvin and Hobbes, there are no
+    themed plush toys, cartoons, or coffee-mugs? Bill Watterson fought for a
+    decade with his print syndicate against licensing of his characters. A fun
+    story of Watterson and that history.
+  </li>
+</ul>
+
+<a
+  href="https://www.nytimes.com/2026/06/09/well/fda-sunscreen-bemotrizinol-approval.html"
+  >F.D.A. Clears Sunscreen Ingredient Long Used in Europe and Asia</a
+>
+<br />
+Dani Blum, New York Times, 6/9/26
+<ul>
+  <li>
+    F.D.A. approves bemotrizinol for use in sunscreen in the U.S. It provides
+    better UVA coverage than existing ingredients and allows for a
+    lighter-feeling formula. The F.D.A. is 25 years behind Europe in approving
+    the ingredient because it classifies sunscreen as a drug rather than a
+    cosmetic, which must pass a higher bar.
+  </li>
+</ul>
+
+<a href="https://andrewmccalip.com/space-datacenters">
+  Economics of Orbital vs Terrestrial Data Centers
+</a>
+<br />
+Andrew McCalip
+<ul>
+  <li>
+    An interactive financial model comparing the cost of space-based to
+    terrestrial data centers. It will be really hard. Only SpaceX is positioned
+    to do it, and will require Starship's success and a vertically integrated
+    supply chain.
+  </li>
+</ul>
+
+    <script>
+      (function () {
+        const toggle = document.getElementById("theme-toggle");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const stored = localStorage.getItem("theme");
+        if (stored === "dark" || (!stored && prefersDark)) {
+          document.body.classList.add("dark");
+          toggle.innerHTML = '<img src="/resources/sun.svg" alt="Switch to light mode" style="height: 1em; width: auto" />';
+          toggle.style.color = "#fff";
+        }
+        toggle.addEventListener("click", () => {
+          if (document.body.classList.contains("dark")) {
+            document.body.classList.remove("dark");
+            toggle.innerHTML = '<img src="/resources/moon.svg" alt="Switch to dark mode" style="height: 1em; width: auto" />';
+            toggle.style.color = "#000";
+            localStorage.setItem("theme", "light");
+          } else {
+            document.body.classList.add("dark");
+            toggle.innerHTML = '<img src="/resources/sun.svg" alt="Switch to light mode" style="height: 1em; width: auto" />';
+            toggle.style.color = "#fff";
+            localStorage.setItem("theme", "dark");
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
