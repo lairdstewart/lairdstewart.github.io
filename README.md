@@ -23,11 +23,15 @@ Why both: KaTeX HTML looks best in browsers but is unusable in RSS readers,
 which don't load external CSS. MathML renders natively everywhere but big
 operators come out small. Use the best tool for each renderer.
 
-## Email recaps
+## How to format email recaps
 
-Clip image widths to 600 pixels. In Preview, use Tools > Adjust Size. In Place
-html in the following table. In Thunderbird, first add photos, then insert the
-html above it with Insert > Html ...
+1. Clip image widths to 600 pixels. In Preview, use Tools > Adjust Size
+2. In Thunderbird, `Insert > Html ...` then copy the below html
+3. Add description and new line for each image
+4. Drag each image into Thunderbird and choose "inline image"
+5. Highlight all text and images
+6. Select `Insert > Html ...` again
+7. Add `style="width:100%; max-width:600px; height:auto;"` to each `<img>` tag
 
 ```
 <!--[if mso]>
