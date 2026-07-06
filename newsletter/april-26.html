@@ -2,15 +2,26 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Laird Stewart</title>
+    <title>April 2026 Roundup</title>
     <link rel="icon" href="resources/icon.png" type="image/png" />
     <link rel="apple-touch-icon" href="resources/icon.png" />
-    <link rel="alternate" type="application/atom+xml" title="Laird Stewart's blog" href="https://www.lairdstewart.com/feed.xml" />
+    <link
+      rel="alternate"
+      type="application/atom+xml"
+      title="Laird Stewart's blog"
+      href="https://www.lairdstewart.com/feed.xml"
+    />
     <link rel="stylesheet" href="/build/style.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
 
     <!-- katex math rendering -- copied from pandoc translation -->
-    <script defer="" src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+    <script
+      defer=""
+      src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"
+    ></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         var mathElements = document.getElementsByClassName("math");
@@ -28,20 +39,62 @@
         }
       });
     </script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"
+    />
     <!-- end of katex math rendering -->
   </head>
 
   <body>
     <p>
-      <a href="/index.html">Laird Stewart</a><a href="/rss.html" aria-label="RSS feed" style="margin-left:0.5em;vertical-align:middle;display:inline-block;line-height:0;"><img src="/resources/rss.svg" alt="RSS" style="height: 1em; width: auto" /></a><button id="theme-toggle" aria-label="Toggle dark mode" style="background:none;border:none;font-size:1em;margin-left:0.5em;vertical-align:middle;cursor:pointer;padding:0;line-height:0;"><img src="/resources/moon.svg" alt="Switch to dark mode" style="height: 1em; width: auto" /></button><br />
+      <a href="/index.html">Laird Stewart</a
+      ><a
+        href="/rss.html"
+        aria-label="RSS feed"
+        style="
+          margin-left: 0.5em;
+          vertical-align: middle;
+          display: inline-block;
+          line-height: 0;
+        "
+        ><img
+          src="/resources/rss.svg"
+          alt="RSS"
+          style="height: 1em; width: auto" /></a
+      ><button
+        id="theme-toggle"
+        aria-label="Toggle dark mode"
+        style="
+          background: none;
+          border: none;
+          font-size: 1em;
+          margin-left: 0.5em;
+          vertical-align: middle;
+          cursor: pointer;
+          padding: 0;
+          line-height: 0;
+        "
+      >
+        <img
+          src="/resources/moon.svg"
+          alt="Switch to dark mode"
+          style="height: 1em; width: auto"
+        /></button
+      ><br />
     </p>
 
-    <p><em>I publish a monthly email newsletter with personal updates and interesting things I read or learned that month. The latter is archived below. If you’d like to be added to the newsletter, email me.</em></p>
+    <p>
+      <em
+        >I publish a monthly email newsletter with personal updates and
+        interesting things I read or learned that month. The latter is archived
+        below. If you’d like to be added to the newsletter, email me.</em
+      >
+    </p>
 
     <h3>April 2026 Roundup</h3>
 
-<!--
+    <!--
         <p>title...</p>
         <div style="padding-left: 1em">
           <blockquote>
@@ -151,26 +204,69 @@ git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c
           </p>
         </div>
 
+    <br />
+    <div id="remark42">Comments are unavailable. Try again later.</div>
+
+    <script>
+      //<![CDATA[
+      const stored = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      ).matches;
+      const initialTheme =
+        stored === "dark" || (!stored && prefersDark) ? "dark" : "light";
+      var remark_config = {
+        // https://remark42.com/docs/configuration/frontend/
+        host: "http://localhost:8080",
+        // docs claim site_id is optional, but doesn't work without it
+        site_id: "remark",
+        simple_view: true,
+        no_footer: true,
+        theme: initialTheme,
+      };
+      !(function (e, n) {
+        for (var o = 0; o < e.length; o++) {
+          var r = n.createElement("script"),
+            c = ".js",
+            d = n.head || n.body;
+          ("noModule" in r
+            ? ((r.type = "module"), (c = ".mjs"))
+            : (r.async = !0),
+            (r.defer = !0),
+            (r.src = remark_config.host + "/web/" + e[o] + c),
+            d.appendChild(r));
+        }
+      })(remark_config.components || ["embed"], document);
+      //]]>
+    </script>
+
     <script>
       (function () {
         const toggle = document.getElementById("theme-toggle");
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
         const stored = localStorage.getItem("theme");
         if (stored === "dark" || (!stored && prefersDark)) {
           document.body.classList.add("dark");
-          toggle.innerHTML = '<img src="/resources/sun.svg" alt="Switch to light mode" style="height: 1em; width: auto" />';
+          toggle.innerHTML =
+            '<img src="/resources/sun.svg" alt="Switch to light mode" style="height: 1em; width: auto" />';
           toggle.style.color = "#fff";
         }
         toggle.addEventListener("click", () => {
           if (document.body.classList.contains("dark")) {
             document.body.classList.remove("dark");
-            toggle.innerHTML = '<img src="/resources/moon.svg" alt="Switch to dark mode" style="height: 1em; width: auto" />';
+            toggle.innerHTML =
+              '<img src="/resources/moon.svg" alt="Switch to dark mode" style="height: 1em; width: auto" />';
             toggle.style.color = "#000";
+            window.REMARK42.changeTheme("light");
             localStorage.setItem("theme", "light");
           } else {
             document.body.classList.add("dark");
-            toggle.innerHTML = '<img src="/resources/sun.svg" alt="Switch to light mode" style="height: 1em; width: auto" />';
+            toggle.innerHTML =
+              '<img src="/resources/sun.svg" alt="Switch to light mode" style="height: 1em; width: auto" />';
             toggle.style.color = "#fff";
+            window.REMARK42.changeTheme("dark");
             localStorage.setItem("theme", "dark");
           }
         });

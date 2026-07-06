@@ -2,24 +2,68 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Laird Stewart</title>
+    <title>Notes on Likelihood</title>
     <link rel="icon" href="resources/icon.png" type="image/png" />
     <link rel="apple-touch-icon" href="resources/icon.png" />
-    <link rel="alternate" type="application/atom+xml" title="Laird Stewart's blog" href="https://www.lairdstewart.com/feed.xml" />
+    <link
+      rel="alternate"
+      type="application/atom+xml"
+      title="Laird Stewart's blog"
+      href="https://www.lairdstewart.com/feed.xml"
+    />
     <link rel="stylesheet" href="/build/style.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
   </head>
 
   <body>
     <p>
-      <a href="/index.html">Laird Stewart</a><a href="/rss.html" aria-label="RSS feed" style="margin-left:0.5em;vertical-align:middle;display:inline-block;line-height:0;"><img src="/resources/rss.svg" alt="RSS" style="height: 1em; width: auto" /></a><button id="theme-toggle" aria-label="Toggle dark mode" style="background:none;border:none;font-size:1em;margin-left:0.5em;vertical-align:middle;cursor:pointer;padding:0;line-height:0;"><img src="/resources/moon.svg" alt="Switch to dark mode" style="height: 1em; width: auto" /></button><br />
+      <a href="/index.html">Laird Stewart</a
+      ><a
+        href="/rss.html"
+        aria-label="RSS feed"
+        style="
+          margin-left: 0.5em;
+          vertical-align: middle;
+          display: inline-block;
+          line-height: 0;
+        "
+        ><img
+          src="/resources/rss.svg"
+          alt="RSS"
+          style="height: 1em; width: auto" /></a
+      ><button
+        id="theme-toggle"
+        aria-label="Toggle dark mode"
+        style="
+          background: none;
+          border: none;
+          font-size: 1em;
+          margin-left: 0.5em;
+          vertical-align: middle;
+          cursor: pointer;
+          padding: 0;
+          line-height: 0;
+        "
+      >
+        <img
+          src="/resources/moon.svg"
+          alt="Switch to dark mode"
+          style="height: 1em; width: auto"
+        /></button
+      ><br />
       <em>4/16/25</em>
     </p>
 
     <h3>Notes on Likelihood</h3>
 
-<p>Take a Gaussian probability distribution <span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">μ</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">σ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.2514em;vertical-align:-0.93em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.2028em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">σ</span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9072em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.0359em;">π</span></span></span><span style="top:-2.8672em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
+    <p>Take a Gaussian probability distribution <span class="katex-display"><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">μ</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">σ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:2.2514em;vertical-align:-0.93em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em;"><span style="top:-2.2028em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.0359em;">σ</span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9072em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.0359em;">π</span></span></span><span style="top:-2.8672em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg xmlns="http://www.w3.org/2000/svg" width="400em" height="1.08em" viewBox="0 0 400000 1080" preserveAspectRatio="xMinYMin slice"><path d="M95,702
 c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
 c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
 c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
@@ -124,28 +168,69 @@ M834 80h400000v40h-400000z"/></svg></span></span></span><span class="vlist-s">�
         from a Gaussian distribution</p>
         <p><img src="/resources/likelihood/figure-4.png" width="50%"/><img src="/resources/likelihood/figure-5.png" width="50%"/></p>
 
-    <br /><br />
+    <br />
+    <div id="remark42">Comments are unavailable. Try again later.</div>
+
+    <script>
+      //<![CDATA[
+      const stored = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      ).matches;
+      const initialTheme =
+        stored === "dark" || (!stored && prefersDark) ? "dark" : "light";
+      var remark_config = {
+        // https://remark42.com/docs/configuration/frontend/
+        host: "http://localhost:8080",
+        // docs claim site_id is optional, but doesn't work without it
+        site_id: "remark",
+        simple_view: true,
+        no_footer: true,
+        theme: initialTheme,
+      };
+      !(function (e, n) {
+        for (var o = 0; o < e.length; o++) {
+          var r = n.createElement("script"),
+            c = ".js",
+            d = n.head || n.body;
+          ("noModule" in r
+            ? ((r.type = "module"), (c = ".mjs"))
+            : (r.async = !0),
+            (r.defer = !0),
+            (r.src = remark_config.host + "/web/" + e[o] + c),
+            d.appendChild(r));
+        }
+      })(remark_config.components || ["embed"], document);
+      //]]>
+    </script>
 
     <script>
       (function () {
         const toggle = document.getElementById("theme-toggle");
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
         const stored = localStorage.getItem("theme");
         if (stored === "dark" || (!stored && prefersDark)) {
           document.body.classList.add("dark");
-          toggle.innerHTML = '<img src="/resources/sun.svg" alt="Switch to light mode" style="height: 1em; width: auto" />';
+          toggle.innerHTML =
+            '<img src="/resources/sun.svg" alt="Switch to light mode" style="height: 1em; width: auto" />';
           toggle.style.color = "#fff";
         }
         toggle.addEventListener("click", () => {
           if (document.body.classList.contains("dark")) {
             document.body.classList.remove("dark");
-            toggle.innerHTML = '<img src="/resources/moon.svg" alt="Switch to dark mode" style="height: 1em; width: auto" />';
+            toggle.innerHTML =
+              '<img src="/resources/moon.svg" alt="Switch to dark mode" style="height: 1em; width: auto" />';
             toggle.style.color = "#000";
+            window.REMARK42.changeTheme("light");
             localStorage.setItem("theme", "light");
           } else {
             document.body.classList.add("dark");
-            toggle.innerHTML = '<img src="/resources/sun.svg" alt="Switch to light mode" style="height: 1em; width: auto" />';
+            toggle.innerHTML =
+              '<img src="/resources/sun.svg" alt="Switch to light mode" style="height: 1em; width: auto" />';
             toggle.style.color = "#fff";
+            window.REMARK42.changeTheme("dark");
             localStorage.setItem("theme", "dark");
           }
         });
