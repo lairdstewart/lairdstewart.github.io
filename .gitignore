@@ -9,3 +9,6 @@ email-out.html
 node_modules/
 src/content/drafts/
 keys/
+remark42/.env-local
+remark42/.env-deployment
+remark42/var/
