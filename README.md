@@ -2,7 +2,8 @@
 
 New posts: drop `<slug>.html` + `<slug>.json` (`title`, `date`) into
 `src/content/blog/` or `src/content/newsletter/`. The HTML body must be valid
-XHTML.
+XHTML. Use `<span class="math display">` and `<span class="math inline">` for
+math equations.
 
 Build: `python3 build/build.py`. Requires `pandoc` and `node` on PATH;
 `npm install` once.
@@ -75,3 +76,8 @@ operators come out small. Use the best tool for each renderer.
 # todo
 
 - [ ] remove javascript duplication between templates
+- [ ] wrap `<script>` with CDATA at build time for the RSS feed so I don't need
+      to specify it for the general posts if i want javascript in them.
+- [ ] add a tag to the json if a post is interactive so i can add a warning
+      about javascript missing to the RSS posts.
+- [ ] figure out why website can't load on some corporate networks/firewalls

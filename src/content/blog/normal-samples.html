@@ -1,0 +1,910 @@
+<p>
+  Imagine drawing a sample from the standard normal distribution:
+  <span class="math inline">X\sim\mathcal{N}(0,1)</span>. Then calculate the
+  probability density at each of those samples
+  <span class="math inline">f(x)=\frac{1}{\sqrt{2\pi}}e^{-x^2/2}</span> and plot
+  a histogram of these densities. What shape will the histogram take? Will there
+  be more samples with density near 0 (the tails) or with density near
+  <span class="math inline">\frac{1}{\sqrt{2\pi}}</span> (the mode
+  <span class="math inline">x=0</span>)?
+</p>
+<p>Once you have a guess, launch the plot below to see for yourself</p>
+
+<style>
+  .normal-viz {
+    margin: 1.5em 0;
+  }
+  .normal-viz button {
+    font: inherit;
+    padding: 0.5em 1em;
+    cursor: pointer;
+  }
+  .normal-viz .plots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+  }
+  .normal-viz .plots figure {
+    flex: 1 1 260px;
+    min-width: 0;
+    margin: 0;
+  }
+  .normal-viz canvas {
+    width: 100%;
+    display: block;
+  }
+  .normal-viz figcaption {
+    text-align: center;
+    font-size: 0.85em;
+    margin-top: 0.3em;
+  }
+  .normal-viz .controls {
+    margin-top: 1em;
+  }
+  .normal-viz .controls input[type="range"] {
+    width: 100%;
+  }
+</style>
+
+<div class="normal-viz">
+  <button id="normal-viz-launch" type="button">Launch 1D visualization</button>
+  <div id="normal-viz-panel" style="display: none">
+    <div class="plots">
+      <figure>
+        <canvas id="normal-viz-samples"></canvas>
+        <figcaption>
+          Samples from <span class="math inline">\mathcal{N}(0,1)</span>
+        </figcaption>
+      </figure>
+      <figure>
+        <canvas id="normal-viz-hist"></canvas>
+        <figcaption>
+          Histogram of densities <span class="math inline">f(x)</span>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="controls">
+      <label for="normal-viz-slider"
+        >Samples revealed: <span id="normal-viz-count">1</span> / 1000</label
+      >
+      <input id="normal-viz-slider" type="range" min="1" max="1000" value="1" />
+    </div>
+  </div>
+</div>
+
+<script>
+  //<![CDATA[
+  (function () {
+    var launch = document.getElementById("normal-viz-launch");
+    if (!launch) return;
+    var panel = document.getElementById("normal-viz-panel");
+    var slider = document.getElementById("normal-viz-slider");
+    var countLabel = document.getElementById("normal-viz-count");
+    var sampCanvas = document.getElementById("normal-viz-samples");
+    var histCanvas = document.getElementById("normal-viz-hist");
+
+    var N_MAX = 1000;
+    var X_MIN = -4;
+    var X_MAX = 4;
+    var Y_MAX = 0.42; // headroom above the mode 1/sqrt(2*pi) ~ 0.399
+    var HIST_BINS = 40;
+    var INV_SQRT_2PI = 1 / Math.sqrt(2 * Math.PI);
+    var DENSITY_MAX = INV_SQRT_2PI; // density spans [0, 1/sqrt(2*pi)]
+    var CANVAS_H = 260;
+
+    var samples = null; // x values, N_MAX of them
+    var densities = null; // f(x) for each sample
+    var histYMax = 1; // fixed y-scale from the full 1000-sample histogram
+
+    // --- reusable scaffolding (extractable to a shared plot.js later) ---
+
+    function pdf(x) {
+      return INV_SQRT_2PI * Math.exp((-x * x) / 2);
+    }
+
+    // Standard normal via Box-Muller.
+    function randn() {
+      var u = 0;
+      var v = 0;
+      while (u === 0) u = Math.random();
+      while (v === 0) v = Math.random();
+      return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+    }
+
+    // Size a canvas for crisp rendering on high-DPI displays.
+    function setupCanvas(canvas, cssHeight) {
+      var dpr = window.devicePixelRatio || 1;
+      var cssWidth = canvas.clientWidth || canvas.parentNode.clientWidth || 300;
+      canvas.style.height = cssHeight + "px";
+      canvas.width = Math.round(cssWidth * dpr);
+      canvas.height = Math.round(cssHeight * dpr);
+      var ctx = canvas.getContext("2d");
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      return { ctx: ctx, w: cssWidth, h: cssHeight };
+    }
+
+    function colors() {
+      var dark = document.body.classList.contains("dark");
+      if (dark) {
+        return {
+          curve: "#9ecbff",
+          text: "#ccc",
+          axis: "#888",
+          line: "rgba(158,203,255,0.16)",
+          bar: "rgba(158,203,255,0.55)",
+        };
+      }
+      return {
+        curve: "#0645ad",
+        text: "#555",
+        axis: "#999",
+        line: "rgba(6,69,173,0.16)",
+        bar: "rgba(6,69,173,0.5)",
+      };
+    }
+
+    // --- data ---
+
+    function binCounts(n) {
+      var counts = new Int32Array(HIST_BINS);
+      for (var i = 0; i < n; i++) {
+        var idx = Math.floor((densities[i] / DENSITY_MAX) * HIST_BINS);
+        if (idx >= HIST_BINS) idx = HIST_BINS - 1;
+        if (idx < 0) idx = 0;
+        counts[idx]++;
+      }
+      return counts;
+    }
+
+    function generate() {
+      samples = new Float64Array(N_MAX);
+      densities = new Float64Array(N_MAX);
+      for (var i = 0; i < N_MAX; i++) {
+        var x = randn();
+        samples[i] = x;
+        densities[i] = pdf(x);
+      }
+      var full = binCounts(N_MAX);
+      histYMax = 1;
+      for (var b = 0; b < full.length; b++) {
+        if (full[b] > histYMax) histYMax = full[b];
+      }
+    }
+
+    // --- rendering ---
+
+    var PAD_L = 34;
+    var PAD_R = 12;
+    var PAD_T = 12;
+    var PAD_B = 24;
+
+    function drawSamples(n, c) {
+      var s = setupCanvas(sampCanvas, CANVAS_H);
+      var ctx = s.ctx;
+      var plotW = s.w - PAD_L - PAD_R;
+      var plotH = s.h - PAD_T - PAD_B;
+      var baseY = PAD_T + plotH;
+
+      function sx(x) {
+        return PAD_L + ((x - X_MIN) / (X_MAX - X_MIN)) * plotW;
+      }
+      function sy(y) {
+        return PAD_T + (1 - y / Y_MAX) * plotH;
+      }
+
+      ctx.clearRect(0, 0, s.w, s.h);
+
+      // x-axis
+      ctx.strokeStyle = c.axis;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(PAD_L, baseY);
+      ctx.lineTo(s.w - PAD_R, baseY);
+      ctx.stroke();
+
+      // x ticks
+      ctx.fillStyle = c.text;
+      ctx.font = "11px sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "top";
+      for (var t = X_MIN; t <= X_MAX; t += 2) {
+        ctx.fillText(String(t), sx(t), baseY + 5);
+      }
+
+      // sample lines, stroked individually so overlap darkens
+      ctx.strokeStyle = c.line;
+      ctx.lineWidth = 1;
+      for (var i = 0; i < n; i++) {
+        var x = samples[i];
+        if (x < X_MIN || x > X_MAX) continue;
+        var px = sx(x);
+        ctx.beginPath();
+        ctx.moveTo(px, baseY);
+        ctx.lineTo(px, sy(densities[i]));
+        ctx.stroke();
+      }
+
+      // the N(0,1) curve on top
+      ctx.strokeStyle = c.curve;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      for (var p = 0; p <= plotW; p++) {
+        var xv = X_MIN + (p / plotW) * (X_MAX - X_MIN);
+        var yp = sy(pdf(xv));
+        if (p === 0) ctx.moveTo(PAD_L + p, yp);
+        else ctx.lineTo(PAD_L + p, yp);
+      }
+      ctx.stroke();
+    }
+
+    function drawHist(n, c) {
+      var s = setupCanvas(histCanvas, CANVAS_H);
+      var ctx = s.ctx;
+      var plotW = s.w - PAD_L - PAD_R;
+      var plotH = s.h - PAD_T - PAD_B;
+      var baseY = PAD_T + plotH;
+      var counts = binCounts(n);
+      var binW = plotW / HIST_BINS;
+
+      ctx.clearRect(0, 0, s.w, s.h);
+
+      // bars
+      ctx.fillStyle = c.bar;
+      for (var b = 0; b < HIST_BINS; b++) {
+        var barH = (counts[b] / histYMax) * plotH;
+        if (barH <= 0) continue;
+        var x = PAD_L + b * binW;
+        ctx.fillRect(x, baseY - barH, Math.max(binW - 1, 1), barH);
+      }
+
+      // x-axis
+      ctx.strokeStyle = c.axis;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(PAD_L, baseY);
+      ctx.lineTo(s.w - PAD_R, baseY);
+      ctx.stroke();
+
+      // x ticks along density [0, 1/sqrt(2*pi)]
+      ctx.fillStyle = c.text;
+      ctx.font = "11px sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "top";
+      var ticks = [0, 0.1, 0.2, 0.3, DENSITY_MAX];
+      for (var ti = 0; ti < ticks.length; ti++) {
+        var d = ticks[ti];
+        var tx = PAD_L + (d / DENSITY_MAX) * plotW;
+        var lbl = ti === ticks.length - 1 ? "0.40" : d.toFixed(1);
+        ctx.fillText(lbl, tx, baseY + 5);
+      }
+    }
+
+    function render() {
+      if (!samples || panel.style.display === "none") return;
+      var n = +slider.value;
+      var c = colors();
+      drawSamples(n, c);
+      drawHist(n, c);
+    }
+
+    // --- wiring ---
+
+    launch.addEventListener("click", function () {
+      generate();
+      launch.style.display = "none";
+      panel.style.display = "block";
+      slider.value = "1";
+      countLabel.textContent = "1";
+      render();
+    });
+
+    slider.addEventListener("input", function () {
+      countLabel.textContent = slider.value;
+      render();
+    });
+
+    window.addEventListener("resize", render);
+
+    // Re-color live when the site's theme toggle flips body.dark.
+    new MutationObserver(render).observe(document.body, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+  })();
+  //]]>
+</script>
+
+<p>
+  Is that what you expected? Now, what if we do the same for a 2D normal
+  distribution? What shape will the histogram take?
+</p>
+
+<div class="normal-viz">
+  <button id="normal-viz-2d-launch" type="button">
+    Launch 2D visualization
+  </button>
+  <div id="normal-viz-2d-panel" style="display: none">
+    <div class="plots">
+      <figure>
+        <canvas id="normal-viz-2d-scatter"></canvas>
+        <figcaption>
+          Samples from
+          <span class="math inline">\mathcal{N}(\mathbf{0}, I_2)</span>
+        </figcaption>
+      </figure>
+      <figure>
+        <canvas id="normal-viz-2d-hist"></canvas>
+        <figcaption>
+          Histogram of densities <span class="math inline">f(\mathbf{x})</span>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="controls">
+      <label for="normal-viz-2d-slider"
+        >Samples revealed: <span id="normal-viz-2d-count">1</span> / 1000</label
+      >
+      <input
+        id="normal-viz-2d-slider"
+        type="range"
+        min="1"
+        max="1000"
+        value="1"
+      />
+    </div>
+  </div>
+</div>
+
+<script>
+  //<![CDATA[
+  (function () {
+    var launch = document.getElementById("normal-viz-2d-launch");
+    if (!launch) return;
+    var panel = document.getElementById("normal-viz-2d-panel");
+    var slider = document.getElementById("normal-viz-2d-slider");
+    var countLabel = document.getElementById("normal-viz-2d-count");
+    var scatterCanvas = document.getElementById("normal-viz-2d-scatter");
+    var histCanvas = document.getElementById("normal-viz-2d-hist");
+
+    var N_MAX = 1000;
+    var AX_MIN = -4;
+    var AX_MAX = 4;
+    var HIST_BINS = 40;
+    var TWO_PI = 2 * Math.PI;
+    var DENSITY_MAX = 1 / TWO_PI; // 2D density peaks at 1/(2*pi) ~ 0.159
+    var CANVAS_H = 260;
+
+    var sx = null; // sample x coordinates
+    var sy = null; // sample y coordinates
+    var densities = null; // f(x, y) for each sample
+    var histYMax = 1; // fixed y-scale from the full 1000-sample histogram
+
+    // --- reusable scaffolding (extractable to a shared plot.js later) ---
+
+    function pdf2(x, y) {
+      return Math.exp(-(x * x + y * y) / 2) / TWO_PI;
+    }
+
+    // Standard normal via Box-Muller.
+    function randn() {
+      var u = 0;
+      var v = 0;
+      while (u === 0) u = Math.random();
+      while (v === 0) v = Math.random();
+      return Math.sqrt(-2 * Math.log(u)) * Math.cos(TWO_PI * v);
+    }
+
+    // Size a canvas for crisp rendering on high-DPI displays.
+    function setupCanvas(canvas, cssHeight) {
+      var dpr = window.devicePixelRatio || 1;
+      var cssWidth = canvas.clientWidth || canvas.parentNode.clientWidth || 300;
+      canvas.style.height = cssHeight + "px";
+      canvas.width = Math.round(cssWidth * dpr);
+      canvas.height = Math.round(cssHeight * dpr);
+      var ctx = canvas.getContext("2d");
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      return { ctx: ctx, w: cssWidth, h: cssHeight };
+    }
+
+    function colors() {
+      var dark = document.body.classList.contains("dark");
+      if (dark) {
+        return {
+          contour: "#9ecbff",
+          text: "#ccc",
+          axis: "#888",
+          dot: "rgba(158,203,255,0.35)",
+          bar: "rgba(158,203,255,0.55)",
+        };
+      }
+      return {
+        contour: "#0645ad",
+        text: "#555",
+        axis: "#999",
+        dot: "rgba(6,69,173,0.35)",
+        bar: "rgba(6,69,173,0.5)",
+      };
+    }
+
+    // --- data ---
+
+    function binCounts(n) {
+      var counts = new Int32Array(HIST_BINS);
+      for (var i = 0; i < n; i++) {
+        var idx = Math.floor((densities[i] / DENSITY_MAX) * HIST_BINS);
+        if (idx >= HIST_BINS) idx = HIST_BINS - 1;
+        if (idx < 0) idx = 0;
+        counts[idx]++;
+      }
+      return counts;
+    }
+
+    function generate() {
+      sx = new Float64Array(N_MAX);
+      sy = new Float64Array(N_MAX);
+      densities = new Float64Array(N_MAX);
+      for (var i = 0; i < N_MAX; i++) {
+        var x = randn();
+        var y = randn();
+        sx[i] = x;
+        sy[i] = y;
+        densities[i] = pdf2(x, y);
+      }
+      var full = binCounts(N_MAX);
+      histYMax = 1;
+      for (var b = 0; b < full.length; b++) {
+        if (full[b] > histYMax) histYMax = full[b];
+      }
+    }
+
+    // --- rendering ---
+
+    var PAD = 26; // scatter panel padding
+    var HIST_PAD_L = 34;
+    var HIST_PAD_R = 12;
+    var HIST_PAD_T = 12;
+    var HIST_PAD_B = 24;
+
+    function drawScatter(n, c) {
+      var s = setupCanvas(scatterCanvas, CANVAS_H);
+      var ctx = s.ctx;
+      // Keep the plane square so constant-density contours read as circles.
+      var availW = s.w - 2 * PAD;
+      var availH = s.h - 2 * PAD;
+      var side = Math.min(availW, availH);
+      var scale = side / (AX_MAX - AX_MIN);
+      var ox = PAD + (availW - side) / 2 + side / 2;
+      var oy = PAD + (availH - side) / 2 + side / 2;
+
+      function px(x) {
+        return ox + x * scale;
+      }
+      function py(y) {
+        return oy - y * scale;
+      }
+
+      ctx.clearRect(0, 0, s.w, s.h);
+
+      // x and y axes through the origin
+      ctx.strokeStyle = c.axis;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(px(AX_MIN), py(0));
+      ctx.lineTo(px(AX_MAX), py(0));
+      ctx.moveTo(px(0), py(AX_MIN));
+      ctx.lineTo(px(0), py(AX_MAX));
+      ctx.stroke();
+
+      // axis tick labels
+      ctx.fillStyle = c.text;
+      ctx.font = "11px sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "top";
+      ctx.fillText("2", px(2), py(0) + 4);
+      ctx.fillText("-2", px(-2), py(0) + 4);
+      ctx.textAlign = "left";
+      ctx.textBaseline = "middle";
+      ctx.fillText("2", px(0) + 4, py(2));
+      ctx.fillText("-2", px(0) + 4, py(-2));
+
+      // one dot per revealed sample; overlap darkens near the mode
+      ctx.fillStyle = c.dot;
+      for (var i = 0; i < n; i++) {
+        var x = sx[i];
+        var y = sy[i];
+        if (x < AX_MIN || x > AX_MAX || y < AX_MIN || y > AX_MAX) continue;
+        ctx.beginPath();
+        ctx.arc(px(x), py(y), 2, 0, TWO_PI);
+        ctx.fill();
+      }
+
+      // constant-density contours at 1, 2, 3 sigma, drawn on top
+      ctx.strokeStyle = c.contour;
+      ctx.lineWidth = 1.5;
+      for (var r = 1; r <= 3; r++) {
+        ctx.beginPath();
+        ctx.arc(ox, oy, r * scale, 0, TWO_PI);
+        ctx.stroke();
+      }
+    }
+
+    function drawHist(n, c) {
+      var s = setupCanvas(histCanvas, CANVAS_H);
+      var ctx = s.ctx;
+      var plotW = s.w - HIST_PAD_L - HIST_PAD_R;
+      var plotH = s.h - HIST_PAD_T - HIST_PAD_B;
+      var baseY = HIST_PAD_T + plotH;
+      var counts = binCounts(n);
+      var binW = plotW / HIST_BINS;
+
+      ctx.clearRect(0, 0, s.w, s.h);
+
+      // bars
+      ctx.fillStyle = c.bar;
+      for (var b = 0; b < HIST_BINS; b++) {
+        var barH = (counts[b] / histYMax) * plotH;
+        if (barH <= 0) continue;
+        var x = HIST_PAD_L + b * binW;
+        ctx.fillRect(x, baseY - barH, Math.max(binW - 1, 1), barH);
+      }
+
+      // x-axis
+      ctx.strokeStyle = c.axis;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(HIST_PAD_L, baseY);
+      ctx.lineTo(s.w - HIST_PAD_R, baseY);
+      ctx.stroke();
+
+      // x ticks along density [0, 1/(2*pi)]
+      ctx.fillStyle = c.text;
+      ctx.font = "11px sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "top";
+      var ticks = [0, 0.05, 0.1, DENSITY_MAX];
+      for (var ti = 0; ti < ticks.length; ti++) {
+        var d = ticks[ti];
+        var tx = HIST_PAD_L + (d / DENSITY_MAX) * plotW;
+        var lbl = ti === ticks.length - 1 ? "0.16" : d.toFixed(2);
+        ctx.fillText(lbl, tx, baseY + 5);
+      }
+    }
+
+    function render() {
+      if (!densities || panel.style.display === "none") return;
+      var n = +slider.value;
+      var c = colors();
+      drawScatter(n, c);
+      drawHist(n, c);
+    }
+
+    // --- wiring ---
+
+    launch.addEventListener("click", function () {
+      generate();
+      launch.style.display = "none";
+      panel.style.display = "block";
+      slider.value = "1";
+      countLabel.textContent = "1";
+      render();
+    });
+
+    slider.addEventListener("input", function () {
+      countLabel.textContent = slider.value;
+      render();
+    });
+
+    window.addEventListener("resize", render);
+
+    // Re-color live when the site's theme toggle flips body.dark.
+    new MutationObserver(render).observe(document.body, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+  })();
+  //]]>
+</script>
+
+<p>
+  Hmm ... recognize that distribution? What do you think will happen for a 3D
+  Gaussian? Do you see a pattern?
+</p>
+
+<div class="normal-viz">
+  <button id="normal-viz-3d-launch" type="button">
+    Launch 3D visualization
+  </button>
+  <div id="normal-viz-3d-panel" style="display: none">
+    <div class="plots">
+      <figure>
+        <canvas id="normal-viz-3d-parallel"></canvas>
+        <figcaption>
+          Samples from
+          <span class="math inline">\mathcal{N}(\mathbf{0}, I_3)</span>
+        </figcaption>
+      </figure>
+      <figure>
+        <canvas id="normal-viz-3d-hist"></canvas>
+        <figcaption>
+          Histogram of densities
+          <span class="math inline">f(\mathbf{x})</span>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="controls">
+      <label for="normal-viz-3d-slider"
+        >Samples revealed: <span id="normal-viz-3d-count">1</span> / 1000</label
+      >
+      <input
+        id="normal-viz-3d-slider"
+        type="range"
+        min="1"
+        max="1000"
+        value="1"
+      />
+    </div>
+  </div>
+</div>
+
+<script>
+  //<![CDATA[
+  (function () {
+    var launch = document.getElementById("normal-viz-3d-launch");
+    if (!launch) return;
+    var panel = document.getElementById("normal-viz-3d-panel");
+    var slider = document.getElementById("normal-viz-3d-slider");
+    var countLabel = document.getElementById("normal-viz-3d-count");
+    var parCanvas = document.getElementById("normal-viz-3d-parallel");
+    var histCanvas = document.getElementById("normal-viz-3d-hist");
+
+    var N_MAX = 1000;
+    var X_MIN = -4;
+    var X_MAX = 4;
+    var HIST_BINS = 40;
+    var TWO_PI = 2 * Math.PI;
+    var DENSITY_MAX = Math.pow(TWO_PI, -1.5); // 3D density peaks at (2*pi)^-1.5 ~ 0.063
+    var CANVAS_H = 260;
+
+    var s1 = null; // sample x_1
+    var s2 = null; // sample x_2
+    var s3 = null; // sample x_3
+    var densities = null; // f(x_1, x_2, x_3) for each sample
+    var histYMax = 1; // fixed y-scale from the full 1000-sample histogram
+
+    // --- reusable scaffolding (extractable to a shared plot.js later) ---
+
+    function pdf3(x, y, z) {
+      return Math.exp(-(x * x + y * y + z * z) / 2) * DENSITY_MAX;
+    }
+
+    // Standard normal via Box-Muller.
+    function randn() {
+      var u = 0;
+      var v = 0;
+      while (u === 0) u = Math.random();
+      while (v === 0) v = Math.random();
+      return Math.sqrt(-2 * Math.log(u)) * Math.cos(TWO_PI * v);
+    }
+
+    // Size a canvas for crisp rendering on high-DPI displays.
+    function setupCanvas(canvas, cssHeight) {
+      var dpr = window.devicePixelRatio || 1;
+      var cssWidth = canvas.clientWidth || canvas.parentNode.clientWidth || 300;
+      canvas.style.height = cssHeight + "px";
+      canvas.width = Math.round(cssWidth * dpr);
+      canvas.height = Math.round(cssHeight * dpr);
+      var ctx = canvas.getContext("2d");
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      return { ctx: ctx, w: cssWidth, h: cssHeight };
+    }
+
+    function colors() {
+      var dark = document.body.classList.contains("dark");
+      if (dark) {
+        return {
+          text: "#ccc",
+          axis: "#888",
+          line: "rgba(158,203,255,0.16)",
+          bar: "rgba(158,203,255,0.55)",
+        };
+      }
+      return {
+        text: "#555",
+        axis: "#999",
+        line: "rgba(6,69,173,0.16)",
+        bar: "rgba(6,69,173,0.5)",
+      };
+    }
+
+    // --- data ---
+
+    function binCounts(n) {
+      var counts = new Int32Array(HIST_BINS);
+      for (var i = 0; i < n; i++) {
+        var idx = Math.floor((densities[i] / DENSITY_MAX) * HIST_BINS);
+        if (idx >= HIST_BINS) idx = HIST_BINS - 1;
+        if (idx < 0) idx = 0;
+        counts[idx]++;
+      }
+      return counts;
+    }
+
+    function generate() {
+      s1 = new Float64Array(N_MAX);
+      s2 = new Float64Array(N_MAX);
+      s3 = new Float64Array(N_MAX);
+      densities = new Float64Array(N_MAX);
+      for (var i = 0; i < N_MAX; i++) {
+        var x = randn();
+        var y = randn();
+        var z = randn();
+        s1[i] = x;
+        s2[i] = y;
+        s3[i] = z;
+        densities[i] = pdf3(x, y, z);
+      }
+      var full = binCounts(N_MAX);
+      histYMax = 1;
+      for (var b = 0; b < full.length; b++) {
+        if (full[b] > histYMax) histYMax = full[b];
+      }
+    }
+
+    // --- rendering ---
+
+    var PAD_L = 40;
+    var PAD_R = 20;
+    var PAD_T = 16;
+    var PAD_B = 24;
+    var HIST_PAD_L = 34;
+
+    function drawParallel(n, c) {
+      var s = setupCanvas(parCanvas, CANVAS_H);
+      var ctx = s.ctx;
+      var plotW = s.w - PAD_L - PAD_R;
+      var plotH = s.h - PAD_T - PAD_B;
+      var axisXs = [PAD_L, PAD_L + plotW / 2, PAD_L + plotW];
+      var labels = ["x₁", "x₂", "x₃"];
+
+      // clamp to the axis range so stray tail samples stay on-plot
+      function py(v) {
+        var vv = v < X_MIN ? X_MIN : v > X_MAX ? X_MAX : v;
+        return PAD_T + (1 - (vv - X_MIN) / (X_MAX - X_MIN)) * plotH;
+      }
+
+      ctx.clearRect(0, 0, s.w, s.h);
+
+      // three vertical axes
+      ctx.strokeStyle = c.axis;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (var a = 0; a < 3; a++) {
+        ctx.moveTo(axisXs[a], PAD_T);
+        ctx.lineTo(axisXs[a], PAD_T + plotH);
+      }
+      // horizontal 0 axis bisecting them
+      ctx.moveTo(axisXs[0], py(0));
+      ctx.lineTo(axisXs[2], py(0));
+      ctx.stroke();
+
+      // one polyline per revealed sample; overlap darkens
+      ctx.strokeStyle = c.line;
+      ctx.lineWidth = 1;
+      for (var i = 0; i < n; i++) {
+        ctx.beginPath();
+        ctx.moveTo(axisXs[0], py(s1[i]));
+        ctx.lineTo(axisXs[1], py(s2[i]));
+        ctx.lineTo(axisXs[2], py(s3[i]));
+        ctx.stroke();
+      }
+
+      // value ticks on the left axis
+      ctx.fillStyle = c.text;
+      ctx.font = "11px sans-serif";
+      ctx.textAlign = "right";
+      ctx.textBaseline = "middle";
+      var vticks = [2, 0, -2];
+      for (var t = 0; t < vticks.length; t++) {
+        ctx.fillText(String(vticks[t]), axisXs[0] - 6, py(vticks[t]));
+      }
+
+      // axis names below each axis
+      ctx.textAlign = "center";
+      ctx.textBaseline = "top";
+      for (var l = 0; l < 3; l++) {
+        ctx.fillText(labels[l], axisXs[l], PAD_T + plotH + 6);
+      }
+    }
+
+    function drawHist(n, c) {
+      var s = setupCanvas(histCanvas, CANVAS_H);
+      var ctx = s.ctx;
+      var plotW = s.w - HIST_PAD_L - PAD_R;
+      var plotH = s.h - PAD_T - PAD_B;
+      var baseY = PAD_T + plotH;
+      var counts = binCounts(n);
+      var binW = plotW / HIST_BINS;
+
+      ctx.clearRect(0, 0, s.w, s.h);
+
+      // bars
+      ctx.fillStyle = c.bar;
+      for (var b = 0; b < HIST_BINS; b++) {
+        var barH = (counts[b] / histYMax) * plotH;
+        if (barH <= 0) continue;
+        var x = HIST_PAD_L + b * binW;
+        ctx.fillRect(x, baseY - barH, Math.max(binW - 1, 1), barH);
+      }
+
+      // x-axis
+      ctx.strokeStyle = c.axis;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(HIST_PAD_L, baseY);
+      ctx.lineTo(s.w - PAD_R, baseY);
+      ctx.stroke();
+
+      // x ticks along density [0, (2*pi)^-1.5]
+      ctx.fillStyle = c.text;
+      ctx.font = "11px sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "top";
+      var ticks = [0, 0.02, 0.04, DENSITY_MAX];
+      for (var ti = 0; ti < ticks.length; ti++) {
+        var d = ticks[ti];
+        var tx = HIST_PAD_L + (d / DENSITY_MAX) * plotW;
+        var lbl = ti === ticks.length - 1 ? "0.06" : d.toFixed(2);
+        ctx.fillText(lbl, tx, baseY + 5);
+      }
+    }
+
+    function render() {
+      if (!densities || panel.style.display === "none") return;
+      var n = +slider.value;
+      var c = colors();
+      drawParallel(n, c);
+      drawHist(n, c);
+    }
+
+    // --- wiring ---
+
+    launch.addEventListener("click", function () {
+      generate();
+      launch.style.display = "none";
+      panel.style.display = "block";
+      slider.value = "1";
+      countLabel.textContent = "1";
+      render();
+    });
+
+    slider.addEventListener("input", function () {
+      countLabel.textContent = slider.value;
+      render();
+    });
+
+    window.addEventListener("resize", render);
+
+    // Re-color live when the site's theme toggle flips body.dark.
+    new MutationObserver(render).observe(document.body, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+  })();
+  //]]>
+</script>
+
+<p>
+  Spoiler, in higher dimensions the pattern continues and becomes even more
+  pronounced. I came across a histogram of densities for a 4D Gaussian at work
+  recently and the result surprised me. I had expected it to continue to look
+  like the 1D case. Perhaps you could attribute this to the
+  <a href="https://en.wikipedia.org/wiki/Curse_of_dimensionality"
+    >curse of dimensionality</a
+  >, but I think it's really just an illustrative example of how our intuitions
+  about smaller dimensions can betray us in higher dimensions.
+</p>
+
+<p>
+  I'm aware of an analytical solution for the densities
+  <span class="math inline">f(x)</span> for one and two dimensions. Not sure
+  about three dimensions. I'll leave that for another post.
+</p>
