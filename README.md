@@ -9,9 +9,11 @@ Build: `python3 build/build.py`. Requires `pandoc` and `node` on PATH;
 
 Run: ./build/server.sh
 
-Start OCI remark42 instance:
+## Oracle cloud (remark42 instance)
 
-- `ssh -i keys/oracle-compute-instance/ssh-key-2026-06-14.key opc@157.151.137.162`
+IP: 157.151.142.254
+
+- `ssh -i keys/oracle-compute-instance/ssh-key-2026-06-14.key opc@157.151.142.254`
 
 ## Math
 
@@ -66,3 +68,22 @@ operators come out small. Use the best tool for each renderer.
 </td></tr></table>
 <![endif]-->
 ```
+
+# todo
+
+- [ ] set ADMIN_SHARED_ID
+- [ ] remove javascript duplication between templates
+- [ ] make ssh session not timeout after 30 minutes
+
+- [ ] setup email service
+  - [ ] setup admin email notifications
+  - [ ] setup user email auth
+
+# inspiration
+
+- https://ben.bolte.cc/
+- https://gwern.net/index
+
+# Misc
+
+.nojekyll file allows the .well-known/ to be published
