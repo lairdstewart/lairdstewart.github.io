@@ -9,12 +9,6 @@ Build: `python3 build/build.py`. Requires `pandoc` and `node` on PATH;
 
 Run: ./build/server.sh
 
-## Oracle cloud (remark42 instance)
-
-IP: 157.151.142.254
-
-- `ssh -i keys/oracle-compute-instance/ssh-key-2026-06-14.key opc@157.151.142.254`
-
 ## Math
 
 Posts use `<span class="math inline|display">TEX</span>`. Each expression is
@@ -69,16 +63,6 @@ operators come out small. Use the best tool for each renderer.
 <![endif]-->
 ```
 
-# todo
-
-- [ ] set ADMIN_SHARED_ID
-- [ ] remove javascript duplication between templates
-- [ ] make ssh session not timeout after 30 minutes
-
-- [ ] setup email service
-  - [ ] setup admin email notifications
-  - [ ] setup user email auth
-
 # inspiration
 
 - https://ben.bolte.cc/
@@ -87,3 +71,7 @@ operators come out small. Use the best tool for each renderer.
 # Misc
 
 .nojekyll file allows the .well-known/ to be published
+
+# todo
+
+- [ ] remove javascript duplication between templates
