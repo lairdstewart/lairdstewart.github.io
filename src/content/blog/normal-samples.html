@@ -8,16 +8,11 @@
   <span class="math inline">\frac{1}{\sqrt{2\pi}}</span> (the mode
   <span class="math inline">x=0</span>)?
 </p>
-<p>Once you have a guess, launch the plot below to see for yourself</p>
+<p>Once you have a guess, drag the slider below to see for yourself</p>
 
 <style>
   .normal-viz {
     margin: 1.5em 0;
-  }
-  .normal-viz button {
-    font: inherit;
-    padding: 0.5em 1em;
-    cursor: pointer;
   }
   .normal-viz .plots {
     display: flex;
@@ -47,8 +42,7 @@
 </style>
 
 <div class="normal-viz">
-  <button id="normal-viz-launch" type="button">Launch 1D visualization</button>
-  <div id="normal-viz-panel" style="display: none">
+  <div id="normal-viz-panel">
     <div class="plots">
       <figure>
         <canvas id="normal-viz-samples"></canvas>
@@ -65,9 +59,9 @@
     </div>
     <div class="controls">
       <label for="normal-viz-slider"
-        >Samples revealed: <span id="normal-viz-count">1</span> / 1000</label
+        >Samples revealed: <span id="normal-viz-count">0</span> / 1000</label
       >
-      <input id="normal-viz-slider" type="range" min="1" max="1000" value="1" />
+      <input id="normal-viz-slider" type="range" min="0" max="1000" value="0" />
     </div>
   </div>
 </div>
@@ -75,9 +69,8 @@
 <script>
   //<![CDATA[
   (function () {
-    var launch = document.getElementById("normal-viz-launch");
-    if (!launch) return;
     var panel = document.getElementById("normal-viz-panel");
+    if (!panel) return;
     var slider = document.getElementById("normal-viz-slider");
     var countLabel = document.getElementById("normal-viz-count");
     var sampCanvas = document.getElementById("normal-viz-samples");
@@ -128,6 +121,7 @@
       if (dark) {
         return {
           curve: "#9ecbff",
+          highlight: "#ff6b6b",
           text: "#ccc",
           axis: "#888",
           line: "rgba(158,203,255,0.16)",
@@ -136,6 +130,7 @@
       }
       return {
         curve: "#0645ad",
+        highlight: "#d32f2f",
         text: "#555",
         axis: "#999",
         line: "rgba(6,69,173,0.16)",
@@ -194,12 +189,14 @@
 
       ctx.clearRect(0, 0, s.w, s.h);
 
-      // x-axis
+      // axes: horizontal at y=0, vertical (density) at x=-4
       ctx.strokeStyle = c.axis;
       ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.moveTo(PAD_L, baseY);
       ctx.lineTo(s.w - PAD_R, baseY);
+      ctx.moveTo(PAD_L, baseY);
+      ctx.lineTo(PAD_L, PAD_T);
       ctx.stroke();
 
       // x ticks
@@ -209,6 +206,14 @@
       ctx.textBaseline = "top";
       for (var t = X_MIN; t <= X_MAX; t += 2) {
         ctx.fillText(String(t), sx(t), baseY + 5);
+      }
+
+      // y ticks (density)
+      ctx.textAlign = "right";
+      ctx.textBaseline = "middle";
+      var yticks = [0.1, 0.2, 0.3, 0.4];
+      for (var yt = 0; yt < yticks.length; yt++) {
+        ctx.fillText(yticks[yt].toFixed(1), PAD_L - 5, sy(yticks[yt]));
       }
 
       // sample lines, stroked individually so overlap darkens
@@ -235,6 +240,19 @@
         else ctx.lineTo(PAD_L + p, yp);
       }
       ctx.stroke();
+
+      // highlight the current (most recently revealed) sample in red
+      var ci = n - 1;
+      var cx = samples[ci];
+      if (cx >= X_MIN && cx <= X_MAX) {
+        ctx.strokeStyle = c.highlight;
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        var cpx = sx(cx);
+        ctx.moveTo(cpx, baseY);
+        ctx.lineTo(cpx, sy(densities[ci]));
+        ctx.stroke();
+      }
     }
 
     function drawHist(n, c) {
@@ -248,12 +266,15 @@
 
       ctx.clearRect(0, 0, s.w, s.h);
 
-      // bars
-      ctx.fillStyle = c.bar;
+      // bars, with the current sample's bin highlighted in red
+      var curBin = Math.floor((densities[n - 1] / DENSITY_MAX) * HIST_BINS);
+      if (curBin >= HIST_BINS) curBin = HIST_BINS - 1;
+      if (curBin < 0) curBin = 0;
       for (var b = 0; b < HIST_BINS; b++) {
         var barH = (counts[b] / histYMax) * plotH;
         if (barH <= 0) continue;
         var x = PAD_L + b * binW;
+        ctx.fillStyle = b === curBin ? c.highlight : c.bar;
         ctx.fillRect(x, baseY - barH, Math.max(binW - 1, 1), barH);
       }
 
@@ -274,7 +295,7 @@
       for (var ti = 0; ti < ticks.length; ti++) {
         var d = ticks[ti];
         var tx = PAD_L + (d / DENSITY_MAX) * plotW;
-        var lbl = ti === ticks.length - 1 ? "0.40" : d.toFixed(1);
+        var lbl = ti === ticks.length - 1 ? "0.4" : d.toFixed(1);
         ctx.fillText(lbl, tx, baseY + 5);
       }
     }
@@ -289,15 +310,6 @@
 
     // --- wiring ---
 
-    launch.addEventListener("click", function () {
-      generate();
-      launch.style.display = "none";
-      panel.style.display = "block";
-      slider.value = "1";
-      countLabel.textContent = "1";
-      render();
-    });
-
     slider.addEventListener("input", function () {
       countLabel.textContent = slider.value;
       render();
@@ -310,6 +322,13 @@
       attributes: true,
       attributeFilter: ["class"],
     });
+
+    // draw immediately on page load with a fresh set of samples, slider reset
+    // to the far left (0 revealed) even if the browser restored its value
+    generate();
+    slider.value = "0";
+    countLabel.textContent = "0";
+    render();
   })();
   //]]>
 </script>
@@ -320,10 +339,7 @@
 </p>
 
 <div class="normal-viz">
-  <button id="normal-viz-2d-launch" type="button">
-    Launch 2D visualization
-  </button>
-  <div id="normal-viz-2d-panel" style="display: none">
+  <div id="normal-viz-2d-panel">
     <div class="plots">
       <figure>
         <canvas id="normal-viz-2d-scatter"></canvas>
@@ -341,14 +357,14 @@
     </div>
     <div class="controls">
       <label for="normal-viz-2d-slider"
-        >Samples revealed: <span id="normal-viz-2d-count">1</span> / 1000</label
+        >Samples revealed: <span id="normal-viz-2d-count">0</span> / 1000</label
       >
       <input
         id="normal-viz-2d-slider"
         type="range"
-        min="1"
+        min="0"
         max="1000"
-        value="1"
+        value="0"
       />
     </div>
   </div>
@@ -357,9 +373,8 @@
 <script>
   //<![CDATA[
   (function () {
-    var launch = document.getElementById("normal-viz-2d-launch");
-    if (!launch) return;
     var panel = document.getElementById("normal-viz-2d-panel");
+    if (!panel) return;
     var slider = document.getElementById("normal-viz-2d-slider");
     var countLabel = document.getElementById("normal-viz-2d-count");
     var scatterCanvas = document.getElementById("normal-viz-2d-scatter");
@@ -410,6 +425,7 @@
       if (dark) {
         return {
           contour: "#9ecbff",
+          highlight: "#ff6b6b",
           text: "#ccc",
           axis: "#888",
           dot: "rgba(158,203,255,0.35)",
@@ -418,6 +434,7 @@
       }
       return {
         contour: "#0645ad",
+        highlight: "#d32f2f",
         text: "#555",
         axis: "#999",
         dot: "rgba(6,69,173,0.35)",
@@ -525,6 +542,17 @@
         ctx.arc(ox, oy, r * scale, 0, TWO_PI);
         ctx.stroke();
       }
+
+      // highlight the current (most recently revealed) sample in red
+      var ci = n - 1;
+      var hx = sx[ci];
+      var hy = sy[ci];
+      if (hx >= AX_MIN && hx <= AX_MAX && hy >= AX_MIN && hy <= AX_MAX) {
+        ctx.fillStyle = c.highlight;
+        ctx.beginPath();
+        ctx.arc(px(hx), py(hy), 6, 0, TWO_PI);
+        ctx.fill();
+      }
     }
 
     function drawHist(n, c) {
@@ -538,12 +566,15 @@
 
       ctx.clearRect(0, 0, s.w, s.h);
 
-      // bars
-      ctx.fillStyle = c.bar;
+      // bars, with the current sample's bin highlighted in red
+      var curBin = Math.floor((densities[n - 1] / DENSITY_MAX) * HIST_BINS);
+      if (curBin >= HIST_BINS) curBin = HIST_BINS - 1;
+      if (curBin < 0) curBin = 0;
       for (var b = 0; b < HIST_BINS; b++) {
         var barH = (counts[b] / histYMax) * plotH;
         if (barH <= 0) continue;
         var x = HIST_PAD_L + b * binW;
+        ctx.fillStyle = b === curBin ? c.highlight : c.bar;
         ctx.fillRect(x, baseY - barH, Math.max(binW - 1, 1), barH);
       }
 
@@ -579,15 +610,6 @@
 
     // --- wiring ---
 
-    launch.addEventListener("click", function () {
-      generate();
-      launch.style.display = "none";
-      panel.style.display = "block";
-      slider.value = "1";
-      countLabel.textContent = "1";
-      render();
-    });
-
     slider.addEventListener("input", function () {
       countLabel.textContent = slider.value;
       render();
@@ -600,6 +622,13 @@
       attributes: true,
       attributeFilter: ["class"],
     });
+
+    // draw immediately on page load with a fresh set of samples, slider reset
+    // to the far left (0 revealed) even if the browser restored its value
+    generate();
+    slider.value = "0";
+    countLabel.textContent = "0";
+    render();
   })();
   //]]>
 </script>
@@ -610,10 +639,7 @@
 </p>
 
 <div class="normal-viz">
-  <button id="normal-viz-3d-launch" type="button">
-    Launch 3D visualization
-  </button>
-  <div id="normal-viz-3d-panel" style="display: none">
+  <div id="normal-viz-3d-panel">
     <div class="plots">
       <figure>
         <canvas id="normal-viz-3d-parallel"></canvas>
@@ -632,14 +658,14 @@
     </div>
     <div class="controls">
       <label for="normal-viz-3d-slider"
-        >Samples revealed: <span id="normal-viz-3d-count">1</span> / 1000</label
+        >Samples revealed: <span id="normal-viz-3d-count">0</span> / 1000</label
       >
       <input
         id="normal-viz-3d-slider"
         type="range"
-        min="1"
+        min="0"
         max="1000"
-        value="1"
+        value="0"
       />
     </div>
   </div>
@@ -648,9 +674,8 @@
 <script>
   //<![CDATA[
   (function () {
-    var launch = document.getElementById("normal-viz-3d-launch");
-    if (!launch) return;
     var panel = document.getElementById("normal-viz-3d-panel");
+    if (!panel) return;
     var slider = document.getElementById("normal-viz-3d-slider");
     var countLabel = document.getElementById("normal-viz-3d-count");
     var parCanvas = document.getElementById("normal-viz-3d-parallel");
@@ -701,6 +726,7 @@
       var dark = document.body.classList.contains("dark");
       if (dark) {
         return {
+          highlight: "#ff6b6b",
           text: "#ccc",
           axis: "#888",
           line: "rgba(158,203,255,0.16)",
@@ -708,6 +734,7 @@
         };
       }
       return {
+        highlight: "#d32f2f",
         text: "#555",
         axis: "#999",
         line: "rgba(6,69,173,0.16)",
@@ -797,6 +824,18 @@
         ctx.stroke();
       }
 
+      // highlight the current (most recently revealed) sample in red
+      if (n > 0) {
+        var ci = n - 1;
+        ctx.strokeStyle = c.highlight;
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(axisXs[0], py(s1[ci]));
+        ctx.lineTo(axisXs[1], py(s2[ci]));
+        ctx.lineTo(axisXs[2], py(s3[ci]));
+        ctx.stroke();
+      }
+
       // value ticks on the left axis
       ctx.fillStyle = c.text;
       ctx.font = "11px sans-serif";
@@ -826,12 +865,15 @@
 
       ctx.clearRect(0, 0, s.w, s.h);
 
-      // bars
-      ctx.fillStyle = c.bar;
+      // bars, with the current sample's bin highlighted in red
+      var curBin = Math.floor((densities[n - 1] / DENSITY_MAX) * HIST_BINS);
+      if (curBin >= HIST_BINS) curBin = HIST_BINS - 1;
+      if (curBin < 0) curBin = 0;
       for (var b = 0; b < HIST_BINS; b++) {
         var barH = (counts[b] / histYMax) * plotH;
         if (barH <= 0) continue;
         var x = HIST_PAD_L + b * binW;
+        ctx.fillStyle = b === curBin ? c.highlight : c.bar;
         ctx.fillRect(x, baseY - barH, Math.max(binW - 1, 1), barH);
       }
 
@@ -867,15 +909,6 @@
 
     // --- wiring ---
 
-    launch.addEventListener("click", function () {
-      generate();
-      launch.style.display = "none";
-      panel.style.display = "block";
-      slider.value = "1";
-      countLabel.textContent = "1";
-      render();
-    });
-
     slider.addEventListener("input", function () {
       countLabel.textContent = slider.value;
       render();
@@ -888,6 +921,13 @@
       attributes: true,
       attributeFilter: ["class"],
     });
+
+    // draw immediately on page load with a fresh set of samples, slider reset
+    // to the far left (0 revealed) even if the browser restored its value
+    generate();
+    slider.value = "0";
+    countLabel.textContent = "0";
+    render();
   })();
   //]]>
 </script>
