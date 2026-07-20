@@ -5,10 +5,11 @@ New posts: drop `<slug>.html` + `<slug>.json` (`title`, `date`) into
 XHTML. Use `<span class="math display">` and `<span class="math inline">` for
 math equations.
 
-Build: `python3 build/build.py`. Requires `pandoc` and `node` on PATH;
-`npm install` once.
+Build: Requires `pandoc` and `node` on PATH. `npm install` once.
 
-Run: ./build/server.sh
+- Run once: ./build/server.sh
+- Run on any change to src/:
+  `fswatch -o src/content | while read -r; do ./build/build.sh; done`
 
 ## Math
 
