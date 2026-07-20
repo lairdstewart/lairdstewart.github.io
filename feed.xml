@@ -2,13 +2,515 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://www.lairdstewart.com/</id>
   <title>Laird Stewart's blog</title>
-  <updated>2026-07-07T00:00:00Z</updated>
+  <updated>2026-07-20T00:00:00Z</updated>
   <author>
     <name>Laird Stewart</name>
   </author>
   <link rel="self" href="https://www.lairdstewart.com/feed.xml"/>
   <link rel="alternate" href="https://www.lairdstewart.com/"/>
   <icon>resources/icon.png</icon>
+  <entry>
+    <id>https://www.lairdstewart.com/blog/intelligence-limits.html</id>
+    <title>The Limits of Intelligence</title>
+    <updated>2026-07-20T00:00:00Z</updated>
+    <link rel="alternate" href="blog/intelligence-limits.html"/>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+<h4>A common argument for AI's impact</h4>
+<p>
+  One common case for AI's transformative impact is this: human intelligence is
+  a biological computation limited by our skull size. Silicon computation can
+  simulate our brains' computation (or execute better algorithms) with no such
+  limit. If intelligence scales with computation resources, AIs will blow past
+  humans in intelligence. Sam Altman invoked something similar on Tyler Cowen's
+  podcast on Nov. 5, 2025:
+</p>
+
+<blockquote>
+  <p>
+    Tyler Cowen: Whether or not you agree with it, what is the best
+    this-is-not-a-bubble argument. Is it just the insatiable demand for compute?
+  </p>
+  <p>
+    Sam Altman: There’s a lot of arguments I’m tempted to give, but I think the
+    intellectually most interesting one is we have no idea how much past
+    human-level intelligence can go and what you can do with it as it does.
+    There’s all the arguments that everyone has made. The one I would like to
+    see people talk about much more is “How are you even supposed to think about
+    vastly superhuman intelligence and the economic impacts of that?”
+  </p>
+</blockquote>
+
+<p>
+  I dislike this appeal because it leads an undiscerning audience to draw an
+  incorrect conclusion. In this case: AI's economic utility will scale with
+  intelligence and blow past that of humans. This conclusion implicitly assumes
+  a linear relationship between intelligence and impact. However, these
+  relationships aren't linear. Intelligence's impact is limited by other inputs
+  into the decision making process (e.g., data, knowledge) and bounded by
+  fundamental constraints (e.g., information theory, chaos theory). I'll
+  describe my framework of intelligence as a black-box and go into detail about
+  these constraints.
+</p>
+
+<h4>How much can better decision making help? (an analogy)</h4>
+
+<p>
+  Consider the game of chess. Over many years, humans identified strong opening
+  positions. When AlphaZero came along in 2017, it favored some openings over
+  others, but didn't come up with totally new ones. By following known opening
+  theory human masters can still compete. In the end-game, there are known
+  <a href="https://en.wikipedia.org/wiki/Endgame_tablebase"
+    >endgame tablebases</a
+  >
+  which, for positions with few enough pieces, give the result (win, draw,
+  loss). For simple enough endgames, human masters can play to perfection. In
+  the mid-game, once we have left theory and the position is still too complex
+  to exist in a tablebase, AlphaZero's advantage over humans is the most
+  pronounced. However, even then, in each position there are generally a few
+  moves that both the human master and AI would consider. It is rare that an AI
+  plays a move no human would consider, and even rarer that it plays a move no
+  human would understand. As an analogy to human affairs, we can think of three
+  classes of decision making
+</p>
+<ol>
+  <li>early-game: common situations with plenty of human experience</li>
+  <li>mid-game: complex, unseen situations</li>
+  <li>end-game: situations with known or provably correct decisions</li>
+</ol>
+<p>
+  The first category could involve things like the structure of a democratic
+  government or business – we know which designs tend to work, and it's unlikely
+  there is a much better way to run either. The mid game is like the act of
+  scientific research, business decision making, or military strategy. In most
+  “positions” there is a set of choices which human experts and AI would both
+  find, AI could often pick the best move, but only rarely finds a "move" which
+  humans wouldn't have thought of. The third category involves things like using
+  the simplex algorithm to solve a linear programming problem or applying Kalman
+  filter for linear state estimation.
+</p>
+<p>
+  There isn't an infinite runway for intelligence to improve here – it boils
+  down to occasionally making a better decision. There are only so many
+  decisions a scientist or CEO makes in the course of their career, so the
+  impact is important but bounded. An important question becomes what percentage
+  of real-world decisions are akin to mid-game positions (which I won't examine
+  here).
+</p>
+
+<h4>Intelligence as a black-box</h4>
+
+<p>
+  Let's now consider how an intelligence makes "mid-game" decisions. I'll
+  describe a simple framework of intelligence as a starting point. I'll use
+  Eliezer and Soares's conceptualization of intelligence from
+  <i>If Anyone Builds It, Everyone Dies</i> (IABIED) as a starting point:
+</p>
+
+<blockquote>
+  <p>
+    In our view, intelligence is about two fundamental types of work: the work
+    of predicting the world, and the work of steering it.
+  </p>
+  <p>
+    “Prediction” is guessing what you will see (or hear, or touch) before you
+    sense it. If you’re driving to the airport, your brain is succeeding at the
+    task of prediction whenever you anticipate a light turning yellow, or a
+    driver in front of you hitting their brakes.
+  </p>
+  <p>
+    “Steering” is about finding actions that lead you to some chosen outcome.
+    When you’re driving to the airport, your brain is succeeding at steering
+    when it finds a pattern of street-turns such that you wind up at the
+    airport, or finds the right nerve signals to contract your muscles such that
+    you pull on the steering wheel.”
+  </p>
+</blockquote>
+
+<p>
+  I'll add that "prediction" could include counterfactual predictions (if I had
+  taken the highway would I be there by now?), conditional predictions (if I
+  brake on this patch of snow will my tires slip?), and non-observed outcomes
+  (is the coolant circulating?).
+</p>
+
+<p>
+  I like this conception, but I think something is missing. How would you
+  categorize proving a conjecture? Perhaps manipulations are "actions" you use
+  to steer towards a proof. A bit of a stretch. How about proposing a conjecture
+  to begin with?
+</p>
+
+<p>
+  You could argue that math is a tool in service of the ultimate goal of
+  prediction or steering, so trying to categorize these things isn't well posed
+  to begin with. But we don't re-discover Newton's physics every time we design
+  a new bridge. To draw from and contribute to our existing knowledge base is an
+  important feature of intelligence. My dictionary, for instance, defines
+  intelligence as "the ability to acquire and apply knowledge and skills".
+  Therefore I'd add the creation of knowledge as a third category called
+  <b>Creation</b>. I use <b>knowledge</b> here to encompass useful information
+  and ideas. It could include the synthesis of data (e.g., the GDP of Delaware
+  summarizes data about the whole economy) or scientific theories and
+  mathematical proofs.
+</p>
+
+<p>
+  Eliezer describes intelligence by its outputs because explaining what it
+  <i>is</i> is much harder. Following suit, I'll extend his conception by
+  proposing data and knowledge as inputs (and add my new "Creation" as an
+  output).
+</p>
+
+<p>
+  <b>Data</b> comprises observations of the real world. This could include
+  sensory perception (i.e., the flip side of "prediction") or information
+  gathered for analysis (e.g., the evidence brought before the judge in a trial
+  or the results of a clinical trial). Data differs from knowledge in that it
+  must be gathered from the real world.
+</p>
+
+<div style="text-align: center">
+  <img src="/resources/intelligence-limits/diagram-2.png" width="70%" />
+</div>
+
+<p>
+  Intelligence is that active process which turns knowledge and data into a
+  prediction, action, or more knowledge (creation). Like Eliezer I won't go into
+  how intelligence works or what it is.
+</p>
+
+<p>
+  To ground things I'll briefly describe LLMs in this framework. Knowledge and
+  data are provided to the LLM in two ways: encoded in the network's parameters
+  via pre-training and provided in context at inference time. The latter can be
+  provided in the prompt or retrieved by the model via an action like a call to
+  a search engine or database. Actions are mediated via MCP: the model
+  outputting tokens denoting a specific tool along with JSON parameters.
+  Prediction operates at two scales. At the micro-scale, the model predicts the
+  next token in a sequence. At the macro-scale, the model can construct
+  predictions as a plain language response. For example, "I give Trump a 50%
+  chance of winning the election". Creation operates only at this macro-scale of
+  responses.
+</p>
+
+<p>
+  Today, LLMs can only compound knowledge (the top arrow in the diagram above)
+  via in-context learning. For example with a scaffold and MCP actions which
+  read/write from a markdown file. The alternative, to update weights directly
+  with new knowledge, is called continual learning and is not routinely used.
+  New data can also only be ingested via in-context learning. Again, a scaffold
+  could be built around this, and is what autonomous laboratory startups like
+  <a href="https://periodic.com/">Periodic labs</a> are doing. The alternative
+  to in-context learning is to include the new knowledge in the training run of
+  the next model, but this can take weeks to months.
+</p>
+
+<h4>Limits of intelligence</h4>
+
+<p>
+  With this framework we can discuss the limits on intelligence (in particular,
+  its outputs creation, prediction, and action). There are two limiting factors:
+  the input knowledge/data and provable bounds in the generation of knowledge,
+  predictions, and actions.
+</p>
+
+<p>
+  Knowledge begets knowledge. An Einstein born in Newton's time wouldn't
+  discover relativity because the mathematical building blocks and physics
+  sophistication were not yet in place. Similarly, Kepler needed Tycho Brahe's
+  measurements of elliptical orbits to develop his laws. If we sent a baby Elon
+  Musk to ancient Greece, they would not become space-faring. Similarly, an
+  advanced intelligence today may accelerate our scientific progress, but not
+  leapfrog us to antimatter engines.
+</p>
+
+<p>
+  Data generation is limited by the number and quality of our sensors deployed
+  in the real world (e.g., the radius of our largest telescope). It is also
+  bottlenecked by how quickly we can set up and run experiments. This is already
+  the case with drug discovery, see
+  <i>
+    <a
+      href="https://www.writingruxandrabio.com/p/what-will-it-take-for-ai-to-change"
+      >What will it take for AI to change drug discovery?</a
+    ></i
+  >
+</p>
+
+<p>
+  Next, there are fundamental constraints on what knowledge can be created and
+  what outcomes can be predicted. Here are a few that come to my mind (though
+  not exhaustive).
+</p>
+
+<ul>
+  <li>
+    <b>Undecidable problems:</b> for some problems it is impossible to construct
+    an algorithm which always leads to a correct answer. The most famous example
+    is the
+    <a href="https://en.wikipedia.org/wiki/Halting_problem">halting problem</a>.
+    These problems
+    <a
+      href="https://dspace.mit.edu/entities/publication/550c1b6b-b56a-4467-b43f-1021e9391373"
+      >also appear in physics</a
+    >.
+  </li>
+  <li>
+    <b>Proven lower bounds:</b> There is no comparison-based sorting algorithm
+    which can sort a list in fewer than
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mrow><mi>log</mi><mo>&#8289;</mo></mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n\log n</annotation></semantics></math> comparisons. There are many lower
+    bounds like this, and many more if
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>≠</mo><mi>N</mi><mi>P</mi></mrow><annotation encoding="application/x-tex">P\ne NP</annotation></semantics></math>
+  </li>
+  <li>
+    <b>Curse of dimensionality:</b> learning an unknown function in d-dimensions
+    requires exponentially many samples in d.
+  </li>
+  <li>
+    <b>Deterministic chaos:</b> the butterfly effect. In chaotic systems, small
+    changes in initial conditions lead to drastically different outcomes. Like
+    us, super-intelligences will struggle to predict the weather more than two
+    weeks in advance.
+  </li>
+</ul>
+
+<p>
+  This isn't to say that AI can't generate knowledge, only to point out which
+  limits exist. As I'm writing this Fable just
+  <a href="https://x.com/__alpoge__/status/2079028340955197566"
+    >disproved the Jacobian Conjecture</a
+  >. With these limits in mind, we can revisit claims about scaling
+  intelligence. Here are Eliezer's "advantages machines have over biological
+  brains" from IABIED
+</p>
+
+<blockquote>
+  <b>Sheer speed.</b> ... Even if it took 1,000 transistor operations to do the
+  work of a single neural spike, and even if artificial intelligence was limited
+  to modern hardware, that implies human-quality thinking could be emulated
+  10,000 times faster on a machine
+  <br />
+  <b>Copy-and-paste abilities.</b> ... it takes twenty years or longer to grow a
+  single new human and transfer into them a tiny fraction of all human
+  knowledge... Artificial intelligences will eventually inhabit a different
+  world, one where genius could be replicated on demand.
+  <br />
+  <b>Faster improvements.</b> ... GPUs (...) improve, and the algorithms running
+  on those chips improve, much much much faster than the human species can
+  evolve larger hips.
+  <br />
+  <b>Larger memories.</b> ... In terms of storage space, [the human brain]
+  defeats most laptops... modern AIs are trained on a significant part of the
+  entirety of human knowledge, and retain a significant portion of [it]
+  <br />
+  <b>Higher-quality thinking.</b> ... There are many well-measured cases of how
+  humans' minds fall prey to systematic errors. (For example, “motivated
+  skepticism”: the tendency to look for arguments against conclusions you don’t
+  like, but not against ones you do like...
+  <br />
+  <b>Self-experimentation and self-rewriting capabilities.</b> AIs could make
+  copies of their minds, perform experiments on them, and (if needed) restore
+  the originals from backups. ... AIs could try building slightly different
+  versions of their own minds to see if they perform better...
+</blockquote>
+
+<p>
+  These advantages speed up the "intelligence" cloud in the middle of the
+  diagram, but run up against the fundamental limits described above. Insofar as
+  the creation of knowledge requires real-world measurements (e.g., validating a
+  new physics theory) the top loop is bounded as well. Real world actions,
+  experiments, measurements will become the bottleneck of progress, Amdahl's law
+  style.
+</p>
+
+<h4>Conclusion</h4>
+
+<p>
+  Humans have become only marginally more intelligent than our ancestors, thanks
+  to better diets and more intensive schooling. If a 21st-century family adopted
+  an ancient Greek baby, it would likely do fine academically. Sending Einstein
+  back to ancient Greece as a baby would not jump-start the industrial
+  revolution. Most human progress can be attributed to the compounding of
+  knowledge rather than increasing human intelligence. Here is Eliezer from
+  IABIED
+</p>
+
+<blockquote>
+  Human intelligence is the source of all our power, all our technology. Even
+  within the human species, small differences in how long groups spend
+  accumulating technological prowess translates into military advantages on the
+  order of "We have guns and they do not."
+</blockquote>
+
+<p>
+  Therefore AI safety advocates should be particularly concerned with rogue
+  deployments which can clandestinely expand their sensing network, run
+  experiments, and expand their knowledge base.
+</p>
+
+<!--
+# Limits of intelligence
+
+- Superintelligences will write more programs than humans ever did
+- 1. Limit of time complexity (big O notation)
+- 2. Limit of chaos theory (initial conditions, simulation fidelity e.g., fluid
+     dynamics)
+- 3. Limit of information theory (making predictions with incomplete
+     information). Maybe tied to machine learning and the size of a training
+     set.
+- Humans have meta-cognition
+- Profs of what is un-provable or impossible
+- Limit on the speed of intelligence is Moore's law
+- tldr: when Sam A or Eliezer talks about this stuff their main appeal is that
+  "AIs will be way smarter than us" but idk (1) how much headroom there actually
+  is to be smarter and (2) how much that translates into a real world advantage.
+  (I don't see an immediate application for optimal 4d sphere packing). By
+  smarter I'll use Eliezer's definition of intelligence (prediction/steering).
+  Also I think you have to compare an army of AIs working together (with tools)
+  to huamanity (humans working toegether with tools). Obviously comparing to
+  humanities "steering" is tough - because we don't have collaboration on
+  climate change which should be pretty easy. What I'm getting at is compare
+  AI's scientific progress to that of humans. I think they will just be faster,
+  not smarter, and being faster doesn't solve bottlenecks.
+- You can also ask: what will AIs be able to solve/create that humans would
+  never be able to do. I'm not honestly convinced that there is any difference,
+  I think just a matter of time. And I'm not talking monkey-on-typewriter. Could
+  the AIs predict better than humanity ever could? if superforecasting is just
+  an algorithm that the AGI writes, then no, I don't think so. To be clear,
+  whenever I say humanity i mean humans + Python. Frankly, so far as prediction
+  is concerned I think the step change in ability here looks more like quantum
+  computing than AI. Equipped with a quantum computer you can absolutely do
+  things that humans + python can't do. Maybe AIs running on sillicon is just an
+  extension of the sillicon revolution and quantum is actually the step change
+  here ...
+- chess example: commonly used that computers are better at chess, but you need
+  to compare Silicon-AI + Python to humans + Python with equal compute. No SAI
+  can evaluate every position.
+
+> “It’s hard to predict how fast AI will advance, and it’s hard to predict what
+> pathway it will take, but the endpoint is an easy call, because in the limits
+> of technology there are many advantages that machines have over biological
+> brains”
+
+- Fallacy in comparing human brain to AI. must compare Human + Python to AI +
+  python. Most useful things in engineering are programs not a human thinking
+  hard. e.g., flight traffic controllers. Similarly, an LLM will never replace
+  the air traffic control algorithms. It will help write better algorithms but
+  that is an important distinction.
+- Humans can leverage all the advantages of computers too! and we do!
+
+Important points (quantum aside)
+
+1. Common fallacy: comparing human brain to AI. Compare human + Python to AI +
+   python.
+2. What can humans figure out with enough time vs. AIs with enough time. I think
+   the two are the same. If true, it is just a question of speed not
+   "intelligence". (see knowledge vs intelligence below)
+3. Hard limits: information theory, chaos theory, time complexity, combinatorial
+   explosion, curse of dimensionality, cramer rao lower bound
+   - chess is an example of combinatorial explosion
+4. Was Einstein more "intelligent" than Newton? Depends on your definition of
+   intelligence. He was able to make more accurate predictions about the
+   universe. In that sense "intelligence" is not just how many things you can
+   hold in working memory and connections you can draw, or the ability to
+   perform meta-cognition, but the sophistication of your scientific
+   understanding. If you compare our brains today to those of ancient Greeks,
+   they probably aren't so different. We both grew up reading, doing math etc.
+   In terms of "intelligence" (as defined above) we are roughly the same. But
+   put us in an arena with them with equal resources and we will probably win
+   because we could leverage our knowledge of thermodynamics or something to
+   make an engine/weapon. So maybe I'm just getting at separating knowledge from
+   intelligence ... AIs can definitely be more intelligent (hold more things in
+   working memory) but I doubt there is much knowledge an AI could have that
+   humans couldn't understand. Of course, a AI could compound its knowledge much
+   more quickly than we can and keep that knowledge to itself. More on this
+   distinction, our brains haven't changed that much since the Greeks, but our
+   knowledge has grown exponentially. But we can still keep up. Optimistic sign.
+5. Ultimately what matters is the ability to ingest information and estimate the
+   current state of the world and predict its future states. Then the ability to
+   act optionally to achieve a goal given those estimates. The question is how
+   much of this solved by algorithms vs. done in your brain's neural net.
+   Looking around the real world it seems like everything is algorithms!! chess,
+   weather, air traffic control, orbits. What I'm getting at is that marginal
+   improvements in intelligence don't make you better at predicting orbits. But
+   improvements in knowledge (i.e., accounting for general relativity, or having
+   a new finite differences method) do. And while humans cannot become more
+   intelligent, we can become more knowledgable.
+
+There is some threshold where if you are intelligent enough to learn how to
+write a python program,
+
+- Limits on knowledge acquisition
+  - Current level of knowledge
+  - Experiments (e.g., compute time or waiting for biology)
+  - "smarts"
+- Limits on prediction. Prediction uses data and background knowledge to predict
+  current and future state.
+  - Data/Sensing (e.g., human trials, number of weather stations)
+  - Information theory (entropy, cramer rao bound)
+  - Chaos theory
+  - Knowledge (e.g,. Newtonian mechanics to relativity)
+  - "smarts"
+- Limits on steering. Steering uses an estimate of current/future state to take
+  an action in the world toward a goal.
+  - Combinatorial explosion (chess)
+  - Time complexity (traveling salesman)
+  - Knowledge (e.g., P != NP)
+  - "smarts"
+
+Predictions on the arrival of AGI
+
+- Weather forecasting will not improve drastically
+- The best chess AI (for constant compute input) will not improve drastically
+- Election prediction uncertainty will not shrink
+
+> intelligence: the ability to acquire and apply knowledge and skills
+
+> In our view,i intelligence is about two fundamental types of work: the work of
+> predicting the world, and the work of steering it.
+
+combinatorial
+
+TLDR: proponents (SamA) and doomers (eliezer) ask "what if intelligence is far
+surpassed" and invoke that computers are much more powerful than brains, but
+they don't ask (1) what are the limits of intelligence (2) what is the marginal
+return on intelligence, as compared to knowledge or additional intelligences. I
+also don't like comparing AGI to a human brain it needs to be humanity + python.
+That may be for a separate post.
+
+Outline
+
+1. sama quote (hook)
+2. diagram + explanation
+3. Define knowledge, make distinction from intelligence. "smarts" "working
+   memory" and other components of "intelligence" are required for these 3
+   things, but aren't limits.
+4. go through eliezer's list and categorize each, also compare to humanity not a
+   single human
+5. Predictions based on these limits
+6. What this means for takeover? Intelligence is one piece. But knowledge and
+   data/sensing more important. Takeover scenario to me looks like an AI can go
+   rouge and start clandestinely increasing its knowledge
+
+conclusion: when we talk about progress in AI we are talking about progress in
+"smarts". But "smarts" is just one of the limits on intelligence. There are some
+fundamental constraints (e.g., information theory) and some real world
+constraints (e.g., data, experiments, knowledge). These are all inputs. The
+question is what is the marginal return on each? As the out models are getting
+stronger they are just stuffing more knowledge into them, we aren't creating new
+knowledge.
+
+misc notes
+
+- I often catch myself conceptualizing the creation of AGI as one moment and one
+intelligence, but this isn't right. it will happen slowly (we are in it) and
+because one company or country creates it doesn't mean no one else will. There
+will be many competing intelligences id guess
+-->
+      </div>
+    </content>
+  </entry>
   <entry>
     <id>https://www.lairdstewart.com/blog/normal-samples.html</id>
     <title>Intuition on sampling from a multi-variate normal</title>
