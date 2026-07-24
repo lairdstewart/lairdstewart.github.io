@@ -18,7 +18,7 @@ MATH_SPAN = re.compile(
     r'<span\s+class="math\s+(inline|display)"[^>]*>(.*?)</span>',
     re.DOTALL,
 )
-MATHML_ELEMENT = re.compile(r'<math\b[^>]*>.*?</math>', re.DOTALL)
+MATHML_ELEMENT = re.compile(r"<math\b[^>]*>.*?</math>", re.DOTALL)
 
 
 def fail(msg):
@@ -70,7 +70,9 @@ def _collect_math(bodies):
     items = []
     for body in bodies:
         for m in MATH_SPAN.finditer(body):
-            items.append((m.group(1) == "display", html.unescape(m.group(2)).strip()))
+            items.append(
+                (m.group(1) == "display", html.unescape(m.group(2)).strip())
+            )
     return items
 
 
@@ -102,7 +104,8 @@ def render_math_pandoc(bodies):
     if not items:
         return bodies
     latex_doc = "\n\n".join(
-        (f"\\[{tex}\\]" if display else f"\\({tex}\\)") for display, tex in items
+        (f"\\[{tex}\\]" if display else f"\\({tex}\\)")
+        for display, tex in items
     )
     result = subprocess.run(
         ["pandoc", "-f", "latex", "-t", "html", "--mathml"],
@@ -114,7 +117,9 @@ def render_math_pandoc(bodies):
         fail(f"pandoc render failed:\n{result.stderr}")
     rendered = MATHML_ELEMENT.findall(result.stdout)
     if len(rendered) != len(items):
-        fail(f"pandoc returned {len(rendered)} <math> elements, expected {len(items)}")
+        fail(
+            f"pandoc returned {len(rendered)} <math> elements, expected {len(items)}"
+        )
     return _substitute(bodies, rendered)
 
 
@@ -131,7 +136,14 @@ def main():
     fragments = []
     fragments += sorted(blog_dir.glob("*.html"))
     fragments += sorted(news_dir.glob("*.html"))
-    fragments += [CONTENT / "index.html", CONTENT / "rss.html"]
+    fragments += [
+        CONTENT / "index.html",
+        CONTENT / "rss.html",
+        CONTENT / "blog.html",
+        CONTENT / "newsletter.html",
+        CONTENT / "projects.html",
+        CONTENT / "publications.html",
+    ]
     for path in fragments:
         validate_xhtml(path)
 
@@ -141,18 +153,31 @@ def main():
     page_bodies = render_math_katex(src_bodies)
     feed_bodies = render_math_pandoc(src_bodies)
     blog_entries = []
-    for src_path, page_body, feed_body in zip(blog_paths, page_bodies, feed_bodies):
+    for src_path, page_body, feed_body in zip(
+        blog_paths, page_bodies, feed_bodies
+    ):
         meta = load_sidecar(src_path)
         slug = src_path.stem
-        page = render(blog_template, {
-            "TITLE": meta["title"],
-            "DATE_DISPLAY": format_display_date(meta["date"]),
-            "BODY": page_body,
-        })
+        page = render(
+            blog_template,
+            {
+                "TITLE": meta["title"],
+                "DATE_DISPLAY": format_display_date(meta["date"]),
+                "BODY": page_body,
+            },
+        )
         out = ROOT / "blog" / f"{slug}.html"
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(page)
-        blog_entries.append({"kind": "blog", "slug": slug, "title": meta["title"], "date": meta["date"], "body": feed_body})
+        blog_entries.append(
+            {
+                "kind": "blog",
+                "slug": slug,
+                "title": meta["title"],
+                "date": meta["date"],
+                "body": feed_body,
+            }
+        )
 
     # 3. Render newsletter entries.
     news_paths = sorted(news_dir.glob("*.html"))
@@ -160,50 +185,85 @@ def main():
     page_bodies = render_math_katex(src_bodies)
     feed_bodies = render_math_pandoc(src_bodies)
     news_entries = []
-    for src_path, page_body, feed_body in zip(news_paths, page_bodies, feed_bodies):
+    for src_path, page_body, feed_body in zip(
+        news_paths, page_bodies, feed_bodies
+    ):
         meta = load_sidecar(src_path)
         slug = src_path.stem
-        page = render(newsletter_template, {
-            "TITLE": meta["title"],
-            "BODY": page_body,
-        })
+        page = render(
+            newsletter_template,
+            {
+                "TITLE": meta["title"],
+                "BODY": page_body,
+            },
+        )
         out = ROOT / "newsletter" / f"{slug}.html"
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(page)
-        news_entries.append({"kind": "newsletter", "slug": slug, "title": meta["title"], "date": meta["date"], "body": feed_body})
+        news_entries.append(
+            {
+                "kind": "newsletter",
+                "slug": slug,
+                "title": meta["title"],
+                "date": meta["date"],
+                "body": feed_body,
+            }
+        )
 
     # 4. Render top-level pages.
-    for name in ("index.html", "rss.html"):
+    for name in (
+        "index.html",
+        "rss.html",
+        "blog.html",
+        "newsletter.html",
+        "projects.html",
+        "publications.html",
+    ):
         body = (CONTENT / name).read_text().rstrip()
         page = render(page_template, {"BODY": body})
         (ROOT / name).write_text(page)
 
     # 5. Render feed.
-    all_entries = sorted(blog_entries + news_entries, key=lambda e: e["date"], reverse=True)
+    all_entries = sorted(
+        blog_entries + news_entries, key=lambda e: e["date"], reverse=True
+    )
     entry_xml = []
     for e in all_entries:
-        path = f"{e['kind']}/{e['slug']}.html" if e["kind"] == "blog" else f"newsletter/{e['slug']}.html"
+        path = (
+            f"{e['kind']}/{e['slug']}.html"
+            if e["kind"] == "blog"
+            else f"newsletter/{e['slug']}.html"
+        )
         entry_xml.append(
             f"  <entry>\n"
             f"    <id>https://www.lairdstewart.com/{path}</id>\n"
             f"    <title>{e['title']}</title>\n"
             f"    <updated>{e['date']}T00:00:00Z</updated>\n"
-            f"    <link rel=\"alternate\" href=\"{path}\"/>\n"
-            f"    <content type=\"xhtml\">\n"
-            f"      <div xmlns=\"http://www.w3.org/1999/xhtml\">\n"
+            f'    <link rel="alternate" href="{path}"/>\n'
+            f'    <content type="xhtml">\n'
+            f'      <div xmlns="http://www.w3.org/1999/xhtml">\n'
             f"{e['body']}\n"
             f"      </div>\n"
             f"    </content>\n"
             f"  </entry>"
         )
-    feed_updated = (all_entries[0]["date"] if all_entries else datetime.now().strftime("%Y-%m-%d")) + "T00:00:00Z"
-    feed = render(feed_template, {
-        "ENTRIES": "\n".join(entry_xml),
-        "FEED_UPDATED": feed_updated,
-    })
+    feed_updated = (
+        all_entries[0]["date"]
+        if all_entries
+        else datetime.now().strftime("%Y-%m-%d")
+    ) + "T00:00:00Z"
+    feed = render(
+        feed_template,
+        {
+            "ENTRIES": "\n".join(entry_xml),
+            "FEED_UPDATED": feed_updated,
+        },
+    )
     (ROOT / "feed.xml").write_text(feed)
 
-    print(f"built {len(blog_entries)} blog, {len(news_entries)} newsletter entries")
+    print(
+        f"built {len(blog_entries)} blog, {len(news_entries)} newsletter entries"
+    )
 
 
 if __name__ == "__main__":
