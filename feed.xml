@@ -2,13 +2,197 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://www.lairdstewart.com/</id>
   <title>Laird Stewart's blog</title>
-  <updated>2026-07-20T00:00:00Z</updated>
+  <updated>2026-08-01T00:00:00Z</updated>
   <author>
     <name>Laird Stewart</name>
   </author>
   <link rel="self" href="https://www.lairdstewart.com/feed.xml"/>
   <link rel="alternate" href="https://www.lairdstewart.com/"/>
   <icon>resources/icon.png</icon>
+  <entry>
+    <id>https://www.lairdstewart.com/newsletter/july-26.html</id>
+    <title>July 2026 Roundup</title>
+    <updated>2026-08-01T00:00:00Z</updated>
+    <link rel="alternate" href="newsletter/july-26.html"/>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+<p>
+  <a
+    href="https://www.maximum-progress.com/p/the-causal-effect-of-income-is-often"
+    >The Causal Effect of Income is (Often) Zero</a
+  >
+  <br />
+  Maxwell Tabarrok, May 19th 2026
+</p>
+<ul>
+  <li>
+    Income and life expectancy are strongly correlated. However, studying
+    Swedish lottery winners (a natural experiment on increased wealth) finds no
+    causal effect.
+  </li>
+</ul>
+
+<p>
+  <a
+    href="https://www.economist.com/briefing/2026/07/09/how-dementia-is-being-defeated"
+    >How dementia is being defeated</a
+  >
+  <br />
+  The Economist, July 9th 2026
+</p>
+<ul>
+  <li>
+    40 years ago, 30% of Americans between 85 and 89 had dementia. Today it is
+    only 10%.
+  </li>
+</ul>
+
+<p>
+  <a href="https://neal.fun/wiki-spy/">Wiki Spy</a>
+</p>
+<ul>
+  <li>
+    A fun website to click through random images from Wikipedia and their
+    connections.
+  </li>
+</ul>
+
+<p>
+  <a
+    href="https://xenaproject.wordpress.com/2026/07/20/human-mathematicians-are-being-outcounterexampled/"
+    >Human mathematicians are being out counter-exampled</a
+  >
+  <br />
+  Kevin Buzzard, July 20th 2026
+</p>
+
+<ul>
+  <li>
+    <i>
+      "At this point I knew that we had a counterexample — a group scheme of
+      order 4 which was not killed by 4. I suggested to Akhil that he make a PR
+      to mathlib with the counterexample — which he did. I would have also
+      suggested to him that he draft a press release saying that a machine had
+      solved a 60-year-old question of Grothendieck in algebraic geometry, but
+      somehow by this point I was almost becoming immune to all of this. It
+      wasn’t clear to me that the media would even be able to distinguish
+      between “machine resolves question due to Erdős” and “machine resolves
+      question due to Grothendieck”."
+    </i>
+  </li>
+  <li>
+    Lots of advances in mathematics made by AI this month (probably more than
+    humans?). Because it doesn't require real world experiment, math is gonna
+    see some breakneck progress. What a time to be alive indeed.
+  </li>
+</ul>
+
+<p>
+  <a href="https://ai-2040.com">Plan A</a>
+  <br />
+  Larsen, Dean, Halstead, Lifland, Greenblatt, and Kokotajlo, July 2026
+</p>
+<ul>
+  <li>
+    A mix between a forecast and a policy prescription on how the U.S.
+    will/should address powerful AI systems. Plenty has been discussed on this
+    so I won't add too much. Like others, I dislike the muddied distinction
+    between normative policy recommendations and predicted unfortunate actions.
+    I also think they overplay job loss (cf.
+    <a href="https://aleximas.substack.com/p/what-will-be-scarce">Alex Imas</a>)
+    and single-agent theory. Finally, I'm skeptical about slowing progress by
+    limiting algorithmic improvements; theory/algorithm improvements are exactly
+    what will be accelerated most by powerful AI (cf. "Human mathematicians are
+    being out counter-exampled") and it's hard to know a-priori the impact of
+    fundamental research. Alignment research can advance capabilities (e.g.,
+    RLHF) and theoretical research (e.g., learning mechanics) could as easily
+    advance capabilities as improve alignment.
+  </li>
+  <li>
+    Rising status: floating datacenters, datacenter hardware for distinguishing
+    inference from training workloads.
+  </li>
+</ul>
+
+<p>
+  <a
+    href="https://www.nytimes.com/2026/07/23/science/fields-medals-pardon-deng-wang-tsimerman.html"
+    >Four Young Mathematicians Receive Prestigious Fields Medals</a
+  >
+  <br />
+  New York Times, July 23rd 2026
+</p>
+<ul>
+  <li>
+    Shameless NYU plug: of the 4 Fields medal winners, one current and one
+    former NYU professor.
+  </li>
+</ul>
+
+<p>
+  <a href="https://maxleiter.com/blog/weights">They're Made Out of Weights</a>
+  <br />
+  Max Leiter, June 3rd 2026
+</p>
+<ul>
+  <li>
+    Read
+    <a
+      href="https://web.mit.edu/people/dpolicar/writing/prose/text/thinkingMeat.html"
+      >They're Made Out of Meat</a
+    >
+    if you haven't already. If you've read that post you could already guess
+    this one's whole trajectory. Regardless, very funny.
+  </li>
+</ul>
+
+<p>
+  <a href="https://www.nature.com/articles/s41586-026-10742-x"
+    >Large language models can predict the results of social science
+    experiments</a
+  >
+  <br />
+  Nature, July 8th 2026
+</p>
+<ul>
+  <li>
+    Probably more of a commentary on social science experiments than LLMs.
+  </li>
+</ul>
+
+<p>
+  <a href="https://calnewport.com/did-openais-new-model-go-rogue/"
+    >Did OpenAI’s New Model “Go Rogue”?</a
+  >
+  <br />
+  Cal Newport, July 27th 2026
+</p>
+<ul>
+  <li>
+    I haven't agreed with all of Cal's recent AI takes, but this was the most
+    level-headed commentary I read on the Hugging Face incident.
+  </li>
+</ul>
+
+<p>
+  <a href="https://www.noahpinion.blog/p/what-will-more-intelligence-actually"
+    >What will more intelligence actually do for us?</a
+  >
+  <br />
+  Noah Smith, July 26th 2026
+</p>
+<ul>
+  <li>
+    Agree with Noah's framing of decreasing returns on intelligence. In fact, I
+    wrote a very similar blog post of my own earlier this month on
+    <a href="https://www.lairdstewart.com/blog/intelligence-limits.html"
+      >The Limits of Intelligence</a
+    >.
+  </li>
+</ul>
+      </div>
+    </content>
+  </entry>
   <entry>
     <id>https://www.lairdstewart.com/blog/intelligence-limits.html</id>
     <title>The Limits of Intelligence</title>
