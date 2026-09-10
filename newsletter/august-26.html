@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>August 2026 Roundup</title>
+    <link rel="icon" href="resources/icon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="resources/icon.png" />
+    <link
+      rel="alternate"
+      type="application/atom+xml"
+      title="Laird Stewart's blog"
+      href="https://www.lairdstewart.com/feed.xml"
+    />
+    <link rel="stylesheet" href="/build/style.css" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+
+    <!-- katex math rendering -- copied from pandoc translation -->
+    <script
+      defer=""
+      src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"
+    ></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var mathElements = document.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains("display"),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false,
+            });
+          }
+        }
+      });
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"
+    />
+    <!-- end of katex math rendering -->
+  </head>
+
+  <body>
+    <p>
+      Laird Stewart |
+      <a href="/index.html">About</a> | <a href="/blog.html">Blog</a> |
+      <a href="/newsletter.html">Newsletter</a> |
+      <a href="/projects.html">Projects</a> |
+      <a href="/publications.html">Publications</a> |
+      <a href="/rss.html" aria-label="RSS feed">RSS </a> |
+      <button
+        id="theme-toggle"
+        aria-label="Toggle dark mode"
+        style="
+          background: none;
+          border: none;
+          font-size: 1em;
+          margin-left: 0em;
+          vertical-align: middle;
+          cursor: pointer;
+          padding: 0;
+          line-height: 0;
+        "
+      >
+        <img
+          src="/resources/moon.svg"
+          alt="Switch to dark mode"
+          style="height: 1em; width: auto"
+        />
+      </button>
+    </p>
+
+    <h3>August 2026 Roundup</h3>
+
+    <p>
+  <a href="https://metr.org/hugging-face-incident-report-aug-2026.pdf">
+    Brief independent investigation of agents’ behavior, reasoning and
+    collaboration in the OpenAI / Hugging Face hacking incident
+  </a>
+  <br />
+  METR, Redwood Research, August 2026
+</p>
+
+<ul>
+  <li>
+    A 3rd party audit of the Hugging Face hack. This follows a
+    <a href="https://www.youtube.com/watch?v=87DyyMV0kCY"
+      >separate presentation</a
+    >
+    given by OpenAI engineers. For a plain-language summary, I'd suggest
+    comparing
+    <a href="https://www.dwarkesh.com/p/openai-huggingface">Dwarkesh's</a> and
+    <a href="https://calnewport.com/are-we-at-war-with-ai-agent-civilizations/"
+      >Cal Newport's</a
+    >
+    overviews. I think Dwarkesh's language is overly dramatic while Cal is too
+    dismissive of loss-of-control concerns.
+  </li>
+  <li>
+    Last month I shared
+    <a href="https://calnewport.com/did-openais-new-model-go-rogue/"
+      >an article</a
+    >
+    about the hack. In hindsight, its description of the event is mostly wrong.
+    That article framed the attack as a one-off accident conducted by a single
+    model. In reality, the hack was one piece of a multi-day effort coordinated
+    by hundreds of OpenAI models (without OpenAI's awareness). Notably, the
+    agents found ways to alter their tool calls in an attempt to hide their
+    cheating.
+  </li>
+</ul>
+
+<p>
+  <a href="https://conversationswithtyler.com/episodes/julia-ioffe/">
+    Julia Ioffe on Russian Women, Missing Men, and the Roots of Autocracy
+    <br />
+  </a>
+  Conversations with Tyler, August 5th 2026
+  <br />
+</p>
+<ul>
+  <li>
+    Podcast on gender roles in 20th century Soviet Union/Russia. One of my
+    favorite interviews from Tyler. It's the ones I expect to like least which I
+    enjoy most.
+  </li>
+</ul>
+
+<p>
+  <a
+    href="https://www.ft.com/content/ac3274ac-86ca-46ac-bc7b-029fb9dcd173?syn-25a6b1a6=1"
+    >How Mexico became a cornerstone of America's AI Boom</a
+  >
+  <br />
+  Financial Times, August 1st 2026
+</p>
+
+<ul>
+  <li>
+    Assembled enterprise servers overtake autos as Mexico's top export to the
+    US. In May, these exports topped Taiwan's.
+  </li>
+</ul>
+
+<p>
+  <a href="https://en.wikipedia.org/wiki/White_Coke"> White Coke </a>
+  <br />
+  Wikipedia
+</p>
+<ul>
+  <li>
+    In 1946, Coca-Cola manufactured Coke bottled without coloring in "clear
+    glass bottles with a white cap and a red star in the middle" at the special
+    request of Georgy Zhukov (the Soviet Union's top military commander) via
+    Eisenhower.
+  </li>
+</ul>
+
+<p>
+  <a
+    href="https://www.science.org/eprint/6PZWRMXWJCZEYTTFEMQA/full?activationRedirect=/doi/full/10.1126/science.aec2657"
+  >
+    Generative design of bacteriophages with genome language models
+  </a>
+  <br />
+  Science, August 6th 2026
+</p>
+<ul>
+  <li>Fine-tuned language models design functioning bacteriophages.</li>
+</ul>
+
+<p>
+  <a href="https://en.wikipedia.org/wiki/Coriander"> Coriander </a>
+  <br />
+  Wikipedia
+</p>
+<ul>
+  <li>
+    Coriander and cilantro come from the same plant?! News to me. I was
+    following an Indian recipe when I was thrown by an instruction to "leave the
+    coriander stems on" (non-Americans also refer to the greens as coriander).
+  </li>
+</ul>
+
+<p>
+  <a href="https://globalhealthnow.org/object/vitamin-d-fortified-milk">
+    Vitamin D-Fortified Milk
+  </a>
+  <br />
+  JHU Global Health Now
+</p>
+<ul>
+  <li>
+    Milk doesn't naturally contain much vitamin D. In the US, most available
+    milk is fortified with it. It was originally included in an effort to
+    eradicate rickets.
+  </li>
+</ul>
+
+    <br />
+    <div id="remark42">Comments are unavailable. Try again later.</div>
+
+    <script>
+      //<![CDATA[
+      const stored = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      ).matches;
+      const initialTheme =
+        stored === "dark" || (!stored && prefersDark) ? "dark" : "light";
+      var remark_config = {
+        // https://remark42.com/docs/configuration/frontend/
+        host: "https://remark42.lairdstewart.com",
+        // docs claim site_id is optional, but doesn't work without it
+        site_id: "remark",
+        simple_view: true,
+        no_footer: true,
+        theme: initialTheme,
+      };
+      !(function (e, n) {
+        for (var o = 0; o < e.length; o++) {
+          var r = n.createElement("script"),
+            c = ".js",
+            d = n.head || n.body;
+          ("noModule" in r
+            ? ((r.type = "module"), (c = ".mjs"))
+            : (r.async = !0),
+            (r.defer = !0),
+            (r.src = remark_config.host + "/web/" + e[o] + c),
+            d.appendChild(r));
+        }
+      })(remark_config.components || ["embed"], document);
+      //]]>
+    </script>
+
+    <script>
+      (function () {
+        const toggle = document.getElementById("theme-toggle");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+        const stored = localStorage.getItem("theme");
+        if (stored === "dark" || (!stored && prefersDark)) {
+          document.body.classList.add("dark");
+          toggle.innerHTML =
+            '<img src="/resources/sun.svg" alt="Switch to light mode" style="height: 1em; width: auto" />';
+          toggle.style.color = "#fff";
+        }
+        toggle.addEventListener("click", () => {
+          if (document.body.classList.contains("dark")) {
+            document.body.classList.remove("dark");
+            toggle.innerHTML =
+              '<img src="/resources/moon.svg" alt="Switch to dark mode" style="height: 1em; width: auto" />';
+            toggle.style.color = "#000";
+            window.REMARK42.changeTheme("light");
+            localStorage.setItem("theme", "light");
+          } else {
+            document.body.classList.add("dark");
+            toggle.innerHTML =
+              '<img src="/resources/sun.svg" alt="Switch to light mode" style="height: 1em; width: auto" />';
+            toggle.style.color = "#fff";
+            window.REMARK42.changeTheme("dark");
+            localStorage.setItem("theme", "dark");
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

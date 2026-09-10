@@ -2,13 +2,147 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://www.lairdstewart.com/</id>
   <title>Laird Stewart's blog</title>
-  <updated>2026-08-30T00:00:00Z</updated>
+  <updated>2026-09-05T00:00:00Z</updated>
   <author>
     <name>Laird Stewart</name>
   </author>
   <link rel="self" href="https://www.lairdstewart.com/feed.xml"/>
   <link rel="alternate" href="https://www.lairdstewart.com/"/>
   <icon>resources/icon.png</icon>
+  <entry>
+    <id>https://www.lairdstewart.com/newsletter/august-26.html</id>
+    <title>August 2026 Roundup</title>
+    <updated>2026-09-05T00:00:00Z</updated>
+    <link rel="alternate" href="newsletter/august-26.html"/>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+<p>
+  <a href="https://metr.org/hugging-face-incident-report-aug-2026.pdf">
+    Brief independent investigation of agents’ behavior, reasoning and
+    collaboration in the OpenAI / Hugging Face hacking incident
+  </a>
+  <br />
+  METR, Redwood Research, August 2026
+</p>
+
+<ul>
+  <li>
+    A 3rd party audit of the Hugging Face hack. This follows a
+    <a href="https://www.youtube.com/watch?v=87DyyMV0kCY"
+      >separate presentation</a
+    >
+    given by OpenAI engineers. For a plain-language summary, I'd suggest
+    comparing
+    <a href="https://www.dwarkesh.com/p/openai-huggingface">Dwarkesh's</a> and
+    <a href="https://calnewport.com/are-we-at-war-with-ai-agent-civilizations/"
+      >Cal Newport's</a
+    >
+    overviews. I think Dwarkesh's language is overly dramatic while Cal is too
+    dismissive of loss-of-control concerns.
+  </li>
+  <li>
+    Last month I shared
+    <a href="https://calnewport.com/did-openais-new-model-go-rogue/"
+      >an article</a
+    >
+    about the hack. In hindsight, its description of the event is mostly wrong.
+    That article framed the attack as a one-off accident conducted by a single
+    model. In reality, the hack was one piece of a multi-day effort coordinated
+    by hundreds of OpenAI models (without OpenAI's awareness). Notably, the
+    agents found ways to alter their tool calls in an attempt to hide their
+    cheating.
+  </li>
+</ul>
+
+<p>
+  <a href="https://conversationswithtyler.com/episodes/julia-ioffe/">
+    Julia Ioffe on Russian Women, Missing Men, and the Roots of Autocracy
+    <br />
+  </a>
+  Conversations with Tyler, August 5th 2026
+  <br />
+</p>
+<ul>
+  <li>
+    Podcast on gender roles in 20th century Soviet Union/Russia. One of my
+    favorite interviews from Tyler. It's the ones I expect to like least which I
+    enjoy most.
+  </li>
+</ul>
+
+<p>
+  <a
+    href="https://www.ft.com/content/ac3274ac-86ca-46ac-bc7b-029fb9dcd173?syn-25a6b1a6=1"
+    >How Mexico became a cornerstone of America's AI Boom</a
+  >
+  <br />
+  Financial Times, August 1st 2026
+</p>
+
+<ul>
+  <li>
+    Assembled enterprise servers overtake autos as Mexico's top export to the
+    US. In May, these exports topped Taiwan's.
+  </li>
+</ul>
+
+<p>
+  <a href="https://en.wikipedia.org/wiki/White_Coke"> White Coke </a>
+  <br />
+  Wikipedia
+</p>
+<ul>
+  <li>
+    In 1946, Coca-Cola manufactured Coke bottled without coloring in "clear
+    glass bottles with a white cap and a red star in the middle" at the special
+    request of Georgy Zhukov (the Soviet Union's top military commander) via
+    Eisenhower.
+  </li>
+</ul>
+
+<p>
+  <a
+    href="https://www.science.org/eprint/6PZWRMXWJCZEYTTFEMQA/full?activationRedirect=/doi/full/10.1126/science.aec2657"
+  >
+    Generative design of bacteriophages with genome language models
+  </a>
+  <br />
+  Science, August 6th 2026
+</p>
+<ul>
+  <li>Fine-tuned language models design functioning bacteriophages.</li>
+</ul>
+
+<p>
+  <a href="https://en.wikipedia.org/wiki/Coriander"> Coriander </a>
+  <br />
+  Wikipedia
+</p>
+<ul>
+  <li>
+    Coriander and cilantro come from the same plant?! News to me. I was
+    following an Indian recipe when I was thrown by an instruction to "leave the
+    coriander stems on" (non-Americans also refer to the greens as coriander).
+  </li>
+</ul>
+
+<p>
+  <a href="https://globalhealthnow.org/object/vitamin-d-fortified-milk">
+    Vitamin D-Fortified Milk
+  </a>
+  <br />
+  JHU Global Health Now
+</p>
+<ul>
+  <li>
+    Milk doesn't naturally contain much vitamin D. In the US, most available
+    milk is fortified with it. It was originally included in an effort to
+    eradicate rickets.
+  </li>
+</ul>
+      </div>
+    </content>
+  </entry>
   <entry>
     <id>https://www.lairdstewart.com/blog/learning-mechanics-for-safety.html</id>
     <title>Learning Mechanics' impact on safety</title>
