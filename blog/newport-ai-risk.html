@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Response to Cal Newport on AI Risk</title>
+    <link rel="icon" href="resources/icon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="resources/icon.png" />
+    <link
+      rel="alternate"
+      type="application/atom+xml"
+      title="Laird Stewart's blog"
+      href="https://www.lairdstewart.com/feed.xml"
+    />
+    <link rel="stylesheet" href="/build/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+  </head>
+
+  <body>
+    <p>
+      Laird Stewart |
+      <a href="/index.html">About</a> | <a href="/blog.html">Blog</a> |
+      <a href="/newsletter.html">Newsletter</a> |
+      <a href="/projects.html">Projects</a> |
+      <a href="/publications.html">Publications</a> |
+      <a href="/rss.html" aria-label="RSS feed">RSS </a> |
+      <button
+        id="theme-toggle"
+        aria-label="Toggle dark mode"
+        style="
+          background: none;
+          border: none;
+          font-size: 1em;
+          margin-left: 0em;
+          vertical-align: middle;
+          cursor: pointer;
+          padding: 0;
+          line-height: 0;
+        "
+      >
+        <img
+          src="/resources/moon.svg"
+          alt="Switch to dark mode"
+          style="height: 1em; width: auto"
+        />
+      </button>
+    </p>
+
+    <h3>Response to Cal Newport on AI Risk (9/28/26)</h3>
+
+    <p>
+  A response to Cal Neport's
+  <a href="https://www.nytimes.com/2026/09/05/opinion/ai-silicon-valley.html"
+    >recent Opinion piece</a
+  >
+  in the NYT. I'm a big fan of Cal's; <i>Deep Work</i>,
+  <i>How to Be a Straight-A Student</i>, and
+  <i>So Good They Can't Ignore You</i> are some of my favorite books and among
+  the most influential on my thinking. However, I've been discouraged by some of
+  his commentary on AI.
+</p>
+<p>
+  Cal worries Silicon Valley execs' public fears about existential AI risk
+  (regardless of their intention) has served to downplay risks/concerns about
+  their current systems. This is probably true. This is bad if the
+  risks/concerns around current system are more worthy of concern than the
+  risks/concerns around more powerful systems.
+</p>
+<p>
+  Cal is also concerned that these EA/Rationalist ideas (i.e., fears about
+  existential AI risk) are easily adopted by Silicon Valley elites because it
+  strokes their ego: EA argues that working on AI risk is good and important.
+  Therefore they are good and important. This protects their ego from outside
+  criticism that big tech and billionaires are evil etc. This is also probably
+  true. While this isn't an argument against the ideas, it should give us reason
+  to think more critically about them.
+</p>
+<p>
+  So should we be more concerned about existential AI risk than risks from
+  today's systems? How does Cal engage with this question? Unfortunately, judges
+  ideas based on their origin (genetic fallacy) and reverts to ad hominem
+  attacks and straw manning. Charitably, an opinion column is too short to dig
+  into the arguments themselves, but then again, he titled it "How Scared Should
+  We Be of A.I. Right Now?"
+</p>
+<p>His overall argument is roughly:</p>
+<ol>
+  <li>
+    The rationalist community is weird (polyamory, psychedelics, Yudkowsky's
+    strange writing style, cult-coded)
+  </li>
+  <li>People warning about future AI risk are associated with rationalism</li>
+  <li>People warning about future AI risk are weird</li>
+  <li>We should take present risks more seriously than future risks</li>
+</ol>
+<p>
+  He never engages with the risks being discussed. Calling its proponents weird
+  is ad hominem. He also does a lot of straw-manning, two examples:
+</p>
+<blockquote>
+  "Be very wary, for example, when A.I. leaders or online commentators begin
+  talking in sweeping generalities about the future of the technology ... that
+  their language models will soon become sentient beings intent on escaping
+  their creators’ control"
+</blockquote>
+<p>
+  Safety arguments don't hinge on sentience or malicious intent, they are
+  concerned with capable systems pursuing misaligned goals.
+</p>
+<blockquote>
+  "In these circles, it’s taken for granted that A.I. capabilities will rapidly
+  accelerate and completely transform the world, and to talk about it in any
+  other way would be considered uninformed"
+</blockquote>
+<p>
+  I'd point to Toby Ord's (cofounder of EA) book, The Precipice. He is
+  characteristically uncertain about AI timelines and final capabilities. But to
+  be concerned about existential AI risk does not require certainty, only some
+  non-zero degree of belief that it is possible.
+</p>
+
+    <br />
+    <div id="remark42">Comments are unavailable. Try again later.</div>
+
+    <script>
+      //<![CDATA[
+      const stored = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      ).matches;
+      const initialTheme =
+        stored === "dark" || (!stored && prefersDark) ? "dark" : "light";
+      var remark_config = {
+        // https://remark42.com/docs/configuration/frontend/
+        host: "https://remark42.lairdstewart.com",
+        // docs claim site_id is optional, but doesn't work without it
+        site_id: "remark",
+        simple_view: true,
+        no_footer: true,
+        theme: initialTheme,
+      };
+      !(function (e, n) {
+        for (var o = 0; o < e.length; o++) {
+          var r = n.createElement("script"),
+            c = ".js",
+            d = n.head || n.body;
+          ("noModule" in r
+            ? ((r.type = "module"), (c = ".mjs"))
+            : (r.async = !0),
+            (r.defer = !0),
+            (r.src = remark_config.host + "/web/" + e[o] + c),
+            d.appendChild(r));
+        }
+      })(remark_config.components || ["embed"], document);
+      //]]>
+    </script>
+
+    <script>
+      (function () {
+        const toggle = document.getElementById("theme-toggle");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+        const stored = localStorage.getItem("theme");
+        if (stored === "dark" || (!stored && prefersDark)) {
+          document.body.classList.add("dark");
+          toggle.innerHTML =
+            '<img src="/resources/sun.svg" alt="Switch to light mode" style="height: 1em; width: auto" />';
+          toggle.style.color = "#fff";
+        }
+        toggle.addEventListener("click", () => {
+          if (document.body.classList.contains("dark")) {
+            document.body.classList.remove("dark");
+            toggle.innerHTML =
+              '<img src="/resources/moon.svg" alt="Switch to dark mode" style="height: 1em; width: auto" />';
+            toggle.style.color = "#000";
+            window.REMARK42.changeTheme("light");
+            localStorage.setItem("theme", "light");
+          } else {
+            document.body.classList.add("dark");
+            toggle.innerHTML =
+              '<img src="/resources/sun.svg" alt="Switch to light mode" style="height: 1em; width: auto" />';
+            toggle.style.color = "#fff";
+            window.REMARK42.changeTheme("dark");
+            localStorage.setItem("theme", "dark");
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -2,13 +2,93 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://www.lairdstewart.com/</id>
   <title>Laird Stewart's blog</title>
-  <updated>2026-09-05T00:00:00Z</updated>
+  <updated>2026-09-28T00:00:00Z</updated>
   <author>
     <name>Laird Stewart</name>
   </author>
   <link rel="self" href="https://www.lairdstewart.com/feed.xml"/>
   <link rel="alternate" href="https://www.lairdstewart.com/"/>
   <icon>resources/icon.png</icon>
+  <entry>
+    <id>https://www.lairdstewart.com/blog/newport-ai-risk.html</id>
+    <title>Response to Cal Newport on AI Risk</title>
+    <updated>2026-09-28T00:00:00Z</updated>
+    <link rel="alternate" href="blog/newport-ai-risk.html"/>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+<p>
+  A response to Cal Neport's
+  <a href="https://www.nytimes.com/2026/09/05/opinion/ai-silicon-valley.html"
+    >recent Opinion piece</a
+  >
+  in the NYT. I'm a big fan of Cal's; <i>Deep Work</i>,
+  <i>How to Be a Straight-A Student</i>, and
+  <i>So Good They Can't Ignore You</i> are some of my favorite books and among
+  the most influential on my thinking. However, I've been discouraged by some of
+  his commentary on AI.
+</p>
+<p>
+  Cal worries Silicon Valley execs' public fears about existential AI risk
+  (regardless of their intention) has served to downplay risks/concerns about
+  their current systems. This is probably true. This is bad if the
+  risks/concerns around current system are more worthy of concern than the
+  risks/concerns around more powerful systems.
+</p>
+<p>
+  Cal is also concerned that these EA/Rationalist ideas (i.e., fears about
+  existential AI risk) are easily adopted by Silicon Valley elites because it
+  strokes their ego: EA argues that working on AI risk is good and important.
+  Therefore they are good and important. This protects their ego from outside
+  criticism that big tech and billionaires are evil etc. This is also probably
+  true. While this isn't an argument against the ideas, it should give us reason
+  to think more critically about them.
+</p>
+<p>
+  So should we be more concerned about existential AI risk than risks from
+  today's systems? How does Cal engage with this question? Unfortunately, judges
+  ideas based on their origin (genetic fallacy) and reverts to ad hominem
+  attacks and straw manning. Charitably, an opinion column is too short to dig
+  into the arguments themselves, but then again, he titled it "How Scared Should
+  We Be of A.I. Right Now?"
+</p>
+<p>His overall argument is roughly:</p>
+<ol>
+  <li>
+    The rationalist community is weird (polyamory, psychedelics, Yudkowsky's
+    strange writing style, cult-coded)
+  </li>
+  <li>People warning about future AI risk are associated with rationalism</li>
+  <li>People warning about future AI risk are weird</li>
+  <li>We should take present risks more seriously than future risks</li>
+</ol>
+<p>
+  He never engages with the risks being discussed. Calling its proponents weird
+  is ad hominem. He also does a lot of straw-manning, two examples:
+</p>
+<blockquote>
+  "Be very wary, for example, when A.I. leaders or online commentators begin
+  talking in sweeping generalities about the future of the technology ... that
+  their language models will soon become sentient beings intent on escaping
+  their creators’ control"
+</blockquote>
+<p>
+  Safety arguments don't hinge on sentience or malicious intent, they are
+  concerned with capable systems pursuing misaligned goals.
+</p>
+<blockquote>
+  "In these circles, it’s taken for granted that A.I. capabilities will rapidly
+  accelerate and completely transform the world, and to talk about it in any
+  other way would be considered uninformed"
+</blockquote>
+<p>
+  I'd point to Toby Ord's (cofounder of EA) book, The Precipice. He is
+  characteristically uncertain about AI timelines and final capabilities. But to
+  be concerned about existential AI risk does not require certainty, only some
+  non-zero degree of belief that it is possible.
+</p>
+      </div>
+    </content>
+  </entry>
   <entry>
     <id>https://www.lairdstewart.com/newsletter/august-26.html</id>
     <title>August 2026 Roundup</title>
